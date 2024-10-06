@@ -22,11 +22,9 @@ public class CorsLoggingFilter extends HttpFilter {
         
         String origin = request.getHeader("Origin");
 
-        // if (origin != null) {
-        //     logger.info("\n\n ------------------------------ 요청된 Origin: " + origin+"\n\n");
-        // } else {
-        //     logger.info("\n\nOrigin 헤더가 포함되지 않았습니다.\n\n");
-        // }
+        if (origin == null) {
+            logger.info("\n\n ---------------------------- null로 요청된 Origin: " + origin+"\n\n");
+        }
 
         // 다음 필터 또는 서블릿 실행
         chain.doFilter(request, response);
