@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bidsystem.bid.mapper.BidMapper">
+            
+    <!-- 좌석번호별 입찰자 수와 최고 입찰 금액 조회 -->
+    <select id="getBidsBySeatArray" parameterType="hashmap" resultType="hashmap">
+        SELECT 
+            p.row_no,
+            p.col_no,
+            p.seat_no,
+            p.seat_price,
+            COALESCE(COUNT(b.bid_userid), 0) AS total_bidders,
+            COALESCE(MAX(b.bid_amount), 0) AS current_bid_amount
+        FROM 
+            seatprice AS p
+        LEFT JOIN 
+            seatbids AS b
+        ON 
+            p.seat_no = b.seat_no AND p.match_no = b.match_no
+        WHERE
+            p.seat_no IN 
+            <foreach item="seatNo" collection="seatNoArray" open="(" separator="," close=")">
+                #{seatNo}
+            </foreach>
+            AND p.match_no = #{matchNumber}
+        GROUP BY
+            p.row_no,
+            p.col_no,
+            p.seat_no,
+            p.seat_price
+        ORDER BY
+            CAST(p.seat_no AS UNSIGNED) ASC;
+    </select>
+            
+    <update id="awardBids" parameterType="hashmap">
+        UPDATE seatbids b
+            JOIN (
+                SELECT seat_no, match_no, MAX(bid_amount) AS max_bid_amount
+                FROM seatbids
+                WHERE match_no = #{matchNumber}
+                GROUP BY seat_no, match_no
+            ) maxbid
+        ON b.seat_no = maxbid.seat_no
+        AND b.bid_amount = maxbid.max_bid_amount
+        AND b.match_no = maxbid.match_no
+        SET b.bid_won = 'Y';
+    </update>
+
+    <!-- 사용자별 모든 입찰 조회 -->
+    <select id="getMyBids" parameterType="hashmap" resultType="hashmap">
+            SELECT 
+            b.seat_no,
+            b.bid_amount,
+            b.bid_at,
+            b.bid_won,
+            b.bid_paid,
+            b.bid_pay_method,
+            (SELECT MAX(bid_amount)
+             FROM seatbids
+             WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
+        FROM 
+            seatbids AS b
+        WHERE
+            b.bid_userid = #{userId} AND
+            b.match_no = #{matchNumber}
+        ORDER BY
+            b.seat_no
+    </select>
+    
+    <!-- 사용자별 모든 입찰 조회 -->
+    <select id="getMyLastBids" parameterType="hashmap" resultType="hashmap">
+        SELECT 
+            b.row_no,
+            b.col_no,
+            b.seat_no,
+            b.bid_amount,
+            b.bid_at,
+            b.bid_won,
+            b.bid_paid,
+            b.bid_pay_method,
+            (SELECT MAX(bid_amount)
+            FROM seatbids
+            WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
+        FROM 
+            seatbids AS b
+        WHERE
+            b.bid_userid = #{userId} AND
+            b.match_no = #{matchNumber}
+            AND b.bid_at = (
+                SELECT MAX(bid_at)
+                FROM seatbids
+                WHERE bid_userid = #{userId}
+                AND seat_no = b.seat_no
+                AND match_no = b.match_no
+            )
+        ORDER BY
+            b.seat_no,
+            b.row_no,
+            b.col_no
+    </select>
+
+    <!-- 최대 입찰 금액 조회 -->
+    <select id="getMaxBidAmount" parameterType="hashmap" resultType="hashmap">
+        SELECT match_no, seat_no, MAX(bid_amount) AS max_bid_amount
+        FROM seatbids
+        WHERE match_no = #{matchNumber} AND seat_no = #{seatNo}
+        FOR UPDATE
+    </select>
+
+
+    <!-- 여러 건의 사용자 입찰 등록 -->
+    <insert id="submitBid" parameterType="hashmap" >
+        INSERT INTO seatbids (match_no, seat_no, bid_userid, bid_amount, bid_at)
+        VALUES (#{matchNumber}, #{seatNo}, #{userId}, #{bidAmount}, #{bidAt});
+    </insert>
+
+
+    <!-- 낙찰된 건에 대해 지불방법과 거래 ID 갱신 -->
+    <update id="updatePayment" parameterType="hashmap" >
+        UPDATE seatbids
+        SET bid_paid = 'Y',
+            bid_tid = #{tid},
+            bid_pay_method = #{payMethod}
+        WHERE bid_userid = #{userId}
+        AND bid_won = 'Y'
+    </update>
+
+</mapper>

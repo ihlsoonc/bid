@@ -1,0 +1,36 @@
+    // 입찰 시간 초기화
+    @PostMapping("/initialize")
+    public ResponseEntity<Map<String, Object>> initializeBid(@RequestBody Map<String, Object> params) {
+        Map<String, Object> results = bidService.initializeBid(params); // 서비스 계층에서 데이터만 반환
+        return ResponseEntity.ok(results); // 데이터를 ResponseEntity로 감싸서 반환
+    }    
+    
+    public Map<String, Object> initializeBid(Map<String, Object> params) {
+        if (params.get("matchNumber") == null) {
+            throw new NotFoundException("해당되는 정보가 없습니다.");
+        }
+
+        try {
+            matchMapper.updateBidTime(params);
+            bidMapper.deleteAllBids(params);
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "입찰 시간이 초기화되었습니다.");
+            return response;
+        } catch (Exception e) {
+            throw new DataAccessException("데이터베이스 접근 중 오류가 발생했습니다.", e);
+        }
+
+            <!-- 입찰 시간 초기화 -->
+    <update id="updateBidTime" parameterType="hashmap">
+        UPDATE matches
+        SET 
+            bid_open_datetime = #{startDate},
+            bid_close_datetime = #{closeDate}
+        WHERE match_no = #{matchNumber}
+    </update>
+
+    <!-- 입찰 기록 삭제 -->
+    <delete id="deleteSeatBids" parameterType="hashmap">
+        DELETE FROM seatbids
+        WHERE match_no = #{matchNumber}
+    </delete>

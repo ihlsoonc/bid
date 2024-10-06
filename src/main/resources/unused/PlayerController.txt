@@ -1,0 +1,250 @@
+package kr.or.sports.tosresult.web;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import kr.or.sports.tosresult.common.vo.UserVO;
+import kr.or.sports.tosresult.service.impl.PlayerService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+@Controller
+public class PlayerController {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(PlayerController.class);
+
+
+	@Resource(name="PlayerService")
+	private PlayerService playerService;
+	
+    /*------- SCREEN --------------------------------------------*/
+    @RequestMapping(value="/regmain.do")
+    public String regmain() throws Exception{
+        return "regmain";
+    }
+    @RequestMapping(value="/regsportsman.do")
+    public String regsportsman() throws Exception{
+        return "regsportsman";
+    }
+    @RequestMapping(value="/regapprove.do")
+    public String regapprove() throws Exception{
+        return "regapprove";
+    }
+    @RequestMapping(value="/regpredict.do")
+    public String regpredict() throws Exception{
+        return "regpredict";
+    }
+    @RequestMapping(value="/regmove.do")
+    public String regmove() throws Exception{
+        return "regmove";
+    }
+    @RequestMapping(value="/reghist.do")
+    public String reghist() throws Exception{
+        return "reghist";
+    }
+    @RequestMapping(value="/regprecord.do")
+    public String regprecord() throws Exception{
+        return "regprecord";
+    }
+    @RequestMapping(value="/reggtos.do")
+    public String reggtos() throws Exception{
+        return "reggtos";
+    }
+    
+    @RequestMapping(value="/userUpdate.do")
+    public String userUpdate(UserVO user) throws Exception{
+    	/*
+    	System.out.println("testtest");
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	UserDetailsVO test = (UserDetailsVO)authentication.getPrincipal();
+    	UserVO userVO = null;
+    	userVO = test.getUserVO();
+    	*/
+        return "userUpdate";
+    }
+    
+    
+    
+    
+    
+    
+    /*------- SQL --------------------------------------------*/
+    @RequestMapping(value="/getcimap.do")
+    public @ResponseBody List<Map<String,Object>>  getcimap(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getcimap(cmdMap);
+        return list;
+    }
+
+    @RequestMapping(value="/getLoginAjax.do")
+    public @ResponseBody List<Map<String,Object>>  getLoginAjax(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getLoginAjax(cmdMap);
+        return list;
+    }
+    @RequestMapping(value="/getwebplayerm.do")
+    public @ResponseBody List<Map<String,Object>>  getwebplayerm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getwebplayerm(cmdMap);
+        return list;
+    }
+    @RequestMapping(value="/getpplpersonm.do")
+    public @ResponseBody List<Map<String,Object>>  getpplpersonm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getpplpersonm(cmdMap);
+        return list;
+    }
+    @RequestMapping(value="/getsplplayerd.do")
+    public @ResponseBody List<Map<String,Object>>  getsplplayerd(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getsplplayerd(cmdMap);
+        return list;
+    }
+    
+
+    @RequestMapping(value="/insertwebplayerm.do")
+    public @ResponseBody Map<String,Object>  insertwebplayerm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        Map<String,Object> result = playerService.insertwebplayerm(cmdMap);
+        return result;
+    }
+    @RequestMapping(value="/updatewebplayerm.do")
+    public @ResponseBody Map<String,Object>  updatewebplayerm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        Map<String,Object> result = playerService.updatewebplayerm(cmdMap);
+        return result;
+    }
+    @RequestMapping(value="/deletewebplayerm.do")
+    public @ResponseBody Map<String,Object>  deletewebplayerm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        Map<String,Object> result = playerService.deletewebplayerm(cmdMap);
+        return result;
+    }
+    @RequestMapping(value="/getlastyearperson.do")
+    public @ResponseBody List<Map<String,Object>>  getlastyearperson(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getlastyearperson(cmdMap);
+        return list;
+    }
+    
+    @RequestMapping(value="/get_detail_class_cd.do")
+    public @ResponseBody List<Map<String,Object>>  get_detail_class_cd(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.get_detail_class_cd(cmdMap);
+        return list;
+    }
+    @RequestMapping(value="/get_class_cd.do")
+    public @ResponseBody List<Map<String,Object>>  get_class_cd(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.get_class_cd(cmdMap);
+        return list;
+    }
+    @RequestMapping(value="/searchteamnmrxjs.do")
+    public @ResponseBody List<Map<String,Object>>  searchteamnmrxjs(@RequestBody Map<String,Object> cmdMap) throws Exception{
+    	System.out.println(cmdMap.toString());
+        List<Map<String,Object>> list = playerService.searchteamnmrxjs(cmdMap);
+        return list;
+    }
+    @RequestMapping(value="/searchteamnm.do")
+    public @ResponseBody List<Map<String,Object>>  searchteamnm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.searchteamnm(cmdMap);
+        return list;
+    }
+    @RequestMapping(value="/getwebscholashipd.do")
+    public @ResponseBody List<Map<String,Object>>  getwebscholashipd(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getwebscholashipd(cmdMap);
+        return list;
+    }
+    @RequestMapping(value="/getpssschoolm.do")
+    public @ResponseBody List<Map<String,Object>>  getpssschoolm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getpssschoolm(cmdMap);
+        return list;
+    }
+    
+    @RequestMapping(value="/createpersonno.do")
+    public @ResponseBody Map<String,Object>  createpersonno(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        Map<String,Object> result = playerService.createpersonno(cmdMap);
+        return result;
+    }
+    @RequestMapping(value="/copyscholashipd.do")
+    public @ResponseBody Map<String,Object>  copyscholashipd(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        Map<String,Object> result = playerService.copyscholashipd(cmdMap);
+        return result;
+    }
+    @RequestMapping(value="/deletewebscholashipd.do")
+    public @ResponseBody Map<String,Object>  deletewebscholashipd(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        Map<String,Object> result = playerService.deletewebscholashipd(cmdMap);
+        return result;
+    }
+    @RequestMapping(value="/addwebscholashipd.do")
+    public @ResponseBody Map<String,Object>  addwebscholashipd(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        Map<String,Object> result = playerService.addwebscholashipd(cmdMap);
+        return result;
+    }
+    
+    @RequestMapping(value="/getwebpayresultm.do")
+    public @ResponseBody List<Map<String,Object>>  getwebpayresultm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getwebpayresultm(cmdMap);
+        return list;
+    }
+    @RequestMapping(value="/addwebpayresultm.do")
+    public @ResponseBody Map<String,Object>  addwebpayresultm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        Map<String,Object> result = playerService.addwebpayresultm(cmdMap);
+        return result;
+    }
+    @RequestMapping(value="/delwebpayresultm.do")
+    public @ResponseBody Map<String,Object>  delwebpayresultm(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        Map<String,Object> result = playerService.delwebpayresultm(cmdMap);
+        return result;
+    }
+    
+    @RequestMapping(value="/getpplsplplayerd.do")
+    public @ResponseBody List<Map<String,Object>>  getpplsplplayerd(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getpplsplplayerd(cmdMap);
+        return list;
+    }
+    
+    @RequestMapping(value="/getmtaresultbo.do")
+    public @ResponseBody List<Map<String,Object>>  getmtaresultbo(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        List<Map<String,Object>> list = playerService.getmtaresultbo(cmdMap);
+        return list;
+    }
+    
+    
+    
+    @RequestMapping(value="/selectUserInfo.do")
+    public @ResponseBody Map<String,Object>  selectUserInfo(@RequestBody Map<String,Object> cmdMap) throws Exception{
+    	Map<String,Object> result = playerService.selectUserInfo(cmdMap);
+        return result;
+    }
+    
+    @RequestMapping(value="/updateUserInfo.do")
+    public @ResponseBody Map<String,Object> insertUser(@RequestBody Map<String,Object> cmdMap) throws Exception{
+        int rs = playerService.updateUserInfo(cmdMap);
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("result", rs);
+        return result;
+    }
+    
+    @RequestMapping(value="/selectSnsInfo.do")
+    public @ResponseBody Map<String,Object> selectSnsInfo(@RequestBody Map<String,Object> cmdMap) throws Exception{
+    	int cnt = playerService.selectSnsInfo(cmdMap);
+    	Map<String,Object> result = new HashMap<String,Object>();
+    	System.out.println(cnt);
+    	if(cnt > 0){
+    		result.put("result", "D");
+    		return result;
+    	}else{
+    		playerService.inserSnsInfo(cmdMap);
+    		result.put("result", "1");
+    		return result;
+    	}
+    }
+
+    @RequestMapping(value="/deleteSnsInfo.do")
+    public @ResponseBody Map<String,Object> deleteSnsInfo(@RequestBody Map<String,Object> cmdMap) throws Exception{
+    	Map<String,Object> result = new HashMap<String,Object>();
+    	int rs = playerService.deleteSnsInfo(cmdMap);	
+    	result.put("result", rs);
+    	return result;
+    }
+    
+}

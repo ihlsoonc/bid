@@ -1,0 +1,799 @@
+package kr.or.sports.tosresult.service.impl;
+
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
+import java.io.*;
+import java.lang.*;
+
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
+
+import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
+import kr.or.sports.tosresult.common.vo.UserVO;
+import kr.or.sports.tosresult.common.vo.LoginVO;
+import kr.or.sports.tosresult.security.SecurityUtils;
+import kr.or.sports.tosresult.service.impl.TosResultMapper;
+
+@Service("TosResultService")
+public class TosResultService  extends EgovAbstractServiceImpl {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(TosResultService.class);
+
+	@Autowired
+	TosResultMapper tosResultMapper;
+	
+    public List<Map<String, Object>> si_get_to_yyyy(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_to_yyyy(map); } 
+    public List<Map<String, Object>> si_get_tour_cd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tour_cd(map); } 
+    public List<Map<String, Object>> si_get_detail_class_cd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_detail_class_cd(map); } 
+    public List<Map<String, Object>> si_get_rh_cd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_rh_cd(map); } 
+    public List<Map<String, Object>> si_get_schedule(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_schedule(map); } 
+    public List<Map<String, Object>> si_get_result(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_result(map); } 
+    public List<Map<String, Object>> si_get_result_complex(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_result_complex(map); } 
+    public List<Map<String, Object>> si_get_startlist(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_startlist(map); } 
+    public List<Map<String, Object>> si_get_history(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_history(map); } 
+    public List<Map<String, Object>> si_search_player(Map<String, Object> map) throws Exception { return tosResultMapper.si_search_player(map); } 
+    /*더이상 안씀 
+	public List<Map<String, Object>> si_get_team_cd(Map<String, Object> map) throws Exception {
+ 		UserVO loginedUser = new UserVO();		
+		loginedUser.setUserId((String) map.get("t_id_no"));
+		loginedUser.setIdNo((String) map.get("t_id_no"));
+		loginedUser.setRegYear((String) map.get("t_reg_year"));
+		loginedUser.setClassCd((String) map.get("t_class_cd"));
+		loginedUser.setPclassCd((String) map.get("t_pclass_cd"));
+		loginedUser.setAuthority((String) map.get("t_authority"));
+		loginedUser.setSidoCd((String) map.get("t_sido_cd"));
+		loginedUser.setTeamCd((String) map.get("t_team_cd"));
+		loginedUser.setTeamNm((String) map.get("t_team_nm"));
+		loginedUser.setPersonNo((String) map.get("t_person_no"));
+		loginedUser.setTeamKorNm((String) map.get("t_team_kor_nm"));
+		
+		loginedUser.setUserNm((String) map.get("t_login_id_nm"));
+		SecurityUtils.setLoginedUser(loginedUser);
+		
+    	return tosResultMapper.si_get_team_cd(map); 
+    } 
+    */
+    public Map<String, Object> si_set_loginvo(Map<String, Object> map) throws Exception {
+ 		LoginVO loginedUser = new LoginVO();		
+		loginedUser.setUserId((String) map.get("t_user_id"));
+		loginedUser.setCi((String) map.get("t_ci"));
+		loginedUser.setUserNm((String) map.get("t_user_nm"));
+		loginedUser.setBirthDt((String) map.get("t_birth_dt"));
+		loginedUser.setSex((String) map.get("t_sex"));
+		loginedUser.setMobileNo((String) map.get("t_mobile_no"));
+		
+		SecurityUtils.setLoginedLoginVO(loginedUser);
+		
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public List<Map<String, Object>> si_search_team(Map<String, Object> map) throws Exception { return tosResultMapper.si_search_team(map); } 
+    public List<Map<String, Object>> si_search_team_by_officer(Map<String, Object> map) throws Exception { return tosResultMapper.si_search_team_by_officer(map); } 
+    public List<Map<String, Object>> si_get_tourplayerdetail(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourplayerdetail(map); } 
+    public List<Map<String, Object>> si_get_dclasscd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_dclasscd(map); } 
+    public List<Map<String, Object>> si_get_dclass_kindcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_dclass_kindcd(map); } 
+    public List<Map<String, Object>> si_get_person_by_team(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_person_by_team(map); } 
+
+    public List<Map<String, Object>> si_search_pplpersonm(Map<String, Object> map) throws Exception { return tosResultMapper.si_search_pplpersonm(map); } 
+    public List<Map<String, Object>> si_get_detailclasscd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_detailclasscd(map); }
+    public List<Map<String, Object>> si_get_sidocd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_sidocd(map); }
+    public List<Map<String, Object>> si_get_bclasscd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_bclasscd(map); }
+
+    public List<Map<String, Object>> si_select_nsrresult_for_del_detail(Map<String, Object> map) throws Exception { return tosResultMapper.si_select_nsrresult_for_del_detail(map); }  
+    
+    public Map<String, Object> si_insert_tourplayerdetail(Map<String, Object> map) throws Exception {
+    	tosResultMapper.si_insert_tourplayerdetail(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_delete_tourplayerdetail(Map<String, Object> map) throws Exception {
+    	tosResultMapper.si_delete_tourplayerdetail(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_insert_tourplayer(Map<String, Object> map) throws Exception {
+    	tosResultMapper.si_insert_tourplayer(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_delete_tourplayer(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_delete_tourplayer(map);
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public List<Map<String, Object>> si_select_nsrresult_for_del_tplayer(Map<String, Object> map) throws Exception { return tosResultMapper.si_select_nsrresult_for_del_tplayer(map); } 
+    
+
+    @Transactional
+    public HashMap<String, Object> si_insdel_tourplayerdetail(Map<String, Object> tempMap) throws Exception{
+       		List<Map<String, Object>> listTempMap = new ArrayList<Map<String, Object>>();
+ 			List<Map<String, Object>> listEntMap = new ArrayList<Map<String, Object>>();
+			Map<String,Object> entMap = new HashMap<>();
+       	
+    	/*--start of tourplayerdetail --*/
+        	if (tempMap.get("t_selected").equals("2")) { //insert tourplayerdetail
+            	System.out.println("si_insert_tourplayerdetail=" + tempMap.toString());
+            	
+            	
+            	Map<String,Object> entrantMap = new HashMap<>();
+            	entrantMap.put("t_class_cd", tempMap.get("t_class_cd"));
+            	entrantMap.put("t_to_cd", tempMap.get("t_to_cd"));
+            	entrantMap.put("t_detail_class_cd", tempMap.get("t_detail_class_cd"));
+            	entrantMap.put("t_team_cd", tempMap.get("t_team_cd"));
+            	entrantMap.put("t_team_nm", tempMap.get("t_team_nm"));
+            	entrantMap.put("t_sido_cd", tempMap.get("t_sido_cd"));
+            	entrantMap.put("t_kind_cd", tempMap.get("t_kind_cd"));
+            	
+                System.out.println(" entrantMap=" + entrantMap.toString());
+            	
+           		listEntMap = new ArrayList<Map<String, Object>>();
+				listEntMap = lf_getinsert_tourteam(entrantMap);/*한번만*/
+              	
+               	System.out.println(" listEntMap=" + listEntMap.toString());
+            	
+            	entMap = new HashMap<>();
+            	entMap = listEntMap.get(0);
+               	System.out.println("entMap=" + entMap.toString());
+            	
+            	tempMap.put("t_entrant_team_cd", entMap.get("ENTRANT_TEAM_CD"));
+               	System.out.println("tempMap=" + tempMap.toString());
+          	
+            	
+        		tosResultMapper.si_insert_tourplayerdetail(tempMap);  
+        		
+        	} else if (tempMap.get("t_selected").equals("0")) { //detete tourplayerdetail
+            	System.out.println("si_select_nsrresult_for_del_detail=" + tempMap.toString());
+				listTempMap = tosResultMapper.si_select_nsrresult_for_del_detail(tempMap);
+				if (listTempMap.size()==0) {
+	            	System.out.println("si_delete_tourplayerdetail=" + tempMap.toString());
+					tosResultMapper.si_delete_tourplayerdetail(tempMap);
+				}
+        	} else if (tempMap.get("t_selected").equals("1")) { //detete tourplayerdetail
+            	System.out.println("update tourplayerdetail=" + tempMap.toString());
+				if (tempMap.get("t_class_cd").equals("1")||tempMap.get("t_class_cd").equals("09")||tempMap.get("t_class_cd").equals("23")|| tempMap.get("t_class_cd").equals("28")) { //탁구,체조,조정의 경우 
+		           	System.out.println("update si_update_tourplayerdetail_huboyn=" + tempMap.toString());
+	            	tosResultMapper.si_update_tourplayerdetail_huboyn(tempMap);
+				}
+			}
+    	/*--end of tourplayerdetail --*/
+        	si_insdel_tourplayer(tempMap);
+		HashMap<String, Object> result = new HashMap();
+		result.put("result", "Success");  
+		return(result);
+    }
+
+    @Transactional
+    public HashMap<String, Object> si_insdel_tourplayer(Map<String, Object> tempMap) throws Exception{
+       		List<Map<String, Object>> listTempMap = new ArrayList<Map<String, Object>>();
+ 			List<Map<String, Object>> listEntMap = new ArrayList<Map<String, Object>>();
+
+    	/*--start of tourplayer --*/
+        	if (tempMap.get("t_selected").equals("2")) { //insert into tourplayer
+				listTempMap = tosResultMapper.si_get_tourplayer_one(tempMap);  
+				if (listTempMap.size()==0) {
+					tosResultMapper.si_insert_tourplayer(tempMap);  
+				}
+			} else if (tempMap.get("t_selected").equals("0")) { //delete from tourplayer
+        		listTempMap = tosResultMapper.si_get_tourplayerdetail_one(tempMap);
+           		if (listTempMap.size()==0) {       					
+	            	System.out.println("si_delete_tourplayer=" + tempMap.toString());
+					listEntMap = tosResultMapper.si_get_tourplayer_one(tempMap);  
+					if (listEntMap.size()>0) {
+						tosResultMapper.si_delete_tourplayer(tempMap);   
+					}			         
+				}
+        	} else if (tempMap.get("t_selected").equals("1")) { //update tourplayer
+            	System.out.println("update tourplayer=" + tempMap.toString());
+				if (tempMap.get("t_class_cd").equals("13")) { //복싱의 경우 
+	            	System.out.println("si_update_tourplayer_remark=" + tempMap.toString());
+					tosResultMapper.si_update_tourplayer_remark(tempMap);
+				}
+			}
+    	/*--end of tourplayer --*/
+		HashMap<String, Object> result = new HashMap();
+		result.put("result", "Success");  
+		return(result);
+	}
+
+		
+		
+    
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)/*--의도는 좋으나 오라클은 안됨, notfound 에서 insert후 read 는 됨-*/
+    public List<Map<String, Object>> lf_getinsert_tourteam(Map<String, Object> map) throws Exception{
+      	List<Map<String, Object>> resultarr = new ArrayList<Map<String, Object>>();
+    	Map<String,Object> tMap = new HashMap<>();
+
+      	String t_class_cd = (String)map.get("t_class_cd");
+      	if (t_class_cd.equals("1")||t_class_cd.equals("2")||t_class_cd.equals("3")||t_class_cd.equals("28")||t_class_cd.equals("33")
+      			||t_class_cd.equals("5")||t_class_cd.equals("6")||t_class_cd.equals("7")||t_class_cd.equals("9")||t_class_cd.equals("B")||t_class_cd.equals("8")) {
+
+
+      		resultarr = tosResultMapper.si_get_tourteam_by_teamcd_dclasscd(map); //team_cd, detail_class_cd 별로 유일, 추가되는 entrantteamcd(경기선발) 는 team_cd 가 null
+      		System.out.println("jhs resultarr=" + resultarr.toString());
+      		
+	      	if (resultarr.size()==0) {
+				System.out.println("bfr insert tourteam map=" + map.toString());
+
+	      		tMap = tosResultMapper.si_getseq_tourteam_by_teamcd_dclasscd(map); 	      		
+	      		System.out.println("si_insert_tourteam_by_teamcd_dclasscd_seq=" + tMap.toString());
+	      		map.put("t_entrant_team_cd", tMap.get("ENTRANT_TEAM_CD"));
+	      		tosResultMapper.si_insert_tourteam_by_teamcd_dclasscd_seq(map);  //entrantteamcd 에  seq 넣음	      		
+	      		resultarr.add(tMap);
+
+	      	}
+      	} else if (t_class_cd.equals("4")||t_class_cd.equals("08")||t_class_cd.equals("24")) { /*--련재 사용하지 않음. 컬링 등 구기에서 tourteam 을 수동으로 만들므로 이 루틴은 타지 않음--*/
+	      	resultarr = tosResultMapper.si_get_tourteam_by_teamcd(map);  //team_cd 별로 유일, detail_class_cd 에 값이있으나 의미없음 한팀이 2개이상의 세부종목에 참가시 team_cd에 A 를 추가---- 
+	      	if (resultarr.size()==0) {
+	      		tosResultMapper.si_insert_tourteam_by_teamcd_dclasscd_teamcd(map); //entrantteamcd 에 team_cd 를 넣음 seq 사용안함.이경우 team_cd별로만 유일
+	      		tMap.put("ENTRANT_TEAM_CD", map.get("t_team_cd"));
+	      		resultarr.add(tMap);
+	      	}
+     	} else if (t_class_cd.equals("14")||t_class_cd.equals("23")) { //37수중 ,
+			System.out.println("bfr get_tourteam_by_teamcd_kindcd map=" + map.toString());
+	      	resultarr = tosResultMapper.si_get_tourteam_by_teamcd(map); //team_cd 별로 유일, --kind_cd(아님)-- 팀분할 없음, 
+	      	if (resultarr.size()==0) {
+	      		tosResultMapper.si_insert_tourteam_by_teamcd_kindcd_teamcd(map);  //entrantteamcd 에 team_cd 를 넣음, 이경우 team_cd별로만 유일. detail_class_cd 에 null,kind_cd에 값있음
+	      		tMap.put("ENTRANT_TEAM_CD", map.get("t_team_cd"));
+	      		resultarr.add(tMap);
+	          	
+	      	}
+      	} else if (t_class_cd.equals("13")) { //05테니스,06정구,18검도,26배드민턴, 31요트, 36우슈, 42당구, 52가라데, 53수상스키,73주짖수
+	      	resultarr = tosResultMapper.si_get_tourteam_by_teamcd_kindcd(map);//team_cd, kind_cd 별로 유일, 
+	      	if (resultarr.size()==0) {	      				
+	      		tMap = tosResultMapper.si_getseq_tourteam_by_teamcd_dclasscd(map); 	  
+	      		map.put("t_entrant_team_cd", tMap.get("ENTRANT_TEAM_CD"));      		
+	      		tosResultMapper.si_insert_tourteam_by_teamcd_kindcd_seq(map);  //entrantteamcd 에 seq 를 넣음, detail_class_cd 에 null
+	      		resultarr.add(tMap);
+	      	}
+      	} else if (t_class_cd.equals("09")) {
+	      	resultarr = tosResultMapper.si_get_tourteam_by_teamcd(map); //team_cd 별로 entrantteamcd 를 가져옴 (대표팀코드)
+System.out.println("resultarr5=" + resultarr.toString());
+	      	if (resultarr.size()==0) { //대표팀코드가 없는 경우
+	      		
+	      		tMap = tosResultMapper.si_getseq_tourteam_by_teamcd_dclasscd(map); 	  
+	      		map.put("t_entrant_team_cd", tMap.get("ENTRANT_TEAM_CD")); //seq 생성후 가져옴     	
+	      		
+System.out.println("bfr6 si_insert_tourteam_by_teamcd_seq=" + map.toString());
+
+	      		tosResultMapper.si_insert_tourteam_by_teamcd_seq(map);  //대표팀코드 추가, detail_class_cd, kind_cd 를 null 
+	      		
+System.out.println("aft si_insert_tourteam_by_teamcd_seq=" + map.toString());
+	      		map.put("t_team_cd_org", map.get("t_team_cd"));
+	      		map.put("t_team_cd", tMap.get("ENTRANT_TEAM_CD")); //대표 seq 를 team_cd 에 교체     
+				
+				String t_rep_no = String.valueOf(tMap.get("ENTRANT_TEAM_CD"));				
+				
+System.out.println("aft t_rep_no=" + t_rep_no);
+				
+	      		map.put("t_entrant_team_cd", Integer.toString(Integer.parseInt(t_rep_no) + 1)); //새 seq 생성후 가져옴     		
+	      		
+System.out.println("bfr7 si_insert_tourteam_by_seqteamcd_dclasscd_seq="  + map.toString());
+	      		
+	      		tosResultMapper.si_insert_tourteam_by_seqteamcd_dclasscd_seq(map);//team_cd에 대표팀코드seq, entrantteamcd 에  seq, kind_cd와  detail_class_cd 에 정상적으로 넣음
+	      		
+System.out.println("aft si_insert_tourteam_by_seqteamcd_dclasscd_seq=" + map.toString());
+				
+	      		tMap.put("ENTRANT_TEAM_CD", Integer.toString(Integer.parseInt(t_rep_no) + 1));
+	      		resultarr.add(tMap);
+	      	} else {
+	      		tMap = resultarr.get(0);
+	      		map.put("t_team_cd_org", map.get("t_team_cd"));
+	      		map.put("t_team_cd", tMap.get("ENTRANT_TEAM_CD")); //대표 seq 를 team_cd 에 교체   
+	      		/*get seqteamcd */
+System.out.println("bfr1 si_get_tourteam_by_teamcd_dclasscd_seqteamcd="  + map.toString());
+		      	resultarr = tosResultMapper.si_get_tourteam_by_teamcd_dclasscd_seqteamcd(map);	//team_cd 가 대표seq, detail_class_cd 별로 유일	      	
+		      	if (resultarr.size()==0) {
+		      		
+System.out.println("bfr2 si_getseq_tourteam_by_teamcd_dclasscd="  + map.toString());
+		      		tMap = tosResultMapper.si_getseq_tourteam_by_teamcd_dclasscd(map); 	
+		      		map.put("t_entrant_team_cd", tMap.get("ENTRANT_TEAM_CD")); //새 seq 생성후 가져옴     		
+
+		      		
+System.out.println("bfr3 si_insert_tourteam_by_seqteamcd_dclasscd_seq="  + map.toString());
+		      		tosResultMapper.si_insert_tourteam_by_seqteamcd_dclasscd_seq(map);  //team_cd에 대표팀코드seq, entrantteamcd 에  seq, team_cd, detail_class_cd 에 정상적으로 넣음
+		      		resultarr.add(tMap);
+		      	}
+	      	}
+      	} else {
+      		resultarr = tosResultMapper.si_get_tourteam_by_teamcd_dclasscd(map); //team_cd, detail_class_cd 별로 유일, 추가되는 entrantteamcd(경기선발) 는 team_cd 가 null
+      		System.out.println("jhs resultarr=" + resultarr.toString());
+      		
+	      	if (resultarr.size()==0) {
+				System.out.println("bfr insert tourteam map=" + map.toString());
+
+	      		tMap = tosResultMapper.si_getseq_tourteam_by_teamcd_dclasscd(map); 	      		
+	      		System.out.println("si_insert_tourteam_by_teamcd_dclasscd_seq=" + tMap.toString());
+	      		map.put("t_entrant_team_cd", tMap.get("ENTRANT_TEAM_CD"));
+	      		tosResultMapper.si_insert_tourteam_by_teamcd_dclasscd_seq(map);  //entrantteamcd 에  seq 넣음	      		
+	      		resultarr.add(tMap);
+
+	      	}      		
+      	}
+        return(resultarr); //반드시 ENTRANT_TEAM_CD 값이 넘어가야함
+    }
+
+    @Transactional
+    public HashMap<String, Object> si_update_tourplayerdetail_arr(List<Map<String, Object>> maplist) throws Exception{
+        Map<String,Object> tempMap = null;
+        for(int i=0, size=maplist.size(); i<size; i++){
+            tempMap = maplist.get(i);            
+            tosResultMapper.si_update_tourplayerdetail(tempMap);           
+        }
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    }
+
+    @Transactional
+    public HashMap<String, Object> si_insert_pay_tid(Map<String, Object> map) throws Exception{
+                   
+        tosResultMapper.si_insert_pay_tid(map);           
+        tosResultMapper.si_update_pay_tourplayerdetail(map);           
+        
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    }
+    @Transactional
+    public HashMap<String, Object> si_cancel_pay(Map<String, Object> map) throws Exception{
+                   
+        tosResultMapper.si_cancel_pay_tid(map);           
+        tosResultMapper.si_cancel_tourplayerdetail(map);           
+        
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    }
+    public List<Map<String, Object>> si_get_pay_tid(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_pay_tid(map); }  
+
+    public List<Map<String, Object>> si_get_entry_end(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_entry_end(map); }  
+/*사용않음*/
+    @Transactional
+    public HashMap<String, Object> si_save_entry_end(Map<String, Object> map) throws Exception{
+       	List<Map<String, Object>> listTempMap = new ArrayList<Map<String, Object>>();
+		listTempMap = tosResultMapper.si_get_entry_end(map);
+		if (listTempMap.size()==0) {
+        	System.out.println("si_delete_tourplayer=" + map.toString());
+			tosResultMapper.si_insert_entry_end(map);  
+		} else {
+			tosResultMapper.si_update_entry_end(map);           
+		}
+        
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    }
+    public Map<String, Object> si_update_entry_end(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_entry_end(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+
+    public List<Map<String, Object>> si_get_tourteam(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourteam(map); }  
+    public List<Map<String, Object>> si_get_tourteam_one(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourteam_one(map); }
+    
+    @Transactional
+    public HashMap<String, Object> si_save_tourteam_one(Map<String, Object> map) throws Exception{
+       	List<Map<String, Object>> listTempMap = new ArrayList<Map<String, Object>>();
+		listTempMap = tosResultMapper.si_get_tourteam_one(map);
+		if (listTempMap.size()==0) {
+        	System.out.println("si_get_tourteam_one=" + map.toString());
+			tosResultMapper.si_insert_tourteam_one(map);  //같은 team_cd, detail_class_cd 에서 seq 다른 레코드가 추가됨
+		} else {
+			tosResultMapper.si_update_tourteam_one(map);           
+		}
+        
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    }
+    
+    public Map<String, Object> si_insert_tourteam_one(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_insert_tourteam_one(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_update_tourteam_one(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_tourteam_one(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_delete_tourteam_one(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_delete_tourteam_one(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    
+    public List<Map<String, Object>> si_get_tourteam_for_assign(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourteam_for_assign(map); }  
+    public List<Map<String, Object>> si_get_tourplayerdetail_for_teamplayer(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourplayerdetail_for_teamplayer(map); }  
+    public List<Map<String, Object>> si_select_nsrresult_for_del_teamplayer(Map<String, Object> map) throws Exception { return tosResultMapper.si_select_nsrresult_for_del_teamplayer(map); }  
+    public Map<String, Object> si_update_teamplayer(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_teamplayer(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+
+    public List<Map<String, Object>> si_get_partner_for_assign(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_partner_for_assign(map); }  
+    public List<Map<String, Object>> si_get_tourplayerdetail_for_partner(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourplayerdetail_for_partner(map); }  
+    public Map<String, Object> si_update_partner(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_partner(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+
+    public List<Map<String, Object>> si_get_tour_active(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tour_active(map); }
+    public List<Map<String, Object>> si_delete_check_tourteam_one(Map<String, Object> map) throws Exception { return tosResultMapper.si_delete_check_tourteam_one(map); }
+  
+    public List<Map<String, Object>> si_get_tourplayer(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourplayer(map); }
+    public List<Map<String, Object>> si_get_tourplayer_one(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourplayer_one(map); }
+    public Map<String, Object> si_update_tourplayer_one(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_tourplayer_one(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+
+    public List<Map<String, Object>> si_getgtosapp_to_yyyy(Map<String, Object> map) throws Exception { return tosResultMapper.si_getgtosapp_to_yyyy(map); }
+    public List<Map<String, Object>> si_getgtosapp_tour_cd(Map<String, Object> map) throws Exception { return tosResultMapper.si_getgtosapp_tour_cd(map); }
+
+    @Transactional
+    public HashMap<String, Object> si_confirmarr_tourplayerdetail(List<Map<String, Object>> maplist) throws Exception{
+        Map<String,Object> tempMap = null;
+        for(int i=0, size=maplist.size(); i<size; i++){
+            tempMap = maplist.get(i);            
+            tosResultMapper.si_confirm_tourplayerdetail(tempMap);           
+        }
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    }
+    public List<Map<String, Object>> si_get_kindcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_kindcd(map); }
+    public Map<String, Object> si_insert_dclasscd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_insert_dclasscd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_update_dclasscd(Map<String, Object> map) throws Exception {
+    	tosResultMapper.si_update_dclasscd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public List<Map<String, Object>> si_delete_check_dclasscd(Map<String, Object> map) throws Exception { return tosResultMapper.si_delete_check_dclasscd(map); }
+    public Map<String, Object> si_delete_dclasscd(Map<String, Object> map) throws Exception {
+    	tosResultMapper.si_delete_dclasscd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public List<Map<String, Object>> si_get_baseclasscd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_baseclasscd(map); }
+    public Map<String, Object> si_insert_bclasscd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_insert_bclasscd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_update_bclasscd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_bclasscd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public List<Map<String, Object>> si_delete_check_bclasscd(Map<String, Object> map) throws Exception { return tosResultMapper.si_delete_check_bclasscd(map); }
+    public Map<String, Object> si_delete_bclasscd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_delete_bclasscd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+   
+    public Map<String, Object> si_insert_kindcd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_insert_kindcd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_update_kindcd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_kindcd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public List<Map<String, Object>> si_delete_check_kindcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_delete_check_kindcd(map); }
+    public Map<String, Object> si_delete_kindcd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_delete_kindcd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+
+    public List<Map<String, Object>> si_get_kindrefcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_kindrefcd(map); }
+    public Map<String, Object> si_insert_kindrefcd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_insert_kindrefcd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_update_kindrefcd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_kindrefcd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_delete_kindrefcd(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_delete_kindrefcd(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+
+    public List<Map<String, Object>> si_get_fiskill(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_fiskill(map); }
+    public Map<String, Object> si_insert_fiskill(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_insert_fiskill(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_update_fiskill(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_fiskill(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_delete_fiskill(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_delete_fiskill(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+
+    public List<Map<String, Object>> si_get_tourplayerfi(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourplayerfi(map); }
+    public List<Map<String, Object>> si_get_music(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_music(map); }
+    public Map<String, Object> si_delins_music(Map<String, Object> map) throws Exception { 
+    	
+       	List<Map<String, Object>> listTempMap = new ArrayList<Map<String, Object>>();
+		listTempMap = tosResultMapper.si_get_music(map);
+		if (listTempMap.size()==0) {
+			tosResultMapper.si_insert_music1(map);  
+			tosResultMapper.si_insert_music2(map);  
+		} else {
+			tosResultMapper.si_delete_music1(map);           
+			tosResultMapper.si_delete_music2(map);           
+			tosResultMapper.si_insert_music1(map);  
+			tosResultMapper.si_insert_music2(map);  
+		}
+        
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    
+    public List<Map<String, Object>> si_get_element(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_element(map); }
+
+    @Transactional
+    public HashMap<String, Object> si_insert_element(List<Map<String, Object>> maplist) throws Exception{
+        Map<String,Object> tempMap = null;
+        for(int i=0, size=maplist.size(); i<size; i++){
+            tempMap = maplist.get(i);            
+            tosResultMapper.si_insert_element(tempMap);           
+        }
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    }
+    public Map<String, Object> si_update_element(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_element(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+
+    public Map<String, Object> si_add_coachplayer(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_add_coachplayer(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_del_coachplayer(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_del_coachplayer(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public List<Map<String, Object>> si_read_coachplayer(Map<String, Object> map) throws Exception { return tosResultMapper.si_read_coachplayer(map); } 
+
+    public List<Map<String, Object>> si_login_search_team_officer(Map<String, Object> map) throws Exception { return tosResultMapper.si_login_search_team_officer(map); } 
+    public List<Map<String, Object>> si_login_search_team_player(Map<String, Object> map) throws Exception { return tosResultMapper.si_login_search_team_player(map); } 
+    public List<Map<String, Object>> si_login_search_coach(Map<String, Object> map) throws Exception { return tosResultMapper.si_login_search_coach(map); } 
+
+    public List<Map<String, Object>> si_ci_search_team_officer(Map<String, Object> map) throws Exception { return tosResultMapper.si_ci_search_team_officer(map); } 
+    public List<Map<String, Object>> si_ci_search_player(Map<String, Object> map) throws Exception { return tosResultMapper.si_ci_search_player(map); } 
+    public List<Map<String, Object>> si_ci_search_coach(Map<String, Object> map) throws Exception { return tosResultMapper.si_ci_search_coach(map); } 
+
+    public Map<String, Object> si_add_coach(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_add_coach(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_del_coach(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_del_coach(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+
+    public List<Map<String, Object>> si_list_coach(Map<String, Object> map) throws Exception { return tosResultMapper.si_list_coach(map); } 
+   	public Map<String, Object> si_permit_update_coach(List<Map<String, Object>> maplist) throws Exception { 
+		
+	    
+		Map<String,Object> tempMap = null;
+        for(int i=0, size=maplist.size(); i<size; i++){
+            tempMap = maplist.get(i);            
+            tosResultMapper.si_permit_update_coach(tempMap);           
+        }
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+	} 
+
+    public List<Map<String, Object>> si_list_coachplayer(Map<String, Object> map) throws Exception { return tosResultMapper.si_list_coachplayer(map); } 
+   	public Map<String, Object> si_permit_update_coachplayer(List<Map<String, Object>> maplist) throws Exception { 
+		
+		Map<String,Object> tempMap = null;
+        for(int i=0, size=maplist.size(); i<size; i++){
+            tempMap = maplist.get(i);            
+            tosResultMapper.si_permit_update_coachplayer(tempMap);           
+        }
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+	} 
+
+    public List<Map<String, Object>> si_count_tourplayer_teamcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_tourplayer_teamcd(map); } 
+    public List<Map<String, Object>> si_count_tourplayerdetail_teamcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_tourplayerdetail_teamcd(map); } 
+    public List<Map<String, Object>> si_count_tourplayer_personno(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_tourplayer_personno(map); } 
+    public List<Map<String, Object>> si_count_tourplayerdetail_personno(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_tourplayerdetail_personno(map); } 
+    public List<Map<String, Object>> si_count_tourplayer_coach(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_tourplayer_coach(map); } 
+    public List<Map<String, Object>> si_count_tourplayerdetail_coach(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_tourplayerdetail_coach(map); } 
+
+    public List<Map<String, Object>> si_count_tourplayer_tocd(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_tourplayer_tocd(map); } 
+    public List<Map<String, Object>> si_count_tourplayerdetail_baseclasscd(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_tourplayerdetail_baseclasscd(map); } 
+    public List<Map<String, Object>> si_count_tourplayerdetail_detailclasscd(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_tourplayerdetail_detailclasscd(map); } 
+	public Map<String, Object> si_getseq_tourteam_by_teamcd_dclasscd(Map<String, Object> map) throws Exception {return tosResultMapper.si_getseq_tourteam_by_teamcd_dclasscd(map); } 
+
+    public List<Map<String, Object>> si_get_tourteam_entnm_by_teamcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourteam_entnm_by_teamcd(map); } 
+    public List<Map<String, Object>> si_get_tourteam_entnm_by_noteamcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourteam_entnm_by_noteamcd(map); } 
+   	public List<Map<String, Object>> si_get_detailclasscd_available(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_detailclasscd_available(map); } 
+    public List<Map<String, Object>> si_get_splteaminfom(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_splteaminfom(map); } 
+    public List<Map<String, Object>> si_get_tourplayerdetail_one(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourplayerdetail_one(map); } 
+    public List<Map<String, Object>> si_get_tourplayerdetail_for_insert(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourplayerdetail_for_insert(map); } 
+    public List<Map<String, Object>> si_count_splplayerd_teamcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_count_splplayerd_teamcd(map); }
+
+    public Map<String, Object> si_update_tourplayer_attfile(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_tourplayer_attfile(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    
+    
+    public List<Map<String, Object>> si_get_attfile(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_attfile(map); }
+    public Map<String, Object> si_update_attfile(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_attfile(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_insert_attfile(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_insert_attfile(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    
+    public List<Map<String, Object>> si_get_applyform(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_applyform(map); }
+    public Map<String, Object> si_update_applyform(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_applyform(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public Map<String, Object> si_insert_applyform(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_insert_applyform(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public List<Map<String, Object>> si_get_list_applyform(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_list_applyform(map); }
+	public Map<String, Object> si_getmaxteamcd_tourteam_by_teamcd_dclasscd(Map<String, Object> map) throws Exception {return tosResultMapper.si_getmaxteamcd_tourteam_by_teamcd_dclasscd(map); } 
+    public List<Map<String, Object>> si_get_repbclass_kindcd(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_repbclass_kindcd(map); }
+    public List<Map<String, Object>> si_get_tourteam_for_assign_14_23(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourteam_for_assign_14_23(map); }
+    
+    public List<Map<String, Object>> si_get_tourplayerdetail_one_for_update(Map<String, Object> map) throws Exception { return tosResultMapper.si_get_tourplayerdetail_one_for_update(map); }
+	public Map<String, Object> si_update_tourplayerdetail_one(Map<String, Object> map) throws Exception {
+		tosResultMapper.si_update_tourplayerdetail_one(map); 
+		HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+	} 
+	public Map<String, Object> si_update_tourplayer_one_ca(Map<String, Object> map) throws Exception { 
+    	tosResultMapper.si_update_tourplayer_one_ca(map); 
+        HashMap<String, Object> result = new HashMap();
+        result.put("result", "Success");  
+        return(result);
+    } 
+    public List<Map<String, Object>> si_search_tourplayer(Map<String, Object> map) throws Exception { return tosResultMapper.si_search_tourplayer(map); }
+	
+
+	public Map<String, Object> si_make_pdf(Map<String, Object> map, String contextpath, String sessid) throws Exception { 
+		
+		
+		String curdir = System.getProperty("user.dir");
+		System.out.println("current dir=" + curdir);
+		System.out.println("contextpath dir=" + contextpath);
+		String rmodulepath = contextpath + "WEB-INF\\report\\module\\";
+		System.out.println("rmodulepath dir=" + rmodulepath);
+		
+		Runtime r = Runtime.getRuntime(); //report_module 은 path 불포함 ex)webreport_test_pdf.exe 현재dir은 tomcat8로 가정
+		Process p = r.exec("\"" + rmodulepath + map.get("report_module") + "\" " + sessid + " " + map.get("command_parameter"));
+        int exitVal = p.waitFor();	
+		System.out.println("Process ended...exitValue=::: " + exitVal);
+		
+		BufferedReader reader = new BufferedReader(
+            new FileReader(rmodulepath + sessid + ".txt") //In powerbuilder report/module/sessid.txt
+        );
+ 
+        StringBuilder sb = new StringBuilder(1024);
+        String s = null;
+        while ((s = reader.readLine()) != null) {
+		   sb.append(s);
+		}
+		String str = sb.toString(); 
+        reader.close();
+        String pdffnm = str.substring(7);
+         
+        // 1. 원본 File, 복사할 File 준비
+        File file = new File(rmodulepath + pdffnm); //현재dir은 WEB-INF로 가정
+        File newFile = new File(contextpath + "result\\" + pdffnm);
+ 
+        // 2. 복사
+        Files.copy(file.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+ 
+        HashMap<String, Object> result = new HashMap();
+        result.put("exitvalue", exitVal);  
+        result.put("resultcode", str.substring(0,7));  
+        
+        result.put("resultmsg", "./result/" + str.substring(7));  //jsp 의 현재dir은 context root
+        return(result);    
+    } 
+
+}

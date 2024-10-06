@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.sports.tosresult.service.impl.PlayerMapper">
+
+
+   <!--로그인 정보로부터 이름,생일,성별, CI 가져오기 
+   <select id="getLoginAjax" parameterType="hashmap" resultType="hashmap">
+    	select USER_ID, KOR_NM, PASSWD, CI, BIRTH_DT, GENDER, ENCPASSWD, MOBILE_NO
+       	from player.ppluserm
+        where user_id = #{userid}
+   </select>
+   -->
+   <select id="getLoginAjax" parameterType="hashmap" resultType="hashmap">
+    	select 'wisam' USER_ID, 'wisam' KOR_NM, 'wisam' PASSWD, '' CI, '' BIRTH_DT, '' GENDER, '' ENCPASSWD, '' MOBILE_NO
+       	from dual
+   </select>
+   
+   <!--CI 로부터 person_no 가져오기 -->
+   <select id="getcimap" parameterType="hashmap" resultType="hashmap">
+		select a.class_cd, a.person_no, b.kor_nm, b.birth_dt, b.sex  from player.pplcimapm a, player.pplpersonm b 
+      	where a.person_no = b.person_no and  a.ci = #{ci} 
+		  <if test="gubun != null and gubun != '' "> and a.gubun = #{gubun} </if>
+   </select>
+
+   <!--웹등록신청정보 by person_no+등록년도 혹은 person_no+등록년도+팀코드 -->
+   <select id="getwebplayerm" parameterType="hashmap" resultType="hashmap">
+    	select 
+			PERSON_NO, TEAM_CD, (select team_nm from splteaminfom where team_cd=a.team_cd) TEAM_NM, 
+			REG_YEAR, KOR_NM, CHN_NM, ENG_NM, JUMIN_NO, SEX,BIRTH_DT, VISA_NO, BORN_SIDO,
+			PICTURE_NM,PICTURE_PATH,BLOOD_TYPE,BODY_HEIGHT,BODY_WEIGHT,BODY_EYESIGHT,ORIGIN_SIDO,ZIPCODE,ADDRESS1,ADDRESS2,
+			PHONE_NO,MOBILE_NO,E_MAIL,MARRIED_YN,COM_SIDO_CD,POSITION,ATH_AGREE_YN,AGREE_DT1,AGREE_DT2,AGREE_DT3,DISAGREE_REASON,
+			CLASS_CD,DETAIL_CLASS_CD,SIDO_CD,KIND_CD,CLUB_YN,REMARK,GRADE,REREG_YN,PRE_TEAM_CD,PRE_CLASS_CD,PRE_DETAIL_CLASS_CD,
+			PRE_SIDO_CD,TRANSFER_SEQ,TRANSFER_REASON,TRANSFER_AGREE_YN,DELETE_DT,CRT_DT,UDT_DT,CRT_ID,UDT_ID,REMARK2,REMARK3,
+			MOBILE_YN,EMAIL_YN,FOREIGN_YN,SITE,CI,RIGHT_EDU_YN,RIGHT_EDU_DATE,KADA_EDU_YN,KADA_EDU_DATE,TRANSFER_FILE_NM,TRANSFER_YN,
+			FIRST_ENTER_DT,AGREE_STEP,AGREE_YN1,AGREE_YN2,AGREE_YN3,YUGUP_YN,YUGUP_REASON,BU_CD,PUNISH,SILUP_YN
+		from player.webplayerm a
+		where person_no = #{t_person_no} and reg_year= #{t_reg_year}
+			<if test="t_team_cd != null and t_team_cd != '' "> and team_cd = #{t_team_cd}</if>
+		order by crt_dt desc
+   </select>
+   <!--웹등록신청정보 추가-->
+   <select id="insertwebplayerm" parameterType="hashmap" resultType="hashmap">
+    	insert into  player.webplayerm (
+			person_no, TEAM_CD, REG_YEAR, KOR_NM, CHN_NM, ENG_NM, JUMIN_NO, SEX,BIRTH_DT, 
+			PICTURE_NM,BODY_HEIGHT,BODY_WEIGHT,BODY_EYESIGHT,ORIGIN_SIDO,ZIPCODE,ADDRESS1,ADDRESS2,
+			PHONE_NO,MOBILE_NO,E_MAIL,
+			CLASS_CD,DETAIL_CLASS_CD,SIDO_CD,KIND_CD,GRADE,REMARK,
+			TRANSFER_REASON,CRT_DT,CRT_ID,UDT_DT,UDT_ID,REMARK2,REMARK3,
+			CI,RIGHT_EDU_YN,RIGHT_EDU_DATE,KADA_EDU_YN,KADA_EDU_DATE,TRANSFER_FILE_NM,TRANSFER_YN,
+			FIRST_ENTER_DT,YUGUP_YN,YUGUP_REASON, PRE_TEAM_CD, PRE_CLASS_CD, PRE_DETAIL_CLASS_CD, PRE_SIDO_CD)
+		values ( 
+			#{t_person_no}, #{t_team_cd}, #{t_reg_year}, #{t_kor_nm}, #{t_chn_nm}, #{t_eng_nm}, #{t_jumin_no}, #{t_sex},#{t_birth_dt}, 
+			#{t_picture_nm},#{t_body_height},#{t_body_weight},#{t_body_eyesight},#{t_origin_sido},#{t_zipcode},#{t_address1},#{t_address2},
+			#{t_phone_no},#{t_mobile_no},#{t_e_mail},
+			#{t_class_cd},#{t_detail_class_cd},#{t_sido_cd},#{t_kind_cd},#{t_grade},#{t_remark}, 
+			#{t_transfer_reason},SYSDATE,#{t_user_id},SYSDATE,#{t_user_id},#{t_remark2},#{t_remark3},
+			#{t_ci},#{t_right_edu_yn},#{t_right_edu_date},#{t_kada_edu_yn},#{t_kada_edu_date},#{t_transfer_file_nm},#{t_transfer_yn},
+			#{t_first_enter_dt},#{t_yugup_yn},#{t_yugup_reason},#{t_pre_team_cd},#{t_pre_class_cd} ,#{t_pre_detail_class_cd} ,#{t_pre_sido_cd}  
+		)
+    </select>
+   <!--웹등록신청정보 수정-->
+   <select id="updatewebplayerm" parameterType="hashmap" resultType="hashmap">
+		update player.webplayerm set 
+			KOR_NM=#{t_kor_nm}, CHN_NM=#{t_chn_nm}, ENG_NM=#{t_eng_nm}, JUMIN_NO=#{t_jumin_no}, SEX=#{t_sex},BIRTH_DT=#{t_birth_dt}, 
+			PICTURE_NM=#{t_picture_nm},BODY_HEIGHT=#{t_body_height},BODY_WEIGHT=#{t_body_weight},
+			BODY_EYESIGHT=#{t_body_eyesight},ORIGIN_SIDO=#{t_origin_sido},ZIPCODE=#{t_zipcode},ADDRESS1=#{t_address1},ADDRESS2=#{t_address2},
+			PHONE_NO=#{t_phone_no},MOBILE_NO=#{t_mobile_no},E_MAIL=#{t_e_mail},
+			CLASS_CD= #{t_class_cd},DETAIL_CLASS_CD=#{t_detail_class_cd},SIDO_CD=#{t_sido_cd},KIND_CD=#{t_kind_cd},
+			GRADE=#{t_grade}, REMARK=#{t_remark}, 
+			TRANSFER_REASON=#{t_transfer_reason},UDT_DT=SYSDATE,UDT_ID=#{t_user_id},REMARK2=#{t_remark2},REMARK3=#{t_remark3},
+			CI=#{t_ci},RIGHT_EDU_YN=#{t_right_edu_yn},RIGHT_EDU_DATE=#{t_right_edu_date},
+			KADA_EDU_YN=#{t_kada_edu_yn},KADA_EDU_DATE=#{t_kada_edu_date},TRANSFER_FILE_NM=#{t_transfer_file_nm},TRANSFER_YN=#{t_transfer_yn},
+			FIRST_ENTER_DT=#{t_first_enter_dt},
+			YUGUP_YN=#{t_yugup_yn},YUGUP_REASON=#{t_yugup_reason}
+		where person_no = #{t_person_no} and reg_year= #{t_reg_year} and team_cd = #{t_team_cd}
+    </select>
+   <!--웹등록신청정보 삭제-->
+   <select id="deletewebplayerm" parameterType="hashmap" resultType="hashmap">
+    	delete from player.webplayerm where person_no = #{t_person_no} and reg_year= #{t_reg_year} and team_cd = #{t_team_cd}
+   </select>
+
+   <!--선수정보 by person_no or by 이름+생일+성별-->
+   <select id="getpplpersonm" parameterType="hashmap" resultType="hashmap">
+		select 
+			PERSON_NO, KOR_NM, CHN_NM, ENG_NM, JUMIN_NO, SEX,BIRTH_DT, VISA_NO, BORN_SIDO,
+			PICTURE_NM,PICTURE_PATH,BLOOD_TYPE,BODY_HEIGHT,BODY_WEIGHT,BODY_EYESIGHT,ORIGIN_SIDO,ZIPCODE,ADDRESS1,ADDRESS2,
+			PHONE_NO,MOBILE_NO,E_MAIL,MARRIED_YN,COM_SIDO_CD,POSITION,  DELETE_DT,CRT_DT,UDT_DT,CRT_ID,UDT_ID,
+			MOBILE_YN,EMAIL_YN,FOREIGN_YN
+		from player.pplpersonm
+		where 
+			<if test="t_person_no != null and t_person_no != '' "> person_no = #{t_person_no}</if>
+			<if test="t_kor_nm != null and t_kor_nm != '' "> kor_nm = #{t_kor_nm} and birth_dt= #{t_birth_dt} and sex= #{t_sex}</if>
+   </select>
+
+   <!--연도별선수등록정보 by person_no 최종등록년도-->
+   <select id="getsplplayerd" parameterType="hashmap" resultType="hashmap">
+		select 
+			PERSON_NO, TEAM_CD, (select team_nm from splteaminfom where team_cd=a.team_cd) TEAM_NM, 
+			REG_YEAR, ATH_AGREE_YN,AGREE_DT, CLASS_CD,DETAIL_CLASS_CD,SIDO_CD,KIND_CD,CLUB_YN,REMARK, 
+			DELETE_DT,CRT_DT,UDT_DT,CRT_ID,UDT_ID, GRADE,PRE_TEAM_CD,PRE_CLASS_CD,PRE_DETAIL_CLASS_CD,
+			TRANSFER_SEQ,TRANSFER_REASON,TRANSFER_AGREE_YN,REMARK2,REMARK3,        
+			RIGHT_EDU_YN,RIGHT_EDU_DATE,KADA_EDU_YN,KADA_EDU_DATE,TRANSFER_FILE_NM,TRANSFER_YN,
+			FIRST_ENTER_DT, YUGUP_YN,YUGUP_REASON,BU_CD,SILUP_YN
+		from player.splplayerd a
+		where 
+			<if test="t_team_cd == null or t_team_cd == '' "> person_no = #{t_person_no} and reg_year= (select max(reg_year) from  player.splplayerd where person_no =  #{t_person_no})</if>
+			<if test="t_team_cd != null and t_team_cd != '' "> person_no = #{t_person_no} and team_cd = #{t_team_cd} and reg_year= (select max(reg_year) from  player.splplayerd where person_no =  #{t_person_no} and team_cd = #{t_team_cd} ) </if>
+   </select>
+
+  
+   <!--최종등록년도 선수등록정보 by kor_nm,birth_dt,sex -->
+   <select id="getlastyearperson" parameterType="hashmap" resultType="hashmap">
+		select 
+			a.PERSON_NO, a.TEAM_CD, a.REG_YEAR, a.CLASS_CD, b.KOR_NM, b.birth_dt, c.sex, c.team_nm, c.kind_cd, d.kind_nm
+		from  (select person_no, team_cd,class_cd, max(reg_year) reg_year from  player.splplayerd group by  person_no, team_cd,class_cd) a,
+				player.pplpersonm b, player.splteaminfom c, (select minor_cd kind_cd, code_nm1 kind_nm from player.psscodem where major_cd='003') d
+		where a.person_no=b.person_no and a.team_cd = c.team_cd and c.kind_cd=d.kind_cd 
+			<if test="t_person_no != null and t_person_no != '' "> and a.person_no = #{t_person_no}</if>
+			<if test="t_kor_nm != null and t_kor_nm != '' "> and b.kor_nm=#{t_kor_nm} and b.birth_dt=#{t_birth_dt} and b.sex=#{t_sex}</if>
+   </select>
+   <!--detail_class_cd 코드 읽기 -->
+   <select id="get_detail_class_cd" parameterType="hashmap" resultType="hashmap">
+		select minor_cd detail_class_cd, code_nm1 detail_class_nm
+		from  psscodem
+		where major_cd='002' and code_fg = #{t_class_cd}
+   </select>
+   <!--class_cd 코드 읽기 -->
+   <select id="get_class_cd" parameterType="hashmap" resultType="hashmap">
+		select minor_cd class_cd, code_nm1 class_nm
+		from  psscodem
+		where major_cd='001' order by code_nm1
+   </select>
+   <!--team_cd search   ROWNUM,  where rownum < #{t_rowcnt}            -->
+   <select id="searchteamnm" parameterType="hashmap" resultType="hashmap">
+		select ROWNUM, TEAM_CD,TEAM_NM,SIDO_CD,CLASS_CD,SEX,KIND_CD,KIND_NM 
+		from
+			(select TEAM_CD,TEAM_NM,SIDO_CD,CLASS_CD,SEX,KIND_CD,(select code_nm1 kind_nm from player.psscodem where major_cd='003' and minor_cd = b.kind_cd) KIND_NM
+			from  player.splteaminfom b
+			where class_cd= #{t_class_cd} and UPPER(team_nm) like '%'||UPPER(#{t_team_nm})||'%' order by team_nm) a
+		where rownum <![CDATA[<]]> #{t_rowcnt}
+   </select>
+   <select id="searchteamnmrxjs" parameterType="hashmap" resultType="hashmap">
+		select TEAM_NM 
+		from
+			(select TEAM_NM
+			from  player.splteaminfom
+			where class_cd= #{t_class_cd} and UPPER(team_nm) like '%'||UPPER(#{t_team_nm})||'%'
+			group by team_nm order by team_nm) a
+		where rownum <![CDATA[<]]> #{t_rowcnt}
+   </select>
+   <select id="createpersonno" parameterType="hashmap" resultType="hashmap">
+		select to_char(to_number( max(person_no) ) + 1) PERSON_NO
+		from  pplperson_no
+		where person_no like #{t_nowyyyymm0}||'%'
+   </select>
+
+   <!--read webscholashipd 가져오기 -->
+   <select id="getwebscholashipd" parameterType="hashmap" resultType="hashmap">
+		select seq, school_nm, graduation_cd, 
+			decode(graduation_cd,'1','졸업','2','중퇴','3','재학','4','전학','5','수료','') graduation_nm,
+			start_dt, end_dt 
+		from player.webscholarshipd 
+		where person_no = #{t_person_no} and reg_year = #{t_reg_year}
+		order by seq
+   </select>
+
+   <!-- copy from pplscholashipd  -->
+   <select id="copyscholashipd" parameterType="hashmap" resultType="hashmap">
+		insert into player.webscholarshipd (person_no, reg_year, seq,school_no, school_nm, grade_cd, school_addr, graduation_cd, start_dt, end_dt, crt_id, crt_dt, udt_id, udt_dt) 
+		select person_no,#{t_reg_year}, seq, school_no, school_nm, grade_cd, school_addr, graduation_cd, start_dt, end_dt, #{t_user_id}, SYSDATE, #{t_user_id}, SYSDATE
+		from player.pplscholarshipd 
+		where person_no = #{t_person_no}
+   </select>
+   <!-- delete webscholashipd  -->
+   <select id="deletewebscholashipd" parameterType="hashmap" resultType="hashmap">
+		delete from player.webscholarshipd where person_no = #{t_person_no} and seq = #{t_seqno} and reg_year = #{t_reg_year}
+   </select>
+   <!--read pssschoolm 가져오기    rownum,   where rownum < #{t_rowcnt}-->
+   <select id="getpssschoolm" parameterType="hashmap" resultType="hashmap">
+		select rownum,  school_no, school_nm, address1, grade_cd
+		from (select school_no, school_nm, address1, school_gb grade_cd
+			from player.pssschoolm 
+			where school_nm like '%'||#{t_school_nm}||'%' order by school_nm) a
+		where rownum <![CDATA[<]]>  #{t_rowcnt}
+   </select>
+   <!-- add webscholashipd  -->
+   <select id="addwebscholashipd" parameterType="hashmap" resultType="hashmap">
+		insert into player.webscholarshipd (person_no, seq,reg_year, school_no, school_nm, grade_cd, school_addr, graduation_cd, start_dt, end_dt, crt_id, crt_dt, udt_id, udt_dt) 
+		values (#{t_person_no},(select nvl(trim(to_char((max(to_number(seq)) + 1),'000')),'001') from player.webscholarshipd where person_no=#{t_person_no} and reg_year=#{t_reg_year}),
+			#{t_reg_year}, #{t_school_no}, #{t_school_nm}, #{t_grade_cd},#{t_school_addr}, #{t_graduation_cd}, #{t_start_dt}, #{t_end_dt}, #{t_user_id}, SYSDATE, #{t_user_id}, SYSDATE)
+		
+   </select>
+
+   <!--read pssschoolm 가져오기    rownum,   where rownum < #{t_rowcnt}-->
+   <select id="getwebpayresultm" parameterType="hashmap" resultType="hashmap">
+		select  REG_YEAR,CLASS_CD,PERSON_NO,PERSON_NM,TOTAL_SUM,to_char(REG_DATE,'YYYY.MM.DD HH24:MI') REG_DATE,TEAM_CD, TID
+		from player.webpayresultm
+		where person_no = #{t_person_no} and reg_year= #{t_reg_year} and team_cd = #{t_team_cd}
+   </select>
+
+   <select id="addwebpayresultm" parameterType="hashmap" resultType="hashmap">
+		insert into player.webpayresultm (
+			PAY_SEQ, REG_YEAR, CLASS_CD, PERSON_NO, PERSON_NM, TOTAL_SUM, REG_DATE, TEAM_CD, TID
+		)
+		values ( (select nvl(max(PAY_SEQ),0) + 1 from player.webpayresultm), #{t_reg_year},#{t_class_cd},
+			#{t_person_no},#{t_kor_nm}, #{t_total_amount}, SYSDATE, #{t_team_cd}, #{t_tid}
+		)      
+   </select>
+
+   <select id="delwebpayresultm" parameterType="hashmap" resultType="hashmap">
+		delete from player.webpayresultm 
+		where person_no = #{t_person_no} and reg_year= #{t_reg_year} and team_cd = #{t_team_cd}
+   </select>
+
+
+
+   <!--연도별선수등록정보 by person_no 최종등록년도-->
+   <select id="getpplsplplayerd" parameterType="hashmap" resultType="hashmap">
+		select 
+			PERSON_NO,(select kor_nm ||','|| birth_dt ||',' || sex from player.pplpersonm where person_no = a.person_no) PERSON_NM,
+			TEAM_CD, (select team_nm from splteaminfom where team_cd=a.team_cd) TEAM_NM, 
+			REG_YEAR, ATH_AGREE_YN,AGREE_DT, CLASS_CD,DETAIL_CLASS_CD,SIDO_CD,KIND_CD,CLUB_YN,REMARK, 
+			DELETE_DT,CRT_DT,UDT_DT,CRT_ID,UDT_ID, GRADE,PRE_TEAM_CD,PRE_CLASS_CD,PRE_DETAIL_CLASS_CD,
+			TRANSFER_SEQ,TRANSFER_REASON,TRANSFER_AGREE_YN,REMARK2,REMARK3,        
+			RIGHT_EDU_YN,RIGHT_EDU_DATE,KADA_EDU_YN,KADA_EDU_DATE,TRANSFER_FILE_NM,TRANSFER_YN,
+			FIRST_ENTER_DT, YUGUP_YN,YUGUP_REASON,BU_CD,SILUP_YN
+		from player.splplayerd a
+		where 
+			person_no = #{t_person_no}
+		order by reg_year desc
+	</select>
+   	<select id="getmtaresultbo" parameterType="hashmap" resultType="hashmap">
+		select pclass_cd, to_cd, (select to_yyyy || ', ' || to_nm from precord.mta_tour where pclass_cd = a.pclass_cd and to_cd = a.to_cd) to_nm,
+			team_cd, (select team_nm from player.splteaminfom where team_cd = a.team_cd) team_nm, detail_class_nm, resultrank
+ 		from precord.mta_result_bo a 
+		where 
+			person_no = #{t_person_no}
+		order by to_nm desc
+	</select>
+
+
+
+
+   <insert id="insertUserJoin" parameterType="hashmap">
+		INSERT
+			INTO
+			PPLUSERM A (
+			A.USER_ID ,
+			A.KOR_NM ,
+			A.PASSWD ,
+			A.GENDER ,
+			A.BIRTH_DT ,
+			A.MOBILE_NO ,
+			A.E_MAIL ,
+			A.ZIPCODE ,
+			A.ADDRESS1 ,
+			A.ADDRESS2 ,
+			A.PLAYERYN ,
+			A.LIFEYN ,
+			A.JUDGEYN ,
+			A.LEADERYN ,
+			A.PLAYERMGRYN
+			<!-- 
+			A.PLAYER_NO
+			 -->
+			)
+		VALUES (
+			#{userId} ,
+			#{userNm} ,
+			#{pass} ,
+			#{gender} ,
+			#{birthDt} ,
+			#{phoneNo} ,
+			#{email} ,
+			#{zipNo} ,
+			#{addr1} ,
+			#{addr2} ,
+			#{pyn} ,
+			#{lyn} ,
+			#{jyn} ,
+			#{cyn} ,
+			#{myn} 
+			<!-- 
+			(SELECT FN_NEW_PERSON_NO('1')  from dual)
+			 -->
+		)
+	</insert>
+	
+	<select id="selectUserInfo" parameterType="hashmap" resultType="hashmap">
+		SELECT
+			USER_ID
+			, KOR_NM
+			, PASSWD
+			, GENDER
+			, BIRTH_DT
+			, MOBILE_NO
+			, E_MAIL
+			, ZIPCODE
+			, ADDRESS1
+			, ADDRESS2
+			, PLAYERYN
+			, LIFEYN
+			, JUDGEYN
+			, LEADERYN
+			, PLAYERMGRYN
+		FROM
+			PPLUSERM p
+		WHERE
+			user_id = #{userId}
+	</select>
+	
+	<update id="updateUserInfo" parameterType="hashmap">
+	UPDATE
+		PPLUSERM
+	SET
+		KOR_NM = #{userNm}
+		, PASSWD = #{pass}
+		, GENDER = #{gender}
+		, BIRTH_DT = #{birthDt}
+		, MOBILE_NO = #{phoneNo}
+		, E_MAIL = #{email}
+		, ZIPCODE = #{zipNo}
+		, ADDRESS1 = #{addr1}
+		, ADDRESS2 = #{addr2}
+		, PLAYERYN = #{pyn}
+		, LIFEYN = #{lyn}
+		, JUDGEYN = #{jyn}
+		, LEADERYN = #{cyn}
+		, PLAYERMGRYN = #{myn}
+	WHERE
+		USER_ID = #{userId}
+	</update>
+	
+	<select id="selectSnsInfo" parameterType="hashmap" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM
+			PPLUSERM p
+		WHERE
+			<choose>
+				<when test='snskind == "K"'>
+				KOKAO_ID = #{snsid}
+				</when>
+				<when test='snskind == "N"'>
+				NAVER_ID = #{snsid}
+				</when>
+				<when test='snskind == "G" '>
+				GOOGLE_ID = #{snsid}
+				</when>
+				<when test='snskind == "F" '>
+				FACEBOOK_ID = #{snsid}
+				</when>
+			</choose>
+	</select>
+	
+	<update id="inserSnsInfo" parameterType="hashmap">
+		UPDATE
+			PPLUSERM
+		SET
+			<choose>
+				<when test='snskind == "K" '>
+				KOKAO_ID = #{snsid}
+				</when>
+				<when test='snskind == "N" '>
+				NAVER_ID = #{snsid}
+				</when>
+				<when test='snskind == "G" '>
+				GOOGLE_ID = #{snsid}
+				</when>
+				<when test='snskind == "F" '>
+				FACEBOOK_ID = #{snsid}
+				</when>
+			</choose>
+		WHERE
+			USER_ID = #{userId}			
+	</update>
+	
+	<update id="deleteSnsInfo" parameterType="hashmap">
+		UPDATE
+			PPLUSERM
+		SET
+			<choose>
+				<when test='snskind == "K" '>
+				KOKAO_ID = ''
+				</when>
+				<when test='snskind == "N" '>
+				NAVER_ID = ''
+				</when>
+				<when test='snskind == "G" '>
+				GOOGLE_ID = ''
+				</when>
+				<when test='snskind == "F" '>
+				FACEBOOK_ID = ''
+				</when>
+			</choose>
+		WHERE
+			<choose>
+				<when test='snskind == "K" '>
+				KOKAO_ID = #{snsid}
+				</when>
+				<when test='snskind == "N" '>
+				NAVER_ID = #{snsid}
+				</when>
+				<when test='snskind == "G" '>
+				GOOGLE_ID = #{snsid}
+				</when>
+				<when test='snskind == "F" '>
+				FACEBOOK_ID = #{snsid}
+				</when>
+			</choose>	
+	</update>
+	
+	<select id="snsUserCheck" parameterType="hashmap" resultType="hashmap">
+		select USER_ID, PASSWD, KOR_NM, CI, BIRTH_DT, GENDER, ENCPASSWD, MOBILE_NO
+       	from player.ppluserm
+        where
+        <choose>
+				<when test='snskind == "K" '>
+				KOKAO_ID = #{snsid}
+				</when>
+				<when test='snskind == "N" '>
+				NAVER_ID = #{snsid}
+				</when>
+				<when test='snskind == "G" '>
+				GOOGLE_ID = #{snsid}
+				</when>
+				<when test='snskind == "F" '>
+				FACEBOOK_ID = #{snsid}
+				</when>
+			</choose>
+	</select>
+	
+</mapper>
