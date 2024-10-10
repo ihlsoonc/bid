@@ -5,7 +5,6 @@
 
 <mapper namespace="com.bidsystem.bid.mapper.MatchMapper">
 
-
     <!-- 입찰 상태 조회 -->
     <select id="getBidStatus" parameterType="hashmap" resultType="hashmap">
         SELECT
@@ -14,7 +13,9 @@
             m.bid_close_datetime,
             m.bid_open_datetime,
             m.bid_open_status,
-            m.end_datetime,
+            m.start_date,
+            m.start_time,
+            m.end_time,
             m.match_name,
             m.round,
             m.start_datetime
@@ -37,26 +38,27 @@
         SELECT 
             m.match_no, m.venue_cd, m.match_name, m.round, 
             m.bid_open_datetime, m.bid_close_datetime, m.bid_open_status,
-            m.start_datetime, m.end_datetime, 
+            m.start_date, m.start_time, m.end_time, 
             m.is_bid_available, m.filename_attached, 
-            m.approved, m.approved_by, m.created_by,
+            m.approved_by, m.created_by,
             v.venue_name
         FROM matches m
         JOIN venue_code v ON m.venue_cd = v.venue_cd
     </select>
-    <!-- 모든 경기 조회 -->
+
+    <!-- 특정 유저의 경기 조회 -->
     <select id="getMatchesByUserId" parameterType="hashmap" resultType="hashmap">
         SELECT 
             m.match_no, m.venue_cd, m.match_name, m.round, 
             m.bid_open_datetime, m.bid_close_datetime, m.bid_open_status,
-            m.start_datetime, m.end_datetime, 
+            m.start_date, m.start_time, m.end_etime, 
             m.is_bid_available, m.filename_attached, 
-            m.approved, m.approved_by, m.created_by,
+            m.approved_by, m.created_by,
             v.venue_name
         FROM matches m
         JOIN venue_code v ON m.venue_cd = v.venue_cd
         WHERE
-            m.created_by = #{userId}
+            m.created_by = #{telno}
     </select>
 
     <!-- 모든 승인된 경기 조회 -->
@@ -64,7 +66,7 @@
         SELECT 
             m.match_no, m.venue_cd, m.match_name, m.round, 
             m.bid_open_datetime, m.bid_close_datetime, m.bid_open_status,
-            m.start_datetime, m.end_datetime, 
+            m.start_date, m.start_time, m.end_etime, 
             m.is_bid_available, m.filename_attached, 
             m.approved_by, m.created_by,
             v.venue_name
@@ -73,6 +75,7 @@
         WHERE m.approved = 'Y'
     </select>
 
+    <!-- 최대 match_no 조회 -->
     <select id="getMaxMatchNo" resultType="int">
         SELECT COALESCE(MAX(match_no), 0) FROM matches
     </select>
@@ -80,12 +83,12 @@
     <!-- 경기 추가 -->
     <insert id="addMatch" parameterType="hashmap">
         INSERT INTO matches (
-            match_no, venue_cd, match_name, round, start_datetime, end_datetime, 
+            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
             is_bid_available, filename_attached, created_by, created_at
         ) 
         VALUES (
-            #{matchNumber}, #{venueCd}, #{matchName}, #{round}, #{startTime}, 
-            #{endTime}, #{isBidAvailable}, #{fileName}, #{userId}, CURRENT_TIMESTAMP
+            #{matchNumber}, #{venueCd}, #{matchName}, #{round}, #{startDate}, #{startTime}, #{endTime}, #{bidOpenTime},#{bidCloseTime},
+            #{isBidAvailable}, #{fileName}, #{telno}, CURRENT_TIMESTAMP
         )
     </insert>
     
@@ -96,12 +99,13 @@
             venue_cd = #{venueCd},
             match_name = #{matchName},
             round = #{round}, 
-            start_datetime = #{startTime}, 
-            end_datetime = #{endTime}, 
+            start_date = #{startDate}, 
+            start_time = #{startTime}, 
+            end_time = #{endTime}, 
             bid_open_datetime = #{bidOpenTime}, 
             bid_close_datetime = #{bidCloseTime}, 
             is_bid_available = #{isBidAvailable}, 
-            updated_by = #{userId}, 
+            updated_by = #{telno}, 
             updated_at = CURRENT_TIMESTAMP, 
             filename_attached = #{fileName}
         WHERE match_no = #{matchNumber}
@@ -112,7 +116,7 @@
         UPDATE matches
         SET 
             approved = #{actionType}, 
-            approved_by = #{userId}, 
+            approved_by = #{telno}, 
             updated_at = CURRENT_TIMESTAMP
         WHERE match_no = #{matchNumber}
     </update>
@@ -122,6 +126,7 @@
         DELETE FROM matches WHERE match_no = #{matchNumber}
     </delete>
 
+    <!-- 경기 상태 업데이트 -->
     <update id="updateMatchAwardStatus" parameterType="hashmap">
         UPDATE matches
         SET bid_open_status = 'F'
@@ -129,4 +134,3 @@
     </update>
 
 </mapper>
-

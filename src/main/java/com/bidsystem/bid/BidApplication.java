@@ -15,7 +15,7 @@ public class BidApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BidApplication.class, args);
-        logger.info("\n\n++++++++++++++++++++++ BidApplication 이 시작되었습니다.\n");
+        logger.info("\n\n=================== BidApplication 이 시작되었습니다.\n");
     }
 
 
