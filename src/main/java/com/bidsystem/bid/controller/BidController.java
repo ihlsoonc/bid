@@ -35,6 +35,14 @@ public class BidController {
         return ResponseEntity.ok(results); 
     }
 
+    
+    // 사용자의 모든 입찰 조회
+    @GetMapping("/getallbids")
+    public ResponseEntity<List<Map<String, Object>>> getAllBids(@RequestParam Map<String, Object> params) {
+        List<Map<String, Object>> results = bidService.getAllBids(params); 
+        return ResponseEntity.ok(results); 
+    }
+
     // 낙찰 처리
     @PostMapping("/award")
     public ResponseEntity<Map<String, Object>> awardBids(@RequestBody Map<String, Object> request) {

@@ -34,31 +34,24 @@ public class UserController {
         return ResponseEntity.ok(result); 
     }
 
-    // 사용자 ID 조회 (이메일과 이름으로)
-    @PostMapping("/find-id")
-    public ResponseEntity<Map<String, Object>> findUserId(@RequestBody Map<String, Object> request) {
-        Map<String, Object> result = userService.findUserId(request);
-        return ResponseEntity.ok(result); 
-    }
-
     // 사용자 등록
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody Map<String, Object> request) {
-        userService.registerUser(request); // 서비스에서 사용자 등록 처리
-        return ResponseEntity.ok("사용자 등록이 완료되었습니다.");
+    public ResponseEntity<Map<String, Object>> registerUser(@RequestBody Map<String, Object> request) {
+        Map<String, Object> result = userService.registerUser(request); // 서비스에서 사용자 등록 처리
+        return ResponseEntity.ok(result); 
     }
 
     // 사용자 정보 수정
     @PostMapping("/update")
-    public ResponseEntity<String> updateUser(@RequestBody Map<String, Object> request) {
-        userService.updateUser(request); // 서비스에서 사용자 정보 수정 처리
-        return ResponseEntity.ok("사용자 정보가 성공적으로 수정되었습니다.");
+    public ResponseEntity<Map<String, Object>> updateUser(@RequestBody Map<String, Object> request) {
+        Map<String, Object> result = userService.updateUser(request); // 서비스에서 사용자 정보 수정 처리
+        return ResponseEntity.ok(result); 
     }
 
     // 비밀번호 변경
     @PostMapping("/change-password")
-    public ResponseEntity<String> changePassword(@RequestBody Map<String, Object> request) {
-        userService.changePassword(request); // 서비스에서 비밀번호 변경 처리
-        return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
+    public ResponseEntity<Map<String, Object>> changePassword(@RequestBody Map<String, Object> request) {
+        Map<String, Object> result = userService.changePassword(request); // 서비스에서 비밀번호 변경 처리
+        return ResponseEntity.ok(result); 
     }
 }

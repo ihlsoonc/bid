@@ -5,9 +5,11 @@ import com.bidsystem.bid.mapper.MatchMapper;
 import com.bidsystem.bid.service.ExceptionService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
-import java.rmi.ServerException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -17,48 +19,27 @@ public class MatchService {
 
     @Autowired
     private MatchMapper matchMapper;
+    private static final Logger logger = LoggerFactory.getLogger(BidService.class);
 
     // 경기 비드 상태 조회
     public Map<String, Object> getBidStatus(Map<String, Object> params) {
         try {
             Map<String, Object> results = matchMapper.getBidStatus(params); 
-            
-            // if (results == null || results.isEmpty()) {
-            //     throw new NotFoundException(null);
-            // } else {
-                String bidStatusCode = "I"; // 기본값: 데이터가 없을 경우
 
-                // 'bid_open_datetime'과 'bid_close_datetime'을 LocalDateTime으로 캐스팅
-                LocalDateTime openDateTime = (LocalDateTime) results.get("bid_open_datetime");
-                LocalDateTime closeDateTime = (LocalDateTime) results.get("bid_close_datetime");
-
-
-                // 현재 시간을 LocalDateTime으로 가져옴
-                LocalDateTime now = LocalDateTime.now();
-
-                // bid_open_status가 'F'이면 F로 설정, 입찰 개시/종료 시간으로 결정
-                String bidOpenStatus = (String) results.get("bid_open_status");
-                if ("F".equals(bidOpenStatus)) {
-                    bidStatusCode = "F"; // 'F' 상태
-                } else {
-                    // 현재 시간과 비교하여 상태 코드 설정
-                    if (now.isBefore(openDateTime)) {
-                        bidStatusCode = "N"; // 입찰 시작 전
-                    } else if (now.isAfter(closeDateTime)) {
-                        bidStatusCode = "C"; // 입찰 종료 후
-                    } else {
-                        bidStatusCode = "O"; // 입찰 진행 중
-                    }
-                }
-                Map<String, Object> response = new HashMap<>(results);
-                response.put("bidStatusCode", bidStatusCode);
-                return response;
-            // }
+            if (results == null || results.isEmpty()) {
+                throw new NotFoundException(null);
+            } 
+            String bidStatusCode = getStatusCode(results);
+            Map<String, Object> response = new HashMap<>(results);
+            response.put("bidStatusCode", bidStatusCode);
+            return response;
+        } catch (NoDataException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException( null,e);
         }
     }
-    public String getStatus(Map<String, Object> results) {
+    public String getStatusCode(Map<String, Object> results) {
             
         String bidStatusCode = "I"; // 기본값: 데이터가 없을 경우
 
@@ -100,11 +81,20 @@ public class MatchService {
         String userType = (String) params.get("userType");
 
         try {
+            List<Map<String, Object>> results = null;
+
             if ("B".equals(userType)) {
-                return matchMapper.getMatchesByUserId(params);
+                results =  matchMapper.getMatchesByUserId(params);
             } else {
-                return matchMapper.getAllMatches(params);
+                results =  matchMapper.getAllMatches(params);
             }
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException(null);
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
@@ -113,42 +103,63 @@ public class MatchService {
     // 모든 승인된 경기 조회 (사용자용)
     public List<Map<String, Object>> getAllApprovedMatches(Map<String, Object> params) {
         try {
-            return matchMapper.getAllMatches(params);
+            List<Map<String, Object>> results = null;
+            results =  matchMapper.getAllMatches(params);
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException(null);
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
     }
 
     // 경기 추가
+    @Transactional
     public Map<String, Object> addMatch(Map<String, Object> params) {
         try {
+            // 첫 번째 쿼리로 최대 match_no 값을 조회
+            Integer maxMatchNo = matchMapper.getMaxMatchNo();
+
+            // 조회된 값에 1을 더해서 새로운 match_no 생성
+            int newMatchNo = (maxMatchNo == null) ? 1 : maxMatchNo + 1;
+
+            // 두 번째 쿼리로 새 데이터를 삽입
+            params.put("matchNumber", newMatchNo);
             int affectedRows = matchMapper.addMatch(params);
             if (affectedRows > 0) {
                 Map<String, Object> response = new HashMap<>();
-                response.put("message", "성공적으로 경기정보가 생성되었습니다.");
+                response.put("message", "성공적으로 등록되었습니다.");
                 return response;
             } else {
-                throw new NotFoundException(null);
+                throw new ZeroAffectedRowException(null);
             }
-        } catch (DuplicateKeyException e) {
-            // 중복 키 예외 처리
-            throw new DuplicateKeyException(null);
-        } catch (Exception e) {
-            throw new DataAccessException(null,e);
+        } catch (ZeroAffectedRowException e) {
+            throw e;
+        } catch (org.springframework.dao.DataAccessException e) {                  //DUPKEY를 catch하기 위함
+            if (e instanceof org.springframework.dao.DuplicateKeyException) {       //DUPKEY를 catch하기 위함
+                throw new DuplicateKeyException("중복된 정보입니다. 입력 내용을 확인하세요.");
+            } else {
+                throw new DataAccessException(null,e);
+            }
         }
     }
-
     // 경기 수정
     public Map<String, Object> updateMatch(Map<String, Object> params) {
         try {
             int affectedRows = matchMapper.updateMatch(params);
             if (affectedRows > 0) {
                 Map<String, Object> response = new HashMap<>();
-                response.put("message", "갱신 처리가 성공적으로 수행되었습니다.");
+                response.put("message", "정보가 성공적으로 수정되었습니다.");
                 return response;
             } else {
                 throw new NotFoundException(null);
             }
+        } catch (NotFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
@@ -165,6 +176,8 @@ public class MatchService {
             } else {
                 throw new NotFoundException(null);
             }
+        } catch (NotFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
@@ -181,6 +194,8 @@ public class MatchService {
             } else {
                 throw new NotFoundException(null);
             }
+        } catch (NotFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }

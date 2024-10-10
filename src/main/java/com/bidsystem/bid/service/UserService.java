@@ -24,19 +24,20 @@ public class UserService {
     private AdminMapper adminMapper;
 
     @Autowired
-    private CommonAuthorization commonService;
+    private CertificationService commonService;
 
     // 로그인 처리
     public Map<String, Object> login(Map<String, Object> request, HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
         try {
             Map<String, Object> verifyResult = commonService.verifyPassword(request);
             // 로그인 성공 시 세션 및 쿠키 처리
+            String telno = (String) verifyResult.get("telno");
             String userId = (String) verifyResult.get("userid");
             String userName = (String) verifyResult.get("username");
             String userType = (String) verifyResult.get("usertype");
 
             // 세션 설정
-            commonService.setSessionAttributes(httpRequest.getSession(), userId, userType);
+            commonService.setSessionAttributes(httpRequest.getSession(), userId, telno, userType);
 
             // 쿠키 설정
             commonService.setLoginCookie( httpRequest.getSession(),httpResponse);
@@ -57,116 +58,63 @@ public class UserService {
     // 사용자 정보 조회
     public Map<String, Object> getUserByQuery(Map<String, Object> request) {
         try {
-            String requestType = (String) request.get("requestType");
-            String table = (String) request.get("table");
             Map<String, Object> results = commonService.verifyPassword(request);
-
-            if ("user".equals(table)) {
-                if ("query".equals(requestType)) {
-                    return results;
-                } else if ("userid".equals(requestType)) {
-                    results = userMapper.getUserById(request);
-                } else if ("telno".equals(requestType)) {
-                    results = userMapper.getUserByTelno(request);
-                } else {
-                    throw new BadRequestException(null);
-                }
-            } else if ("admin".equals(table)) {
-                if ("query".equals(requestType)) {
-                    return results;
-                } else if ("userid".equals(requestType)) {
-                    results = adminMapper.getUserById(request);
-                } else {
-                    throw new BadRequestException(null);
-                }
+            if (results == null || results.isEmpty()) {
+                throw new NotFoundException(null);
+            } else {
+                return results;
             }
-   
-            return results;
         } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
             throw e;
         } catch (Exception e) {
             throw new ServerException(null,e);
         }
     }
-    public Map<String, Object> getUserById(Map<String, Object> request) {
-        try {
-            return userMapper.getUserById(request);
-        } catch (Exception e) {
-            throw new ServerException(null,e);
-        }
-    }
+
+    // pginterface호출함수 (password verification이 없음)
     public Map<String, Object> getUserByTelno(Map<String, Object> request) {
         try {
-            return userMapper.getUserByTelno(request);
+            request.put("queryType", "telno");
+            request.put("query", request.get("telno"));
+            return userMapper.getUserByQuery(request);
         } catch (Exception e) {
             throw new ServerException(null,e);
-        }
-    }
-    // 사용자 ID 찾기
-    public Map<String, Object> findUserId(Map<String, Object> request) {
-        try {
-            String table = (String) request.get("table");
-            Map<String, Object> results = null;
-
-            if ("user".equals(table)) {
-                results = userMapper.getUserIdByEmailAndName(request);
-            } else if ("admin".equals(table)) {
-                results = adminMapper.getUserIdByEmailAndName(request);
-            } else {
-                throw new BadRequestException(null);
-            }
-
-            if (results == null || results.isEmpty()) {
-                throw new NotFoundException("사용자 정보가 없습니다.");
-            } else {
-                return results;
-            }
-        } catch (Exception e) {
-            throw new DataAccessException(null,e);
         }
     }
 
     // 비밀번호 변경
-    public void changePassword(Map<String, Object> request) {
+    public Map<String, Object> changePassword(Map<String, Object> request) {
         try {
             String table = (String) request.get("table");
             String inputPassword = (String) request.get("password");
-
+            System.out.println("\n\n++++++++++++++++++++++++"+request+"\n\n");
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(inputPassword);
-            request.put("password", encodedPassword);
-
+            request.put("newPassword", encodedPassword);
+            int affectedRows = 0;
             if ("user".equals(table)) {
-                userMapper.changePassword(request);
+                affectedRows =  userMapper.changePassword(request);
             } else if ("admin".equals(table)) {
-                adminMapper.changePassword(request);
+                affectedRows =  adminMapper.changePassword(request);
             } else {
                 throw new BadRequestException(null);
             }
-        } catch (Exception e) {
-            throw new DataAccessException(null,e);
-        }
-    }
-
-    // 사용자 정보 업데이트
-    public void updateUser(Map<String, Object> request) {
-        try {
-            String table = (String) request.get("table");
-
-            if ("user".equals(table)) {
-                userMapper.updateUser(request);
-            } else if ("admin".equals(table)) {
-                adminMapper.updateUser(request);
+            if (affectedRows > 0) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", "성공적으로 수행되었습니다.");
+                return response;
             } else {
-                throw new BadRequestException(null);
+                throw new ZeroAffectedRowException("작업이 처리되지 않았습니다.");
             }
+        } catch (NotFoundException e) {
+            throw new NotFoundException(null);
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
     }
 
     // 사용자 등록
-    public void registerUser(Map<String, Object> request) {
+    public Map<String, Object> registerUser(Map<String, Object> request) {
         try {
             String table = (String) request.get("table");
             String password = (String) request.get("password");
@@ -174,14 +122,53 @@ public class UserService {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(password);
             request.put("password", encodedPassword);
-
+            int affectedRows = 0;
             if ("user".equals(table)) {
-                userMapper.registerUser(request);
+                affectedRows =  userMapper.registerUser(request);
             } else if ("admin".equals(table)) {
-                adminMapper.registerUser(request);
+                affectedRows =  adminMapper.registerUser(request);
             } else {
                 throw new BadRequestException(null);
             }
+            if (affectedRows > 0) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", "성공적으로 등록되었습니다.");
+                return response;
+            } else {
+                throw new ZeroAffectedRowException(null);
+            }
+        } catch (BadRequestException e) {
+            throw e;
+        } catch (org.springframework.dao.DataAccessException e) {                  //DUPKEY를 catch하기 위함
+            if (e instanceof org.springframework.dao.DuplicateKeyException) {       //DUPKEY를 catch하기 위함
+                throw new DuplicateKeyException("중복된 정보입니다. 입력 내용을 확인하세요.");
+            } else {
+                throw new DataAccessException(null,e);
+            }
+        }
+    }
+
+    // 사용자 정보 업데이트
+    public Map<String, Object> updateUser(Map<String, Object> request) {
+        try {
+            String table = (String) request.get("table");
+            int affectedRows = 0;
+            if ("user".equals(table)) {
+                affectedRows =  userMapper.updateUser(request);
+            } else if ("admin".equals(table)) {
+                affectedRows =  adminMapper.updateUser(request);
+            } else {
+                throw new BadRequestException("tableName정보 parameter 오류입니다.");
+            }
+            if (affectedRows > 0) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", "성공적으로 수행되었습니다.");
+                return response;
+            } else {
+                throw new ZeroAffectedRowException(null);
+            }
+        } catch (ZeroAffectedRowException | BadRequestException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }

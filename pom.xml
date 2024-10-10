@@ -78,6 +78,19 @@
             <version>10.1.5</version> <!-- 적절한 버전 사용 -->
         </dependency>
 
+
+        <!-- coolSMS 사용 -->
+        <dependency>
+            <groupId>net.nurigo</groupId>
+            <artifactId>sdk</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!-- Spring Boot Starter Test (JUnit 5 포함) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -127,6 +140,7 @@
             <artifactId>logback-classic</artifactId>
             <version>1.4.11</version> <!-- 최신 버전 확인 가능 -->
         </dependency>
+
     </dependencies>
 
     <build>

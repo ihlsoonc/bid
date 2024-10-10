@@ -62,8 +62,6 @@
                         <label>resultMsg</label>
                         <label>${resultMap.resultMsg}</label> 
                         <br/>
-                        <label>사용자 id</label>
-                        <label>${resultMap.userId}</label> 
                         <label>${resultMap.bidUpdateResults}</label> 
                         <br/>
                         <label>tid</label>

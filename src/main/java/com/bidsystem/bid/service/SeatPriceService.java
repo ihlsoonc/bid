@@ -21,7 +21,14 @@ public class SeatPriceService {
     // 좌석별 가격 조회
     public List<Map<String, Object>> getSeatPrices(Map<String, Object> params) {
         try {
-            return seatPriceMapper.getSeatPrice(params);
+            List<Map<String, Object>> results = seatPriceMapper.getSeatPrice(params);
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException(null);
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
@@ -32,9 +39,15 @@ public class SeatPriceService {
     public Map<String, Object> updateSeatPriceArray(Map<String, Object> params) {
         try {
             int affectedRows = seatPriceMapper.updateSeatPriceArray(params);
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", affectedRows + "개의 정보가 갱신되었습니다.");
-            return response;
+            if (affectedRows > 0) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", affectedRows + "개의 정보가 갱신되었습니다.");
+                return response;
+            } else {
+                throw new ZeroAffectedRowException(null);
+            }
+        } catch (ZeroAffectedRowException e) {
+            throw e;    
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
@@ -45,9 +58,15 @@ public class SeatPriceService {
     public Map<String, Object> deleteSeatPriceArray(Map<String, Object> params) {
         try {
             int affectedRows = seatPriceMapper.deleteSeatPriceArray(params);
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", affectedRows + "개의 정보가 삭제되었습니다.");
-            return response;
+            if (affectedRows > 0) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", affectedRows + "개의 정보가 갱신되었습니다.");
+                return response;
+            } else {
+                throw new ZeroAffectedRowException(null);
+            }
+        } catch (ZeroAffectedRowException e) {
+            throw e; 
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }

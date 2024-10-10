@@ -18,28 +18,28 @@ public class MatchController {
     // 입찰 상태 조회
     @GetMapping("/status")
     public ResponseEntity<Map<String, Object>> getBidStatus(@RequestParam Map<String, Object> params) {
-        Map<String, Object> results = matchService.getBidStatus(params); // 서비스에서 데이터만 반환
+        Map<String, Object> results = matchService.getBidStatus(params); 
         return ResponseEntity.ok(results); 
     }
 
     // 특정 경기 조회
     @GetMapping("/getbyid")
     public ResponseEntity<Map<String, Object>> getMatchById(@RequestParam Map<String, Object> params) {
-        Map<String, Object> results = matchService.getMatchById(params); // 서비스에서 데이터만 반환
+        Map<String, Object> results = matchService.getMatchById(params); 
         return ResponseEntity.ok(results); 
     }
 
     // 모든 경기 조회
     @GetMapping("/getall")
     public ResponseEntity<List<Map<String, Object>>> getAllMatches(@RequestParam Map<String, Object> params) {
-        List<Map<String, Object>> results = matchService.getAllMatches(params); // 서비스에서 데이터만 반환
+        List<Map<String, Object>> results = matchService.getAllMatches(params); 
         return ResponseEntity.ok(results); 
     }
 
     // 승인된 경기 조회
     @GetMapping("/getallapproved")
     public ResponseEntity<List<Map<String, Object>>> getAllApprovedMatches(@RequestParam Map<String, Object> params) {
-        List<Map<String, Object>> results = matchService.getAllApprovedMatches(params); // 서비스에서 데이터만 반환
+        List<Map<String, Object>> results = matchService.getAllApprovedMatches(params); 
         return ResponseEntity.ok(results); 
     }
 

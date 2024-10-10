@@ -2,7 +2,6 @@ package com.bidsystem.bid.service;
 
 import com.bidsystem.bid.mapper.BidMapper;
 import com.bidsystem.bid.mapper.MatchMapper;
-import com.bidsystem.bid.mapper.UserMapper;
 import com.bidsystem.bid.service.ExceptionService.*;
 
 import java.sql.Timestamp;
@@ -17,21 +16,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Service
 public class BidService {
-    private static final Logger logger = LoggerFactory.getLogger(BidService.class); // 로거 생성
+    private static final Logger logger = LoggerFactory.getLogger(BidService.class); 
     @Autowired
     private BidMapper bidMapper;
     
-    @Autowired
-    private UserMapper userMapper;
 
     @Autowired
     private MatchMapper matchMapper;
 
     public List<Map<String, Object>> getBidsBySeatArray(Map<String, Object> params) {
         try {
-            return bidMapper.getBidsBySeatArray(params); // 실제 데이터 가져오기
+            List<Map<String, Object>> results =  bidMapper.getBidsBySeatArray(params); 
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException(null);
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
@@ -39,7 +44,29 @@ public class BidService {
     
     public List<Map<String, Object>> getMyBids(Map<String, Object> params) {
         try {
-            return bidMapper.getMyBids(params); // 실제 데이터 가져오기
+            List<Map<String, Object>> results =  bidMapper.getMyBids(params); 
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException(null);
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new DataAccessException(null,e);
+        }
+    }
+    
+    public List<Map<String, Object>> getAllBids(Map<String, Object> params) {
+        try {
+            List<Map<String, Object>> results =  bidMapper.getAllBids(params); 
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException("입찰된 내역이 없습니다.");
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
@@ -47,7 +74,14 @@ public class BidService {
     
     public List<Map<String, Object>> getMyLastBids(Map<String, Object> params) {
         try {
-            return bidMapper.getMyLastBids(params); // 실제 데이터 가져오기
+            List<Map<String, Object>> results =  bidMapper.getMyLastBids(params); 
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException(null);
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
@@ -55,13 +89,13 @@ public class BidService {
 
     @Transactional
     public Map<String, Object> updateBidPayment(Map<String, Object> params) {
-        // 전화번호 추출 및 검증
-        String userId = (String) params.get("userId");
-        if (userId == null) {
-            throw new IllegalArgumentException("userId가 null입니다.");
+
+        String telno = (String) params.get("telno");
+        if (telno == null) {
+            throw new java.lang.IllegalArgumentException("telno가 null입니다.");
         }
 
-        // 입찰 금액 추출 및 검증 (Object에서 Integer로 안전하게 변환)
+        // 입찰 금액 추출 및 검증
         Integer bidAmount = null;
         if (params.get("bidAmount") instanceof Integer) {
             bidAmount = (Integer) params.get("bidAmount");
@@ -69,45 +103,45 @@ public class BidService {
             try {
                 bidAmount = Integer.parseInt((String) params.get("bidAmount"));
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("bidAmount 값이 유효한 숫자가 아닙니다.");
+                throw new java.lang.IllegalArgumentException("bidAmount 값이 유효한 숫자가 아닙니다.");
             }
         }
         if (bidAmount == null) {
-            throw new IllegalArgumentException("입찰 금액(bidAmount)이 null이거나 유효하지 않습니다.");
+            throw new java.lang.IllegalArgumentException("입찰 금액(bidAmount)이 null이거나 유효하지 않습니다.");
         }
 
         // 거래 ID 추출 및 검증
         String tid = (String) params.get("tid");
         if (tid == null) {
-            throw new IllegalArgumentException("거래 ID(tid)가 null입니다.");
+            throw new java.lang.IllegalArgumentException("거래 ID(tid)가 null입니다.");
         }
 
         // 결제 방법 추출 및 검증
         String payMethod = (String) params.get("payMethod");
         if (payMethod == null) {
-            throw new IllegalArgumentException("결제 방법(payMethod)이 null입니다.");
+            throw new java.lang.IllegalArgumentException("결제 방법(payMethod)이 null입니다.");
         }
   
         try {
             Map<String, Object> updateParams = Map.of(
-                "userId", userId,
+                "telno", telno,
                 "bidAmount", bidAmount,
                 "tid", tid,
                 "payMethod", payMethod
             );
 
-            try {
-                int rowsaffected = bidMapper.updatePayment(updateParams);
-                if (rowsaffected  == 0) {
-                    throw new NotFoundException("결제정보를 갱신하기 위한 입찰 데이터를 찾을 수 없습니다.");
-                }
+            int rowsaffected = bidMapper.updatePayment(updateParams);
+            if (rowsaffected  == 0) {
+                throw new NotFoundException("결제정보를 갱신하기 위한 입찰 데이터를 찾을 수 없습니다.");
+            }
+            else {
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", rowsaffected+"건의 지불내용이 성공적으로 수정되었습니다.");  
                 return response;
             }
-            catch (Exception e) {
-                throw new DataAccessException(null,e);
-            }
+        } catch (java.lang.IllegalArgumentException | NotFoundException e) {
+            throw e;
+        
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }
@@ -116,7 +150,7 @@ public class BidService {
     @Transactional(rollbackFor = Exception.class)
     public List<Map<String, Object>> submitBids(Map<String, Object> params) {
         List<Map<String, Object>> bidArray = (List<Map<String, Object>>) params.get("bidArray");
-        String userId = (String) params.get("userId");
+        String telno = (String) params.get("telno");
         String matchNumber = (String) params.get("matchNumber");
 
         List<Map<String, Object>> resultsArray = new ArrayList<>();
@@ -124,75 +158,52 @@ public class BidService {
         if (bidArray == null || !(bidArray instanceof List)) {
             throw new BadRequestException(null);
         }
+        
+        //입찰된 좌석건별로 데이터 포멧 체므 반복 수행
         int bidAmount = 0;
         for (Map<String, Object> bid : bidArray) {
             Object seatNoObj = bid.get("seatNo");
             String seatNo ="";
             if (seatNoObj instanceof String) {
-                try {
-                    System.out.println("\n\nBid seatNoObj is of type String: " + seatNoObj);
-                    seatNo = (String) seatNoObj;
-                } catch (NumberFormatException e) {
-                    System.out.println("\n\nFailed to convert String to Integer");
-                    throw new NumberFormatException();
-                }
+                    seatNo = (String) seatNoObj; 
             } else if (seatNoObj instanceof Integer) {
-                System.out.println("\n\nBid seatNoObj is of type Integer: " + seatNoObj);
                 seatNo = Integer.toString((int) seatNoObj);
-            } else {
-                System.out.println("\n\nUnsupported type for bid seatNoObj: " + seatNoObj.getClass().getSimpleName());
-                throw new NumberFormatException();
-            }
+            } 
+
             Object bidAmountObj = bid.get("bidAmount");
             if (bidAmountObj instanceof String) {
-                try {
-                    System.out.println("\n\nBid amount is of type String: " + bidAmountObj);
-                    bidAmount = Integer.parseInt((String) bidAmountObj);
-                } catch (NumberFormatException e) {
-                    System.out.println("\n\nFailed to convert String to Integer");
-                    throw new NumberFormatException();
-                }
+                bidAmount = Integer.parseInt((String) bidAmountObj);
             } else if (bidAmountObj instanceof Integer) {
-                System.out.println("\n\nBid amount is of type Integer: " + bidAmountObj);
                 bidAmount = (Integer) bidAmountObj;
             } else if (bidAmountObj instanceof Double) {
-                System.out.println("\n\nBid amount is of type Double: " + bidAmountObj);
                 bidAmount = ((Double) bidAmountObj).intValue();
-            } else {
-                System.out.println("\n\nUnsupported type for bid amount: " + bidAmountObj.getClass().getSimpleName());
-                throw new NumberFormatException();
-            }
-            
+            } 
+
+            //입찰된 좌석건별로 반복 수행
             Map<String, Object> getparams = new HashMap<>();
             getparams.put("matchNumber", matchNumber);
             getparams.put("seatNo", seatNo);
             try {
+                //해당 seatNo의 현재 시점의 최고 입찰금액을 조회
                 Map<String, Object> results = bidMapper.getMaxBidAmount(getparams);
-                logger.info("\n\n===========================max amout", results);
                 int maxBidAmount =0;
                 if (results != null) {
                     Object maxBidAmountObject = results.get("max_bid_amount");
                     if (maxBidAmountObject instanceof String) {
                         try {
-                            System.out.println("\n\nBid maxBidAmountObject is of type String: " + maxBidAmountObject);
                             maxBidAmount = Integer.parseInt((String) maxBidAmountObject);
                         } catch (NumberFormatException e) {
-                            System.out.println("\n\nFailed to convert String to Integer");
                             throw new NumberFormatException();
                         }
                     } else if (maxBidAmountObject instanceof Integer) {
-                        System.out.println("\n\nBid maxBidAmountObject is of type Integer: " + maxBidAmountObject);
                         maxBidAmount = (Integer) maxBidAmountObject;
                     } else if (bidAmountObj instanceof Double) {
-                        System.out.println("\n\nBid maxBidAmountObject is of type Double: " + maxBidAmountObject);
                         maxBidAmount = ((Double) maxBidAmountObject).intValue();
                     } else {
-                        System.out.println("\n\nUnsupported type for maxBidAmountObject amount: " + maxBidAmountObject.getClass().getSimpleName());
                         throw new NumberFormatException();
                     }
-    
                 }
-                
+                //해당 seatNo의 현재 시점의 최고 입찰금액보다 금액이 크지 않으면 등록 실패, 아니면 성공으로 반환
                 if (bidAmount <= maxBidAmount) {
                     Map<String, Object> resultEach = new HashMap<>();
                     resultEach.put("status", "fail");
@@ -204,7 +215,7 @@ public class BidService {
 
                 Map<String, Object> bidParams = new HashMap<>();
                 bidParams.put("bidAt", new Timestamp(System.currentTimeMillis()));
-                bidParams.put("userId", userId);
+                bidParams.put("telno", telno);
                 bidParams.put("matchNumber", matchNumber);
                 bidParams.put("seatNo", seatNo);
                 bidParams.put("bidAmount", bidAmount);
@@ -216,6 +227,9 @@ public class BidService {
                 resultEach.put("seat_no", seatNo);
                 resultEach.put("message", "등록 성공");
                 resultsArray.add(resultEach);
+
+            } catch (NumberFormatException | BadRequestException e) {
+                throw e;
             } catch (Exception e) {
                 throw new DataAccessException(null,e);
             }
@@ -227,18 +241,22 @@ public class BidService {
     @Transactional(rollbackFor = Exception.class)
     public Map<String, Object> awardBids(Map<String, Object> params) {
         try {
-            int affectedRows = matchMapper.updateMatchAwardStatus(params);  // updateBidStatus 호출 (낙찰 처리 flag =F' set)
-            if (affectedRows == 0) {
+
+            int affectedRowsStatus = matchMapper.updateMatchAwardStatus(params);  // updateBidStatus 호출 (낙찰 처리 flag =F' set)
+            if (affectedRowsStatus == 0) {
                 throw new NotFoundException(null);
             }
-        } catch (Exception e) {
-            throw new DataAccessException(null,e);
-        }
-        try { 
-            int result = bidMapper.awardBids(params);  // awardBids 호출
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", result+"건이 성공적으로 낙찰 처리되었습니다.");
-            return response;
+            int affectedRowsBids = bidMapper.awardBids(params);  // awardBids 호출
+
+            if (affectedRowsBids > 0) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", affectedRowsBids+"건이 성공적으로 낙찰 처리되었습니다.");
+                return response;
+            } else {
+                throw new NotFoundException(null); 
+            }
+        } catch (NotFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
         }

@@ -24,7 +24,9 @@ public interface MatchMapper {
 
     // 경기 추가
     int addMatch(Map<String, Object> params);
-
+    
+    // 마지막 경기 번호
+    int getMaxMatchNo();
     // 경기 수정
     int updateMatch(Map<String, Object> params);
     

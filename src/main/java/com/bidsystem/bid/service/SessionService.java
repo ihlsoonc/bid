@@ -52,7 +52,6 @@ public class SessionService {
 
     // 사용자 ID 검증 (데이터베이스 조회 등으로 구현)
     private boolean isValidUserId(String userId) {
-        // 사용자 ID 검증 로직을 여기에 추가 (데이터베이스 조회 등)
-        return true; // 실제 검증 로직에 맞게 변경 필요
+        return true;
     }
 }

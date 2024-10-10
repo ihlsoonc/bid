@@ -1,5 +1,5 @@
 package com.bidsystem.bid.controller;
 
-public class JSONObject {
+public class CommonResponse<T> {
 
 }

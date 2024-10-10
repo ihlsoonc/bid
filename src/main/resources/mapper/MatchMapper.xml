@@ -73,6 +73,10 @@
         WHERE m.approved = 'Y'
     </select>
 
+    <select id="getMaxMatchNo" resultType="int">
+        SELECT COALESCE(MAX(match_no), 0) FROM matches
+    </select>
+
     <!-- 경기 추가 -->
     <insert id="addMatch" parameterType="hashmap">
         INSERT INTO matches (
@@ -84,7 +88,7 @@
             #{endTime}, #{isBidAvailable}, #{fileName}, #{userId}, CURRENT_TIMESTAMP
         )
     </insert>
-
+    
     <!-- 경기 수정 -->
     <update id="updateMatch" parameterType="hashmap">
         UPDATE matches

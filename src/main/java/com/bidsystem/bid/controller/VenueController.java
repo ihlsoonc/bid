@@ -32,22 +32,23 @@ public class VenueController {
 
     // 경기장 추가
     @PostMapping("/add")
-    public ResponseEntity<String> addVenue(@RequestBody Map<String, Object> request) {
-        venueService.addVenue(request); // 서비스 계층에서 추가 처리
-        return ResponseEntity.ok("경기장이 성공적으로 추가되었습니다."); // 성공 메시지 반환
+    public ResponseEntity<Map<String, Object>> addVenue(@RequestBody Map<String, Object> request) {
+        Map<String, Object> result = venueService.addVenue(request); 
+        return ResponseEntity.ok(result);
+
     }
 
     // 경기장 수정
     @PostMapping("/update")
-    public ResponseEntity<String> updateVenue(@RequestBody Map<String, Object> request) {
-        venueService.updateVenue(request); // 서비스 계층에서 수정 처리
-        return ResponseEntity.ok("경기장이 성공적으로 수정되었습니다."); // 성공 메시지 반환
+    public ResponseEntity<Map<String, Object>> updateVenue(@RequestBody Map<String, Object> request) {
+        Map<String, Object> result = venueService.updateVenue(request); // 서비스 계층에서 수정 처리
+        return ResponseEntity.ok(result);
     }
 
     // 경기장 삭제
     @PostMapping("/delete")
-    public ResponseEntity<String> deleteVenue(@RequestBody Map<String, Object> request) {
-        venueService.deleteVenue(request); // 서비스 계층에서 삭제 처리
-        return ResponseEntity.ok("경기장이 성공적으로 삭제되었습니다."); // 성공 메시지 반환
+    public ResponseEntity<Map<String, Object>> deleteVenue(@RequestBody Map<String, Object> request) {
+        Map<String, Object> result = venueService.deleteVenue(request); // 서비스 계층에서 삭제 처리
+        return ResponseEntity.ok(result);
     }
 }

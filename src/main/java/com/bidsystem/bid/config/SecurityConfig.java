@@ -50,7 +50,7 @@ public class SecurityConfig {
             .httpBasic(withDefaults());  // 기본 HTTP 인증 설정
     
         http.addFilterBefore(new CustomLoggingFilter(), UsernamePasswordAuthenticationFilter.class);
-        return http.build();  // 빌드 메서드가 빠져있었기 때문에 추가
+        return http.build(); 
     }
 
     @Bean

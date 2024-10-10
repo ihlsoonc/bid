@@ -41,7 +41,7 @@ public class PgViewController {
         public static final String RETURN = "http://localhost:5000/api/pgreturnpost";  // 서버 프로그램
         public static final String CLOSE = "http://localhost:5000/api/pgclose";        // 서버 프로그램
         public static final String REDIRECT = "http://localhost:8080/bidseats";        // 서버 프로그램
-        public static final String ERROR = "http://localhost:8080/userlogin";        // 서버 프로그램
+        public static final String LOGIN = "http://localhost:8080/userlogin";        // 서버 프로그램
     }
     
     public class Views {
@@ -52,13 +52,13 @@ public class PgViewController {
     }
     public class PgParams {
         public static final String VERSION = "1.0";
-        public static final String MID = "INIpayTest"; // 실제 값으로 대체
+        public static final String MID = "INIpayTest"; 
         public static final String CURRENCY = "WON";
         public static final String ACCEPT_METHOD = "HPP(1):va_receipt:below1000:centerCd(Y)";
         public static final String GOPAY_METHOD = "Card:DirectBank:VBank:HPP";
-        public static final String OID = "INIpayTest_01234"; // 실제 값으로 대체
-        public static final String SIGN_KEY = "SU5JTElURV9UUklQTEVERVNfS0VZU1RS"; // 실제 값으로 대체
-        public static final String USE_CHKFAKE = "Y";  // 실제 값으로 대체
+        public static final String OID = "INIpayTest_01234"; 
+        public static final String SIGN_KEY = "SU5JTElURV9UUklQTEVERVNfS0VZU1RS"; 
+        public static final String USE_CHKFAKE = "Y";  
     }
 
     @Autowired
@@ -70,32 +70,28 @@ public class PgViewController {
     public ModelAndView paymentPage(@RequestParam Map<String, Object> request, Model model, HttpServletResponse response) {
 
         try {
-            // 새로운 Map을 생성
-            Map<String, Object> extractedParams = new HashMap<>();
-
-            // requestParams에서 필요한 데이터를 추출하여 새로운 Map에 넣기
-            if (request.containsKey("userId")) {
-                extractedParams.put("userId", request.get("userId"));
+            if (!request.containsKey("telno")) {
+                throw new BadRequestException("결제요청 파라메터에 전화번호가 필요합니다.");
             }
-            Map<String, Object> results = userService.getUserById(extractedParams);
+
+            //요청 전문에 전화번호, 이메일을 추가하기 위해 사용자 정보 조회
+            Map<String, Object> results = userService.getUserByTelno(request);
     
-            // 결과가 비어있을 경우 NotFoundException 예외 발생 (가정)
+            // 결과가 비어있을 경우 NotFoundException 예외 발생
             if (results == null || results.isEmpty()) {
-                throw new NotFoundException("사용자 아이디의 정보를 찾을 수 없습니다.");
+                throw new NotFoundException("사용자 전화번호로 정보를 찾을 수 없습니다.");
             }
-                // 클라이언트로부터 받은 데이터를 처리
-            logger.info("\n\n---------------------------pgstart: params " + request + "\n");
 
+            // 승인사전 요청을 위한 데이터 구성 
             ModelAndView modelAndView = new ModelAndView();
-            String timestamp = Long.toString(System.currentTimeMillis()); // 타임스탬프
-            modelAndView.addObject("userId", request.get("userid"));
+            String timestamp = Long.toString(System.currentTimeMillis());
             modelAndView.addObject("price", request.get("price"));
             modelAndView.addObject("goodname", request.get("goodName"));
             modelAndView.addObject("buyername", results.get("username"));
             modelAndView.addObject("buyertel", results.get("telno"));
             modelAndView.addObject("buyeremail", results.get("email"));
             modelAndView.addObject("returnUrl", Urls.RETURN);
-            modelAndView.addObject("closeUrl", Urls.ERROR);
+            modelAndView.addObject("closeUrl", Urls.CLOSE);
             modelAndView.addObject("mid", PgParams.MID);
             modelAndView.addObject("signKey", PgParams.SIGN_KEY);
             modelAndView.addObject("timestamp", timestamp);
@@ -114,23 +110,26 @@ public class PgViewController {
             modelAndView.addObject("verification", verification);
             modelAndView.setViewName(Views.REQUEST);
             return modelAndView;
-        
-        } catch (NotFoundException e) {
-            // 사용자를 찾지 못했을 때 처리할 로직
-            throw new NotFoundException(null);
-            // 필요에 따라 적절한 응답 반환 (예: 에러 페이지나 JSON 응답 등)
+    
         } catch (Exception e) {
-            // 다른 예외 처리
-            throw new ServerException(null,e);
+            ModelAndView modelAndView = new ModelAndView();
+            if (e instanceof NotFoundException) {
+                logger.error("\n\n++ 결제 사전 요청에서 오류가 발생하였습니다. (사용자 정보 조회 실패)", e);
+            } else {
+                logger.error("\n\n++ 결제 사전 요청에서 오류가 발생하였습니다.", e);
+            }
+            modelAndView.addObject("errorMessage", "결제 사전 요청에서 오류가 발생하였습니다");
+            modelAndView.setViewName(Views.ERROR);
+            return modelAndView;
         }
     }
 
     @PostMapping("/pgreturnpost")
-
     public ModelAndView pgReturnPost(@RequestBody String request, Model model) {
         Map<String, String> params;
+                    // URL 인코딩된 문자열을 Map<String, String>으로 변환
         try {
-            // URL 인코딩된 문자열을 Map<String, String>으로 변환
+
             params = parseQueryString(request);
 
         } catch (Exception e) {
@@ -140,7 +139,7 @@ public class PgViewController {
         // 요청에서 "resultCode"가 0000일 아닐 경우 처리
         if (!"0000".equals(params.get("resultCode"))) {
             // 결제 실패 시 처리
-            logger.error("\n\n---------------------------pgreturn 결제요청이 실패하였습니다. " + "\n");
+            logger.error("\n\n---------------------------pgreturn 승인요청이 실패하였습니다. " + "\n");
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
             }
@@ -257,27 +256,19 @@ public class PgViewController {
 
             // 입찰결과에 결제 승인 내용 기록
             try {
-                // 전화번호로 사용자 ID구하기
-                Map<String, Object> queryParams = Map.of("telno",approveData.get("buyerTel"));
-                Map<String, Object> results = userService.getUserByTelno(queryParams);
-                Object userId = results.get("userid");
 
                 //입찰 정보 업데이트 파라메터 구성
                 Map<String, Object> updateParams = new HashMap<>();
-                updateParams.put("userId", userId);
+                updateParams.put("telno", approveData.get("buyerTel"));
                 updateParams.put("bidAmount", approveData.get("TotPrice"));
                 updateParams.put("tid", approveData.get("tid"));
                 updateParams.put("payMethod", approveData.get("payMethod"));
 
-                // for (Map.Entry<String, Object> entry : updateParams.entrySet()) {
-                //     System.out.println("\n\n----------------------Key: " + entry.getKey() + ", Value: " + entry.getValue());
-                // }
                 // 입찰 정보 업데이트 호출
                 Map<String, Object> bidResults = bidService.updateBidPayment(updateParams);
 
                 //승인결과 화면을 render
                 Object bidMsg = bidResults.get("message");
-                approveData.put("userId", userId);
                 approveData.put("bidUpdateResults", bidMsg);
                 System.out.println("\n\n====================approveData==========================\n\n");
                 System.out.println(approveData);
@@ -289,29 +280,24 @@ public class PgViewController {
             } catch (Exception e) {
                     // 예외 처리 로직
                     String errorMessageSub = e.getMessage();
-                    logger.error("\n\n==========입찰정보에 승인 정보를 갱신하는 중 오류가 발생하였습니다."+errorMessageSub, e);
-                    String errorMsg = "승인은 완료되었으면 정보갱신 중 오류가 발생하였습니다";
-                    modelAndView.addObject("resultCode", "AAA");
-                    modelAndView.addObject("errorMessage", errorMsg);
+                    logger.error("\n\n++ 승인은 완료되었으며, 입찰정보에 승인 정보를 갱신하는 중 오류가 발생하였습니다."+ errorMessageSub, e);
+                    modelAndView.addObject("errorMessage", "승인 완료 후 사용자 정보 갱신 중 오류가 발생하였습니다");
                     modelAndView.setViewName(Views.ERROR); 
                     return modelAndView;
             }
         } catch (Exception e) {
-            String errorMsg = "승인요청중 오류가 발생하였습니다";
-            logger.error("\n\nError---------------승인요청중 오류가 발생하였습니다\n\n", e);
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("resultCode", "BBB");
-            modelAndView.addObject("errorMessage", errorMsg);
-            modelAndView.setViewName(Views.ERROR); 
+            logger.error("\n\n==========승인요청중 오류가 발생하였습니다", e);
+            modelAndView.addObject("errorMessage", "승인요청중 오류가 발생하였습니다.");
+            modelAndView.setViewName(Views.ERROR);
             return modelAndView;
         }
     }
 
     @GetMapping("/pgclose")
     public ModelAndView pgClose(@RequestParam Map<String, Object> request, Model model) {
-        logger.info("\n\nError---------------Pgclose가 호출되었습니다\n\n");
+        logger.info("\n\n---------------------------Pgclose가 호출되었습니다\n\n");
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("resultCode", "CCC");
         modelAndView.addObject("errorMessage", "pg close가 호출되었습니다.");
         modelAndView.setViewName(Views.CLOSE); 
         return modelAndView;
@@ -340,53 +326,6 @@ public class PgViewController {
         return result.toString();
         }
 
-    public class UrlService {
-
-        public static String getAuthUrl(String idcName) {
-            String url = "stdpay.inicis.com/api/payAuth";
-            String authUrl = null;
-    
-            switch (idcName) {
-                case "fc":
-                    authUrl = "https://fc" + url;
-                    break;
-                case "ks":
-                    authUrl = "https://ks" + url;
-                    break;
-                case "stg":
-                    authUrl = "https://stg" + url;
-                    break;
-                default:
-                    // 기본값이 필요하면 설정 가능
-                    break;
-            }
-    
-            return authUrl;
-        }
-    
-        public static String getNetCancelUrl(String idcName) {
-            String url = "stdpay.inicis.com/api/netCancel";
-            String netCancelUrl = null;
-    
-            switch (idcName) {
-                case "fc":
-                    netCancelUrl = "https://fc" + url;
-                    break;
-                case "ks":
-                    netCancelUrl = "https://ks" + url;
-                    break;
-                case "stg":
-                    netCancelUrl = "https://stg" + url;
-                    break;
-                default:
-                    // 기본값이 필요하면 설정 가능
-                    break;
-            }
-    
-            return netCancelUrl;
-        }
-    }
-
     // URL 인코딩된 쿼리 문자열을 Map으로 변환하는 메서드
     private Map<String, String> parseQueryString(String queryString) throws java.io.UnsupportedEncodingException {
         Map<String, String> resultMap = new HashMap<>();
@@ -403,14 +342,12 @@ public class PgViewController {
                 // RuntimeException으로 감싸서 던지되, 원인 예외(e)를 함께 전달
                 throw new RuntimeException("pgreturn 쿼리 처리 중 오류가 발생하였습니다.", e);
             }
-            
             try {
                 value = keyValue.length > 1 ? URLDecoder.decode(keyValue[1], "UTF-8") : "";
             } catch (UnsupportedEncodingException e) {
                 // RuntimeException으로 감싸서 던지되, 원인 예외(e)를 함께 전달
                 throw new RuntimeException("pgreturn 쿼리 처리 중 오류가 발생하였습니다.", e);
             }
-
             resultMap.put(key, value);
         }
 
@@ -428,7 +365,6 @@ public class PgViewController {
             for (byte b : hash) {
                 hexString.append(String.format("%02x", b));
             }
-
             return hexString.toString();
         } catch (java.security.NoSuchAlgorithmException e) {
             throw new NoSuchAlgorithmException(null,e);
@@ -496,6 +432,51 @@ public class PgViewController {
 
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public class UrlService {
+        public static String getAuthUrl(String idcName) {
+            String url = "stdpay.inicis.com/api/payAuth";
+            String authUrl = null;
+    
+            switch (idcName) {
+                case "fc":
+                    authUrl = "https://fc" + url;
+                    break;
+                case "ks":
+                    authUrl = "https://ks" + url;
+                    break;
+                case "stg":
+                    authUrl = "https://stg" + url;
+                    break;
+                default:
+                    // 기본값이 필요하면 설정 가능
+                    break;
+            }
+    
+            return authUrl;
+        }
+    
+        public static String getNetCancelUrl(String idcName) {
+            String url = "stdpay.inicis.com/api/netCancel";
+            String netCancelUrl = null;
+    
+            switch (idcName) {
+                case "fc":
+                    netCancelUrl = "https://fc" + url;
+                    break;
+                case "ks":
+                    netCancelUrl = "https://ks" + url;
+                    break;
+                case "stg":
+                    netCancelUrl = "https://stg" + url;
+                    break;
+                default:
+                    // 기본값이 필요하면 설정 가능
+                    break;
+            }
+    
+            return netCancelUrl;
         }
     }
 }

@@ -12,12 +12,12 @@
             p.col_no,
             p.seat_no,
             p.seat_price,
-            COALESCE(COUNT(b.bid_userid), 0) AS total_bidders,
+            COALESCE(COUNT(DISTINCT b.bid_telno), 0) AS total_bidders,
             COALESCE(MAX(b.bid_amount), 0) AS current_bid_amount
         FROM 
             seatprice AS p
         LEFT JOIN 
-            seatbids AS b
+            bids AS b
         ON 
             p.seat_no = b.seat_no AND p.match_no = b.match_no
         WHERE
@@ -34,12 +34,37 @@
         ORDER BY
             CAST(p.seat_no AS UNSIGNED) ASC;
     </select>
+        <!-- 좌석번호별 입찰자 수와 최고 입찰 금액 조회 -->
+    <select id="getAllBids" parameterType="hashmap" resultType="hashmap">
+        SELECT 
+            p.row_no,
+            p.col_no,
+            p.seat_no,
+            p.seat_price,
+            COALESCE(COUNT(DISTINCT b.bid_telno), 0) AS total_bidders,
+            COALESCE(MAX(b.bid_amount), 0) AS current_bid_amount
+        FROM 
+            seatprice AS p
+        LEFT JOIN 
+            bids AS b
+        ON 
+            p.seat_no = b.seat_no AND p.match_no = b.match_no
+        WHERE
+            p.match_no = #{matchNumber}
+        GROUP BY
+            p.row_no,
+            p.col_no,
+            p.seat_no,
+            p.seat_price
+        ORDER BY
+            CAST(p.seat_no AS UNSIGNED) ASC;
+    </select>
             
     <update id="awardBids" parameterType="hashmap">
-        UPDATE seatbids b
+        UPDATE bids b
             JOIN (
                 SELECT seat_no, match_no, MAX(bid_amount) AS max_bid_amount
-                FROM seatbids
+                FROM bids
                 WHERE match_no = #{matchNumber}
                 GROUP BY seat_no, match_no
             ) maxbid
@@ -59,12 +84,12 @@
             b.bid_paid,
             b.bid_pay_method,
             (SELECT MAX(bid_amount)
-             FROM seatbids
+             FROM bids
              WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
         FROM 
-            seatbids AS b
+            bids AS b
         WHERE
-            b.bid_userid = #{userId} AND
+            b.bid_telno = #{telno} AND
             b.match_no = #{matchNumber}
         ORDER BY
             b.seat_no
@@ -82,17 +107,17 @@
             b.bid_paid,
             b.bid_pay_method,
             (SELECT MAX(bid_amount)
-            FROM seatbids
+            FROM bids
             WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
         FROM 
-            seatbids AS b
+            bids AS b
         WHERE
-            b.bid_userid = #{userId} AND
+            b.bid_telno = #{telno} AND
             b.match_no = #{matchNumber}
             AND b.bid_at = (
                 SELECT MAX(bid_at)
-                FROM seatbids
-                WHERE bid_userid = #{userId}
+                FROM bids
+                WHERE bid_telno = #{telno}
                 AND seat_no = b.seat_no
                 AND match_no = b.match_no
             )
@@ -105,7 +130,7 @@
     <!-- 최대 입찰 금액 조회 -->
     <select id="getMaxBidAmount" parameterType="hashmap" resultType="hashmap">
         SELECT match_no, seat_no, MAX(bid_amount) AS max_bid_amount
-        FROM seatbids
+        FROM bids
         WHERE match_no = #{matchNumber} AND seat_no = #{seatNo}
         FOR UPDATE
     </select>
@@ -113,18 +138,18 @@
 
     <!-- 여러 건의 사용자 입찰 등록 -->
     <insert id="submitBid" parameterType="hashmap" >
-        INSERT INTO seatbids (match_no, seat_no, bid_userid, bid_amount, bid_at)
-        VALUES (#{matchNumber}, #{seatNo}, #{userId}, #{bidAmount}, #{bidAt});
+        INSERT INTO bids (match_no, seat_no, bid_telno, bid_amount, bid_at)
+        VALUES (#{matchNumber}, #{seatNo}, #{telno}, #{bidAmount}, #{bidAt});
     </insert>
 
 
     <!-- 낙찰된 건에 대해 지불방법과 거래 ID 갱신 -->
     <update id="updatePayment" parameterType="hashmap" >
-        UPDATE seatbids
+        UPDATE bids
         SET bid_paid = 'Y',
             bid_tid = #{tid},
             bid_pay_method = #{payMethod}
-        WHERE bid_userid = #{userId}
+        WHERE bid_telno = #{telno}
         AND bid_won = 'Y'
     </update>
 

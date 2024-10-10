@@ -16,13 +16,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class CommonAuthorization {
+public class CertificationService {
 
     @Autowired
     private AdminMapper adminMapper;
 
     @Autowired
     private UserMapper userMapper;
+
     
     public Map<String, Object> verifyPassword(Map<String, Object> request) throws Exception {
         String table = (String) request.get("table");
@@ -33,15 +34,14 @@ public class CommonAuthorization {
             if (table.equals("user")) {
                 results = userMapper.getUserByQuery(request);
 
-            } else if (table.equals("admin")) {
+            } else if (table.equals("admin")){
                 results = adminMapper.getUserByQuery(request);
-
             } else {
                 throw new BadRequestException("잘못된 요청입니다. (TableName)");      
             }
-
+            
             if (results == null || results.isEmpty()) {
-                throw new NotFoundException("사용자 ID가 없습니다.");
+                throw new NotFoundException(null);
             }
 
             String inputpassword = (String) request.get("password");
@@ -54,7 +54,6 @@ public class CommonAuthorization {
                 throw new PasswordMismatchException(null);  
             }
         } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
-            // 서비스 계층에서 예외와 메시지를 그대로 받을 수 있도록 재던짐
             throw e;
         } catch (Exception e) {
             throw new DataAccessException(null,e);
@@ -62,8 +61,9 @@ public class CommonAuthorization {
     }
 
     // 세션 변수 설정 함수 (userType이 null이 아니면 추가)
-    public void setSessionAttributes(HttpSession session, String userId, String userType) {
+    public void setSessionAttributes(HttpSession session, String userId, String telno, String userType) {
         session.setAttribute("userId", userId);
+        session.setAttribute("telno", telno);
         if (userType != null) {
             session.setAttribute("userType", userType); // userType이 null이 아닐 경우에만 추가
         }
@@ -98,16 +98,18 @@ public class CommonAuthorization {
         try {
             // 세션에서 사용자 ID를 가져옴
             String userId = (String) session.getAttribute("userId");
+            String telno = (String) session.getAttribute("telno");
             String userType = (String) session.getAttribute("userType");
-            if (userId != null) {
+            if (telno != null) {
                 // 사용자 ID가 존재하면 성공 응답을 반환
                 response.put("status", "success");
                 response.put("userId", userId);
+                response.put("telno", telno);
                 response.put("userType", userType);
             } else {
                 // 사용자 ID가 없으면 오류 메시지 반환
                 response.put("status", "error");
-                response.put("message", "UserId not found in session");
+                response.put("message", "세션정보가 없습니다. 다시 로그인해주세요.");
             }
         } catch (Exception e) {
             throw new ServerException("세션정보 조회 중 오류가 발생하였습니다.",e);
@@ -128,7 +130,7 @@ public class CommonAuthorization {
     }
 
     // 세션 복원 함수
-    public void restoreSession(HttpServletRequest httpRequest, String userId, String userType) {
+    public void restoreSession(HttpServletRequest httpRequest, String telno, String userId, String userType) {
         HttpSession session = httpRequest.getSession(false);  // 이미 존재하는 세션을 가져옴, 없으면 null 반환
 
         if (session == null) {
@@ -137,6 +139,7 @@ public class CommonAuthorization {
         }
 
         session.setAttribute("userId", userId);
+        session.setAttribute("telno", telno);
 
         if (userType != null) {
             session.setAttribute("userType", userType);  // userType이 null이 아닐 경우에만 추가

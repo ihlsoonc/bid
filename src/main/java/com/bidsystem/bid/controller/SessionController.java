@@ -1,6 +1,6 @@
 package com.bidsystem.bid.controller;
 
-import com.bidsystem.bid.service.CommonAuthorization;
+import com.bidsystem.bid.service.CertificationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +13,24 @@ import jakarta.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/api/session")
 public class SessionController {
 
     @Autowired
-    private CommonAuthorization commonService;
+    private CertificationService commonService;
 
     // 세션 복원
     @PostMapping("/restore")
     public ResponseEntity<Map<String, Object>> restoreSession(@RequestBody Map<String, Object> requestBody, HttpServletRequest httpServletRequest) throws Exception {
+        
         String userId = (String) requestBody.get("userId");
+        String telno = (String) requestBody.get("telno");
         String userType = (String) requestBody.get("userType");
     
         // 세션 복원 서비스 호출
-        commonService.restoreSession(httpServletRequest, userId, userType);
+        commonService.restoreSession(httpServletRequest, telno, userId, userType);
     
         // 성공 응답 메시지 반환
         Map<String, Object> response = new HashMap<>();

@@ -102,7 +102,7 @@
                     </div>
                 </form>
 
-                <button onclick="location.href='http://localhost:8080/bidseats?userId=${userId}'">결제 요청</button>
+                <button onclick="paybtn()">결제 요청</button>
             </div>
         </section>
 

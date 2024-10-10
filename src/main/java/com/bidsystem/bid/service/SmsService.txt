@@ -1,0 +1,125 @@
+package com.bidsystem.bid.service;
+
+import com.bidsystem.bid.mapper.UserMapper;
+import com.bidsystem.bid.mapper.AdminMapper;
+import com.bidsystem.bid.service.ExceptionService.*;
+
+import ch.qos.logback.core.status.ErrorStatus;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.service.DefaultMessageService;
+
+// import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+
+
+@RequiredArgsConstructor
+public class SmsService {
+    String API_KEY = "NCSGX5PWFCMXYXHH";
+    String API_SECRET_KEY = "9QBDTPZP3ABYWYMEHXGY5HMWWKADAVAL";
+    String SMS_PROVIDER = "https://api.coolsms.co.kr";
+    String SMS_SENDER = "http://localhost:5000";
+
+    // @Value("${spring.sms.api-key}")
+    // private String apiKey;
+    // @Value("${spring.sms.api-secret}")
+    // private String apiSecret;
+    // @Value("${spring.sms.provider}")
+    // private String smsProvider;
+    // @Value("${spring.sms.sender}")
+    // private String smsSender;
+
+    @Value(API_KEY)
+    private String apiKey;
+    @Value(API_SECRET_KEY)
+    private String apiSecret;
+    @Value(SMS_PROVIDER)
+    private String smsProvider;
+    @Value(SMS_SENDER)
+    private String smsSender;
+    private DefaultMessageService messageService;
+
+
+    @PostConstruct
+    public void init(){
+        messageService = NurigoApp.INSTANCE.initialize(
+                apiKey,
+                apiSecret,
+                smsProvider
+        );
+    }
+    // private final RedisUtil redisUtil;
+    // this.redisUtil = redisUtil;
+
+    // public void sendVerificationMessage(String to, LocalDateTime sentAt){
+    //     Message message = new Message();
+    //     message.setFrom(smsSender);
+    //     message.setTo(to);
+
+    //     VerificationCode verificationCode = 
+    //             generateVerificationCode(sentAt);
+    //     verificationCodeRepository.save(verificationCode);
+
+    //     String text = verificationCode.generateCodeMessage();
+    //     message.setText(text);
+
+    //     messageService.sendOne(new SingleMessageSendingRequest(message));
+    // }
+
+    // public void verifyCode(String code, LocalDateTime verifiedAt){
+    //     VerificationCode verificationCode = findByCode(code)
+    //             .orElseThrow(() -> new GeneralException(ErrorStatus._VERIFICATION_CODE_NOT_FOUND));
+
+    //     if(verificationCode.isExpired(verifiedAt)){
+    //         throw new GeneralException(ErrorStatus._VERIFICATION_CODE_EXPIRED);
+    //     }
+
+    //     remove(verificationCode);
+    // }
+
+    // public class VerificationCodeGenerator {
+    // private static final Integer EXPIRATION_TIME_IN_MINUTES = 5;
+
+    // public static VerificationCode generateVerificationCode(LocalDateTime sentAt) {
+    //     String code = UUID.randomUUID().toString();
+    //     return VerificationCode.builder()
+    //             .code(code)
+    //             .createAt(sentAt)
+    //             .expirationTimeInMinutes(EXPIRATION_TIME_IN_MINUTES)
+    //             .build();
+    // }
+}
+
+// public class RedisUtil {
+//     private RedisTemplate<String, Object> redisTemplate;
+
+//     public void putData(String key, String value, long expiredTime) {
+//         redisTemplate.opsForValue().set(key, value, expiredTime, TimeUnit.MICROSECONDS);
+//     }
+
+//     public String getData(String key) {
+//         return (String) redisTemplate.opsForValue().get(key);
+//     }
+
+//     public void deleteData(String key) {
+//         redisTemplate.delete(key);
+//     }
+// }
+}
