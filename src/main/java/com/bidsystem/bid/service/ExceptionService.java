@@ -14,34 +14,34 @@ public class ExceptionService {
         // 메시지와 예외 객체를 함께 받는 생성자
         public ServerException(String message, Throwable cause) {
             super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다."); 
-            logger.error("\n\n++시스템 오류가 발생하였습니다.",cause.getMessage(), cause);
+            logger.error("\n\n++ 시스템 오류가 발생하였습니다.",cause.getMessage(), cause);
         }
     }
     public  static class DataAccessException extends RuntimeException {
         public DataAccessException(String message, Throwable cause) {
             super(message != null && !message.isEmpty() ? message :"오류 : 데이터베이스 접근 중 오류가 발생하였습니다."); 
-            logger.error("\n\n++데이터베이스 접근 중 오류가 발행하였습니다.", cause.getMessage(), cause);
+            logger.error( "\n\n++데이터베이스 접근 중 오류가 발행하였습니다.", cause.getMessage(), cause);
         }
     }
 
     public  static class IllegalStateException extends RuntimeException {
         public IllegalStateException(String message, Throwable cause) {
             super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다(Illegal State)."); 
-            logger.error("\n\n++시스템 오류가 발생하였습니다.Illegal State", message, cause.getMessage(), cause);
+            logger.error("\n\n++ 시스템 오류가 발생하였습니다.Illegal State", message, cause.getMessage(), cause);
         }
     }
 
     public  static class IllegalArgumentException extends RuntimeException {
         public IllegalArgumentException(String message, Throwable cause) {
             super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다(Illegal Argument).", cause); 
-            logger.error("\n\n++시스템 오류가 발생하였습니다.Illegal Argument", message, cause);
+            logger.error("\n\n++ 시스템 오류가 발생하였습니다.Illegal Argument", message, cause);
         }
     }
 
     public static class NoSuchAlgorithmException extends RuntimeException {
         public NoSuchAlgorithmException(String message, Throwable cause) {
             super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다."); 
-            logger.error("\n\n++알고리즘을 찾을 수 없습니다.", message, cause.getMessage(), cause);
+            logger.error("\n\n++ 알고리즘을 찾을 수 없습니다.", message, cause.getMessage(), cause);
         }
     }
     public static class UnsupportedEncodingException extends RuntimeException {

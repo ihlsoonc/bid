@@ -25,7 +25,7 @@ public class BidApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:8080", "https://stgstdpay.inicis.com", "null") // 여러 도메인 설정
+                        .allowedOrigins("http://localhost:9000", "https://stgstdpay.inicis.com", "null") // 여러 도메인 설정
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
