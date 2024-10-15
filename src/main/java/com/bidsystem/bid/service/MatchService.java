@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -40,16 +41,18 @@ public class MatchService {
         }
     }
     public String getStatusCode(Map<String, Object> results) {
-            
         String bidStatusCode = "I"; // 기본값: 데이터가 없을 경우
-
-        // 'bid_open_datetime'과 'bid_close_datetime'을 LocalDateTime으로 캐스팅
-        LocalDateTime openDateTime = (LocalDateTime) results.get("bid_open_datetime");
-        LocalDateTime closeDateTime = (LocalDateTime) results.get("bid_close_datetime");
-
+    
+        // 'bid_open_datetime'과 'bid_close_datetime'을 Timestamp로 받아서 LocalDateTime으로 변환
+        Timestamp openTimestamp = (Timestamp) results.get("bid_open_datetime");
+        Timestamp closeTimestamp = (Timestamp) results.get("bid_close_datetime");
+    
+        LocalDateTime openDateTime = openTimestamp.toLocalDateTime();
+        LocalDateTime closeDateTime = closeTimestamp.toLocalDateTime();
+    
         // 현재 시간을 LocalDateTime으로 가져옴
         LocalDateTime now = LocalDateTime.now();
-
+    
         // bid_open_status가 'F'이면 F로 설정, 입찰 개시/종료 시간으로 결정
         String bidOpenStatus = (String) results.get("bid_open_status");
         if ("F".equals(bidOpenStatus)) {
@@ -64,9 +67,10 @@ public class MatchService {
                 bidStatusCode = "O"; // 입찰 진행 중
             }
         }
+    
         return bidStatusCode;
     }
-
+    
     // 특정 경기 조회
     public Map<String, Object> getMatchById(Map<String, Object> params) {
         try {
