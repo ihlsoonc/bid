@@ -24,12 +24,12 @@ public class UserService {
     private AdminMapper adminMapper;
 
     @Autowired
-    private CertificationService commonService;
+    private CertificationService certificationService;
 
     // 로그인 처리
     public Map<String, Object> login(Map<String, Object> request, HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
         try {
-            Map<String, Object> verifyResult = commonService.verifyPassword(request);
+            Map<String, Object> verifyResult = certificationService.verifyPassword(request);
             // 로그인 성공 시 세션 및 쿠키 처리
             String telno = (String) verifyResult.get("telno");
             String userId = (String) verifyResult.get("userid");
@@ -37,10 +37,10 @@ public class UserService {
             String userType = (String) verifyResult.get("usertype");
 
             // 세션 설정
-            commonService.setSessionAttributes(httpRequest.getSession(), userId, telno, userType);
+            certificationService.setSessionAttributes(httpRequest.getSession(), userId, telno, userType,userName);
 
             // 쿠키 설정
-            commonService.setLoginCookie( httpRequest.getSession(),httpResponse);
+            certificationService.setLoginCookie( httpRequest.getSession(),httpResponse);
 
             // 성공 응답 반환
             Map<String, Object> response = new HashMap<>();
@@ -58,7 +58,7 @@ public class UserService {
     // 사용자 정보 조회
     public Map<String, Object> getUserByQuery(Map<String, Object> request) {
         try {
-            Map<String, Object> results = commonService.verifyPassword(request);
+            Map<String, Object> results = certificationService.verifyPassword(request);
             if (results == null || results.isEmpty()) {
                 throw new NotFoundException(null);
             } else {

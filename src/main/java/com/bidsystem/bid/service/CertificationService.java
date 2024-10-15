@@ -61,9 +61,10 @@ public class CertificationService {
     }
 
     // 세션 변수 설정 함수 (userType이 null이 아니면 추가)
-    public void setSessionAttributes(HttpSession session, String userId, String telno, String userType) {
+    public void setSessionAttributes(HttpSession session, String userId, String telno, String userType, String userName) {
         session.setAttribute("userId", userId);
         session.setAttribute("telno", telno);
+        session.setAttribute("userName", userName);
         if (userType != null) {
             session.setAttribute("userType", userType); // userType이 null이 아닐 경우에만 추가
         }
@@ -100,12 +101,14 @@ public class CertificationService {
             String userId = (String) session.getAttribute("userId");
             String telno = (String) session.getAttribute("telno");
             String userType = (String) session.getAttribute("userType");
+            String userName = (String) session.getAttribute("userName");
             if (telno != null) {
                 // 사용자 ID가 존재하면 성공 응답을 반환
                 response.put("status", "success");
                 response.put("userId", userId);
                 response.put("telno", telno);
                 response.put("userType", userType);
+                response.put("userName", userName);
             } else {
                 // 사용자 ID가 없으면 오류 메시지 반환
                 response.put("status", "error");

@@ -77,8 +77,8 @@ public class SmsController {
      */
     private String sendVerificationMessage(String toTelno, LocalDateTime sentAt) {
         // 인증 코드 생성
-        String code = UUID.randomUUID().toString().substring(0, 6); // 6자리 인증 코드 생성
-        
+        Random random = new Random();
+        String code = String.format("%06d", random.nextInt(1000000));
         // HashMap에 전화번호를 키로 사용하여 인증 코드, 생성 시각 및 만료 시간 저장
         Map<String, Object> verificationData = new HashMap<>();
         verificationData.put("code", code);
