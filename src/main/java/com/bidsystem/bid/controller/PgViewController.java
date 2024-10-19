@@ -295,14 +295,72 @@ public class PgViewController {
     }
 
     @GetMapping("/pgclose")
-    public ModelAndView pgClose(@RequestParam Map<String, Object> request, Model model) {
-        logger.info("\n\n---------------------------Pgclose가 호출되었습니다\n\n");
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("errorMessage", "pg close가 호출되었습니다.");
-        modelAndView.setViewName(Views.CLOSE); 
-        return modelAndView;
-    }
+    // public ModelAndView pgClose(@RequestParam Map<String, Object> request, Model model) {
+    //     logger.info("\n\n---------------------------Pgclose가 호출되었습니다\n\n");
+    //     ModelAndView modelAndView = new ModelAndView();
+    //     modelAndView.addObject("errorMessage", "pg close가 호출되었습니다.");
+    //     modelAndView.setViewName(Views.CLOSE); 
+    //     return modelAndView;
+    // }
 
+
+    // @GetMapping("/pgstart")
+    public ModelAndView paymentPage2(@RequestParam Map<String, Object> request, Model model, HttpServletResponse response) {
+
+        try {
+            if (!request.containsKey("telno")) {
+                throw new BadRequestException("결제요청 파라메터에 전화번호가 필요합니다.");
+            }
+
+            //요청 전문에 전화번호, 이메일을 추가하기 위해 사용자 정보 조회
+            Map<String, Object> results = userService.getUserByTelno(request);
+    
+            // 결과가 비어있을 경우 NotFoundException 예외 발생
+            if (results == null || results.isEmpty()) {
+                throw new NotFoundException("사용자 전화번호로 정보를 찾을 수 없습니다.");
+            }
+
+            // 승인사전 요청을 위한 데이터 구성 
+            ModelAndView modelAndView = new ModelAndView();
+            String timestamp = Long.toString(System.currentTimeMillis());
+            modelAndView.addObject("price", request.get("price"));
+            modelAndView.addObject("goodname", request.get("goodName"));
+            modelAndView.addObject("buyername", results.get("username"));
+            modelAndView.addObject("buyertel", results.get("telno"));
+            modelAndView.addObject("buyeremail", results.get("email"));
+            modelAndView.addObject("returnUrl", Urls.RETURN);
+            modelAndView.addObject("closeUrl", Urls.CLOSE);
+            modelAndView.addObject("mid", PgParams.MID);
+            modelAndView.addObject("signKey", PgParams.SIGN_KEY);
+            modelAndView.addObject("timestamp", timestamp);
+            modelAndView.addObject("use_chkfake", PgParams.USE_CHKFAKE);
+            modelAndView.addObject("oid", PgParams.OID);
+            modelAndView.addObject("returnUrl", Urls.RETURN);
+            modelAndView.addObject("closeUrl", Urls.CLOSE);
+            String orderNumber = PgParams.MID + "_" + timestamp;
+            modelAndView.addObject("orderNumber", orderNumber);
+            String mKey = sha256(PgParams.SIGN_KEY);
+            Object price = request.get("price");
+            String signature = sha256("oid=" + PgParams.OID + "&price=" + price + "&timestamp=" + timestamp);
+            String verification = sha256("oid=" + PgParams.OID + "&price=" + price + "&signKey=" + PgParams.SIGN_KEY + "&timestamp=" + timestamp);
+            modelAndView.addObject("mKey", mKey);
+            modelAndView.addObject("signature", signature);
+            modelAndView.addObject("verification", verification);
+            modelAndView.setViewName(Views.REQUEST);
+            return modelAndView;
+    
+        } catch (Exception e) {
+            ModelAndView modelAndView = new ModelAndView();
+            if (e instanceof NotFoundException) {
+                logger.error("\n\n++ 결제 사전 요청에서 오류가 발생하였습니다. (사용자 정보 조회 실패)", e);
+            } else {
+                logger.error("\n\n++ 결제 사전 요청에서 오류가 발생하였습니다.", e);
+            }
+            modelAndView.addObject("errorMessage", "결제 사전 요청에서 오류가 발생하였습니다");
+            modelAndView.setViewName(Views.ERROR);
+            return modelAndView;
+        }
+    }
     // Map<String, Object>을 URL-encoded 형식으로 변환하는 메서드
     public static String convertToUrlEncodedString(Map<String, Object> data) {
         StringBuilder result = new StringBuilder();

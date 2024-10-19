@@ -58,7 +58,7 @@
                     <div>
                         <label>resultCode</label>
                         <label>${resultMap.resultCode}</label> 
-                    
+                        <br/>            
                         <label>resultMsg</label>
                         <label>${resultMap.resultMsg}</label> 
                         <br/>
@@ -69,6 +69,9 @@
                         <br/>
                         <label>MOID</label>
                         <label>${resultMap.MOID}</label> 
+                        <br/>
+                        <label>telno</label>
+                        <label>${resultMap.buyerTel}</label> 
                         <br/>
                         <label>TotPrice</label>
                         <label>${resultMap.TotPrice}</label> 
@@ -85,7 +88,7 @@
                 </form>
                 
 
-                <button onclick="location.href='http://localhost:8080/bidseats?userId=${resultMap.userId}'">돌아가기</button>
+                <button onclick="location.href='http://localhost:9000/bidseats?telno=${resultMap.buyerTel}'">돌아가기</button>
 
             </div>
         </section>

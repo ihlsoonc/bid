@@ -32,7 +32,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
-        logger.info("\n======================== SecurityFilterChain 초기화가 시작됩니다...\n");
+        logger.info("\n======================== SecurityFilterChain started...\n");
     
         http
             .csrf(csrf -> csrf.disable()) 
@@ -44,7 +44,7 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/WEB-INF/views/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/WEB-INF/views/**", "GET")).permitAll()
                         .anyRequest().authenticated();
-                    logger.info("\n\n======================== Authorization rules 적용됨.\n");
+                    logger.info("\n\n======================== Authorization rules applied.\n");
                 }
             )
             .httpBasic(withDefaults());  // 기본 HTTP 인증 설정
@@ -69,7 +69,7 @@ public class SecurityConfig {
             ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(request);
 
             // 필터 시작 시 바로 로그 출력
-            logger.info("\n\n=========== Incoming request 시작: "+ request.getMethod()+" "+ request.getRequestURI()+ " Params: "+request.getQueryString()+"\n\n");
+            logger.info("\n\n=========== Incoming request: "+ request.getMethod()+" "+ request.getRequestURI()+ " Params: "+request.getQueryString()+"\n\n");
 
             // 필터 체인을 통해 다음 필터로 요청 넘기기
             filterChain.doFilter(wrappedRequest, response);
@@ -82,7 +82,8 @@ public class SecurityConfig {
             }
 
             // 응답 처리 후 로그 출력
-            logger.info("\n\n==================== Incoming request 종료: "+response.getStatus()+" "+request.getRequestURI()+"\n\n");
+            logger.info("\n\n==================== Incoming request ended: "+response.getStatus()+" "+request.getRequestURI()+"\n\n");
+            response.setHeader("Set-Cookie", "JSESSIONID=" + request.getRequestedSessionId() + "; path=/; Secure; SameSite=None");
         }
     }
 }

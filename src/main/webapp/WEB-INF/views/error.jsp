@@ -6,11 +6,14 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>오류 발생</title>
+        <br/>
+        <br/>
+        <br/>
+        <title>결제 요청 중에 오류가 발생하였습니다.</title>
         
         <script type="text/javascript">
             function redirectToLogin() {
-                window.location.href = "http://localhost:8080/userlogin";
+                window.location.href = "http://localhost:9000/userlogin";
             }
         </script>
     </head>

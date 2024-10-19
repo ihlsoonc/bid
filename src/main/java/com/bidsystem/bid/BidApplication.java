@@ -15,22 +15,22 @@ public class BidApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BidApplication.class, args);
-        logger.info("\n\n=================== BidApplication 이 시작되었습니다.\n");
+        logger.info("\n\n---------------------------- BidApplication started -------------------------------------\n");
     }
 
-
+    //"https://stgstdpay.inicis.com"
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:9000", "https://stgstdpay.inicis.com", "null") // 여러 도메인 설정
+                        .allowedOrigins("http://localhost:9000", "http://localhost:5000", "null") // 여러 도메인 설정
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
                 // CORS 설정 로깅
-                logger.info("\n\n==================== BidApplication에서 CORS configuration 이 적용됩니다. ====================\n");
+                logger.info("\n\n==================== BidApplication CORS configuration applied. ====================\n");
         };
     };
     }
