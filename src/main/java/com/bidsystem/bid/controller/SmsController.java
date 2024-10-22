@@ -12,34 +12,20 @@ import net.nurigo.sdk.message.response.MessageListResponse;
 import net.nurigo.sdk.message.response.MultipleDetailMessageSentResponse;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
-import net.nurigo.sdk.message.service.MessageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.qos.logback.core.status.ErrorStatus;
-import jakarta.annotation.PostConstruct;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/sendsms")
@@ -93,8 +79,8 @@ public class SmsController {
         message.setText(text);
 
         // CoolSMS 메시지 전송
-        // SingleMessageSentResponse response = messageService.sendOne(new SingleMessageSendingRequest(message));
-        // System.out.println("SMS 전송 응답: " + response);
+        SingleMessageSentResponse response = messageService.sendOne(new SingleMessageSendingRequest(message));
+        System.out.println("SMS 전송 응답: " + response);
 
         // 로그 출력
         System.out.println("인증 코드 전송: " + code);
