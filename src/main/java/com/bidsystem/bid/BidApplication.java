@@ -23,9 +23,11 @@ public class BidApplication {
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
+
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:9000", "http://localhost:5000", "null") // 여러 도메인 설정
+                        .allowedOriginPatterns("*")
+                        // .allowedOrigins("http://localhost:9000", "http://localhost:5000", "null")  //위와 동일한 효과
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);

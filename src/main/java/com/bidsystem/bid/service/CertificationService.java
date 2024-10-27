@@ -24,42 +24,6 @@ public class CertificationService {
     @Autowired
     private UserMapper userMapper;
 
-    
-    public Map<String, Object> verifyPassword(Map<String, Object> request) throws Exception {
-        String table = (String) request.get("table");
-        Map<String, Object> results;
-
-        try {
-            // 사용자 또는 관리자 테이블에서 정보 가져오기
-            if (table.equals("user")) {
-                results = userMapper.getUserByQuery(request);
-
-            } else if (table.equals("admin")){
-                results = adminMapper.getUserByQuery(request);
-            } else {
-                throw new BadRequestException("잘못된 요청입니다. (TableName)");      
-            }
-            
-            if (results == null || results.isEmpty()) {
-                throw new NotFoundException(null);
-            }
-
-            String inputpassword = (String) request.get("password");
-            String encodedPassword = (String) results.get("password"); // 테이블에 저장된 암호화된 비밀번호
-
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            if (passwordEncoder.matches(inputpassword, encodedPassword)) {
-                return results;  
-            } else {
-                throw new PasswordMismatchException(null);  
-            }
-        } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new DataAccessException(null,e);
-        }
-    }
-
     // 세션 변수 설정 함수 (userType이 null이 아니면 추가)
     public void setSessionAttributes(HttpSession session, String userId, String telno, String userType, String userName) {
         session.setAttribute("userId", userId);
@@ -71,17 +35,17 @@ public class CertificationService {
     }
 
     // 쿠키 설정 함수
-    public void setLoginCookie(HttpSession session, HttpServletResponse response) {
+    public void setLoginCookie(HttpSession session, HttpServletResponse httpResponse) {
         // HttpSession에서 세션 ID를 가져옴 (Java 표준 세션 ID)
         String sessionId = session.getId();         
-    // JSESSIONID 쿠키 생성
+        // JSESSIONID 쿠키 생성
         Cookie cookie = new Cookie("JSESSIONID", sessionId);
         cookie.setHttpOnly(true);  // JavaScript에서 접근 불가하도록 설정
         cookie.setSecure(true);    // HTTPS를 사용하는 경우 true로 설정
         cookie.setPath("/");       // 모든 경로에서 쿠키 유효
         cookie.setMaxAge(60 * 60); // 1시간 동안 유효 (원하는 만료 시간으로 설정 가능)
-        response.addHeader("Set-Cookie", cookie.getName() + "=" + cookie.getValue() + "; Path=" + cookie.getPath() + "; HttpOnly; Secure; SameSite=None");
-        response.addCookie(cookie);
+        httpResponse.addHeader("Set-Cookie", cookie.getName() + "=" + cookie.getValue() + "; Path=" + cookie.getPath() + "; HttpOnly; Secure; SameSite=None");
+        httpResponse.addCookie(cookie);
     }
     
     // 쿠키 삭제 함수
@@ -102,7 +66,7 @@ public class CertificationService {
 
     try {
         // 세션이 존재하는지 확인
-        if (session == null || session.getAttribute("userId") == null) {
+        if (session == null || session.getAttribute("telno") == null) {
             // 세션이 만료되었거나 사용자 정보가 없는 경우
             throw new UnauthorizedException("세션이 유효하지 않습니다. 다시 로그인해주세요.");
         }
@@ -131,47 +95,87 @@ public class CertificationService {
     return response;
 }
 
-// 세션 clear 및 JSESSIONID 쿠키 삭제
-public void clearSession(HttpSession session, HttpServletResponse response) {
 
+// 세션 clear 및 JSESSIONID 쿠키 삭제
+public Map<String, Object> clearSession(HttpSession session, HttpServletResponse httpResponse) {
     try {
         // 세션 무효화
         session.invalidate();
 
         // JSESSIONID 쿠키 삭제
-        Cookie cookie = new Cookie("JSESSIONID", null); // JSESSIONID 쿠키 이름으로 생성
+        Cookie cookie = new Cookie("JSESSIONID", null);
         cookie.setMaxAge(0);   // 즉시 만료
         cookie.setPath("/");   // 애플리케이션 전체 경로에 적용
         cookie.setHttpOnly(true);  // 보안 설정
         cookie.setSecure(true);    // HTTPS를 사용하는 경우에만 true
-        response.addCookie(cookie);  // 클라이언트에 쿠키 삭제 요청
-        
+        httpResponse.addCookie(cookie);  // 클라이언트에 쿠키 삭제 요청
+
+        // 로그아웃 성공 응답 데이터 생성
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "로그아웃 성공");
+
+        return response;
     } catch (Exception e) {
-        // 세션이 이미 무효화된 상태일 수 있으므로 예외를 다시 던지지 않고 로그 등으로 처리할 수 있음
         throw new ServerException("세션 무효화에서 오류가 발생하였습니다.", e);
     }
+
 }
 
-
-// 세션 복원 함수
-public void restoreSession(HttpServletRequest httpRequest, String telno, String userName, String userType) {
-    HttpSession session = httpRequest.getSession(false);  // 이미 존재하는 세션을 가져옴, 없으면 null 반환
+// 세션 복원 함수 request, requestBody, session,response
+public Map<String, Object> restoreSession(Map<String, Object> request, HttpServletRequest httpRequest, HttpSession session, HttpServletResponse httpResponse) {
+    String userId = (String) request.get("userId");
+    String telno = (String) request.get("telno");
+    String userType = (String) request.get("userType");
+    String userName = (String) request.get("userName");
 
     if (session == null) {
         // 세션이 없으면 새로 생성
         session = httpRequest.getSession(true);
     }
+    setSessionAttributes( session,  userId,  telno,  userType,  userName);
+    setLoginCookie(session, httpResponse);
+
+    // 로그아웃 성공 응답 데이터 생성
+    Map<String, Object> response = new HashMap<>();
+    response.put("status", "success");
+    response.put("message", "세션복원 성공");
+    return response;
+}
+
+    
+public Map<String, Object> verifyPassword(Map<String, Object> request) throws Exception {
+    String table = (String) request.get("table");
+    Map<String, Object> results;
 
     try {
-        session.setAttribute("telno", telno);
-        session.setAttribute("userName", userName);
+        // 사용자 또는 관리자 테이블에서 정보 가져오기
+        if (table.equals("user")) {
+            results = userMapper.getUserByQuery(request);
 
-        if (userType != null) {
-            session.setAttribute("userType", userType);  // userType이 null이 아닐 경우에만 추가
+        } else if (table.equals("admin")){
+            results = adminMapper.getUserByQuery(request);
+        } else {
+            throw new BadRequestException("잘못된 요청입니다. (TableName)");      
         }
+        
+        if (results == null || results.isEmpty()) {
+            throw new NotFoundException(null);
+        }
+
+        String inputpassword = (String) request.get("password");
+        String encodedPassword = (String) results.get("password"); // 테이블에 저장된 암호화된 비밀번호
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (passwordEncoder.matches(inputpassword, encodedPassword)) {
+            return results;  
+        } else {
+            throw new PasswordMismatchException(null);  
+        }
+    } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
+        throw e;
     } catch (Exception e) {
-        // 에러가 발생하면 처리 (로그 기록, 에러 메시지 반환 등)
-        throw new ServerException("세션 복원 중 오류가 발생하였습니다.", e);
+        throw new DataAccessException(null,e);
     }
 }
 

@@ -50,6 +50,12 @@ public class ExceptionService {
             logger.error("\n\n++ UnsupportedEncodingException, Encoding중 오류가 발생하였습니다.", message, cause.getMessage(), cause);
         }
     }
+    public static class NurigoException extends RuntimeException {
+        public NurigoException(String message, Throwable cause) {
+            super(message != null && !message.isEmpty() ? message :"오류 : 인증코드 전송 전송 중 오류가 발생하였습니다."); 
+            logger.error("\n\n++ NurigoException, 오류가 발생하였습니다.", message, cause.getMessage(), cause);
+        }
+    }
     // insert에서 dupkey이외의 이유로 affctedrow ++0인 경우(DB제약조건 위반 등등
     // update에서 notfound 이외의 이유로 affctedrow ++0인 경우 (DB제약조건 위반 등등)
     // biz logic 상 dupkey, notfound이 경우가 없는데도 불구하고... 결과가 처리되지 않는 경우에 발생

@@ -18,6 +18,7 @@
         </script>
     </head>
     <body>
+        <div> 오류 내용을 참고하세요.</div>
         <div class="error-message">
             <div>"${errorMessage}" Code : "${resultCode}"</div>
         </div>

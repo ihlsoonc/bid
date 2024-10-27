@@ -37,12 +37,12 @@ public class UserService {
             String userType = (String) verifyResult.get("usertype");
 
             // 세션 설정
-            certificationService.setSessionAttributes(httpRequest.getSession(), userId, telno, userType,userName);
+            certificationService.setSessionAttributes(httpRequest.getSession(), userId, telno, userType, userName);
 
             // 쿠키 설정
             certificationService.setLoginCookie( httpRequest.getSession(),httpResponse);
 
-            // 성공 응답 반환
+
             Map<String, Object> response = new HashMap<>();
             response.put("message", "로그인 성공");
             response.put("userName", userName);

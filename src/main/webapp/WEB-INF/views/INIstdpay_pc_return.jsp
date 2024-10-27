@@ -87,8 +87,9 @@
                     </div>
                 </form>
                 
+                <button onclick="location.href='http://localhost:9000/bidseats?telno=${resultMap.buyerTel}&_=' + new Date().getTime()">돌아가기</button>
 
-                <button onclick="location.href='http://localhost:9000/bidseats?telno=${resultMap.buyerTel}'">돌아가기</button>
+                <!-- <button onclick="location.href='http://localhost:9000/bidseats?telno=${resultMap.buyerTel}'">돌아가기</button> -->
 
             </div>
         </section>

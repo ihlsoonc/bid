@@ -1,47 +1,42 @@
-package com.bidsystem.bid.controller;
+package com.bidsystem.bid.service;
 
 import com.bidsystem.bid.service.ExceptionService.*;
-import com.bidsystem.bid.service.UserService;
-import com.bidsystem.bid.service.BidService;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
-import jakarta.servlet.http.HttpServletResponse;
 
 import java.net.URI;
 import java.net.URLDecoder;
-
-import java.security.MessageDigest;
-import java.util.HashMap;
-import java.util.Map;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.security.MessageDigest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import java.util.HashMap;
+import java.util.Map;
 
-@RequestMapping("/api")
-public class PgViewController {
-    private static final Logger logger = LoggerFactory.getLogger(BidService.class); // 로거 생성
+@Service
+public class PgInterfaceService {
+    private static final Logger logger = LoggerFactory.getLogger(BidService.class); 
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private BidService bidService;
+
     public class Urls {
         public static final String RETURN = "http://localhost:5000/api/pgreturnpost";  // 서버 프로그램
         public static final String CLOSE = "http://localhost:5000/api/pgclose";        // 서버 프로그램
-        public static final String REDIRECT = "http://localhost:8080/bidseats";        // 서버 프로그램
-        public static final String LOGIN = "http://localhost:8080/userlogin";        // 서버 프로그램
+        public static final String REDIRECT = "http://localhost:9000/bidseats";        // 서버 프로그램
+        public static final String LOGIN = "http://localhost:9000/userlogin";        // 서버 프로그램
     }
     
     public class Views {
@@ -61,35 +56,24 @@ public class PgViewController {
         public static final String USE_CHKFAKE = "Y";  
     }
 
-    @Autowired
-    private BidService bidService;
-    @Autowired
-    private UserService userService;
-
-    @GetMapping("/pgstart")
-    public ModelAndView paymentPage(@RequestParam Map<String, Object> request, Model model, HttpServletResponse response) {
-
+    public ModelAndView pgStart(Map<String, Object> request) {
         try {
-            if (!request.containsKey("telno")) {
-                throw new BadRequestException("결제요청 파라메터에 전화번호가 필요합니다.");
-            }
+            validateRequestParameters(request);  // 전화번호 유효성 검사
+            Map<String, Object> userInfo = userService.getUserByTelno(request);
 
-            //요청 전문에 전화번호, 이메일을 추가하기 위해 사용자 정보 조회
-            Map<String, Object> results = userService.getUserByTelno(request);
-    
-            // 결과가 비어있을 경우 NotFoundException 예외 발생
-            if (results == null || results.isEmpty()) {
+            if (userInfo == null || userInfo.isEmpty()) {
                 throw new NotFoundException("사용자 전화번호로 정보를 찾을 수 없습니다.");
             }
-
-            // 승인사전 요청을 위한 데이터 구성 
             ModelAndView modelAndView = new ModelAndView();
             String timestamp = Long.toString(System.currentTimeMillis());
-            modelAndView.addObject("price", request.get("price"));
-            modelAndView.addObject("goodname", request.get("goodName"));
-            modelAndView.addObject("buyername", results.get("username"));
-            modelAndView.addObject("buyertel", results.get("telno"));
-            modelAndView.addObject("buyeremail", results.get("email"));
+            String orderNumber = PgParams.MID + "_" + timestamp;
+        
+            modelAndView.addObject("price", request.get("price"));          //from client
+            modelAndView.addObject("goodName", request.get("goodName"));    //from client
+
+            modelAndView.addObject("buyerName", userInfo.get("username"));  //from db query
+            modelAndView.addObject("buyerTel", userInfo.get("telno"));      //from db query
+            modelAndView.addObject("buyerEmail", userInfo.get("email"));    //from db query
             modelAndView.addObject("returnUrl", Urls.RETURN);
             modelAndView.addObject("closeUrl", Urls.CLOSE);
             modelAndView.addObject("mid", PgParams.MID);
@@ -97,41 +81,24 @@ public class PgViewController {
             modelAndView.addObject("timestamp", timestamp);
             modelAndView.addObject("use_chkfake", PgParams.USE_CHKFAKE);
             modelAndView.addObject("oid", PgParams.OID);
-            modelAndView.addObject("returnUrl", Urls.RETURN);
-            modelAndView.addObject("closeUrl", Urls.CLOSE);
-            String orderNumber = PgParams.MID + "_" + timestamp;
             modelAndView.addObject("orderNumber", orderNumber);
-            String mKey = sha256(PgParams.SIGN_KEY);
-            Object price = request.get("price");
-            String signature = sha256("oid=" + PgParams.OID + "&price=" + price + "&timestamp=" + timestamp);
-            String verification = sha256("oid=" + PgParams.OID + "&price=" + price + "&signKey=" + PgParams.SIGN_KEY + "&timestamp=" + timestamp);
-            modelAndView.addObject("mKey", mKey);
-            modelAndView.addObject("signature", signature);
-            modelAndView.addObject("verification", verification);
+            modelAndView.addObject("mKey", sha256(PgParams.SIGN_KEY));
+            modelAndView.addObject("signature", generateSignature(request.get("price"), timestamp));
+            modelAndView.addObject("verification", generateVerification(request.get("price"), timestamp));
             modelAndView.setViewName(Views.REQUEST);
+        
             return modelAndView;
-    
+
         } catch (Exception e) {
-            ModelAndView modelAndView = new ModelAndView();
-            if (e instanceof NotFoundException) {
-                logger.error("\n\n++ 결제 사전 요청에서 오류가 발생하였습니다. (사용자 정보 조회 실패)", e);
-            } else {
-                logger.error("\n\n++ 결제 사전 요청에서 오류가 발생하였습니다.", e);
-            }
-            modelAndView.addObject("errorMessage", "결제 사전 요청에서 오류가 발생하였습니다");
-            modelAndView.setViewName(Views.ERROR);
-            return modelAndView;
+            return handleException(e);
         }
+        
     }
-
-    @PostMapping("/pgreturnpost")
-    public ModelAndView pgReturnPost(@RequestBody String request, Model model) {
+    
+    public ModelAndView pgReturn(String request) {
         Map<String, String> params;
-                    // URL 인코딩된 문자열을 Map<String, String>으로 변환
-        try {
-
-            params = parseQueryString(request);
-
+        try{
+            params = parseQueryString(request);      // URL 인코딩된 문자열을 Map<String, String>으로 변환
         } catch (Exception e) {
             throw new UnsupportedEncodingException("pg리턴의 쿼리 파싱에서 오류가 발생하였습니다.", e);
         }
@@ -157,6 +124,7 @@ public class PgViewController {
             modelAndView.setViewName(Views.RETURN); 
             return modelAndView;
         }
+        
         // 결제요청에서 "resultCode"가 0000일 경우 처리
         // 1. 전문 필드 값 설정
         String mid = params.get("mid");                     // 상점아이디
@@ -196,7 +164,7 @@ public class PgViewController {
         options.put("verification", verification);
         options.put("charset", charset);
         options.put("format", format);
-        logger.info("\n\n---------------------------pgreturn 승인을 요청합니다. " + authUrl2 + "\n");
+        logger.info("\n\n--------------------------- pgreturn 승인을 요청합니다. " + authUrl2 + "\n");
         try{
             String urlEncodedOptions = convertToUrlEncodedString(options);
             if (!authUrl.equals(authUrl2)) {
@@ -293,74 +261,32 @@ public class PgViewController {
             return modelAndView;
         }
     }
-
-    @GetMapping("/pgclose")
-    // public ModelAndView pgClose(@RequestParam Map<String, Object> request, Model model) {
-    //     logger.info("\n\n---------------------------Pgclose가 호출되었습니다\n\n");
-    //     ModelAndView modelAndView = new ModelAndView();
-    //     modelAndView.addObject("errorMessage", "pg close가 호출되었습니다.");
-    //     modelAndView.setViewName(Views.CLOSE); 
-    //     return modelAndView;
-    // }
-
-
-    // @GetMapping("/pgstart")
-    public ModelAndView paymentPage2(@RequestParam Map<String, Object> request, Model model, HttpServletResponse response) {
-
-        try {
-            if (!request.containsKey("telno")) {
-                throw new BadRequestException("결제요청 파라메터에 전화번호가 필요합니다.");
-            }
-
-            //요청 전문에 전화번호, 이메일을 추가하기 위해 사용자 정보 조회
-            Map<String, Object> results = userService.getUserByTelno(request);
     
-            // 결과가 비어있을 경우 NotFoundException 예외 발생
-            if (results == null || results.isEmpty()) {
-                throw new NotFoundException("사용자 전화번호로 정보를 찾을 수 없습니다.");
-            }
-
-            // 승인사전 요청을 위한 데이터 구성 
-            ModelAndView modelAndView = new ModelAndView();
-            String timestamp = Long.toString(System.currentTimeMillis());
-            modelAndView.addObject("price", request.get("price"));
-            modelAndView.addObject("goodname", request.get("goodName"));
-            modelAndView.addObject("buyername", results.get("username"));
-            modelAndView.addObject("buyertel", results.get("telno"));
-            modelAndView.addObject("buyeremail", results.get("email"));
-            modelAndView.addObject("returnUrl", Urls.RETURN);
-            modelAndView.addObject("closeUrl", Urls.CLOSE);
-            modelAndView.addObject("mid", PgParams.MID);
-            modelAndView.addObject("signKey", PgParams.SIGN_KEY);
-            modelAndView.addObject("timestamp", timestamp);
-            modelAndView.addObject("use_chkfake", PgParams.USE_CHKFAKE);
-            modelAndView.addObject("oid", PgParams.OID);
-            modelAndView.addObject("returnUrl", Urls.RETURN);
-            modelAndView.addObject("closeUrl", Urls.CLOSE);
-            String orderNumber = PgParams.MID + "_" + timestamp;
-            modelAndView.addObject("orderNumber", orderNumber);
-            String mKey = sha256(PgParams.SIGN_KEY);
-            Object price = request.get("price");
-            String signature = sha256("oid=" + PgParams.OID + "&price=" + price + "&timestamp=" + timestamp);
-            String verification = sha256("oid=" + PgParams.OID + "&price=" + price + "&signKey=" + PgParams.SIGN_KEY + "&timestamp=" + timestamp);
-            modelAndView.addObject("mKey", mKey);
-            modelAndView.addObject("signature", signature);
-            modelAndView.addObject("verification", verification);
-            modelAndView.setViewName(Views.REQUEST);
-            return modelAndView;
-    
-        } catch (Exception e) {
-            ModelAndView modelAndView = new ModelAndView();
-            if (e instanceof NotFoundException) {
-                logger.error("\n\n++ 결제 사전 요청에서 오류가 발생하였습니다. (사용자 정보 조회 실패)", e);
-            } else {
-                logger.error("\n\n++ 결제 사전 요청에서 오류가 발생하였습니다.", e);
-            }
-            modelAndView.addObject("errorMessage", "결제 사전 요청에서 오류가 발생하였습니다");
-            modelAndView.setViewName(Views.ERROR);
-            return modelAndView;
+    private void validateRequestParameters(Map<String, Object> request) {
+        if (!request.containsKey("telno")) {
+            throw new BadRequestException("결제요청 파라메터에 전화번호가 필요합니다.");
         }
     }
+
+    private String generateSignature(Object price, String timestamp) {
+        return sha256("oid=" + PgParams.OID + "&price=" + price + "&timestamp=" + timestamp);
+    }
+    
+    private String generateVerification(Object price, String timestamp) {
+        return sha256("oid=" + PgParams.OID + "&price=" + price + "&signKey=" + PgParams.SIGN_KEY + "&timestamp=" + timestamp);
+    }
+    
+    private ModelAndView handleException(Exception e) {
+        ModelAndView modelAndView = new ModelAndView(Views.ERROR);
+        if (e instanceof NotFoundException) {
+            logger.error("++ 결제 사전 요청에서 오류가 발생하였습니다. (사용자 정보 조회 실패)", e);
+        } else {
+            logger.error("++ 결제 사전 요청에서 오류가 발생하였습니다.", e);
+        }
+        modelAndView.addObject("errorMessage", "결제 사전 요청에서 오류가 발생하였습니다");
+        return modelAndView;
+    }
+    
     // Map<String, Object>을 URL-encoded 형식으로 변환하는 메서드
     public static String convertToUrlEncodedString(Map<String, Object> data) {
         StringBuilder result = new StringBuilder();
@@ -538,7 +464,6 @@ public class PgViewController {
         }
     }
 }
-
 
 // ---------------------------pgreturn 승인 요청 결과입니다.
 // CARD_Quota:00
