@@ -1,6 +1,7 @@
 package com.bidsystem.bid.service;
 import com.bidsystem.bid.service.ExceptionService.*;
 
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,86 +20,64 @@ public class OAuthTokenService {
 
     // RestTemplate 빈을 생성합니다
     private final RestTemplate restTemplate = new RestTemplate();
+    private static final String BIZTALK_TEST = "http://www.biztalk-center.co.kr/biztalkapi_test/";
+    private static final String BIZTALK_RUN = "http://www.biztalk-center.co.kr/biztalkapi/";
+    // private static final String CLIENT_SECRET = "66fd8d80344a5bb4b28f85ee02cd378178bacf8e"; // 실제 clientSecret로 대체
 
-    // /getToken 엔드포인트를 호출하면 토큰을 가져옵니다.
-    public String getOAuthToken() {
-        String url = "https://www.biztalk-api.com/v2/auth/getToken";
-        String token = "";
+    private static final String BASE_URL = "https://bizmsg-web.kakaoenterprise.com/v2/oauth/token";
+    private static final String CLIENT_ID = "wisam"; // 실제 clientID로 대체
+    private static final String CLIENT_SECRET = "66fd8d80344a5bb4b28f85ee02cd378178bacf8e"; // 실제 clientSecret로 대체
+
+    public String getAccessToken() {
+        String url = BASE_URL + "/v2/oauth/token";
+
+        // Authorization 헤더 설정
+        String auth = CLIENT_ID + ":" + CLIENT_SECRET;
+        String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Basic " + encodedAuth);
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.set("Accept", "application/json");
+
+        // 요청 본문 설정
+        String requestBody = "grant_type=client_credentials";
+        HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
+
         try {
-            // JSON 요청 객체 생성
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("bsid", "wisam");
-            jsonObject.put("passwd", "b14c2d414288409ff3948159e1b9306c7c48a302");
-
-            // 헤더 설정
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Content-Type", "application/json");
-            headers.set("Accept", "application/json");
-
-            // HttpEntity에 JSON과 헤더 포함
-            HttpEntity<String> request = new HttpEntity<>(jsonObject.toString(), headers);
-
-            // POST 요청 전송
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
 
-            // 응답 본문을 가져와서 JSONObject로 변환
-            JSONObject responseJson = new JSONObject(response.getBody());
-            System.out.println("responseJson: Oauth" + responseJson);
+            // 응답 처리
+            if (response.getStatusCode() == HttpStatus.OK) {
+                JSONObject jsonResponse = new JSONObject(response.getBody());
+                String code = jsonResponse.getString("code");
+                JSONObject result = jsonResponse.getJSONObject("result");
+                String detailCode = result.getString("detail_code");
+                String detailMessage = result.getString("detail_message");
 
-            // 응답 코드 확인
-            if (responseJson.get("responseCode") == "0000") {
-                // JSON 파싱
-                if ("NRM00000".equals(responseJson.get("detail_code"))) {
-                    token = responseJson.getString("access_token");
+                if ("200".equals(code) && "NRM00000".equals(detailCode)) {
+                    String accessToken = jsonResponse.getString("access_token");
+                    int expiresIn = jsonResponse.getInt("expires_in");
+
+                    System.out.println("Access Token: " + accessToken);
+                    System.out.println("Expires In: " + expiresIn + " seconds");
+                    System.out.println("Message: " + detailMessage);
+
+                    return accessToken;
                 } else {
-                    System.out.println("Error: " + responseJson.getString("msg"));
+                    System.out.println("Failed: " + detailMessage);
                 }
             } else {
-                String msg = responseJson.getString("msg") ;
-                System.out.println("Error: Response status code " + responseJson);
+                System.out.println("Error: HTTP " + response.getStatusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println(e.toString());
         }
-        return token;
+        return null;
     }
+        // String url = "https://www.biztalk-api.com/v2/auth/getToken";
+        //     jsonObject.put("bsid", "wisam");
+        //     jsonObject.put("passwd", "b14c2d414288409ff3948159e1b9306c7c48a302");
 
-    public String getOAuthToken2(String clientId, String clientSecret, String baseUrl) {
-        try {
-            // URL 설정
-            String url = baseUrl + "/v2/oauth/token";
-
-            // Basic 인증을 위한 client_id와 client_secret을 Base64로 인코딩
-            String auth = clientId + ":" + clientSecret;
-            String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
-
-            // 헤더 설정
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            headers.set("Authorization", "Basic " + encodedAuth);
-
-            // 바디 데이터 설정
-            String body = "grant_type=client_credentials";
-
-            // HttpEntity 생성 (요청 헤더와 바디를 포함)
-            HttpEntity<String> request = new HttpEntity<>(body, headers);
-
-            // POST 요청 보내기
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
-
-            // 응답 코드 확인 및 처리
-            if (response.getStatusCode() == HttpStatus.OK) {
-                return response.getBody();
-            } else {
-                return "POST request failed with status: " + response.getStatusCode();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error: " + e.getMessage();
-        }
-    }
 }
 
 // OAuth 2.0 인증 Response Syntax
@@ -112,3 +91,4 @@ public class OAuthTokenService {
 //     "token_type": "bearer",
 //     "expires_in": 863999
 //   }
+  

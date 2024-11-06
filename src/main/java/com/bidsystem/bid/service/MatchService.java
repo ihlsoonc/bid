@@ -80,18 +80,10 @@ public class MatchService {
         }
     }
 
-    // 모든 경기 조회
+    // 모든 경기 조회 (venucd에 해당되는)
     public List<Map<String, Object>> getAllMatches(Map<String, Object> params) {
-        String userType = (String) params.get("userType");
-
         try {
-            List<Map<String, Object>> results = null;
-
-            if ("B".equals(userType)) {
-                results =  matchMapper.getMatchesByUserId(params);
-            } else {
-                results =  matchMapper.getAllMatches(params);
-            }
+            List<Map<String, Object>> results = matchMapper.getAllMatches(params);
             if (results == null || results.isEmpty()) {
                 throw new NoDataException(null);
             } else {
@@ -104,7 +96,23 @@ public class MatchService {
         }
     }
 
-    // 모든 승인된 경기 조회 (사용자용)
+    // 본인이 등록한 경기 조회 (venucd에 해당되는)
+    public List<Map<String, Object>> getMyMatches(Map<String, Object> params) {
+        try {
+            List<Map<String, Object>> results = matchMapper.getMyMatches(params);
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException(null);
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new DataAccessException(null,e);
+        }
+    }
+
+    // 모든 승인된 경기 조회 (사용자용, (venucd에 해당되는))
     public List<Map<String, Object>> getAllApprovedMatches(Map<String, Object> params) {
         try {
             List<Map<String, Object>> results = null;

@@ -4,137 +4,132 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @Service
 public class ExceptionService {
     private static final Logger logger = LoggerFactory.getLogger(BidService.class);
 
-    //=======================++logging error exception ++===============================
+    //=======================\n\n++logging error exception \n\n++===============================
     public static class ServerException extends RuntimeException {
-        // 메시지와 예외 객체를 함께 받는 생성자
         public ServerException(String message, Throwable cause) {
-            super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다."); 
-            logger.error("\n\n++ ServerException 시스템 오류가 발생하였습니다.",cause.getMessage(), cause);
+            super(message != null && !message.isEmpty() ? message : "오류: 서버에서 오류가 발생하였습니다.");
+            logger.error("\n\n\n\n++ ServerException: A system error occurred.", cause.getMessage(), cause);
         }
     }
-    public  static class DataAccessException extends RuntimeException {
+
+    public static class DataAccessException extends RuntimeException {
         public DataAccessException(String message, Throwable cause) {
-            super(message != null && !message.isEmpty() ? message :"오류 : 데이터베이스 접근 중 오류가 발생하였습니다."); 
-            logger.error( "\n\n++ DataAccessException 데이터베이스 접근 중 오류가 발행하였습니다.", cause.getMessage(), cause);
+            super(message != null && !message.isEmpty() ? message : "오류: 데이터베이스 접근 중 오류가 발생하였습니다.");
+            logger.error("\n\n\n\n++ DataAccessException: An error occurred while accessing the database.", cause.getMessage(), cause);
         }
     }
 
-    public  static class IllegalStateException extends RuntimeException {
+    public static class IllegalStateException extends RuntimeException {
         public IllegalStateException(String message, Throwable cause) {
-            super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다(Illegal State)."); 
-            logger.error("\n\n++ IllegalStateException 시스템 오류가 발생하였습니다.", message, cause.getMessage(), cause);
+            super(message != null && !message.isEmpty() ? message : "오류: 서버에서 오류가 발생하였습니다(Illegal State).");
+            logger.error("\n\n\n\n++ IllegalStateException: A system error occurred.", message, cause.getMessage(), cause);
         }
     }
 
-    public  static class IllegalArgumentException extends RuntimeException {
+    public static class IllegalArgumentException extends RuntimeException {
         public IllegalArgumentException(String message, Throwable cause) {
-            super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다(Illegal Argument).", cause); 
-            logger.error("\n\n++ IllegalArgumentException 시스템 오류가 발생하였습니다.", message, cause);
+            super(message != null && !message.isEmpty() ? message : "오류: 서버에서 오류가 발생하였습니다(Illegal Argument).", cause);
+            logger.error("\n\n\n\n\n\n++ IllegalArgumentException: A system error occurred.", message, cause);
         }
     }
 
     public static class NoSuchAlgorithmException extends RuntimeException {
         public NoSuchAlgorithmException(String message, Throwable cause) {
-            super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다."); 
-            logger.error("\n\n++ NoSuchAlgorithmException 알고리즘을 찾을 수 없습니다.", message, cause.getMessage(), cause);
+            super(message != null && !message.isEmpty() ? message : "오류: 서버에서 알고리즘을 찾을 수 없습니다.");
+            logger.error("\n\n\n\n++ NoSuchAlgorithmException: No such algorithm found.", message, cause.getMessage(), cause);
         }
     }
+
     public static class UnsupportedEncodingException extends RuntimeException {
         public UnsupportedEncodingException(String message, Throwable cause) {
-            super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다."); 
-            logger.error("\n\n++ UnsupportedEncodingException, Encoding중 오류가 발생하였습니다.", message, cause.getMessage(), cause);
+            super(message != null && !message.isEmpty() ? message : "오류: 서버에서 인코딩 중 오류가 발생하였습니다.");
+            logger.error("\n\n++ UnsupportedEncodingException: An error occurred during encoding.", message, cause.getMessage(), cause);
         }
     }
+
     public static class NurigoException extends RuntimeException {
         public NurigoException(String message, Throwable cause) {
-            super(message != null && !message.isEmpty() ? message :"오류 : 인증코드 전송 전송 중 오류가 발생하였습니다."); 
-            logger.error("\n\n++ NurigoException, 오류가 발생하였습니다.", message, cause.getMessage(), cause);
+            super(message != null && !message.isEmpty() ? message : "오류: 인증코드 전송 중 오류가 발생하였습니다.");
+            logger.error("\n\n++ NurigoException: An error occurred during verification code sending.", message, cause.getMessage(), cause);
         }
     }
-    // insert에서 dupkey이외의 이유로 affctedrow ++0인 경우(DB제약조건 위반 등등
-    // update에서 notfound 이외의 이유로 affctedrow ++0인 경우 (DB제약조건 위반 등등)
-    // biz logic 상 dupkey, notfound이 경우가 없는데도 불구하고... 결과가 처리되지 않는 경우에 발생
+
+    public static class PgException extends RuntimeException {
+        public PgException(String message, Throwable cause) {
+            super(message != null && !message.isEmpty() ? message : "오류: 결제 요청 중 오류가 발생하였습니다.");
+            logger.error("\n\n++ PgException: An error occurred during payment processing.", message, cause.getMessage(), cause);
+        }
+    }
+
     public static class ZeroAffectedRowException extends RuntimeException {
         public ZeroAffectedRowException(String message) {
-            super(message != null && !message.isEmpty() ? message :"오류 : 서버에서 오류가 발생하였습니다. (noRows)"); 
-            logger.error("\n\n++ZeroAffectedRowException 작업수행이 실패하였습니다.", message);
+            super(message != null && !message.isEmpty() ? message : "오류: 처리된 행이 없습니다.");
+            logger.error("\n\n++ ZeroAffectedRowException: The operation failed to affect any rows.", message);
         }
     }
 
-    //=======================++logging info exception ++===============================
+    //=======================\n\n++logging info exception \n\n++===============================
 
-    // DuplicateKeyException
-    
     public static class DuplicateKeyException extends RuntimeException {
-        private String loggingMessage; // loggingMessage 변수 선언
-    
+        private String loggingMessage;
+
         public DuplicateKeyException(String message) {
             super(message != null && !message.isEmpty() ? message : "중복된 정보입니다. 입력내용을 확인하세요.");
             loggingMessage = message != null && !message.isEmpty() ? message : "중복된 정보입니다. 입력내용을 확인하세요.";
-            logger.info("\n\n++ DuplicateKeyException: " + loggingMessage + " ++\n\n");
+            logger.info("\n\n++ DuplicateKeyException: Duplicate information. Please check the input. Message: " + loggingMessage);
         }
     }
 
-    // UnauthorizedException
     public static class UnauthorizedException extends RuntimeException {
         public UnauthorizedException(String message) {
             super(message != null && !message.isEmpty() ? message : "권한이 없습니다.");
-            logger.info("\n\n++ UnauthorizedException: " + (message != null ? message : "권한이 없습니다.") + " ++\n\n");
+            logger.info("\n\n++ UnauthorizedException: No permission. Message: " + (message != null ? message : "No permission."));
         }
     }
 
-    // VerificationException
     public static class VerificationException extends RuntimeException {
         public VerificationException(String message) {
             super(message != null && !message.isEmpty() ? message : "인증이 실패하였습니다. 다시 인증해주세요.");
-            logger.info("\n\n++ VerificationException: " + (message != null ? message : "인증이 실패하였습니다.") + " ++\n\n");
+            logger.info("\n\n++ VerificationException: Verification failed. Message: " + (message != null ? message : "Verification failed."));
         }
     }
 
-    // NotFoundException
     public static class NotFoundException extends RuntimeException {
         public NotFoundException(String message) {
             super(message != null && !message.isEmpty() ? message : "해당되는 정보를 찾을 수 없습니다. 입력내용을 확인하세요.");
-            logger.info("\n\n++ NotFoundException: " + (message != null ? message : "해당되는 정보를 찾을 수 없습니다.") + " ++\n\n");
+            logger.info("\n\n++ NotFoundException: No matching information found. Message: " + (message != null ? message : "No matching information found."));
         }
     }
 
-    // NoDataException
     public static class NoDataException extends RuntimeException {
         public NoDataException(String message) {
             super(message != null && !message.isEmpty() ? message : "해당되는 정보가 없습니다.");
-            logger.info("\n\n++ NoDataException: " + (message != null ? message : "해당되는 정보가 없습니다.") + " ++\n\n");
+            logger.info("\n\n++ NoDataException: No information available. Message: " + (message != null ? message : "No information available."));
         }
     }
-    
 
-    // BadRequestException
     public static class BadRequestException extends RuntimeException {
         public BadRequestException(String message) {
-            super(message != null && !message.isEmpty() ? message : "요청파라메터의 형식에 오류가 있습니다.");
-            logger.info("\n\n++ BadRequestException: " + (message != null ? message : "요청파라메터의 형식에 오류가 있습니다.") + " ++\n\n");
+            super(message != null && !message.isEmpty() ? message : "요청 파라메터의 형식에 오류가 있습니다.");
+            logger.info("\n\n++ BadRequestException: There is an error in the request parameters. Message: " + (message != null ? message : "There is an error in the request parameters."));
         }
     }
 
-    // ConflictException
     public static class ConflictException extends RuntimeException {
         public ConflictException(String message) {
             super(message != null && !message.isEmpty() ? message : "중복된 정보가 존재합니다.");
-            logger.info("\n\n++ ConflictException: " + (message != null ? message : "중복된 정보가 존재합니다.") + " ++\n\n");
+            logger.info("\n\n++ ConflictException: Conflicting information exists. Message: " + (message != null ? message : "Conflicting information exists."));
         }
     }
 
-    // PasswordMismatchException
     public static class PasswordMismatchException extends RuntimeException {
         public PasswordMismatchException(String message) {
             super(message != null && !message.isEmpty() ? message : "비밀번호가 일치하지 않습니다.");
-            logger.info("\n\n++ PasswordMismatchException: " + (message != null ? message : "비밀번호가 일치하지 않습니다.") + " ++\n\n");
+            logger.info("\n\n++ PasswordMismatchException: Password does not match. Message: " + (message != null ? message : "Password does not match."));
         }
     }
 }
-  

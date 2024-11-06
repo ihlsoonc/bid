@@ -42,6 +42,38 @@ public class BidService {
         }
     }
     
+    public String buildBidMessages(List<Map<String, Object>> bidList) {
+        StringBuilder messageBuilder = new StringBuilder();
+
+        for (Map<String, Object> bid : bidList) {
+            String seatNo = (String) bid.get("seat_no");
+            Object bidAmountObj = bid.get("bid_amount");
+
+            // bid_amount가 숫자일 수 있으므로 String으로 변환
+            String bidAmount = bidAmountObj != null ? bidAmountObj.toString() : "0";
+
+            messageBuilder.append("Seat No: ").append(seatNo)
+                          .append(", Bid Amount: ").append(bidAmount)
+                          .append("\n");
+        }
+
+        return messageBuilder.toString();
+    }
+    
+    public void getMyAwardedBids_FormatMessage(Map<String, Object> params) {
+        try {
+            List<Map<String, Object>> results =  bidMapper.getMyAwardedBids(params); 
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException(null);
+            } else {
+               String bidMessage = buildBidMessages(results);   
+            }
+        } catch (NoDataException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new DataAccessException(null,e);
+        }
+    }
     public List<Map<String, Object>> getMyBids(Map<String, Object> params) {
         try {
             List<Map<String, Object>> results =  bidMapper.getMyBids(params); 

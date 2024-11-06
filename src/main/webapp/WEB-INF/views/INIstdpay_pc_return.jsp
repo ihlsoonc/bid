@@ -62,8 +62,6 @@
                         <label>resultMsg</label>
                         <label>${resultMap.resultMsg}</label> 
                         <br/>
-                        <label>${resultMap.bidUpdateResults}</label> 
-                        <br/>
                         <label>tid</label>
                         <label>${resultMap.tid}</label> 
                         <br/>

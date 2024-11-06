@@ -55,6 +55,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleNoSuchAlgorithmException(NoSuchAlgorithmException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_IMPLEMENTED);
     }
+
+    @ExceptionHandler(NurigoException.class)
+    public ResponseEntity<String> handleNurigoException(NurigoException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(PgException.class)
+    public ResponseEntity<String> handlePgException(PgException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     // @ExceptionHandler(IllegalArgumentException.class)
     // public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
     //     return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);

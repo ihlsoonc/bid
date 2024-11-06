@@ -34,7 +34,7 @@
         ORDER BY
             CAST(p.seat_no AS UNSIGNED) ASC;
     </select>
-        <!-- 좌석번호별 입찰자 수와 최고 입찰 금액 조회 -->
+    <!-- 좌석번호별 입찰자 수와 최고 입찰 금액 조회 -->
     <select id="getAllBids" parameterType="hashmap" resultType="hashmap">
         SELECT 
             p.row_no,
@@ -58,8 +58,31 @@
             p.seat_price
         ORDER BY
             CAST(p.seat_no AS UNSIGNED) ASC;
+
     </select>
-            
+        <select id="getMyAwardedBids" parameterType="hashmap" resultType="hashmap">
+        SELECT 
+            b.seat_no,
+            b.bid_amount,
+            SUM(b.bid_amount) AS total_bid_amount,
+            m.match_name,
+            m.round_name,
+            m.pay_due_datetime,
+            u.username
+        FROM 
+            bids AS b
+        JOIN 
+            matchs AS m ON b.match_no = m.match_no
+        JOIN 
+            biduser AS u ON b.bid_telno = u.telno
+        WHERE 
+            b.bid_telno = #{telno}
+            AND b.match_no = #{matchNumber}
+            AND b.bid_won = 'Y'
+        GROUP BY 
+            b.seat_no;
+
+       </select>
     <update id="awardBids" parameterType="hashmap">
         UPDATE bids b
             JOIN (
@@ -92,7 +115,7 @@
             b.bid_telno = #{telno} AND
             b.match_no = #{matchNumber}
         ORDER BY
-            b.seat_no
+            b.bid_at
     </select>
     
     <!-- 사용자별 모든 입찰 조회 -->

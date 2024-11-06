@@ -36,6 +36,13 @@ public class KakaoAlimTalkController {
     @Autowired
     private OAuthTokenService oAuthTokenService;
     private static final RestTemplate restTemplate = null;
+    // #{user_name}님의 낙찰 내용을 알려드립니다.
+    // _________________________________
+    // #{bids_array}
+    // _________________________________
+    // 결제할 금액은 #{bid_total}입니다.
+    // 결제시한 : #{pay_Due}
+
 
     @PostMapping("/send-kakao-message")
     public ResponseEntity<String> sendKakaoMessage(@RequestBody Map<String, Object> requestData) {
@@ -44,7 +51,7 @@ public class KakaoAlimTalkController {
         // Authorization Token 및 헤더 설정
         // String accessToken = oAuthTokenService.getOAuthToken(clientId, clientSecret, baseUrl);
 
-        String accessToken = oAuthTokenService.getOAuthToken();
+        String accessToken = oAuthTokenService.getAccessToken();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("authorization", "Bearer " + accessToken);
@@ -79,6 +86,15 @@ public class KakaoAlimTalkController {
     }
 
 }
+
+// #{user_name}님의 낙찰 내용을 알려드립니다.
+// #{match_info}
+// _________________________________
+// #{bids_array}
+// _________________________________
+// 결제할 금액은 #{bid_total}입니다.
+// 결제시한 : #{pay_due}
+
     // @GetMapping("/sendMessage")
     // public String sendMessage(
     //         @RequestParam String clientId,

@@ -28,9 +28,16 @@ public class UserController {
     }
  
     // 사용자 정보 조회 (query로 조회)
-    @PostMapping("/getinfobyquery")
+    @PostMapping("/getinfo-byquery")
     public ResponseEntity<Map<String, Object>> getUserByQuery(@RequestBody HashMap<String, Object> request) {
         Map<String, Object> result = userService.getUserByQuery(request); 
+        return ResponseEntity.ok(result); 
+    }
+
+    // 사용자 정보 조회 (query로 조회)  : dupkey check를 위해 certification없이 조회함
+    @PostMapping("/getuser-bytelno")
+    public ResponseEntity<Map<String, Object>> getUserByTelno(@RequestBody HashMap<String, Object> request) {
+        Map<String, Object> result = userService.getUserByTelno(request); 
         return ResponseEntity.ok(result); 
     }
 

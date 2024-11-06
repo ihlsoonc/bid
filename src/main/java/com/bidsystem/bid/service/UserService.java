@@ -29,15 +29,16 @@ public class UserService {
     // 로그인 처리
     public Map<String, Object> login(Map<String, Object> request, HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
         try {
-            Map<String, Object> verifyResult = certificationService.verifyPassword(request);
+            Map<String, Object> certiResults = certificationService.verifyPassword(request);
             // 로그인 성공 시 세션 및 쿠키 처리
-            String telno = (String) verifyResult.get("telno");
-            String userId = (String) verifyResult.get("userid");
-            String userName = (String) verifyResult.get("username");
-            String userType = (String) verifyResult.get("usertype");
+            String userClass = (String) request.get("userClass");
+            String telno = (String) certiResults.get("telno");
+            String userId = (String) certiResults.get("userid");
+            String userName = (String) certiResults.get("username");
+            String userType = (String) certiResults.get("usertype");
 
             // 세션 설정
-            certificationService.setSessionAttributes(httpRequest.getSession(), userId, telno, userType, userName);
+            certificationService.setSessionAttributes(httpRequest.getSession(), userClass, userId, telno, userType, userName);
 
             // 쿠키 설정
             certificationService.setLoginCookie( httpRequest.getSession(),httpResponse);
@@ -71,12 +72,23 @@ public class UserService {
         }
     }
 
-    // pginterface호출함수 (password verification이 없음)
+    // pginterface 및 사용자 등록시 중복을 체크하기위해 호출 (password verification이 없음)
     public Map<String, Object> getUserByTelno(Map<String, Object> request) {
         try {
             request.put("queryType", "telno");
             request.put("query", request.get("telno"));
-            return userMapper.getUserByQuery(request);
+            Map<String, Object> results = userMapper.getUserByQuery(request);
+            if (results == null || results.isEmpty()) {
+                throw new NotFoundException(null);
+            }
+            // username과 useremail만 포함하는 새로운 Map 생성
+            Map<String, Object> filteredResults = new HashMap<>();
+            filteredResults.put("username", results.get("username"));
+            filteredResults.put("email", results.get("useremail"));
+
+            return filteredResults;
+        } catch (NotFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new ServerException(null,e);
         }

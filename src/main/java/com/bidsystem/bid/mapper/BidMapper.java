@@ -12,9 +12,13 @@ public interface BidMapper {
     List<Map<String, Object>> getMyLastBids(Map<String, Object> params);
     List<Map<String, Object>> getAllBids(Map<String, Object> params);
     
+    // id로 경기별 낙찰내용과 금액 조회
+    List<Map<String, Object>>  getMyAwardedBids(Map<String, Object> params);
+    
     // 최대 입찰 금액 조회
     Map<String, Object> getMaxBidAmount(Map<String, Object> params);
 
+    
     //입찰 제출
     int submitBid(Map<String, Object> params);
 

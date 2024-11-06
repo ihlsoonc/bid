@@ -25,13 +25,12 @@ public class CertificationService {
     private UserMapper userMapper;
 
     // 세션 변수 설정 함수 (userType이 null이 아니면 추가)
-    public void setSessionAttributes(HttpSession session, String userId, String telno, String userType, String userName) {
+    public void setSessionAttributes(HttpSession session, String userClass, String userId, String telno, String userType, String userName) {
+        session.setAttribute("userClass", userClass);
         session.setAttribute("userId", userId);
         session.setAttribute("telno", telno);
         session.setAttribute("userName", userName);
-        if (userType != null) {
-            session.setAttribute("userType", userType); // userType이 null이 아닐 경우에만 추가
-        }
+        session.setAttribute("userType", userType); // userType이 null이 아닐 경우에만 추가
     }
 
     // 쿠키 설정 함수
@@ -61,7 +60,7 @@ public class CertificationService {
     }
 
     // 세션에서 사용자 ID를 가져오는 공통 함수
-    public Map<String, Object> getSessionUserId(HttpSession session) {
+    public Map<String, Object> getSessionUser(HttpSession session) {
     Map<String, Object> response = new HashMap<>();
 
     try {
@@ -72,6 +71,7 @@ public class CertificationService {
         }
 
         // 세션에서 사용자 정보를 가져옴
+        String userClass = (String) session.getAttribute("userClass");
         String userId = (String) session.getAttribute("userId");
         String telno = (String) session.getAttribute("telno");
         String userType = (String) session.getAttribute("userType");
@@ -80,6 +80,7 @@ public class CertificationService {
         if (telno != null) {
             // 사용자 정보가 존재하면 성공 응답을 반환
             response.put("status", "success");
+            response.put("userClass", userClass);
             response.put("userId", userId);
             response.put("telno", telno);
             response.put("userType", userType);
@@ -124,6 +125,7 @@ public Map<String, Object> clearSession(HttpSession session, HttpServletResponse
 
 // 세션 복원 함수 request, requestBody, session,response
 public Map<String, Object> restoreSession(Map<String, Object> request, HttpServletRequest httpRequest, HttpSession session, HttpServletResponse httpResponse) {
+    String userClass = (String) request.get("userClass");
     String userId = (String) request.get("userId");
     String telno = (String) request.get("telno");
     String userType = (String) request.get("userType");
@@ -133,7 +135,8 @@ public Map<String, Object> restoreSession(Map<String, Object> request, HttpServl
         // 세션이 없으면 새로 생성
         session = httpRequest.getSession(true);
     }
-    setSessionAttributes( session,  userId,  telno,  userType,  userName);
+    setSessionAttributes( session, userClass,
+      userId,  telno,  userType,  userName);
     setLoginCookie(session, httpResponse);
 
     // 로그아웃 성공 응답 데이터 생성
@@ -156,6 +159,7 @@ public Map<String, Object> verifyPassword(Map<String, Object> request) throws Ex
         } else if (table.equals("admin")){
             results = adminMapper.getUserByQuery(request);
         } else {
+            System.out.println("Invalid table name"+table);
             throw new BadRequestException("잘못된 요청입니다. (TableName)");      
         }
         

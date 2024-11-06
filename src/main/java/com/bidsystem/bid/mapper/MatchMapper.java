@@ -16,8 +16,8 @@ public interface MatchMapper {
     // 모든 경기 정보 가져오기
     List<Map<String, Object>> getAllMatches(Map<String, Object> params);
 
-    // 사용자id가 생성한 경기 정보 가져오기
-    List<Map<String, Object>> getMatchesByUserId(Map<String, Object> params);
+    // 사용자id로 생성한 경기 정보 가져오기
+    List<Map<String, Object>> getMyMatches(Map<String, Object> params);
 
     // 승인된 경기 정보 가져오기
     List<Map<String, Object>> getAllApprovedMatches(Map<String, Object> params);

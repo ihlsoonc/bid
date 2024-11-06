@@ -22,9 +22,9 @@ public class SessionController {
 
     // 세션 복원
     // 세션에서 사용자 ID 가져오기
-    @GetMapping("/getuserid")
-    public Map<String, Object> getSessionUserId(HttpSession session) {
-        return certificationService.getSessionUserId(session);
+    @GetMapping("/get-session-user")
+    public Map<String, Object> getSessionUser(HttpSession session) {
+        return certificationService.getSessionUser(session);
     }
 
     @PostMapping("/restore-session")

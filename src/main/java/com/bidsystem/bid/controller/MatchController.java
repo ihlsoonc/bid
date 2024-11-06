@@ -36,6 +36,12 @@ public class MatchController {
         return ResponseEntity.ok(results); 
     }
 
+    @GetMapping("/getmy")
+    public ResponseEntity<List<Map<String, Object>>> getMyMatches(@RequestParam Map<String, Object> params) {
+        List<Map<String, Object>> results = matchService.getMyMatches(params); 
+        return ResponseEntity.ok(results); 
+    }
+
     // 승인된 경기 조회
     @GetMapping("/getallapproved")
     public ResponseEntity<List<Map<String, Object>>> getAllApprovedMatches(@RequestParam Map<String, Object> params) {
