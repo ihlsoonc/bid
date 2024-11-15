@@ -89,11 +89,11 @@ public class BidService {
         }
     }
     
-    public List<Map<String, Object>> getAllBids(Map<String, Object> params) {
+    public List<Map<String, Object>> getBidTallies(Map<String, Object> params) {
         try {
-            List<Map<String, Object>> results =  bidMapper.getAllBids(params); 
+            List<Map<String, Object>> results =  bidMapper.getBidTallies(params); 
             if (results == null || results.isEmpty()) {
-                throw new NoDataException("입찰된 내역이 없습니다.");
+                throw new NoDataException("입찰 내역이 없습니다.");
             } else {
                 return results;
             }
@@ -104,6 +104,34 @@ public class BidService {
         }
     }
     
+    public List<Map<String, Object>> getAllBids(Map<String, Object> params) {
+        try {
+            List<Map<String, Object>> results =  bidMapper.getAllBids(params); 
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException("입찰 내역이 없습니다.");
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new DataAccessException(null,e);
+        }
+    }
+    public List<Map<String, Object>> getHighestBids(Map<String, Object> params) {
+        try {
+            List<Map<String, Object>>  results =  bidMapper.getHighestBids(params); 
+            if (results == null || results.isEmpty()) {
+                throw new NoDataException("입찰 내역이 없습니다.");
+            } else {
+                return results;
+            }
+        } catch (NoDataException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new DataAccessException(null,e);
+        }
+    }
     public List<Map<String, Object>> getMyLastBids(Map<String, Object> params) {
         try {
             List<Map<String, Object>> results =  bidMapper.getMyLastBids(params); 

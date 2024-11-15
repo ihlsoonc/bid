@@ -31,7 +31,7 @@ public interface MatchMapper {
     int updateMatch(Map<String, Object> params);
     
     int updateMatchAwardStatus(Map<String, Object> params);
-
+    int updateMatchAlimtalkStatus(Map<String, Object> params);
     // 경기 승인
     int approveMatch(Map<String, Object> params);
 

@@ -60,7 +60,7 @@ public class SeatPriceService {
             int affectedRows = seatPriceMapper.deleteSeatPriceArray(params);
             if (affectedRows > 0) {
                 Map<String, Object> response = new HashMap<>();
-                response.put("message", affectedRows + "개의 정보가 갱신되었습니다.");
+                response.put("message", affectedRows + "개의 정보가 삭제되었습니다.");
                 return response;
             } else {
                 throw new ZeroAffectedRowException(null);

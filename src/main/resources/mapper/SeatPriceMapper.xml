@@ -33,14 +33,15 @@
     </insert>
 
 
-    <!-- 여러 좌석 정보 삭제 -->
-    <delete id="deleteSeatPriceArray" parameterType="hashmap">
-        DELETE FROM seatprice
-        WHERE match_no = #{match_no}
-        AND seat_no IN
-        <foreach collection="seatNoArray" item="seat" open="(" separator="," close=")">
-            #{seat}
-        </foreach>
-    </delete>
+<!-- 여러 좌석 정보 삭제 -->
+<delete id="deleteSeatPriceArray" parameterType="hashmap">
+    DELETE FROM seatprice
+    WHERE match_no = #{matchNumber}
+    AND seat_no IN
+    <foreach collection="seatPriceArray" item="seat" open="(" separator="," close=")">
+        #{seat.seat_no}
+    </foreach>
+</delete>
+
 
 </mapper>

@@ -60,7 +60,7 @@
             m.venue_cd = #{venueCd}
     </select>
 
-    <!-- 특정 유저의 경기 조회 -->
+    <!-- 특정 관리자가 생성한 경기 조회 -->
     <select id="getMyMatches" parameterType="hashmap" resultType="hashmap">
         SELECT 
             m.match_no, 
@@ -100,7 +100,7 @@
             m.bid_open_status,
             m.start_date, 
             m.start_time, 
-            m.end_etime, 
+            m.end_time, 
             m.is_bid_available, 
             m.filename_attached, 
             m.approved_by, 
@@ -167,11 +167,20 @@
         DELETE FROM matches WHERE match_no = #{matchNumber}
     </delete>
 
-    <!-- 경기 상태 업데이트 -->
+    <!-- 경기 상태 업데이트 : 낙찰완료 -->
     <update id="updateMatchAwardStatus" parameterType="hashmap">
         UPDATE matches
         SET bid_open_status = 'F'
         WHERE match_no = #{matchNumber};
     </update>
+    <!-- 경기 상태 업데이트 : 알림톡 보내기 -->
+    <update id="updateMatchAlimtalkStatus" parameterType="hashmap">
+        UPDATE matches
+        SET 
+            alimtalk_sent = 'Y',
+            alimtalk_sent_at = CURRENT_TIMESTAMP
+        WHERE 
+            match_no = #{matchNumber};
 
+    </update>
 </mapper>

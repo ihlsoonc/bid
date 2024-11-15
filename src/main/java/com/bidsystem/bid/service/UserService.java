@@ -29,26 +29,46 @@ public class UserService {
     // 로그인 처리
     public Map<String, Object> login(Map<String, Object> request, HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
         try {
+            
+            // 비밀번호 인증 단계
             Map<String, Object> certiResults = certificationService.verifyPassword(request);
-            // 로그인 성공 시 세션 및 쿠키 처리
+            
+            // 사용자 정보 설정 단계
             String userClass = (String) request.get("userClass");
             String telno = (String) certiResults.get("telno");
             String userId = (String) certiResults.get("userid");
             String userName = (String) certiResults.get("username");
             String userType = (String) certiResults.get("usertype");
-
-            // 세션 설정
+            
+            // 세션 속성 설정 단계
             certificationService.setSessionAttributes(httpRequest.getSession(), userClass, userId, telno, userType, userName);
-
-            // 쿠키 설정
-            certificationService.setLoginCookie( httpRequest.getSession(),httpResponse);
-
-
+            
+            // 로그인 쿠키 설정 단계
+            certificationService.setLoginCookie(httpRequest.getSession(), httpResponse);
+            
+            // 응답 생성 단계
             Map<String, Object> response = new HashMap<>();
             response.put("message", "로그인 성공");
             response.put("userName", userName);
             response.put("userType", userType);
+            
             return response;
+        } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ServerException(null, e);
+        }
+    }
+
+    // 사용자 정보 조회
+    public Map<String, Object> getUserByQueryAndPassword(Map<String, Object> request) {
+        try {
+            Map<String, Object> results = certificationService.verifyPassword(request);
+            if (results == null || results.isEmpty()) {
+                throw new NotFoundException(null);
+            } else {
+                return results;
+            }
         } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
             throw e;
         } catch (Exception e) {
@@ -59,7 +79,7 @@ public class UserService {
     // 사용자 정보 조회
     public Map<String, Object> getUserByQuery(Map<String, Object> request) {
         try {
-            Map<String, Object> results = certificationService.verifyPassword(request);
+            Map<String, Object> results = userMapper.getUserByQuery(request);
             if (results == null || results.isEmpty()) {
                 throw new NotFoundException(null);
             } else {
@@ -83,9 +103,10 @@ public class UserService {
             }
             // username과 useremail만 포함하는 새로운 Map 생성
             Map<String, Object> filteredResults = new HashMap<>();
+            filteredResults.put("telno", results.get("telno"));
             filteredResults.put("username", results.get("username"));
-            filteredResults.put("email", results.get("useremail"));
-
+            filteredResults.put("email", results.get("email"));
+            System.out.println("\n\n++++++++++++++++++++++++"+filteredResults+"\n\n");
             return filteredResults;
         } catch (NotFoundException e) {
             throw e;
@@ -99,7 +120,7 @@ public class UserService {
         try {
             String table = (String) request.get("table");
             String inputPassword = (String) request.get("password");
-            System.out.println("\n\n++++++++++++++++++++++++"+request+"\n\n");
+
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(inputPassword);
             request.put("newPassword", encodedPassword);

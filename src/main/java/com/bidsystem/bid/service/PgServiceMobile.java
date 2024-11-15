@@ -49,6 +49,7 @@ public class PgServiceMobile {
             payRequest.addObject("P_INI_PAYMENT", "CARD");       
             payRequest.addObject("P_AMT", request.get("price"));          //from client
             payRequest.addObject("P_GOODS", request.get("goodName"));    //from client
+            
             payRequest.addObject("P_UNAME", userInfo.get("username"));  //from db query
             payRequest.addObject("P_MOBILE", userInfo.get("telno"));      //from db query
             payRequest.addObject("P_EMAIL", userInfo.get("email"));    //from db query

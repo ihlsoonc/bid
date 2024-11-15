@@ -17,20 +17,20 @@ public class BidController {
     private BidService bidService;
 
     // 좌석 입찰 정보를 가져오기
-    @PostMapping("/getbyseatarray")
+    @PostMapping("/get-by-seatarray")
     public ResponseEntity<List<Map<String, Object>>> getBidsBySeatArray(@RequestBody Map<String, Object> params) {
         List<Map<String, Object>> results = bidService.getBidsBySeatArray(params); 
         return ResponseEntity.ok(results); 
     }
 
     // 사용자의 모든 입찰 조회
-    @GetMapping("/getmybids")
+    @GetMapping("/get-mybids")
     public ResponseEntity<List<Map<String, Object>>> getMyBids(@RequestParam Map<String, Object> params) {
         List<Map<String, Object>> results = bidService.getMyBids(params); 
         return ResponseEntity.ok(results); 
     }
 
-    @GetMapping("/getmylastbids")
+    @GetMapping("/get-mylastbids")
     public ResponseEntity<List<Map<String, Object>>> getMyLastBids(@RequestParam Map<String, Object> params) {
         List<Map<String, Object>> results = bidService.getMyLastBids(params); 
         return ResponseEntity.ok(results); 
@@ -38,7 +38,20 @@ public class BidController {
 
     
     // 사용자의 모든 입찰 조회
-    @GetMapping("/getallbids")
+    @GetMapping("/get-bid-tallies")
+    public ResponseEntity<List<Map<String, Object>>> getBidTallies(@RequestParam Map<String, Object> params) {
+        List<Map<String, Object>> results = bidService.getBidTallies(params); 
+        return ResponseEntity.ok(results); 
+    }
+    // 사용자의 모든 입찰 조회
+    @GetMapping("/get-highest-bids")
+    public ResponseEntity<List<Map<String, Object>>>  getHighestBids(@RequestParam Map<String, Object> params) {
+        List<Map<String, Object>> results = bidService.getHighestBids(params); 
+        return ResponseEntity.ok(results); 
+    }
+
+    // 사용자의 모든 입찰 조회
+    @GetMapping("/get-all-bids")
     public ResponseEntity<List<Map<String, Object>>> getAllBids(@RequestParam Map<String, Object> params) {
         List<Map<String, Object>> results = bidService.getAllBids(params); 
         return ResponseEntity.ok(results); 
