@@ -1,8 +1,8 @@
 package com.bidsystem.bid.service;
 
 import com.bidsystem.bid.mapper.MatchMapper;
-
 import com.bidsystem.bid.service.ExceptionService.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,10 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Service
 public class MatchService {
@@ -23,14 +23,14 @@ public class MatchService {
     private static final Logger logger = LoggerFactory.getLogger(BidService.class);
 
     // 경기 비드 상태 조회
-    public Map<String, Object> getBidStatus(Map<String, Object> params) {
+    public Map<String, Object> getMatchBidStatus(Map<String, Object> params) {
         try {
-            Map<String, Object> results = matchMapper.getBidStatus(params); 
+            Map<String, Object> results = matchMapper.getMatchBidStatus(params); 
 
             if (results == null || results.isEmpty()) {
                 throw new NotFoundException(null);
             } 
-            String bidStatusCode = getStatusCode(results);
+            String bidStatusCode = getBidStatusCode(results);
             Map<String, Object> response = new HashMap<>(results);
             response.put("bidStatusCode", bidStatusCode);
             return response;
@@ -40,7 +40,9 @@ public class MatchService {
             throw new DataAccessException( null,e);
         }
     }
-    public String getStatusCode(Map<String, Object> results) {
+
+    // 입찰개시 및 종료 일시로 입찰상태 코드 생성하는 함수
+    public String getBidStatusCode(Map<String, Object> results) {
         String bidStatusCode = "I"; // 기본값: 데이터가 없을 경우
     
         // 'bid_open_datetime'과 'bid_close_datetime'을 Timestamp로 받아서 LocalDateTime으로 변환
@@ -56,13 +58,13 @@ public class MatchService {
         // bid_open_status가 'F'이면 F로 설정, 입찰 개시/종료 시간으로 결정
         String bidOpenStatus = (String) results.get("bid_open_status");
         if ("F".equals(bidOpenStatus)) {
-            bidStatusCode = "F"; // 'F' 상태
+            bidStatusCode = "F"; // 낙찰완료 상태 
         } else {
             // 현재 시간과 비교하여 상태 코드 설정
             if (now.isBefore(openDateTime)) {
                 bidStatusCode = "N"; // 입찰 시작 전
             } else if (now.isAfter(closeDateTime)) {
-                bidStatusCode = "C"; // 입찰 종료 후
+                bidStatusCode = "C"; // 입찰 종료 후 낙찰 처리 전
             } else {
                 bidStatusCode = "O"; // 입찰 진행 중
             }
@@ -112,11 +114,11 @@ public class MatchService {
         }
     }
 
-    // 모든 승인된 경기 조회 (사용자용, (venucd에 해당되는))
+    // 모든 승인된 경기 조회 (사용자용, venucd에 해당되는)
     public List<Map<String, Object>> getAllApprovedMatches(Map<String, Object> params) {
         try {
             List<Map<String, Object>> results = null;
-            results =  matchMapper.getAllMatches(params);
+            results =  matchMapper.getAllApprovedMatches(params);
             if (results == null || results.isEmpty()) {
                 throw new NoDataException(null);
             } else {
@@ -145,6 +147,7 @@ public class MatchService {
             if (affectedRows > 0) {
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", "성공적으로 등록되었습니다.");
+                response.put("newMatchNumber", newMatchNo);
                 return response;
             } else {
                 throw new ZeroAffectedRowException(null);

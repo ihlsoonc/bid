@@ -11,7 +11,7 @@ public interface MatchMapper {
     Map<String, Object> getMatchById(Map<String, Object> params);
     
     // 비드 개시.종료 및 입찰 가능상태 조회
-    Map<String, Object> getBidStatus(Map<String, Object> params);
+    Map<String, Object> getMatchBidStatus(Map<String, Object> params);
 
     // 모든 경기 정보 가져오기
     List<Map<String, Object>> getAllMatches(Map<String, Object> params);
@@ -22,16 +22,21 @@ public interface MatchMapper {
     // 승인된 경기 정보 가져오기
     List<Map<String, Object>> getAllApprovedMatches(Map<String, Object> params);
 
-    // 경기 추가
-    int addMatch(Map<String, Object> params);
-    
     // 마지막 경기 번호
     int getMaxMatchNo();
+
+    // 경기 추가
+    int addMatch(Map<String, Object> params);
+
     // 경기 수정
     int updateMatch(Map<String, Object> params);
     
+    // 낙찰 처리 flag=F set
     int updateMatchAwardStatus(Map<String, Object> params);
+
+     // 알림톡 전송 flag=Y set
     int updateMatchAlimtalkStatus(Map<String, Object> params);
+
     // 경기 승인
     int approveMatch(Map<String, Object> params);
 

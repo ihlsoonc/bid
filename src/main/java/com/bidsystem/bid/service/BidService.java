@@ -42,38 +42,7 @@ public class BidService {
         }
     }
     
-    public String buildBidMessages(List<Map<String, Object>> bidList) {
-        StringBuilder messageBuilder = new StringBuilder();
-
-        for (Map<String, Object> bid : bidList) {
-            String seatNo = (String) bid.get("seat_no");
-            Object bidAmountObj = bid.get("bid_amount");
-
-            // bid_amount가 숫자일 수 있으므로 String으로 변환
-            String bidAmount = bidAmountObj != null ? bidAmountObj.toString() : "0";
-
-            messageBuilder.append("Seat No: ").append(seatNo)
-                          .append(", Bid Amount: ").append(bidAmount)
-                          .append("\n");
-        }
-
-        return messageBuilder.toString();
-    }
     
-    public void getMyAwardedBids_FormatMessage(Map<String, Object> params) {
-        try {
-            List<Map<String, Object>> results =  bidMapper.getMyAwardedBids(params); 
-            if (results == null || results.isEmpty()) {
-                throw new NoDataException(null);
-            } else {
-               String bidMessage = buildBidMessages(results);   
-            }
-        } catch (NoDataException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new DataAccessException(null,e);
-        }
-    }
     public List<Map<String, Object>> getMyBids(Map<String, Object> params) {
         try {
             List<Map<String, Object>> results =  bidMapper.getMyBids(params); 
@@ -118,6 +87,7 @@ public class BidService {
             throw new DataAccessException(null,e);
         }
     }
+
     public List<Map<String, Object>> getHighestBids(Map<String, Object> params) {
         try {
             List<Map<String, Object>>  results =  bidMapper.getHighestBids(params); 
@@ -132,6 +102,7 @@ public class BidService {
             throw new DataAccessException(null,e);
         }
     }
+
     public List<Map<String, Object>> getMyLastBids(Map<String, Object> params) {
         try {
             List<Map<String, Object>> results =  bidMapper.getMyLastBids(params); 
@@ -163,23 +134,23 @@ public class BidService {
             try {
                 bidAmount = Integer.parseInt((String) params.get("bidAmount"));
             } catch (NumberFormatException e) {
-                throw new java.lang.IllegalArgumentException("bidAmount 값이 유효한 숫자가 아닙니다.");
+                throw new java.lang.IllegalArgumentException("오류 : bidAmount값 무효.");
             }
         }
         if (bidAmount == null) {
-            throw new java.lang.IllegalArgumentException("입찰 금액(bidAmount)이 null이거나 유효하지 않습니다.");
+            throw new java.lang.IllegalArgumentException("오류 : BidAmount 값이 null입니다.");
         }
 
         // 거래 ID 추출 및 검증
         String tid = (String) params.get("tid");
         if (tid == null) {
-            throw new java.lang.IllegalArgumentException("거래 ID(tid)가 null입니다.");
+            throw new java.lang.IllegalArgumentException("시스템 오류 : tid값이 null입니다.");
         }
 
         // 결제 방법 추출 및 검증
         String payMethod = (String) params.get("payMethod");
         if (payMethod == null) {
-            throw new java.lang.IllegalArgumentException("결제 방법(payMethod)이 null입니다.");
+            throw new java.lang.IllegalArgumentException("시스템 오류 : payMethod값이 null입니다.");
         }
   
         try {
@@ -189,10 +160,11 @@ public class BidService {
                 "tid", tid,
                 "payMethod", payMethod
             );
-
+            
+            // 낙찰된 건에 대해 지불방법과 거래 ID 갱신 
             int rowsaffected = bidMapper.updatePayment(updateParams);
             if (rowsaffected  == 0) {
-                throw new NotFoundException("결제정보를 갱신하기 위한 입찰 데이터를 찾을 수 없습니다.");
+                throw new NotFoundException("Error in finding bids data for updating payment infomation");
             }
             else {
                 Map<String, Object> response = new HashMap<>();
@@ -263,6 +235,7 @@ public class BidService {
                         throw new NumberFormatException();
                     }
                 }
+                
                 //해당 seatNo의 현재 시점의 최고 입찰금액보다 금액이 크지 않으면 등록 실패, 아니면 성공으로 반환
                 if (bidAmount <= maxBidAmount) {
                     Map<String, Object> resultEach = new HashMap<>();

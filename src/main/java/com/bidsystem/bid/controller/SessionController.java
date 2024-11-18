@@ -20,19 +20,18 @@ public class SessionController {
     @Autowired
     private CertificationService certificationService;
 
-    // 세션 복원
     // 세션에서 사용자 ID 가져오기
     @GetMapping("/get-session-user")
     public Map<String, Object> getSessionUser(HttpSession session) {
         return certificationService.getSessionUser(session);
     }
-
+    
+    // 세션 복원
     @PostMapping("/restore-session")
         public ResponseEntity<Map<String, Object>> restoreSession(
             @RequestBody Map<String, Object> request, HttpServletRequest httpRequest, HttpSession session, HttpServletResponse httpResponse) {
                 Map<String, Object> response =  certificationService.restoreSession(request, httpRequest, session, httpResponse);
                 return ResponseEntity.ok(response); // 200 OK 응답 반환
-
     }
 
     // 로그아웃 처리

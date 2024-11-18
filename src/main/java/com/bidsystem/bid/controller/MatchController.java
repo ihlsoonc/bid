@@ -17,8 +17,8 @@ public class MatchController {
 
     // 입찰 상태 조회
     @GetMapping("/status")
-    public ResponseEntity<Map<String, Object>> getBidStatus(@RequestParam Map<String, Object> params) {
-        Map<String, Object> results = matchService.getBidStatus(params); 
+    public ResponseEntity<Map<String, Object>> getMatchBidStatus(@RequestParam Map<String, Object> params) {
+        Map<String, Object> results = matchService.getMatchBidStatus(params); 
         return ResponseEntity.ok(results); 
     }
 
@@ -36,6 +36,7 @@ public class MatchController {
         return ResponseEntity.ok(results); 
     }
 
+    // 사용자가 등록한 경기 조회
     @GetMapping("/getmy")
     public ResponseEntity<List<Map<String, Object>>> getMyMatches(@RequestParam Map<String, Object> params) {
         List<Map<String, Object>> results = matchService.getMyMatches(params); 

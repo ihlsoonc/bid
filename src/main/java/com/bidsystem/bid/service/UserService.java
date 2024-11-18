@@ -67,7 +67,13 @@ public class UserService {
             if (results == null || results.isEmpty()) {
                 throw new NotFoundException(null);
             } else {
-                return results;
+                // 패스워드를 제외한 새로운 Map 생성
+                Map<String, Object> filteredResults = new HashMap<>();
+                filteredResults.put("telno", results.get("telno"));
+                filteredResults.put("username", results.get("username"));
+                filteredResults.put("email", results.get("email"));
+                filteredResults.put("userType", results.get("userType"));
+                return filteredResults;
             }
         } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
             throw e;
@@ -76,14 +82,31 @@ public class UserService {
         }
     }
     
-    // 사용자 정보 조회
     public Map<String, Object> getUserByQuery(Map<String, Object> request) {
+        String table = (String) request.get("table");
+        Map<String, Object> results;
+        if (table == null || table == "") {
+            throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
+        }
         try {
-            Map<String, Object> results = userMapper.getUserByQuery(request);
+            if (table.equals("user")) {
+                results = userMapper.getUserByQuery(request);
+            } else if (table.equals("admin")) {
+                results = adminMapper.getUserByQuery(request);
+            } else {
+                throw new BadRequestException("오류 : Table 파라메터 : "+table);       
+            }
+
             if (results == null || results.isEmpty()) {
                 throw new NotFoundException(null);
             } else {
-                return results;
+                // 패스워드를 제외한 새로운 Map 생성
+                Map<String, Object> filteredResults = new HashMap<>();
+                filteredResults.put("telno", results.get("telno"));
+                filteredResults.put("username", results.get("username"));
+                filteredResults.put("email", results.get("email"));
+                filteredResults.put("userType", results.get("userType"));
+                return filteredResults;
             }
         } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
             throw e;
@@ -92,35 +115,68 @@ public class UserService {
         }
     }
 
-    // pginterface 및 사용자 등록시 중복을 체크하기위해 호출 (password verification이 없음)
-    public Map<String, Object> getUserByTelno(Map<String, Object> request) {
+    // 사용자 등록 및 수정시 이메일 중복을 체크하기위해 호출 
+    public Map<String, Object> getEmailCount(Map<String, Object> request) {
+        // 요청에서 테이블 이름 가져오기
+        String table = (String) request.get("table");
+        if (table == null || table == "") {
+            throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
+        }
+        
+        Map<String, Object> results;
+    
         try {
-            request.put("queryType", "telno");
-            request.put("query", request.get("telno"));
-            Map<String, Object> results = userMapper.getUserByQuery(request);
-            if (results == null || results.isEmpty()) {
-                throw new NotFoundException(null);
+            // 사용자 또는 관리자 테이블에서 정보 가져오기
+            if (table.equals("user")) {
+                results = userMapper.getEmailCount(request);
+            } else if (table.equals("admin")) {
+                results = adminMapper.getEmailCount(request);
+            } else {
+                throw new BadRequestException("오류 : Table 파라메터 : "+table);      
             }
-            // username과 useremail만 포함하는 새로운 Map 생성
-            Map<String, Object> filteredResults = new HashMap<>();
-            filteredResults.put("telno", results.get("telno"));
-            filteredResults.put("username", results.get("username"));
-            filteredResults.put("email", results.get("email"));
-            System.out.println("\n\n++++++++++++++++++++++++"+filteredResults+"\n\n");
-            return filteredResults;
-        } catch (NotFoundException e) {
+            return results;
+        } catch (BadRequestException e) {
             throw e;
         } catch (Exception e) {
-            throw new ServerException(null,e);
+            throw new DataAccessException(null, e);
         }
-    }
+    }    
+    
+    // 사용자 등록 및 수정시 이메일 중복을 체크하기위해 호출 
+    public Map<String, Object> getTelnoCount(Map<String, Object> request) {
+        // 요청에서 테이블 이름 가져오기
+        String table = (String) request.get("table");
+        if (table == null || table == "") {
+            throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
+        }
+        
+        Map<String, Object> results;
+    
+        try {
+            // 사용자 또는 관리자 테이블에서 정보 가져오기
+            if (table.equals("user")) {
+                results = userMapper.getTelnoCount(request);
+            } else if (table.equals("admin")) {
+                results = adminMapper.getTelnoCount(request);
+            } else {
+                throw new BadRequestException("오류 : Table 파라메터 : "+table);      
+            }
+            return results;
+        } catch (BadRequestException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new DataAccessException(null, e);
+        }
+    }   
 
     // 비밀번호 변경
     public Map<String, Object> changePassword(Map<String, Object> request) {
         try {
             String table = (String) request.get("table");
+            if (table == null || table == "") {
+                throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
+            }
             String inputPassword = (String) request.get("password");
-
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(inputPassword);
             request.put("newPassword", encodedPassword);
@@ -137,7 +193,7 @@ public class UserService {
                 response.put("message", "성공적으로 수행되었습니다.");
                 return response;
             } else {
-                throw new ZeroAffectedRowException("작업이 처리되지 않았습니다.");
+                throw new ZeroAffectedRowException("오류 : 갱신된 행이 없습니다.");
             }
         } catch (NotFoundException e) {
             throw new NotFoundException(null);
@@ -150,18 +206,21 @@ public class UserService {
     public Map<String, Object> registerUser(Map<String, Object> request) {
         try {
             String table = (String) request.get("table");
+            if (table == null || table == "") {
+                throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
+            }
             String password = (String) request.get("password");
-
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(password);
             request.put("password", encodedPassword);
+            
             int affectedRows = 0;
             if ("user".equals(table)) {
                 affectedRows =  userMapper.registerUser(request);
             } else if ("admin".equals(table)) {
                 affectedRows =  adminMapper.registerUser(request);
             } else {
-                throw new BadRequestException(null);
+                throw new BadRequestException("오류 : Table 파라메터 : "+table);     
             }
             if (affectedRows > 0) {
                 Map<String, Object> response = new HashMap<>();
@@ -185,13 +244,16 @@ public class UserService {
     public Map<String, Object> updateUser(Map<String, Object> request) {
         try {
             String table = (String) request.get("table");
+            if (table == null || table == "") {
+                throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
+            }
             int affectedRows = 0;
             if ("user".equals(table)) {
                 affectedRows =  userMapper.updateUser(request);
             } else if ("admin".equals(table)) {
                 affectedRows =  adminMapper.updateUser(request);
             } else {
-                throw new BadRequestException("tableName정보 parameter 오류입니다.");
+                throw new BadRequestException("오류 : Table 파라메터 : "+table);     
             }
             if (affectedRows > 0) {
                 Map<String, Object> response = new HashMap<>();

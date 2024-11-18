@@ -1,10 +1,8 @@
 package com.bidsystem.bid.controller;
-
 import com.bidsystem.bid.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +25,7 @@ public class UserController {
         return ResponseEntity.ok(result); 
     }
  
-    // 사용자 정보 조회 (query로 조회)
+    // 사용자 정보 조회 (query로 조회 : query값과 queryType(telno, userid, email)을 파라메터로 함)
     @PostMapping("/getinfo-byquery")
     public ResponseEntity<Map<String, Object>> getUserByQuery(@RequestBody HashMap<String, Object> request) {
         Map<String, Object> result = userService.getUserByQuery(request); 
@@ -35,17 +33,24 @@ public class UserController {
     }
 
      
-    // 사용자 정보 조회 (query로 조회)
+    // 사용자 정보 조회 (query로 조회는 동일하나 password verification이 있음)
     @PostMapping("/getinfo-byquery-and-password")
     public ResponseEntity<Map<String, Object>> getUserByQueryAndPassword(@RequestBody HashMap<String, Object> request) {
         Map<String, Object> result = userService.getUserByQueryAndPassword(request); 
         return ResponseEntity.ok(result); 
     }
 
-    // 사용자 정보 조회 (query로 조회)  : dupkey check를 위해 certification없이 조회함
-    @PostMapping("/getuser-bytelno")
-    public ResponseEntity<Map<String, Object>> getUserByTelno(@RequestBody HashMap<String, Object> request) {
-        Map<String, Object> result = userService.getUserByTelno(request); 
+    // 중복확인을 위한 email count
+    @PostMapping("/get-email-count")
+    public ResponseEntity<Map<String, Object>> getEmailCount(@RequestBody HashMap<String, Object> request) {
+        Map<String, Object> result = userService.getEmailCount(request); 
+        return ResponseEntity.ok(result); 
+    }
+
+    // 중복확인을 위한 telno count
+    @PostMapping("/get-telno-count")
+    public ResponseEntity<Map<String, Object>> getTelnoCount(@RequestBody HashMap<String, Object> request) {
+        Map<String, Object> result = userService.getTelnoCount(request); 
         return ResponseEntity.ok(result); 
     }
 

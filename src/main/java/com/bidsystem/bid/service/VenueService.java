@@ -3,8 +3,6 @@ package com.bidsystem.bid.service;
 import com.bidsystem.bid.service.ExceptionService.*;
 import com.bidsystem.bid.mapper.VenueMapper;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +15,6 @@ public class VenueService {
 
     @Autowired
     private VenueMapper venueMapper;
-    private static final Logger logger = LoggerFactory.getLogger(BidService.class);
-
 
     // 특정 경기장 조회
     public Map<String, Object> getVenueByCode(Map<String, Object> params) {
@@ -65,7 +61,7 @@ public class VenueService {
         } catch (ZeroAffectedRowException e) {
             throw e;
 
-            //DUPKEY를 catch하기 위함 이렇게 하지 않으면 DataAccessException으로 catch됨
+        //DUPKEY를 catch하기 위함 정의하지 않으면 DataAccessException으로 catch됨
         } catch (org.springframework.dao.DataAccessException e) { 
             if (e instanceof org.springframework.dao.DuplicateKeyException) {       
                 throw new DuplicateKeyException("중복된 정보입니다. 입력 내용을 확인하세요.");

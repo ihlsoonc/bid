@@ -15,7 +15,7 @@ public class BidApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BidApplication.class, args);
-        logger.info("\n\n---------------------------- BidApplication started -------------------------------------\n");
+        logger.info("\n\n---------------------------- BidApplication started ---------------------------\n");
     }
 
     //"https://stgstdpay.inicis.com"
@@ -32,7 +32,7 @@ public class BidApplication {
                         .allowedHeaders("*")
                         .allowCredentials(true);
                 // CORS 설정 로깅
-                logger.info("\n\n==================== BidApplication CORS configuration applied. ====================\n");
+                logger.info("\n\n================ BidApplication.java CORS configuration applied. \n");
         };
     };
     }

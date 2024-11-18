@@ -6,10 +6,9 @@
 <mapper namespace="com.bidsystem.bid.mapper.MatchMapper">
 
     <!-- 입찰 상태 조회 -->
-    <select id="getBidStatus" parameterType="hashmap" resultType="hashmap">
+    <select id="getMatchBidStatus" parameterType="hashmap" resultType="hashmap">
         SELECT
             m.match_no,
-            v.venue_name,
             m.bid_close_datetime,
             m.bid_open_datetime,
             m.bid_open_status,
@@ -18,7 +17,9 @@
             m.end_time,
             m.match_name,
             m.round,
-            m.start_datetime
+            m.start_datetime,
+            m.alimtalk_sent,
+            v.venue_name
         FROM
             matches AS m
         JOIN venue_code v ON m.venue_cd = v.venue_cd
@@ -122,15 +123,19 @@
     </select>
 
     <!-- 경기 추가 -->
-    <insert id="addMatch" parameterType="hashmap">
-        INSERT INTO matches (
-            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
-            is_bid_available, filename_attached, created_by, created_at
-        ) 
-        VALUES (
-            #{matchNumber}, #{venueCd}, #{matchName}, #{round}, #{startDate}, #{startTime}, #{endTime}, #{bidOpenTime},#{bidCloseTime},
-            #{isBidAvailable}, #{fileName}, #{telno}, CURRENT_TIMESTAMP
-        )
+    <insert id="addMatch" parameterType="map">
+    INSERT INTO matches (
+        match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
+        is_bid_available, filename_attached, created_by, created_at
+    )
+    VALUES (
+        #{matchNumber}, #{venueCd}, #{matchName}, #{round}, #{startDate}, #{startTime}, #{endTime}, 
+        <if test="bidOpenTime != '' and bidOpenTime != null">#{bidOpenTime}</if>
+        <if test="bidOpenTime == '' or bidOpenTime == null">null</if>,
+        <if test="bidCloseTime != '' and bidCloseTime != null">#{bidCloseTime}</if>
+        <if test="bidCloseTime == '' or bidCloseTime == null">null</if>,
+        #{isBidAvailable}, #{fileName}, #{telno}, CURRENT_TIMESTAMP
+    )
     </insert>
     
     <!-- 경기 수정 -->

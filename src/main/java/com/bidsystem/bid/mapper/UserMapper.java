@@ -5,9 +5,15 @@ import java.util.Map;
 @Mapper
 public interface UserMapper {
 
-    // 사용자 정보 조회 (ID 또는 전화번호로)
+    // 사용자 정보 조회 (ID, 전화번호, 이메일 등)
     Map<String, Object> getUserByQuery(Map<String, Object> request);
 
+    // 이메일 건수 확인(중복확인 용)
+    Map<String, Object> getEmailCount(Map<String, Object> request);
+
+    // 전화번호 건수 확인(중복확인 용)
+    Map<String, Object> getTelnoCount(Map<String, Object> request);
+    
     // 사용자 등록
     int registerUser(Map<String, Object> request);
 

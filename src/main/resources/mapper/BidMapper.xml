@@ -116,7 +116,7 @@
 
     </select>
 
-    <select id="getMyAwardedBids" parameterType="hashmap" resultType="hashmap">
+    <select id="getAwardedBidsByMatch" parameterType="hashmap" resultType="hashmap">
         SELECT 
             b.match_no,
             b.bid_telno,

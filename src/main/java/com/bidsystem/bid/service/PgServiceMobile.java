@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class PgServiceMobile {
@@ -35,55 +34,70 @@ public class PgServiceMobile {
     //결제 요청
     public ModelAndView pgStartMobile(Map<String, Object> request) {
         try {
-            pgInterfaceCommon.validateRequestParameters(request);  // 전화번호 유효성 검사
-            Map<String, Object> userInfo = userService.getUserByTelno(request);
+            // 전화번호 유효성 검사
+            pgInterfaceCommon.validateRequestParameters(request); 
 
+            //결제요청에 필요한 사용자 DB정보 요청
+            request.put("table", "user");
+            request.put("queryType", "telno");
+            request.put("query", request.get("telno"));
+            Map<String, Object> userInfo = userService.getUserByQuery(request);
             if (userInfo == null || userInfo.isEmpty()) {
                 throw new NotFoundException("User query by telno failed in pgStartMobile");
             }
 
-            String randomOID = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 16);
+            //oid를 MID와 timestamp로 unique하게 구성
+            String timestamp = Long.toString(System.currentTimeMillis());
+            String oid = PgParams.MID + "_" + timestamp;
     
-            // P_OID 값으로 추가
+            // 요청 전문 구성
             ModelAndView payRequest = new ModelAndView();
             payRequest.addObject("P_INI_PAYMENT", "CARD");       
-            payRequest.addObject("P_AMT", request.get("price"));          //from client
-            payRequest.addObject("P_GOODS", request.get("goodName"));    //from client
+            payRequest.addObject("P_AMT", request.get("price"));          // client request정보에서
+            payRequest.addObject("P_GOODS", request.get("goodName"));    // client request정보에서
             
-            payRequest.addObject("P_UNAME", userInfo.get("username"));  //from db query
-            payRequest.addObject("P_MOBILE", userInfo.get("telno"));      //from db query
-            payRequest.addObject("P_EMAIL", userInfo.get("email"));    //from db query
+            payRequest.addObject("P_UNAME", userInfo.get("username"));  // 사용자 DB정보
+            payRequest.addObject("P_MOBILE", userInfo.get("telno"));    // 사용자 DB정보
+            payRequest.addObject("P_EMAIL", userInfo.get("email"));    // 사용자 DB정보
             payRequest.addObject("P_NEXT_URL", Urls.RETURN_MOBILE);
-            payRequest.addObject("P_NOTI_URL", "");   //가상계좌입금통보 URL 가상계좌 결제 시 필수
-            payRequest.addObject("P_HPP_METHOD", "1"); //휴대폰결제 상품유형 [1:컨텐츠, 2:실물]
+            payRequest.addObject("P_NOTI_URL", "");   // 가상계좌입금통보 URL 가상계좌 결제 시 필수
+            payRequest.addObject("P_HPP_METHOD", "1"); // 휴대폰결제 상품유형 [1:컨텐츠, 2:실물]
             payRequest.addObject("P_MID", PgParams.MID);
-            payRequest.addObject("P_OID", randomOID); 
+            payRequest.addObject("P_OID", oid); 
             payRequest.setViewName(Views.REQUEST_MOBILE);
             Map<String, Object> modelMap = payRequest.getModel();
-            paymentMapper.saveRequest(modelMap);            // 결제 요청 데이터를 DB에
+
+            // 결제 요청 정보를 payments table 에 기록     
+            paymentMapper.saveMobileRequest(modelMap);
+
+            // 결제창 호출을 위한 JSP화면 호출        
             return payRequest;
 
         } catch (Exception e) {
-            throw new PgException("pg start중  오류가 발생하였습니다.", e);
+            throw new PgException("Error in pgStart Mobile.", e);
         }
         
     }
 
-    //승인 요청
+    //결제요청 응답 수신 및 승인 요청
     public ModelAndView pgReturnMobile(String request) {
+
+        // URL 인코딩된 문자열을 Map<String, String>으로 변환
         Map<String, String> params;
         try{
-            params = pgInterfaceCommon.parseQueryString(request);      // URL 인코딩된 문자열을 Map<String, String>으로 변환
+            params = pgInterfaceCommon.parseQueryString(request);      
         } catch (Exception e) {
-            throw new UnsupportedEncodingException("Parsing error in pgReturnMobile.", e);
+            throw new UnsupportedEncodingException("Error in parging querysting in pgReturn Mobile", e);
         }
-        System.out.println("\n\n pgReturnMobile called: " + params);
         
         String P_TID = params.get("P_TID");         // 승인요청 검증 토큰
         String idc_name = params.get("idc_name");    
         String P_RMESG1 = params.get("P_RMESG1");    //debug
-        String expectedUrl = pgInterfaceCommon.getMobilePayReqUrl(idc_name);
+
+        //== inicis에서 제공한 샘플 코드는 아래와 같이 property에서 가져오지만 오류가 발생하여 함수로 변경함 ==  
         // String expectedUrl = ResourceBundle.getBundle("properties/idc_name.mobile").getString(idc_name);
+        String expectedUrl = pgInterfaceCommon.getMobilePayReqUrl(idc_name);
+
         String P_REQ_URL = params.get("P_REQ_URL");
         String P_STATUS = params.get("P_STATUS");
 
@@ -137,9 +151,9 @@ public class PgServiceMobile {
             // Map<String, String>을 Map<String, Object>로 변환하여 데이터베이스에 저장
             Map<String, Object> modelMap = new HashMap<>(paymentResult);
 
-            // 데이터베이스에 저장
-            paymentMapper.saveApprovel(modelMap);
-            pgInterfaceCommon.printMap(modelMap);        //debug용도
+            // 승인 결과 데이터베이스에 저장
+            paymentMapper.saveMobileApproval(modelMap);
+            pgInterfaceCommon.printMap(modelMap);        //debug용도///////
 
             ModelAndView errorView = new ModelAndView();
             P_STATUS = (String) paymentResult.get("P_STATUS");
@@ -157,13 +171,13 @@ public class PgServiceMobile {
             for (Map.Entry<String, String> entry : paymentResult.entrySet()) {
                 modelAndView.addObject(entry.getKey(), entry.getValue());
             }
-            // printModelAndView(modelAndView);            // debug 용도 
+            // printModelAndView(modelAndView);            //debug용도///////
             modelAndView.setViewName(Views.RETURN_MOBILE); 
             return modelAndView;
 
         } catch (Exception e) {
             ModelAndView errorAndView = new ModelAndView();
-            logger.error("\n\n========== Error occured in approval request", e);
+            logger.error("\n\n------------------- Error in pgRetutn " , e);
             errorAndView.addObject("errorMessage", "Error occured in approval request.");
             errorAndView.setViewName(Views.ERROR);
             return errorAndView;
@@ -180,7 +194,7 @@ public class PgServiceMobile {
 // idc_name: ks
 // P_AMT: 2000
 
-// ---------------------------pgreturn map converted approval results :
+// ---------------------------pgreturn approval results :
 // CARD_CorpFlag:0
 // P_NOTEURL:
 // P_CARD_ISSUER_CODE:00

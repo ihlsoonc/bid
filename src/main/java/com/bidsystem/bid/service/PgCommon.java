@@ -56,20 +56,23 @@ public class PgCommon {
         public static final String ERROR = "error";
     }
 
+    // 결제 요청 파라미터에서 전화번호가 있는지 확인
     public void validateRequestParameters(Map<String, Object> request) {
         if (!request.containsKey("telno")) {
             throw new BadRequestException("결제요청 파라메터에 전화번호가 필요합니다.");
         }
     }
 
+    // SHA-256 해시 알고리즘을 사용해 서명 생성
     public String generateSignature(Object price, String oid, String timestamp) {
         return sha256("oid=" + oid + "&price=" + price + "&timestamp=" + timestamp);
     }
-    
+    // SHA-256 해시 알고리즘을 사용해 검증 서명 생성 
     public String generateVerification(Object price, String oid, String timestamp) {
         return sha256("oid=" + oid + "&price=" + price + "&signKey=" + PgParams.SIGN_KEY + "&timestamp=" + timestamp);
     }
     
+    // 결제 요청 시 발생한 예외 처리 및 오류 페이지 반환
     public ModelAndView handleException(Exception e) {
         ModelAndView modelAndView = new ModelAndView(Views.ERROR);
         if (e instanceof NotFoundException) {
@@ -80,8 +83,7 @@ public class PgCommon {
         modelAndView.addObject("errorMessage", "결제 사전 요청에서 오류가 발생하였습니다");
         return modelAndView;
     }
-
-    // Map<String, Object>을 URL-encoded 형식으로 변환하는 메서드
+    // Map<String, Object> 데이터를 URL-encoded 쿼리 문자열로 변환
     public String convertToUrlEncodedString(Map<String, Object> data) {
         StringBuilder result = new StringBuilder();
         
@@ -100,7 +102,7 @@ public class PgCommon {
         return result.toString();
     }
 
-    // URL 인코딩된 쿼리 문자열을 Map으로 변환하는 메서드
+    // URL 인코딩된 쿼리 문자열을 Map으로 변환
     public Map<String, String> parseQueryString(String queryString) throws java.io.UnsupportedEncodingException {
         Map<String, String> resultMap = new HashMap<>();
         String[] pairs = queryString.split("&");
@@ -114,15 +116,18 @@ public class PgCommon {
         return resultMap;
     }
 
+    // 인증 서명 생성
     public String createSignature(String authToken, long timestamp) throws NoSuchAlgorithmException {
         return sha256("authToken=" + authToken + "&timestamp=" + timestamp);
     }
 
+    // 검증 서명 생성
     public String createVerification(String authToken, long timestamp) throws NoSuchAlgorithmException {
         String data = "authToken=" + authToken + "&signKey=" + PgParams.SIGN_KEY + "&timestamp=" + timestamp;
         return sha256(data);
     }
 
+    // 네트워크 취소 요청 처리
     public ModelAndView handleNetCancel(String netCancelUrl, String idcName, Map<String, Object> options) {
         String netCancelUrl2 = getNetCancelUrl(idcName);
         if (netCancelUrl.equals(netCancelUrl2)) {
@@ -136,6 +141,7 @@ public class PgCommon {
         return modelAndView;
     }
 
+    // SHA-256 해시를 생성
     public static String sha256(String input) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -153,6 +159,8 @@ public class PgCommon {
             throw new RuntimeException("SHA-256 알고리즘을 찾을 수 없습니다", e);
         }
     }
+
+    //  URL 생성
     public static String getAuthUrl(String idcName) {
         String url = "stdpay.inicis.com/api/payAuth";
         switch (idcName) {
@@ -166,6 +174,7 @@ public class PgCommon {
                 return "https://default" + url; // 기본 URL을 설정합니다.
         }
     }
+    // 네트워크 취소 URL 생성
     public static String getNetCancelUrl(String idcName) {
         String url = "stdpay.inicis.com/api/netCancel";
         switch (idcName) {
@@ -180,20 +189,23 @@ public class PgCommon {
         }
 }
 
-public static String getMobilePayReqUrl(String idcName) {
-    String url = "/smart/payReq.ini";
-    switch (idcName) {
-        case "fc":
-            return "https://fcmobile.inicis.com" + url;
-        case "ks":
-            return "https://ksmobile.inicis.com" + url;
-        case "stg":
-            return "https://stgmobile.inicis.com" + url;
-        default:
-            return "https://default.inicis.com" + url;
-    }
-}
-public static String convertQueryStringToJson(String queryString) {
+    // 모바일 결제 요청 URL 생성
+    public static String getMobilePayReqUrl(String idcName) {
+        String url = "/smart/payReq.ini";
+        switch (idcName) {
+            case "fc":
+                return "https://fcmobile.inicis.com" + url;
+            case "ks":
+                return "https://ksmobile.inicis.com" + url;
+            case "stg":
+                return "https://stgmobile.inicis.com" + url;
+            default:
+                return "https://default.inicis.com" + url;
+        }
+        }
+
+    // 쿼리 문자열을 JSON 형식으로 변환
+    public static String convertQueryStringToJson(String queryString) {
         try {
             // ObjectMapper 인스턴스 생성
             ObjectMapper objectMapper = new ObjectMapper();
@@ -218,6 +230,7 @@ public static String convertQueryStringToJson(String queryString) {
         }
     }
 
+    // ModelAndView 객체 내용을 출력  : 디버깅 용도임
     public static void printModelAndView(ModelAndView modelAndView) {
         System.out.println("View Name: " + modelAndView.getViewName());
         System.out.println("Model Contents:");
@@ -227,6 +240,7 @@ public static String convertQueryStringToJson(String queryString) {
         }
     }
 
+    // Map 내용을 출력 : 디버깅 용도임
     public static void printMap(Map<String, Object> modelMap) {
         if (modelMap == null || modelMap.isEmpty()) {
             System.out.println("Map is empty or null.");
@@ -238,6 +252,7 @@ public static String convertQueryStringToJson(String queryString) {
         }
     }
 
+    // JSON 문자열을 Map으로 변환
     public static Map<String, String> convertJsonToMap(String jsonString) {
         try {
             // ObjectMapper 인스턴스 생성

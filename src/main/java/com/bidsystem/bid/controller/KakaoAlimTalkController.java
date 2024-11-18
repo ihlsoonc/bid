@@ -21,20 +21,14 @@ public class KakaoAlimTalkController {
 
     @PostMapping("/send-kakao-message")
     public ResponseEntity<String> sendKakaoMessage(@RequestBody Map<String, Object> request) {
-        System.out.println("sendKakaoMessage 메서드 시작");
-
         String ACCESS_TOKEN = alimtalkService.getAccessToken();
-        System.out.println("액세스 토큰 획득: " + ACCESS_TOKEN);
         
         String matchNumber = (String) request.get("matchNumber");
-        System.out.println("매치 번호 추출: matchNumber = " + matchNumber);
         try {
             alimtalkService.sendAlimtalkByMatch(matchNumber, ACCESS_TOKEN);
-            
-            System.out.println("sendKakaoMessage 메서드 종료, 모든 메시지 전송 완료");
-            return ResponseEntity.ok("All kakao messages sent successfully");
+            return ResponseEntity.ok("알림톡이 성공적으로 발송되었습니다.");
         } catch (Exception e) {
-            throw new ServerException( "error in alim control",e);
+            throw new ServerException( "시스템 오류 : 알림톡 전송에 실패하였습니다.",e);
         }
         
     }

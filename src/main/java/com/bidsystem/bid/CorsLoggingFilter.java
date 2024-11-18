@@ -27,7 +27,7 @@ public class CorsLoggingFilter extends HttpFilter {
             String host = request.getHeader("Host");
             String userAgent = request.getHeader("User-Agent");
 
-            logger.info("\n\n ---------------------------- Origin null Host: " + host+" "+userAgent+"\n\n");
+            logger.info("\n\n In CorsLoggingFilter.java --------------------- Origin null Host: " + host+" "+userAgent+"\n\n");
         }
 
         // 다음 필터 또는 서블릿 실행

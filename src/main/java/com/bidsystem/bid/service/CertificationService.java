@@ -67,7 +67,7 @@ public class CertificationService {
         // 세션이 존재하는지 확인
         if (session == null || session.getAttribute("telno") == null) {
             // 세션이 만료되었거나 사용자 정보가 없는 경우
-            throw new UnauthorizedException("세션이 유효하지 않습니다. 다시 로그인해주세요.");
+            throw new UnauthorizedException("세션이 유효하지 않습니다. 다시 로그인 해주세요.");
         }
 
         // 세션에서 사용자 정보를 가져옴
@@ -87,10 +87,12 @@ public class CertificationService {
             response.put("userName", userName);
         } else {
             // 사용자 정보가 없으면 오류 메시지 반환
-            throw new UnauthorizedException("세션 정보가 없습니다. 시스템 오류입니다.");
+            throw new UnauthorizedException("세션 사용자 정보가 없습니다.");
         }
+    } catch (UnauthorizedException e) {
+        throw e;
     } catch (Exception e) {
-        throw new ServerException("세션 정보 조회 중 오류가 발생하였습니다.", e);
+        throw new ServerException("세션 정보 접근 중 오류가 발생하였습니다.", e);
     }
 
     return response;
@@ -118,12 +120,12 @@ public Map<String, Object> clearSession(HttpSession session, HttpServletResponse
 
         return response;
     } catch (Exception e) {
-        throw new ServerException("세션 무효화에서 오류가 발생하였습니다.", e);
+        throw new ServerException("세션 종료에 오류가 발생하였습니다.", e);
     }
 
 }
 
-// 세션 복원 함수 request, requestBody, session,response
+// 세션 복원 함수 
 public Map<String, Object> restoreSession(Map<String, Object> request, HttpServletRequest httpRequest, HttpSession session, HttpServletResponse httpResponse) {
     String userClass = (String) request.get("userClass");
     String userId = (String) request.get("userId");
@@ -146,11 +148,13 @@ public Map<String, Object> restoreSession(Map<String, Object> request, HttpServl
     return response;
 }
 
-    
+// 사용자 테이블에서 id와 password로 자격 확인 
 public Map<String, Object> verifyPassword(Map<String, Object> request) throws Exception {
     String table = (String) request.get("table");
     Map<String, Object> results;
-
+    if (table == null || table == "") {
+        throw new BadRequestException("오류 : Table 파라메터 오류");
+    }
     try {
         // 사용자 또는 관리자 테이블에서 정보 가져오기
         if (table.equals("user")) {
@@ -159,15 +163,14 @@ public Map<String, Object> verifyPassword(Map<String, Object> request) throws Ex
         } else if (table.equals("admin")){
             results = adminMapper.getUserByQuery(request);
         } else {
-            System.out.println("Invalid table name"+table);
-            throw new BadRequestException("잘못된 요청입니다. (TableName)");      
+            throw new BadRequestException("오류 : Table 파라메터 오류 : "+table);       
         }
         
         if (results == null || results.isEmpty()) {
             throw new NotFoundException(null);
         }
 
-        String inputpassword = (String) request.get("password");
+        String inputpassword = (String) request.get("password");   // 입력된 비밀번호
         String encodedPassword = (String) results.get("password"); // 테이블에 저장된 암호화된 비밀번호
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

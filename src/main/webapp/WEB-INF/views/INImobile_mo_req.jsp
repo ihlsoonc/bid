@@ -70,19 +70,16 @@ pageEncoding="UTF-8"%>
                             <br/>
 				    		<label class="col-10 col-sm-2 input param" style="border:none;">P_MID</label>
                             <label class="col-10 col-sm-9 input">
-                                <!-- <input type="text" name="P_MID" value="INIpayTest"> -->
                                 <input type="text" name="P_MID" value="${P_MID}">
                             </label>
                             <br/>
                             <label class="col-10 col-sm-2 input param" style="border:none;">P_OID</label>
                             <label class="col-10 col-sm-9 input">
-                                <!-- <input type="text" name="P_OID" value="mobile_test1234"> -->
                                 <input type="text" name="P_OID" value="${P_OID}">
                             </label>
 				    		<br/>
 				    		<label class="col-10 col-sm-2 input param" style="border:none;">P_AMT</label>
                             <label class="col-10 col-sm-9 input">
-                                <!-- <input type="text" name="P_AMT" value="1000"> -->
                                 <input type="text" name="P_AMT" value=${P_AMT}>
                             </label>
                             <br/>
@@ -95,26 +92,22 @@ pageEncoding="UTF-8"%>
 
 				    		<label class="col-10 col-sm-2 input param" style="border:none;">P_UNAME</label>
                             <label class="col-10 col-sm-9 input">
-                                <!-- <input type="text" name="P_UNAME" value="테스터"> -->
                                 <input type="text" name="P_UNAME" value="${P_UNAME}">
                             </label>
                             <br/>
 
 				    		<label class="col-10 col-sm-2 input param" style="border:none;">P_MOBILE</label>
                             <label class="col-10 col-sm-9 input">
-                                <!-- <input type="text" name="P_MOBILE" value="01012345678"> -->
                                 <input type="text" name="P_MOBILE" value="${P_MOBILE}">
                             </label>
                             <br/>
 
 				    		<label class="col-10 col-sm-2 input param" style="border:none;">P_EMAIL</label>
                             <label class="col-10 col-sm-9 input">
-                                <!-- <input type="text" name="P_EMAIL" value="test@test.com"> -->
                                 <input type="text" name="P_EMAIL" value="${P_EMAIL}">
                             </label>
                             <br/>
 
-				    		<!-- <input type="hidden" name="P_NEXT_URL" value="https://[가맹점도메인]/INImobile_mo_return.jsp"> -->
 				    		<input type="hidden" name="P_NEXT_URL" value="${P_NEXT_URL}">
                             <br/>
 
