@@ -1,6 +1,6 @@
 package com.bidsystem.bid.controller;
-
 import com.bidsystem.bid.service.MatchService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +11,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/match")
 public class MatchController {
-
     @Autowired
-    private MatchService matchService;
+    private  MatchService matchService;
 
     // 입찰 상태 조회
     @GetMapping("/status")

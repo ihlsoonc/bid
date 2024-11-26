@@ -1,0 +1,59 @@
+//spring security loginfilter 및 jwt사용으로 현재 이 프로그램은 호출되지 않음
+package com.bidsystem.bid.service;
+
+import com.bidsystem.bid.service.ExceptionService.*;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
+public class LoginService {
+
+    @Autowired
+    private PaswordVerification paswordVerification;
+
+    @Autowired
+    private SessionService sessionService;
+
+    // 로그인 처리
+    public Map<String, Object> login(Map<String, Object> request, HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+        try {
+            
+            // 비밀번호 인증 단계
+            Map<String, Object> userInfo = paswordVerification.verifyPassword(request);
+            
+            // 사용자 정보 설정 단계
+            String userClass = (String) request.get("userClass");
+            // 사용자 정보
+            String telno = (String) userInfo.get("telno");
+            String userId = (String) userInfo.get("userid");
+            String userName = (String) userInfo.get("username");
+            String role = (String) userInfo.get("role");
+            
+            // 세션 속성 설정 단계
+            sessionService.setSessionAttributes(httpRequest.getSession(), userClass, userId, telno, role, userName);
+            
+            // 로그인 쿠키 설정 단계
+            sessionService.setLoginCookie(httpRequest.getSession(), httpResponse);
+            
+            // 응답 생성 단계
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "로그인 성공");
+            response.put("userName", userName);
+            response.put("role", role);
+            
+            return response;
+        } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ServerException(null, e);
+        }
+    }
+
+}

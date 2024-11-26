@@ -1,24 +1,30 @@
 package com.bidsystem.bid.controller;
 
+import com.bidsystem.bid.service.ExceptionService.PgException;
+import com.bidsystem.bid.service.PgCommon;
+import com.bidsystem.bid.service.PgCommon.PgParams;
+import com.bidsystem.bid.service.PgCommon.Urls;
+import com.bidsystem.bid.service.PgCommon.Views;
 import com.bidsystem.bid.service.PgService;
 import com.bidsystem.bid.service.PgServiceMobile;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/api")
-
 public class PgController {
-
-    @Autowired
+@Autowired
     private PgService pgService;
-
-    @Autowired
+@Autowired
     private PgServiceMobile pgServiceMobile;
 
     //결제 요청 : PC
@@ -51,8 +57,12 @@ public class PgController {
     }
 
     @GetMapping("/pgclose")
-    public String closePage() throws InterruptedException {
-        return "close"; //close.jsp
+    public ModelAndView closePage() {
+        ModelAndView pgclose = new ModelAndView();
+        pgclose.setViewName(Views.CLOSE);
+        return pgclose;
     }
+    
+        
 }
 

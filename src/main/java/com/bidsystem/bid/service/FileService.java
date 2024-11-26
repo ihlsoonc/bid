@@ -17,7 +17,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FileService {
 
-    private final Path uploadDir = Paths.get("src/main/resources/images/uploads");
+    private Path uploadDir = Paths.get("src/main/resources/images/uploads");
 
     public FileService() throws IOException {
         // 디렉토리가 존재하지 않으면 생성

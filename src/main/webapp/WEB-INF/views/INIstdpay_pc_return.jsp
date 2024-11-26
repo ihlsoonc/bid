@@ -57,37 +57,38 @@
                 <form name="" id="result" method="post">
                     <div>
                         <label>resultCode</label>
-                        <label>${resultMap.resultCode}</label> 
+                        <label>${resultCode}</label> 
                         <br/>            
                         <label>resultMsg</label>
-                        <label>${resultMap.resultMsg}</label> 
+                        <label>${resultMsg}</label> 
+                        <br/>
+                        <label>errorMsg</label>
+                        <label>${errorMsg}</label> 
                         <br/>
                         <label>tid</label>
-                        <label>${resultMap.tid}</label> 
+                        <label>${tid}</label> 
                         <br/>
                         <label>MOID</label>
-                        <label>${resultMap.MOID}</label> 
+                        <label>${MOID}</label> 
                         <br/>
                         <label>telno</label>
-                        <label>${resultMap.buyerTel}</label> 
+                        <label>${buyerTel}</label> 
                         <br/>
                         <label>TotPrice</label>
-                        <label>${resultMap.TotPrice}</label> 
+                        <label>${TotPrice}</label> 
                         <br/>
                         <label>goodName</label>
-                        <label>${resultMap.goodName}</label> 
+                        <label>${goodName}</label> 
                         <br/>
                         <label>applDate</label>
-                        <label>${resultMap.applDate}</label> 
+                        <label>${applDate}</label> 
                         <br/>
                         <label>applTime</label>
-                        <label>${resultMap.applTime}</label> 
+                        <label>${applTime}</label> 
                     </div>
                 </form>
-                
-                <button onclick="location.href='http://localhost:9000/bidseats?telno=${resultMap.buyerTel}&_=' + new Date().getTime()">돌아가기</button>
 
-                <!-- <button onclick="location.href='http://localhost:9000/bidseats?telno=${resultMap.buyerTel}'">돌아가기</button> -->
+                <button onclick="location.href='http://localhost:9000/bidseats?telno=${buyerTel}'">돌아가기</button>
 
             </div>
         </section>

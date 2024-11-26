@@ -1,6 +1,8 @@
 package com.bidsystem.bid.controller;
 
 import com.bidsystem.bid.service.VenueService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +13,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/venue")
 public class VenueController {
-
-    @Autowired
+@Autowired
     private VenueService venueService;
 
     // 특정 경기장 조회

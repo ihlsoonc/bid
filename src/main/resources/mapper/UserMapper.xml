@@ -37,6 +37,13 @@
             email = #{email}
     </select>
 
+    <!-- 중복확인용 telno 건수 확인 -->
+    <select id="getTelnoCount" parameterType="hashmap" resultType="hashmap">
+        SELECT COUNT(*) AS telno_count
+        FROM biduser
+        WHERE telno = #{telno}
+    </select>
+
     <!-- 사용자 등록 -->
     <insert id="registerUser" parameterType="hashmap">
         INSERT INTO biduser (userid, password, username, email, telno, postcode, addr1, addr2, createdat)

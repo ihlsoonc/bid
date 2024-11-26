@@ -1,5 +1,7 @@
 package com.bidsystem.bid.controller;
 import com.bidsystem.bid.service.SmsService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,11 +13,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/sendsms")
 public class SmsController {
-    @Autowired
+@Autowired
     private SmsService smsService;
     
     // 인증 코드 전송
-    @PostMapping("/sendauthcode")
+    @PostMapping("/send-auth-code")
     public ResponseEntity<Map<String, Object>> sendVerificationMessage(@RequestBody Map<String, Object> request) { 
         Map<String, Object> results = smsService.sendVerificationMessage(request);
         return ResponseEntity.ok(results); 

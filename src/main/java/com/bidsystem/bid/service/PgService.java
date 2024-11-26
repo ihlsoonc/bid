@@ -2,9 +2,16 @@ package com.bidsystem.bid.service;
 
 import com.bidsystem.bid.service.PgCommon.*;
 import com.bidsystem.bid.mapper.PaymentMapper;
+import com.bidsystem.bid.mapper.BidMapper;
 import com.bidsystem.bid.service.ExceptionService.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -25,16 +32,94 @@ public class PgService {
     private static final Logger logger = LoggerFactory.getLogger(BidService.class); 
 
     @Autowired
+    private PgCommon pgInterfaceCommon;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
-    private PgCommon pgInterfaceCommon;
+    private BidMapper bidMapper;
 
     @Autowired
     private PaymentMapper paymentMapper;
 
-    private final AtomicInteger counter = new AtomicInteger(1);
+    private AtomicInteger counter = new AtomicInteger(1);
 
+    public String pgStartPost(Map<String, Object> request, HttpServletRequest request2, HttpServletResponse response) {
+   
+            try {
+                // 전화번호 유효성 검사
+                // pgInterfaceCommon.validateRequestParameters(request);
+            
+                // 결제요청에 필요한 사용자 DB정보 요청
+                System.out.println("Step 1: 전화번호 유효성 검사 및 사용자 정보 요청 시작");
+                request.put("queryType", "telno");
+                request.put("query", request.get("telno"));
+                System.out.println("Step 1: request"+request);
+                System.out.println("Step 1: telno"+request.get("telno"));
+                Map<String, Object> userInfo = userService.getUserByQuery(request);
+            
+                if (userInfo == null || userInfo.isEmpty()) {
+                    System.out.println("Step 2: 사용자 정보 없음");
+                    throw new NotFoundException("전화번호로 사용자 정보를 찾을 수 없습니다.");
+                }
+                System.out.println("Step 2: 사용자 정보 성공적으로 조회 - " + userInfo);
+            
+                // oid를 MID와 timestamp로 unique하게 구성
+                System.out.println("Step 3: oid 생성 시작");
+                String timestamp = Long.toString(System.currentTimeMillis());
+                String oid = PgParams.MID + "_" + timestamp;
+                System.out.println("Step 3: oid 생성 완료 - " + oid);
+            
+                // 요청전문 구성
+                System.out.println("Step 4: 결제 요청 정보 구성 시작");
+                ModelAndView payRequest = new ModelAndView();
+                payRequest.addObject("price", request.get("price"));
+                payRequest.addObject("goodName", request.get("goodName"));
+                payRequest.addObject("buyerName", userInfo.get("username"));
+                payRequest.addObject("buyerTel", userInfo.get("telno"));
+                payRequest.addObject("buyerEmail", userInfo.get("email"));
+                payRequest.addObject("returnUrl", Urls.RETURN);
+                payRequest.addObject("closeUrl", Urls.CLOSE);
+                payRequest.addObject("mid", PgParams.MID);
+                payRequest.addObject("signKey", PgParams.SIGN_KEY);
+                payRequest.addObject("timestamp", timestamp);
+                payRequest.addObject("use_chkfake", PgParams.USE_CHKFAKE);
+                payRequest.addObject("oid", oid);
+                payRequest.addObject("mKey", PgCommon.sha256(PgParams.SIGN_KEY));
+                payRequest.addObject("signature", pgInterfaceCommon.generateSignature(request.get("price"), oid, timestamp));
+                payRequest.addObject("verification", pgInterfaceCommon.generateVerification(request.get("price"), oid, timestamp));
+                payRequest.setViewName(Views.REQUEST);
+                System.out.println("Step 4: 결제 요청 정보 구성 완료");
+            
+                Map<String, Object> modelMap = payRequest.getModel();
+                System.out.println("Step 5: 결제 요청 정보 저장 시작 - " + modelMap);
+            
+                // 결제 요청 정보를 payments table 에 기록                          
+                paymentMapper.savePcRequest(modelMap);
+                System.out.println("Step 5: 결제 요청 정보 저장 완료");
+            
+                // bids table oid 에 기록 
+                System.out.println("Step 6: Bids table oid 업데이트 시작");
+                Map<String, Object> updateParams = new HashMap<>();
+                updateParams.put("telno", request.get("telno"));
+                updateParams.put("matchNumber", request.get("matchNumber"));
+                updateParams.put("oid", oid);
+                int affectedRows = bidMapper.updateBidOid(updateParams);
+                System.out.println("Step 6: Bids table 업데이트 완료, affectedRows: " + affectedRows);
+            
+                // 결제창 호출을 위한 JSP화면 호출        
+                System.out.println("Step 7: JSP 호출 시작");
+                RequestDispatcher dispatcher = request2.getRequestDispatcher("/WEB-INF/views/" + payRequest.getViewName() + ".jsp");
+                dispatcher.forward(request2, response);
+                System.out.println("Step 7: JSP 호출 완료");
+                return "success";
+            
+            } catch (Exception e) {
+                System.out.println("Error: 시스템 오류 발생 - " + e.getMessage());
+                throw new PgException("시스템 오류 : 결제 요청중 오류가 발생하였습니다.", e);
+            }
+    }
     // 결제 요청
     public ModelAndView pgStart(Map<String, Object> request) {
         try {
@@ -42,18 +127,16 @@ public class PgService {
             pgInterfaceCommon.validateRequestParameters(request);
 
             //결제요청에 필요한 사용자 DB정보 요청
-            request.put("table", "user");
             request.put("queryType", "telno");
             request.put("query", request.get("telno"));
             Map<String, Object> userInfo = userService.getUserByQuery(request);
             if (userInfo == null || userInfo.isEmpty()) {
-                throw new NotFoundException("사용자 전화번호로 정보를 찾을 수 없습니다.");
+                throw new NotFoundException("전화번호로 사용자 정보를 찾을 수 없습니다.");
             }
 
             //oid를 MID와 timestamp로 unique하게 구성
             String timestamp = Long.toString(System.currentTimeMillis());
-            String uniqueCounterValue = Integer.toString(counter.getAndIncrement()); // 카운터 값을 증가
-            String oid = PgParams.MID + "_" + timestamp+ "_" + uniqueCounterValue;
+            String oid = PgParams.MID + "_" + timestamp;
             
             // 요청전문 구성
             ModelAndView payRequest = new ModelAndView();
@@ -76,13 +159,23 @@ public class PgService {
             Map<String, Object> modelMap = payRequest.getModel();
 
             // 결제 요청 정보를 payments table 에 기록                          
-            paymentMapper.savePcRequest(modelMap);    
+            paymentMapper.savePcRequest(modelMap);
+            
+            // bids table oid 에 기록 
+            Map<String, Object> updateParams = new HashMap<>();
+            updateParams.put("telno", request.get("telno"));
+            updateParams.put("matchNumber", request.get("matchNumber"));
+            updateParams.put("oid", oid);
+            int affectedRows = bidMapper.updateBidOid(updateParams);
+            if (affectedRows == 0) {
+                throw new ZeroAffectedRowException("입찰내용에 거래아이디 세팅오류");
+            }
             
             // 결제창 호출을 위한 JSP화면 호출        
             return payRequest;
 
         } catch (Exception e) {
-            throw new PgException("Error in pgStart PC.", e);
+            throw new PgException("시스템 오류 : 결제 요청중 오류가 발생하였습니다.", e);
         }
         
     }
@@ -97,25 +190,28 @@ public class PgService {
         } catch (Exception e) {
             throw new UnsupportedEncodingException("Error in parging querysting in pgReturn", e);
         }
-    
-        // 요청에서 "resultCode"가 0000일 아닐 경우 처리
-        if (!"0000".equals(params.get("resultCode"))) {
-            // 결제 실패 시 처리
-            System.out.println("\n\n----------------- pgreturn approval failed. " + params+" \n");
 
+        // key-value 형태로 출력 : Debugging용
+        // for (Map.Entry<String, String> entry : params.entrySet()) {
+        // System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        // }
+
+        // 결제요청 응답의  "resultCode"가 0000일 아닐 경우(오류인 경우) 처리
+        if (!"0000".equals(params.get("resultCode"))) {
+            logger.error("\n\n------------- pgreturn failed. " + params+"\n");
+            
             // ModelAndView 생성 및 데이터 추가
             ModelAndView approveData = new ModelAndView();
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 approveData.addObject(entry.getKey(), entry.getValue());
             }
-
-            // 반환할 뷰 이름 설정
+            pgInterfaceCommon.printModelAndView(approveData);
             approveData.setViewName(Views.RETURN); 
             return approveData;
         }
         
-        // 결제요청에서 "resultCode"가 0000일 경우 처리
-        // 결제 승인 요청 옵션 설정
+        // 결제요청 응답의 "resultCode"가 0000일 경우 처리(요청 성공)
+        // 승인 요청 옵션 설정
         String mid = params.get("mid");                     // 상점아이디
         String authToken = params.get("authToken");         // 승인요청 검증 토큰
         String netCancelUrl = params.get("netCancelUrl");   // 망취소요청 URL
@@ -153,8 +249,8 @@ public class PgService {
         options.put("verification", verification);
         options.put("charset", charset);
         options.put("format", format);
-        logger.info("\n\n------------------- pgreturn 승인을 요청합니다. " + authUrl2 + "\n");
         try{
+            //----------------------- 승인 요청 하기
             String urlEncodedOptions = pgInterfaceCommon.convertToUrlEncodedString(options);
             if (!authUrl.equals(authUrl2)) {
                 return pgInterfaceCommon.handleNetCancel(netCancelUrl, idc_name, options);
@@ -173,29 +269,52 @@ public class PgService {
             String responseBody = response.body();
    
             ObjectMapper objectMapper = new ObjectMapper();
-            Map<String, Object> responseBodyMap = objectMapper.readValue(responseBody, Map.class);
+            Map<String, Object> approveData = objectMapper.readValue(responseBody, Map.class);
 
             // 승인 결과 데이터베이스에 저장
-            paymentMapper.savePCApproval(responseBodyMap);      
-            pgInterfaceCommon.printMap(responseBodyMap);        //debug용도///////
+            paymentMapper.savePCApproval(approveData);
+
+            // Debugging 용    
+            // pgInterfaceCommon.printMap(approveData);
 
             ModelAndView errorView = new ModelAndView("Pc approval results");
-            String resultCode = (String) responseBodyMap.get("resultCode");
+            String resultCode = (String) approveData.get("resultCode");
 
-            // 결과 코드가 0000이 아닌 경우 오류 페이지로 리다이렉트
+            // 승인결과 코드가 0000이 아닌 경우 오류 페이지로 리다이렉트
             if (!"0000".equals(resultCode)) {
-                String errorMsg = (String) responseBodyMap.get("resultMsg");
+                String errorMsg = (String) approveData.get("resultMsg");
                 errorView.addObject("resultCode", resultCode);
                 errorView.addObject("errorMessage", errorMsg);
                 errorView.setViewName(Views.ERROR); 
                 return errorView;
             }
-            // 승인 요청 성공 후  회신 데이터 처리
+
+            // 승인 요청 성공 후  회신 데이터를 jsp용 modelAndView에 저장
             ModelAndView modelAndView = new ModelAndView("paymentResultPage"); // 원하는 페이지 이름
-            for (Map.Entry<String, Object> entry : responseBodyMap.entrySet()) {
+            for (Map.Entry<String, Object> entry : approveData.entrySet()) {
                 modelAndView.addObject(entry.getKey(), entry.getValue());
             }
+
+            // 입찰결과에 결제 승인 내용 기록
+            try {
+                Map<String, Object> updateParams = new HashMap<>();
+                updateParams.put("oid", approveData.get("MOID"));
+                int affectedRows = bidMapper.updateBidPayment(updateParams);
+                
+            } catch (Exception e) {
+                // 예외 처리 로직
+                String errorMessageSub = e.getMessage();
+                logger.error("\n\n++ 승인은 완료되었으며, 입찰정보에 승인 정보를 갱신하는 중 오류가 발생하였습니다."+ errorMessageSub, e);
+                modelAndView.addObject("errorMsg", "승인 되었습니다.  완료 처리 중 오류가 발생하였습니다. 관리자에게 문의하세요.");
+                modelAndView.setViewName(Views.ERROR); 
+                return modelAndView;
+            }
+
+            //jsp view name
             modelAndView.setViewName(Views.RETURN); 
+       
+            // jsp용 modelAndView pring(debug용)
+            // pgInterfaceCommon.printModelAndView(modelAndView);   
             return modelAndView;
 
         } catch (Exception e) {
@@ -205,10 +324,25 @@ public class PgService {
             errorAndView.setViewName(Views.ERROR);
             return errorAndView;
         }
-    }
-    
+    }   
 
 }
+// ---------------------------pgreturn 결제 요청 회신결과
+// Key: cp_yn, Value: 
+// Key: charset, Value: UTF-8
+// Key: orderNumber, Value: INIpayTest_1731929432040
+// Key: authToken, Value: +yyiuysaqtzVAwvitOoA8MIvYA9dZREBMwKebgXr3pBShgu/Ny9TkYb+kQBbX192.....................
+// Key: resultCode, Value: 0000
+// Key: checkAckUrl, Value: https://stgstdpay.inicis.com/api/checkAck
+// Key: netCancelUrl, Value: https://stgstdpay.inicis.com/api/netCancel
+// Key: mid, Value: INIpayTest
+// Key: idc_name, Value: stg
+// Key: merchantData, Value:
+// Key: resultMsg, Value: 성공
+// Key: authUrl, Value: https://stgstdpay.inicis.com/api/payAuth
+// Key: cardnum, Value:
+// Key: cardUsePoint, Value:
+// Key: returnUrl, Value:
 
 // ---------------------------pgreturn 승인 요청 결과입니다.
 // Key: CARD_Quota, Value: 00

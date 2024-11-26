@@ -1,6 +1,8 @@
 package com.bidsystem.bid.controller;
 
 import com.bidsystem.bid.service.SeatPriceService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +13,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/seatprice")
 public class SeatPriceController {
-
-    @Autowired
+@Autowired
     private SeatPriceService seatPriceService;
 
     // 특정 경기의 좌석 가격을 조회

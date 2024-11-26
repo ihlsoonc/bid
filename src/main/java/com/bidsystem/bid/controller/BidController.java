@@ -1,4 +1,5 @@
 package com.bidsystem.bid.controller;
+import com.bidsystem.bid.service.BidService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,12 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-import com.bidsystem.bid.service.BidService;
-
 @RestController
 @RequestMapping("/api/bid")
 public class BidController {
-
     @Autowired
     private BidService bidService;
 

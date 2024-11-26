@@ -1,19 +1,9 @@
 package com.bidsystem.bid.service;
 import com.bidsystem.bid.service.ExceptionService.*;
 
-import ch.qos.logback.core.status.ErrorStatus;
-import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import net.nurigo.sdk.NurigoApp;
-import net.nurigo.sdk.message.exception.NurigoUnknownException;
 import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
@@ -30,14 +20,14 @@ public class SmsService {
     private static final String API_KEY = "NCS547958B8DCD89";   // coolsms key
     private static final String API_SECRET_KEY = "0FC78662787861FB62E9349FDA63A75B"; // coolsms secret-key
     private static final String SMS_PROVIDER = "https://api.coolsms.co.kr"; // coolsms provider
-    private static final String SMS_SENDER = "024204314"; // coolsms 발신자 번호
+    private static final String SMS_SENDER = "024475967"; // coolsms 발신자 번호
     private static final Integer EXPIRATION_TIME_IN_MINUTES = 3;
 
     // 인증 코드를 저장할 HashMap (메모리 내에서 관리)
-    private final Map<String, Map<String, Object>> verificationCodes = new HashMap<>();
+    private Map<String, Map<String, Object>> verificationCodes = new HashMap<>();
 
     // CoolSMS 서비스 초기화
-    private final DefaultMessageService messageService = NurigoApp.INSTANCE.initialize(API_KEY, API_SECRET_KEY, SMS_PROVIDER);
+    private DefaultMessageService messageService = NurigoApp.INSTANCE.initialize(API_KEY, API_SECRET_KEY, SMS_PROVIDER);
     
     // 인증코드 전송
     public Map<String, Object> sendVerificationMessage(Map<String, Object> request) {

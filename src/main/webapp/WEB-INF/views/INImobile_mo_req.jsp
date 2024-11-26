@@ -68,6 +68,10 @@ pageEncoding="UTF-8"%>
                                 <input type="text" name="P_INI_PAYMENT" value="${P_INI_PAYMENT}">
                             </label>
                             <br/>
+                            <label class="col-10 col-sm-2 input param" style="border:none;">메시지</label>
+                            <label class="col-10 col-sm-9 input">
+                                <input type="text" name="errorMsg" value="${errorMsg}">
+                            </label>
 				    		<label class="col-10 col-sm-2 input param" style="border:none;">P_MID</label>
                             <label class="col-10 col-sm-9 input">
                                 <input type="text" name="P_MID" value="${P_MID}">
@@ -125,7 +129,7 @@ pageEncoding="UTF-8"%>
                     </form>
 				
 				    <button onclick="on_pay()" class="btn_solid_pri col-6 mx-auto btn_lg" style="margin-top:50px">결제 요청</button>
-                    <button onclick="location.href='http://localhost:9000/bidseats?telno=${P_MOBILE}'">취소</button>		
+                    <button onclick="location.href='http://localhost:5000/bidseats?telno=${P_MOBILE}'">취소</button>		
                 </div>
             </section>
 			

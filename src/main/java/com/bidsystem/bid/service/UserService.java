@@ -1,11 +1,7 @@
 package com.bidsystem.bid.service;
 
 import com.bidsystem.bid.mapper.UserMapper;
-import com.bidsystem.bid.mapper.AdminMapper;
 import com.bidsystem.bid.service.ExceptionService.*;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,49 +17,13 @@ public class UserService {
     private UserMapper userMapper;
 
     @Autowired
-    private AdminMapper adminMapper;
+    private PaswordVerification paswordVerification;
 
-    @Autowired
-    private CertificationService certificationService;
-
-    // 로그인 처리
-    public Map<String, Object> login(Map<String, Object> request, HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
-        try {
-            
-            // 비밀번호 인증 단계
-            Map<String, Object> certiResults = certificationService.verifyPassword(request);
-            
-            // 사용자 정보 설정 단계
-            String userClass = (String) request.get("userClass");
-            String telno = (String) certiResults.get("telno");
-            String userId = (String) certiResults.get("userid");
-            String userName = (String) certiResults.get("username");
-            String userType = (String) certiResults.get("usertype");
-            
-            // 세션 속성 설정 단계
-            certificationService.setSessionAttributes(httpRequest.getSession(), userClass, userId, telno, userType, userName);
-            
-            // 로그인 쿠키 설정 단계
-            certificationService.setLoginCookie(httpRequest.getSession(), httpResponse);
-            
-            // 응답 생성 단계
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "로그인 성공");
-            response.put("userName", userName);
-            response.put("userType", userType);
-            
-            return response;
-        } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ServerException(null, e);
-        }
-    }
-
+    
     // 사용자 정보 조회
     public Map<String, Object> getUserByQueryAndPassword(Map<String, Object> request) {
         try {
-            Map<String, Object> results = certificationService.verifyPassword(request);
+            Map<String, Object> results = paswordVerification.verifyPassword(request);
             if (results == null || results.isEmpty()) {
                 throw new NotFoundException(null);
             } else {
@@ -72,7 +32,7 @@ public class UserService {
                 filteredResults.put("telno", results.get("telno"));
                 filteredResults.put("username", results.get("username"));
                 filteredResults.put("email", results.get("email"));
-                filteredResults.put("userType", results.get("userType"));
+                filteredResults.put("role", results.get("role"));
                 return filteredResults;
             }
         } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
@@ -83,20 +43,9 @@ public class UserService {
     }
     
     public Map<String, Object> getUserByQuery(Map<String, Object> request) {
-        String table = (String) request.get("table");
         Map<String, Object> results;
-        if (table == null || table == "") {
-            throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
-        }
         try {
-            if (table.equals("user")) {
-                results = userMapper.getUserByQuery(request);
-            } else if (table.equals("admin")) {
-                results = adminMapper.getUserByQuery(request);
-            } else {
-                throw new BadRequestException("오류 : Table 파라메터 : "+table);       
-            }
-
+            results = userMapper.getUserByQuery(request);
             if (results == null || results.isEmpty()) {
                 throw new NotFoundException(null);
             } else {
@@ -105,7 +54,7 @@ public class UserService {
                 filteredResults.put("telno", results.get("telno"));
                 filteredResults.put("username", results.get("username"));
                 filteredResults.put("email", results.get("email"));
-                filteredResults.put("userType", results.get("userType"));
+                filteredResults.put("role", results.get("role"));
                 return filteredResults;
             }
         } catch (BadRequestException | NotFoundException | PasswordMismatchException e) {
@@ -118,22 +67,12 @@ public class UserService {
     // 사용자 등록 및 수정시 이메일 중복을 체크하기위해 호출 
     public Map<String, Object> getEmailCount(Map<String, Object> request) {
         // 요청에서 테이블 이름 가져오기
-        String table = (String) request.get("table");
-        if (table == null || table == "") {
-            throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
-        }
-        
+
         Map<String, Object> results;
     
         try {
             // 사용자 또는 관리자 테이블에서 정보 가져오기
-            if (table.equals("user")) {
-                results = userMapper.getEmailCount(request);
-            } else if (table.equals("admin")) {
-                results = adminMapper.getEmailCount(request);
-            } else {
-                throw new BadRequestException("오류 : Table 파라메터 : "+table);      
-            }
+            results = userMapper.getEmailCount(request);
             return results;
         } catch (BadRequestException e) {
             throw e;
@@ -145,25 +84,10 @@ public class UserService {
     // 사용자 등록 및 수정시 이메일 중복을 체크하기위해 호출 
     public Map<String, Object> getTelnoCount(Map<String, Object> request) {
         // 요청에서 테이블 이름 가져오기
-        String table = (String) request.get("table");
-        if (table == null || table == "") {
-            throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
-        }
-        
+      try {  
         Map<String, Object> results;
-    
-        try {
-            // 사용자 또는 관리자 테이블에서 정보 가져오기
-            if (table.equals("user")) {
-                results = userMapper.getTelnoCount(request);
-            } else if (table.equals("admin")) {
-                results = adminMapper.getTelnoCount(request);
-            } else {
-                throw new BadRequestException("오류 : Table 파라메터 : "+table);      
-            }
+            results = userMapper.getTelnoCount(request);
             return results;
-        } catch (BadRequestException e) {
-            throw e;
         } catch (Exception e) {
             throw new DataAccessException(null, e);
         }
@@ -172,22 +96,12 @@ public class UserService {
     // 비밀번호 변경
     public Map<String, Object> changePassword(Map<String, Object> request) {
         try {
-            String table = (String) request.get("table");
-            if (table == null || table == "") {
-                throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
-            }
+
             String inputPassword = (String) request.get("password");
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(inputPassword);
             request.put("newPassword", encodedPassword);
-            int affectedRows = 0;
-            if ("user".equals(table)) {
-                affectedRows =  userMapper.changePassword(request);
-            } else if ("admin".equals(table)) {
-                affectedRows =  adminMapper.changePassword(request);
-            } else {
-                throw new BadRequestException(null);
-            }
+            int affectedRows =  userMapper.changePassword(request);
             if (affectedRows > 0) {
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", "성공적으로 수행되었습니다.");
@@ -201,60 +115,11 @@ public class UserService {
             throw new DataAccessException(null,e);
         }
     }
-
-    // 사용자 등록
-    public Map<String, Object> registerUser(Map<String, Object> request) {
-        try {
-            String table = (String) request.get("table");
-            if (table == null || table == "") {
-                throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
-            }
-            String password = (String) request.get("password");
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String encodedPassword = passwordEncoder.encode(password);
-            request.put("password", encodedPassword);
-            
-            int affectedRows = 0;
-            if ("user".equals(table)) {
-                affectedRows =  userMapper.registerUser(request);
-            } else if ("admin".equals(table)) {
-                affectedRows =  adminMapper.registerUser(request);
-            } else {
-                throw new BadRequestException("오류 : Table 파라메터 : "+table);     
-            }
-            if (affectedRows > 0) {
-                Map<String, Object> response = new HashMap<>();
-                response.put("message", "성공적으로 등록되었습니다.");
-                return response;
-            } else {
-                throw new ZeroAffectedRowException(null);
-            }
-        } catch (BadRequestException e) {
-            throw e;
-        } catch (org.springframework.dao.DataAccessException e) {                  //DUPKEY를 catch하기 위함
-            if (e instanceof org.springframework.dao.DuplicateKeyException) {       //DUPKEY를 catch하기 위함
-                throw new DuplicateKeyException("중복된 정보입니다. 입력 내용을 확인하세요.");
-            } else {
-                throw new DataAccessException(null,e);
-            }
-        }
-    }
-
+    
     // 사용자 정보 업데이트
     public Map<String, Object> updateUser(Map<String, Object> request) {
         try {
-            String table = (String) request.get("table");
-            if (table == null || table == "") {
-                throw new BadRequestException("오류 : Table 파라메터가 null입니다.");
-            }
-            int affectedRows = 0;
-            if ("user".equals(table)) {
-                affectedRows =  userMapper.updateUser(request);
-            } else if ("admin".equals(table)) {
-                affectedRows =  adminMapper.updateUser(request);
-            } else {
-                throw new BadRequestException("오류 : Table 파라메터 : "+table);     
-            }
+            int affectedRows =  userMapper.updateUser(request);
             if (affectedRows > 0) {
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", "성공적으로 수행되었습니다.");

@@ -4,25 +4,27 @@ import com.bidsystem.bid.mapper.BidMapper;
 import com.bidsystem.bid.mapper.MatchMapper;
 import com.bidsystem.bid.service.ExceptionService.*;
 
-import java.sql.Timestamp;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.sql.Timestamp;
 
 @Service
 public class BidService {
     private static final Logger logger = LoggerFactory.getLogger(BidService.class); 
+    
     @Autowired
     private BidMapper bidMapper;
-    
+
 
     @Autowired
     private MatchMapper matchMapper;
@@ -118,67 +120,6 @@ public class BidService {
         }
     }
 
-    @Transactional
-    public Map<String, Object> updateBidPayment(Map<String, Object> params) {
-
-        String telno = (String) params.get("telno");
-        if (telno == null) {
-            throw new java.lang.IllegalArgumentException("telno가 null입니다.");
-        }
-
-        // 입찰 금액 추출 및 검증
-        Integer bidAmount = null;
-        if (params.get("bidAmount") instanceof Integer) {
-            bidAmount = (Integer) params.get("bidAmount");
-        } else if (params.get("bidAmount") instanceof String) {
-            try {
-                bidAmount = Integer.parseInt((String) params.get("bidAmount"));
-            } catch (NumberFormatException e) {
-                throw new java.lang.IllegalArgumentException("오류 : bidAmount값 무효.");
-            }
-        }
-        if (bidAmount == null) {
-            throw new java.lang.IllegalArgumentException("오류 : BidAmount 값이 null입니다.");
-        }
-
-        // 거래 ID 추출 및 검증
-        String tid = (String) params.get("tid");
-        if (tid == null) {
-            throw new java.lang.IllegalArgumentException("시스템 오류 : tid값이 null입니다.");
-        }
-
-        // 결제 방법 추출 및 검증
-        String payMethod = (String) params.get("payMethod");
-        if (payMethod == null) {
-            throw new java.lang.IllegalArgumentException("시스템 오류 : payMethod값이 null입니다.");
-        }
-  
-        try {
-            Map<String, Object> updateParams = Map.of(
-                "telno", telno,
-                "bidAmount", bidAmount,
-                "tid", tid,
-                "payMethod", payMethod
-            );
-            
-            // 낙찰된 건에 대해 지불방법과 거래 ID 갱신 
-            int rowsaffected = bidMapper.updatePayment(updateParams);
-            if (rowsaffected  == 0) {
-                throw new NotFoundException("Error in finding bids data for updating payment infomation");
-            }
-            else {
-                Map<String, Object> response = new HashMap<>();
-                response.put("message", rowsaffected+"건의 지불내용이 성공적으로 수정되었습니다.");  
-                return response;
-            }
-        } catch (java.lang.IllegalArgumentException | NotFoundException e) {
-            throw e;
-        
-        } catch (Exception e) {
-            throw new DataAccessException(null,e);
-        }
-    }
-
     @Transactional(rollbackFor = Exception.class)
     public List<Map<String, Object>> submitBids(Map<String, Object> params) {
         List<Map<String, Object>> bidArray = (List<Map<String, Object>>) params.get("bidArray");
@@ -191,7 +132,7 @@ public class BidService {
             throw new BadRequestException(null);
         }
         
-        //입찰된 좌석건별로 데이터 포멧 체므 반복 수행
+        //입찰된 좌석건별로 데이터  반복 수행
         int bidAmount = 0;
         for (Map<String, Object> bid : bidArray) {
             Object seatNoObj = bid.get("seatNo");

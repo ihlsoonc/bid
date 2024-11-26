@@ -1,0 +1,71 @@
+
+jwt:
+  secret: "1@Ml9demE7lEwK#zc3v5X!d29yM6s8@j#DYSycrhk0fYm1HdU!TyGv14SSIpdf" # 토큰 서명에 사용할 비밀 키
+  expiration: 3600000       # Access Token 유효 기간 (밀리초, 1시간)
+
+# 카카오 알림톡 (이것만 사용함)
+alimtalk:
+  tokenUrl: https://www.biztalk-api.com/v2/auth/getToken
+  sendUrl: https://www.biztalk-api.com/v2/kko/sendAlimTalk
+  resultUrl: https://www.biztalk-api.com/v2/kko/getResultAll
+  bsid: wisam
+  passwd: b14c2d414288409ff3948159e1b9306c7c48a302
+  senderKey: 4946de9fe9945a158bf5b9a47c8bbc7e6d3ceeb5
+  templateCode: bidawardnotice
+  countryCode: "82"
+  # excel로 제공된 정보
+  clientId : "wisam"          
+  clientSecret : "66fd8d80344a5bb4b28f85ee02cd378178bacf8e"
+
+# coolsms 인증번호 전송용
+coolsms:
+  apiKey: "NCS547958B8DCD89"          # coolsms key
+  apiSecretKey: "0FC78662787861FB62E9349FDA63A75B" # coolsms secret-key
+  sendProfileKey : "66fd8d80344a5bb4b28f85ee02cd378178bacf8e"
+  provider: "https://api.coolsms.co.kr" # coolsms provider
+  sender: "024475967"                 # coolsms 발신자 번호
+  expirationTimeInMinutes: 3          # 만료 시간(분 단위)
+
+# inicis 전송용
+inicis:
+  params:
+    version: "1.0"
+    mid: "INIpayTest"
+    currency: "WON"
+    acceptMethod: "HPP(1):va_receipt:below1000:centerCd(Y)"
+    gopayMethod: "Card:DirectBank:VBank:HPP"
+    signKey: "SU5JTElURV9UUklQTEVERVNfS0VZU1RS"
+    useChkFake: "Y"
+
+  idcName:
+    fc: "fc"
+    ks: "ks"
+    stg: "stg"
+
+  returnUrls:
+    return: "http://localhost:5000/api/pgreturn"
+    returnMobile: "http://localhost:5000/api/pgreturn-mobile"
+    close: "http://localhost:5000/api/pgclose"
+    redirect: "http://localhost:9000/bidseats"
+    login: "http://localhost:9000/userlogin"
+
+  views:
+    request: "INIstdpay_pc_req"
+    return: "INIstdpay_pc_return"
+    requestMobile: "INImobile_mo_req"        # 결제창 시작 전 확인 화면
+    returnMobile: "INImobile_mo_return"     # 승인 후 리턴 화면
+    close: "close"
+    error: "error"
+
+  urls:
+    auth:
+      fc: "https://fcstdpay.inicis.com/api/payAuth"
+      ks: "https://ksstdpay.inicis.com/api/payAuth"
+      stg: "https://stgstdpay.inicis.com/api/payAuth"
+      default: "https://defaultstdpay.inicis.com/api/payAuth"
+    netCancel:
+      fc: "https://fcstdpay.inicis.com/api/netCancel"
+      ks: "https://ksstdpay.inicis.com/api/netCancel"
+      stg: "https://stgstdpay.inicis.com/api/netCancel"
+      default: "https://defaultstdpay.inicis.com/api/netCancel"
+

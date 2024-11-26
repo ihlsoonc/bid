@@ -167,7 +167,6 @@
             b.bid_at,
             b.bid_won,
             b.bid_paid,
-            b.bid_pay_method,
             (SELECT MAX(bid_amount)
              FROM bids
              WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
@@ -190,7 +189,6 @@
             b.bid_at,
             b.bid_won,
             b.bid_paid,
-            b.bid_pay_method,
             (SELECT MAX(bid_amount)
             FROM bids
             WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
@@ -226,15 +224,21 @@
         VALUES (#{matchNumber}, #{seatNo}, #{telno}, #{bidAmount}, #{bidAt});
     </insert>
 
-
-    <!-- 낙찰된 건에 대해 지불방법과 거래 ID 갱신 -->
-    <update id="updatePayment" parameterType="hashmap" >
+    <!-- 낙찰건에 결제 요청 oid 기록 -->
+    <update id="updateBidOid" parameterType="hashmap" >
         UPDATE bids
-        SET bid_paid = 'Y',
-            bid_tid = #{tid},
-            bid_pay_method = #{payMethod}
+        SET pay_oid = #{oid}
         WHERE bid_telno = #{telno}
-        AND bid_won = 'Y'
+            AND match_no = #{matchNumber}
+            AND bid_won = 'Y';
+    </update>
+
+
+    <!-- 승인된 건에 대해 결제완료 flag 갱신 -->
+    <update id="updateBidPayment" parameterType="hashmap" >
+        UPDATE bids
+        SET bid_paid = 'Y'
+        WHERE pay_oid = #{oid}
     </update>
 
 </mapper>

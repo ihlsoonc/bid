@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CounterService {
 
     // AtomicInteger로 스레드 안전한 카운터 생성
-    private final AtomicInteger counter = new AtomicInteger(0);
+    private AtomicInteger counter = new AtomicInteger(0);
 
     /**
      * 현재 카운터 값을 반환

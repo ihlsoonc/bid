@@ -52,8 +52,8 @@ public class PgCommon {
         public static final String RETURN = "INIstdpay_pc_return";
         public static final String REQUEST_MOBILE = "INImobile_mo_req";        // 결제창 시작 전 확인 화면
         public static final String RETURN_MOBILE = "INImobile_mo_return";    // 승인 후 리턴 화면
-        public static final String CLOSE = "close";
-        public static final String ERROR = "error";
+        public static final String CLOSE = "pgclose";
+        public static final String ERROR = "pgerror";
     }
 
     // 결제 요청 파라미터에서 전화번호가 있는지 확인

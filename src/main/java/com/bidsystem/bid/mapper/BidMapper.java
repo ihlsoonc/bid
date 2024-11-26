@@ -37,8 +37,11 @@ public interface BidMapper {
     // 낙찰 처리
     int awardBids(Map<String, Object> params);
 
+    // 낙찰건에 결제 요청 oid 기록
+    int updateBidOid(Map<String, Object> params);
+
     // 지불 후 입찰 내역에 지불 정보 갱신
-    int updatePayment(Map<String, Object> params);
+    int updateBidPayment(Map<String, Object> params);
 
     // 입찰 기록 삭제
     int deleteAllBids(Map<String, Object> params);

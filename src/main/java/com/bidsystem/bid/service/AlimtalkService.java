@@ -6,10 +6,9 @@ import com.bidsystem.bid.service.ExceptionService.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.tomcat.util.http.parser.Authorization;
-import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,11 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -40,22 +35,56 @@ public class AlimtalkService {
     private BidMapper bidMapper;
 
     // RestTemplate 빈을 생성
-    private final RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate = new RestTemplate();
 
-    // EXCEL에 있는 정보 (현재 사용하지 않음)
-    // private static final String CLIENT_ID = "wisam"; 
-    // private static final String CLIENT_SECRET = "66fd8d80344a5bb4b28f85ee02cd378178bacf8e";
+    // appl
+    @Value("${alimtalk.token-url}")
+    private String TOKEN_URL;
 
-    public static class ALIMTALK {
-        public static final String TOKEN_URL = "https://www.biztalk-api.com/v2/auth/getToken";
-        public static final String SEND_URL = "https://www.biztalk-api.com/v2/kko/sendAlimTalk"; 
-        public static final String RESULT_URL = "https://www.biztalk-api.com/v2/kko/getResultAll"; 
-    }
-    private static final String BSID = "wisam";
-    private static final String PASSWD = "b14c2d414288409ff3948159e1b9306c7c48a302";
-    private static final String SENDER_KEY = "4946de9fe9945a158bf5b9a47c8bbc7e6d3ceeb5";
-    private static final String TEMPLATE_CODE = "bidawardnotice";
-    private static final String COUNTRY_CODE = "82";
+    @Value("${alimtalk.send-url}")
+    private String SEND_URL;
+
+    @Value("${alimtalk.result-url}")
+    private String RESULT_URL;
+
+    @Value("${alimtalk.bsid}")
+    private String BSID;
+
+    @Value("${alimtalk.passwd}")
+    private String PASSWD;
+
+    @Value("${alimtalk.sender-key}")
+    private String SENDER_KEY;
+
+    @Value("${alimtalk.template-code}")
+    private String TEMPLATE_CODE;
+
+    @Value("${alimtalk.country-code}")
+    private String COUNTRY_CODE;
+
+    // 필요한 경우 메서드 추가
+
+    // // 각 필드를 final로 선언
+    // private final String TOKEN_URL;
+    // private final String SEND_URL;
+    // private final String RESULT_URL;
+    // private final String BSID;
+    // private final String PASSWD;
+    // private final String SENDER_KEY;
+    // private final String TEMPLATE_CODE;
+    // private final String COUNTRY_CODE;
+
+    // // 생성자를 통해 초기화
+    // public AlimtalkService(AlimtalkProperties alimtalkProperties) {
+    //     this.TOKEN_URL = alimtalkProperties.getTokenUrl();
+    //     this.SEND_URL = alimtalkProperties.getSendUrl();
+    //     this.RESULT_URL = alimtalkProperties.getResultUrl();
+    //     this.BSID = alimtalkProperties.getBsid();
+    //     this.PASSWD = alimtalkProperties.getPasswd();
+    //     this.SENDER_KEY = alimtalkProperties.getSenderKey();
+    //     this.TEMPLATE_CODE = alimtalkProperties.getTemplateCode();
+    //     this.COUNTRY_CODE = alimtalkProperties.getCountryCode();
+    // }
 
     @SuppressWarnings("deprecation")
     public String getAccessToken() {
@@ -80,7 +109,7 @@ public class AlimtalkService {
             System.out.println("HttpEntity 생성 완료: " + entity);
     
             // POST 요청 수행
-            ResponseEntity<String> response = restTemplate.exchange(ALIMTALK.TOKEN_URL, HttpMethod.POST, entity, String.class);
+            ResponseEntity<String> response = restTemplate.exchange(TOKEN_URL, HttpMethod.POST, entity, String.class);
     
             // 응답 상태 코드 확인
             if (response.getStatusCodeValue() != 200) {
@@ -230,7 +259,7 @@ public void sendOneAlimTalk(String alimMessage, String telno, String token) {
     // 알림톡 전송 요청
     System.out.println("\n알림톡 전송 요청 시작");
     try{
-        ResponseEntity<String> response = restTemplate.exchange(ALIMTALK.SEND_URL, HttpMethod.POST, entity, String.class);
+        ResponseEntity<String> response = restTemplate.exchange(SEND_URL, HttpMethod.POST, entity, String.class);
         // 응답 상태 확인
         System.out.println("알림톡 전송 결과: " + response.getBody());
         if (response.getStatusCode() == HttpStatus.OK) {
@@ -252,7 +281,7 @@ public void sendOneAlimTalk(String alimMessage, String telno, String token) {
     //     headers.set("bt-token", token);
 
     //     HttpEntity<String> entity = new HttpEntity<>(headers);
-    //     ResponseEntity<String> response = restTemplate.exchange(ALIMTALK.RESULT_URL, HttpMethod.GET, entity, String.class);
+    //     ResponseEntity<String> response = restTemplate.exchange(RESULT_URL, HttpMethod.GET, entity, String.class);
 
     //     Map<String, Object> resultMap = new HashMap<>();
     //     int successCount = 0;

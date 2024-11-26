@@ -69,7 +69,7 @@
                     </div>
                 </form>
                 
-                <button onclick="location.href='http://localhost:9000/bidseats?telno=${telno}'" class="btn_solid_pri col-6 mx-auto btn_lg" style="margin-top:50px">돌아가기</button>
+                <button onclick="location.href='http://localhost:5000/bidseats'" class="btn_solid_pri col-6 mx-auto btn_lg" style="margin-top:50px">돌아가기</button>
             </div>
         </section>
         
