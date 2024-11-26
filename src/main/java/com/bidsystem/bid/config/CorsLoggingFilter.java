@@ -1,4 +1,4 @@
-package com.bidsystem.bid;
+package com.bidsystem.bid.config;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpFilter;
