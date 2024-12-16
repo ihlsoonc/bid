@@ -3,12 +3,15 @@ package com.bidsystem.bid.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+/*
+ * 사용자 테이블블
+ */
 @Entity
-@Table(name = "biduser") // 테이블 이름
+@Table(name = "biduser")
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성 전략
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성
     private Long id; // 엔티티의 고유 식별자
     private String username; // 사용자 이름
     private String email;    // 이메일

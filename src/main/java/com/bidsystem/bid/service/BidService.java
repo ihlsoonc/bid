@@ -18,6 +18,35 @@ import java.util.List;
 import java.util.Map;
 import java.sql.Timestamp;
 
+/* 주요 메서드 설명 */
+/* 1. getBidsBySeatArray(Map<String, Object> params):
+      - 특정 좌석 배열에 대한 입찰 정보를 조회 */
+
+/* 2. getMyBids(Map<String, Object> params):
+      - 특정 사용자의 입찰 내역 조회 */
+
+/* 3. getBidTallies(Map<String, Object> params):
+      - 좌석별 입찰 통계 정보 조회 */
+
+/* 4. getAllBids(Map<String, Object> params):
+      - 전체 입찰 정보 조회 */
+
+/* 5. getHighestBids(Map<String, Object> params):
+      - 좌석별 최고 입찰 내역 조회 */
+
+/* 6. getMyLastBids(Map<String, Object> params):
+      - 특정 사용자의 좌석별 마지막 입찰 내역 조회 */
+
+/* 7. submitBids(Map<String, Object> params):
+      - 사용자로부터 전달받은 입찰 데이터를 처리하고, 각 좌석에 대해 성공 여부를 반환
+      - DB 갱신시점 직전에 좌석별 최고 입찰 금액을 조회하여 금액액보다 낮은 입찰은 실패로 처리
+      - 입찰 성공 시 데이터를 DB에 기록 */
+      
+/* 8. awardBids(Map<String, Object> params):
+      - 특정 경기의 입찰을 낙찰 처리하고, 관련 상태를 업데이트
+      - 경기의 낙찰 처리 상태 flag를를 업데이트
+      - 낙찰된 입찰 건수 반환 */
+
 @Service
 public class BidService {
     private static final Logger logger = LoggerFactory.getLogger(BidService.class); 

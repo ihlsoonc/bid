@@ -10,6 +10,34 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
+/* 주요 메서드 설명 */
+/* - getVenueByCode(Map<String, Object> params):
+       특정 경기장 정보를 코드 기반으로 조회
+       조회된 결과가 없으면 `NotFoundException` 발생 */
+
+/* - getAllVenues(Map<String, Object> params):
+       모든 경기장 정보를 조회
+       결과가 없으면 `NoDataException` 발생 */
+
+/* - addVenue(Map<String, Object> params):
+       새로운 경기장을 추가
+       주요 기능:
+         . 성공적으로 추가되면 확인 메시지를 반환
+         . 중복된 정보가 있으면 `DuplicateKeyException` 발생
+         . 추가 실패 시 `ZeroAffectedRowException` 발생 */
+
+/* - updateVenue(Map<String, Object> params):
+       기존 경기장 정보를 수정
+       주요 기능:
+         . 수정 성공 시 확인 메시지를 반환
+         . 수정 실패 시 `NotFoundException` 발생 */
+
+/* - deleteVenue(Map<String, Object> params):
+       특정 경기장을 삭제
+       주요 기능:
+         . 삭제 성공 시 확인 메시지를 반환
+         . 삭제 실패 시 `NotFoundException` 발생 */
+
 @Service
 public class VenueService {
 

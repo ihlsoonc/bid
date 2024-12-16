@@ -16,8 +16,8 @@ import java.util.Map;
 public class SessionService {
 
     // 세션 변수 설정 함수
-    public void setSessionAttributes(HttpSession session, String userClass, String userId, String telno, String role, String userName) {
-        session.setAttribute("userClass", userClass);
+    public void setSessionAttributes(HttpSession session, String userContext, String userId, String telno, String role, String userName) {
+        session.setAttribute("userContext", userContext);
         session.setAttribute("userId", userId);
         session.setAttribute("telno", telno);
         session.setAttribute("userName", userName);
@@ -62,7 +62,7 @@ public class SessionService {
         }
 
         // 세션에서 사용자 정보를 가져옴
-        String userClass = (String) session.getAttribute("userClass");
+        String userContext = (String) session.getAttribute("userContext");
         String userId = (String) session.getAttribute("userId");
         String telno = (String) session.getAttribute("telno");
         String role = (String) session.getAttribute("role");
@@ -71,7 +71,7 @@ public class SessionService {
         if (telno != null) {
             // 사용자 정보가 존재하면 성공 응답을 반환
             response.put("status", "success");
-            response.put("userClass", userClass);
+            response.put("userContext", userContext);
             response.put("userId", userId);
             response.put("telno", telno);
             response.put("role", role);
@@ -117,7 +117,7 @@ public Map<String, Object> clearSession(HttpSession session, HttpServletResponse
 
 // 세션 복원 함수 
 public Map<String, Object> restoreSession(Map<String, Object> request, HttpServletRequest httpRequest, HttpSession session, HttpServletResponse httpResponse) {
-    String userClass = (String) request.get("userClass");
+    String userContext = (String) request.get("userContext");
     String userId = (String) request.get("userId");
     String telno = (String) request.get("telno");
     String role = (String) request.get("role");
@@ -127,7 +127,7 @@ public Map<String, Object> restoreSession(Map<String, Object> request, HttpServl
         // 세션이 없으면 새로 생성
         session = httpRequest.getSession(true);
     }
-    setSessionAttributes( session, userClass,
+    setSessionAttributes( session, userContext,
       userId,  telno,  role,  userName);
     setLoginCookie(session, httpResponse);
 

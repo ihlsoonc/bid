@@ -1,7 +1,8 @@
 package com.bidsystem.bid.service;
 
-import com.bidsystem.bid.service.PgCommon.*;
+// import com.bidsystem.bid.service.PgUtil.*;
 import com.bidsystem.bid.mapper.PaymentMapper;
+import com.bidsystem.bid.config.PgProperties;
 import com.bidsystem.bid.mapper.BidMapper;
 import com.bidsystem.bid.service.ExceptionService.*;
 
@@ -19,12 +20,45 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 import java.util.Map;
 
+/* 주요 메서드 설명 */
+/* 1. pgStartMobile(Map<String, Object> request):
+      - 모바일 결제 요청을 처리하는 메서드
+      - 주요 기능:
+        1) 전화번호 유효성 검사 및 사용자 정보 조회
+        2) 고유한 거래 ID(oid) 생성
+        3) 결제 요청 데이터를 구성하여 `payments` 테이블에 기록
+        4) 입찰 데이터에 거래 ID를 기록(bids 테이블 업데이트)
+        5) 결제 요청 데이터를 반환하여 JSP 뷰 호출 */
+
+/* 2. pgReturnMobile(String request):
+      - 모바일 결제 요청에 대한 응답 데이터를 처리하고, 승인 요청을 진행하는 메서드
+      - 주요 기능:
+        1) 결제 응답 데이터를 URL 파라미터에서 추출
+        2) 응답 상태(P_STATUS)가 성공("00")인지 확인
+        3) 승인 요청 URL(P_REQ_URL) 및 옵션 설정
+        4) 승인 요청 API 호출 및 결과 처리
+        5) 승인 결과 데이터를 `payments` 테이블에 저장
+        6) 승인 결과를 `payments` 테이블에 기록 */
+
+/* 기타:
+/* - PgUtil 및 UtilService:
+      - 결제 요청 데이터 검증, 서명 생성, URL 파라미터 변환 등의 유틸리티 기능 제공 */
+/* - PgProperties:
+      - 결제 서비스 설정(예: MID, 반환 URL, 요청 URL)을 관리 */
+/* - BidMapper 및 PaymentMapper:
+      - 입찰 및 결제 데이터베이스 작업 수행 */
+
+
 @Service
 public class PgServiceMobile {
     private static final Logger logger = LoggerFactory.getLogger(BidService.class); 
 
     @Autowired
-    private PgCommon pgInterfaceCommon;
+    private PgUtil pgUtil;
+
+    
+    @Autowired
+    private UtilService utilService;
 
     @Autowired
     private UserService userService;
@@ -34,12 +68,19 @@ public class PgServiceMobile {
 
     @Autowired
     private PaymentMapper paymentMapper;
+    private final PgProperties pgProperties;
+    
+    @Autowired
+    public PgServiceMobile(PgProperties pgProperties) {
+        this.pgProperties = pgProperties;
+    }
+
 
     //결제 요청
     public ModelAndView pgStartMobile(Map<String, Object> request) {
         try {
             // 전화번호 유효성 검사
-            pgInterfaceCommon.validateRequestParameters(request); 
+            pgUtil.validateRequestParameters(request); 
 
             //결제요청에 필요한 사용자 DB정보 조회
             request.put("table", "user");
@@ -52,7 +93,7 @@ public class PgServiceMobile {
 
             //oid를 MID와 timestamp로 unique하게 구성
             String timestamp = Long.toString(System.currentTimeMillis());
-            String oid = PgParams.MID + "_" + timestamp;
+            String oid = pgProperties.getParam("mid") + "_" + timestamp;
     
             // 요청 전문 구성
             ModelAndView payRequest = new ModelAndView();
@@ -63,12 +104,12 @@ public class PgServiceMobile {
             payRequest.addObject("P_UNAME", userInfo.get("username"));  // 사용자 DB정보
             payRequest.addObject("P_MOBILE", userInfo.get("telno"));    // 사용자 DB정보
             payRequest.addObject("P_EMAIL", userInfo.get("email"));    // 사용자 DB정보
-            payRequest.addObject("P_NEXT_URL", Urls.RETURN_MOBILE);
+            payRequest.addObject("P_NEXT_URL", pgProperties.getReturnUrl("returnMobile"));
             payRequest.addObject("P_NOTI_URL", "");   // 가상계좌입금통보 URL 가상계좌 결제 시 필수
             payRequest.addObject("P_HPP_METHOD", "1"); // 휴대폰결제 상품유형 [1:컨텐츠, 2:실물]
-            payRequest.addObject("P_MID", PgParams.MID);
+            payRequest.addObject("P_MID", pgProperties.getParam("mid"));
             payRequest.addObject("P_OID", oid); 
-            payRequest.setViewName(Views.REQUEST_MOBILE);
+            payRequest.setViewName(pgProperties.getView("requestMobile"));
             Map<String, Object> modelMap = payRequest.getModel();
 
             // 결제 요청 정보를 payments table 에 기록     
@@ -80,6 +121,9 @@ public class PgServiceMobile {
             updateParams.put("matchNumber", request.get("matchNumber"));
             updateParams.put("oid", oid);
             int affectedRows = bidMapper.updateBidOid(updateParams);
+            if (affectedRows == 0) {
+                throw new ZeroAffectedRowException("시스템 오류 : 결제 요청중 오류가 발생하였습니다. updateBidOid오류");
+            }
 
             // 결제창 호출을 위한 JSP화면 호출        
             return payRequest;
@@ -96,7 +140,7 @@ public class PgServiceMobile {
         // URL 인코딩된 문자열을 Map<String, String>으로 변환
         Map<String, String> params;
         try{
-            params = pgInterfaceCommon.parseQueryString(request);      
+            params = utilService.parseQueryString(request);      
         } catch (Exception e) {
             throw new UnsupportedEncodingException("Error in parging querysting in pgReturn Mobile", e);
         }
@@ -107,7 +151,7 @@ public class PgServiceMobile {
 
         //== inicis에서 제공한 샘플 코드는 아래와 같이 property에서 가져오지만 오류가 발생하여 함수로 변경함 ==  
         // String expectedUrl = ResourceBundle.getBundle("properties/idc_name.mobile").getString(idc_name);
-        String expectedUrl = pgInterfaceCommon.getMobilePayReqUrl(idc_name);
+        String expectedUrl = pgProperties.getUrl("mobilePayReq",idc_name);
 
         String P_REQ_URL = params.get("P_REQ_URL");
         String P_STATUS = params.get("P_STATUS");
@@ -122,30 +166,30 @@ public class PgServiceMobile {
                 approveData.addObject(entry.getKey(), entry.getValue());
             }
 
-            approveData.setViewName(Views.RETURN_MOBILE); 
+            approveData.setViewName(pgProperties.getView("returnMobile")); 
             return approveData;
         }
         
         // 결제요청 응답의  "P_STATUS"가 00일 경우 처리(요청 성공)
         // 승인 요청 옵션 설정
         Map<String, Object> options = new HashMap<>();
-        String P_MID = PgParams.MID;       
+        String P_MID = pgProperties.getParam("mid");       
         if (P_TID.length() >= 20) {
             try {
                 P_MID = P_TID.substring(10, 20);
-                System.out.println("P_MID: " + P_MID);
+                logger.info("P_MID: " + P_MID);
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("문자열의 길이가 충분하지 않습니다: " + e.getMessage());
+                logger.info("문자열의 길이가 충분하지 않습니다: " + e.getMessage());
             }
         } else {
-            System.out.println("P_TID의 길이가 충분하지 않습니다.");
+            logger.info("P_TID의 길이가 충분하지 않습니다.");
         }
         P_REQ_URL = P_REQ_URL + "?P_TID=" + P_TID + "&P_MID=" + P_MID;
         options.put("P_MID", P_MID);
         options.put("P_TID", P_TID);
         try{
             //----------------------- 승인 요청 하기
-            String urlEncodedOptions = pgInterfaceCommon.convertToUrlEncodedString(options);
+            String urlEncodedOptions = utilService.convertToUrlEncodedString(options);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest requestToInicis = HttpRequest.newBuilder()
                     .uri(URI.create(P_REQ_URL))
@@ -155,10 +199,10 @@ public class PgServiceMobile {
 
             // 응답 받기
             HttpResponse<String> response = client.send(requestToInicis, HttpResponse.BodyHandlers.ofString());
-            String jsonString = pgInterfaceCommon.convertQueryStringToJson(response.body());
+            String jsonString = utilService.convertQueryStringToJson(response.body());
 
             // JSON 문자열을 Map으로 변환
-            Map<String, String> approveData = pgInterfaceCommon.convertJsonToMap(jsonString);
+            Map<String, String> approveData = utilService.convertJsonToMap(jsonString);
 
             // Map<String, String>을 Map<String, Object>로 변환하여 데이터베이스에 저장
             Map<String, Object> modelMap = new HashMap<>(approveData);
@@ -167,7 +211,7 @@ public class PgServiceMobile {
             paymentMapper.saveMobileApproval(modelMap);
 
             // Debugging 용   
-            // pgInterfaceCommon.printMap(modelMap);        
+            // pgUtil.printMap(modelMap);        
 
             ModelAndView errorView = new ModelAndView();
             P_STATUS = (String) approveData.get("P_STATUS");
@@ -176,7 +220,7 @@ public class PgServiceMobile {
             if (!"00".equals(P_STATUS)) {
                 errorView.addObject("resultCode", P_STATUS);
                 errorView.addObject("errorMessage", P_RMESG1);
-                errorView.setViewName(Views.ERROR); 
+                errorView.setViewName(pgProperties.getView("error")); 
                 return errorView;
             }
             
@@ -197,19 +241,19 @@ public class PgServiceMobile {
                 String errorMessageSub = e.getMessage();
                 logger.error("\n\n++ 승인 완료, 입찰정보에 승인 여부 갱신 중 오류가 발생하였습니다."+ errorMessageSub, e);
                 modelAndView.addObject("errorMsg", "승인 되었습니다.  완료 처리 중 오류가 발생하였습니다. 관리자에게 문의하세요.");
-                modelAndView.setViewName(Views.ERROR); 
+                modelAndView.setViewName(pgProperties.getView("error")); 
                 return modelAndView;
             }
 
             // printModelAndView(modelAndView);            //debug용도///////
-            modelAndView.setViewName(Views.RETURN_MOBILE); 
+            modelAndView.setViewName(pgProperties.getView("returnMobile")); 
             return modelAndView;
 
         } catch (Exception e) {
             ModelAndView errorAndView = new ModelAndView();
             logger.error("\n\n------------------- Error in pgRetutn " , e);
             errorAndView.addObject("errorMessage", "Error occured in approval request.");
-            errorAndView.setViewName(Views.ERROR);
+            errorAndView.setViewName(pgProperties.getView("error"));
             return errorAndView;
         }
     }

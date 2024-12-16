@@ -35,7 +35,6 @@ public class VenueController {
     public ResponseEntity<Map<String, Object>> addVenue(@RequestBody Map<String, Object> request) {
         Map<String, Object> result = venueService.addVenue(request); 
         return ResponseEntity.ok(result);
-
     }
 
     // 경기장 수정

@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
+/*
+ * vue client를 build한 후 적용됨, 모든 request를 index.html로 포워딩
+ */
 @Controller
 public class SpaController {
 
@@ -17,7 +19,7 @@ public class SpaController {
 
         @GetMapping("/{path:[^\\.]*}")
         public String home() {
-            return "forward:/index.html"; // static/index.html로 포워딩
+            return "forward:/index.html"; 
         }
     }
 }

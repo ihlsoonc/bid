@@ -1,4 +1,4 @@
-package com.bidsystem.bid.jwt;
+package com.bidsystem.bid.service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -9,28 +9,71 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.bidsystem.bid.config.SecurityConfig;
 import com.bidsystem.bid.entity.RefreshEntity;
 import com.bidsystem.bid.repository.RefreshRepository;
 
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/* 주요 메서드 설명 */
+/* 1. JWTUtil 생성자:
+      - JWT 비밀 키를 설정하고 `RefreshRepository`를 초기화
+      - 비밀 키는 애플리케이션 속성에서 주입 */
+
+/* 2. getCategory(String token):
+      - JWT에서 "category" 클레임 값을 추출 */
+
+/* 3. getUsername(String token):
+      - JWT에서 "username" 클레임 값을 추출 */
+
+/* 4. getRole(String token):
+      - JWT에서 "role" 클레임 값을 추출 */
+
+/* 5. isExpired(String token):
+      - JWT의 만료 날짜를 확인하여 토큰이 만료되었는지 여부를 반환 */
+
+/* 6. createJwt(String category, String username, String role, Long expiredMs):
+      - 주어진 클레임과 만료 시간을 기반으로 JWT를 생성
+      - 생성된 JWT를 문자열로 반환 */
+
+/* 7. addRefreshEntity(String username, String refresh, Long expiredMs):
+      - Refresh 토큰 정보를 `RefreshEntity` 객체로 생성하여 데이터베이스에 저장
+      - 만료 시간은 현재 시간에서 설정된 밀리초를 더한 값 */
+
+/* 8. createCookie(String key, String value, int maxAge):
+      - 주어진 이름(key)과 값(value)으로 HTTP 전용 쿠키를 생성
+      - `maxAge`는 쿠키의 만료 시간을 초 단위로 설정 */
+      
+/* 9. getRefreshTokenFromCookies(HttpServletRequest request, String cookieName):
+      - HTTP 요청의 쿠키 배열에서 지정된 이름의 쿠키 값을 추출
+      - 쿠키가 없거나 이름이 일치하지 않을 경우 `null`을 반환 */
+
 
 @Component
 public class JWTUtil {
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     private SecretKey secretKey;
     private RefreshRepository refreshRepository;
 
-    public JWTUtil( RefreshRepository refreshRepository) {
-        //토큰 생성용 key
-        String secret = "FA;1@Ml9demE7lEwK#zc3v5X!d29yM6s8@j#DYSycrhk0fYm1HdU!TyGv14SSIpdf2304147";
-        secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
+    public JWTUtil(
+            @Value("${jwt.secret}") String secret,
+            RefreshRepository refreshRepository) {
+        this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
         this.refreshRepository = refreshRepository;
     }
+
+
     public String getCategory(String token) {
       
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("category", String.class);
     }
+    
     public String getUsername(String token) {
 
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username", String.class);
@@ -58,13 +101,6 @@ public class JWTUtil {
                 .compact();
     }
 
-    /**
-     * Refresh 토큰 정보를 DB에 저장하는 메서드
-     * 
-     * @param username 사용자 이름
-     * @param refresh  Refresh 토큰
-     * @param expiredMs 만료 시간 (밀리초)
-     */
     public void addRefreshEntity(String username, String refresh, Long expiredMs) {
         Date expirationDate = new Date(System.currentTimeMillis() + expiredMs);
 
@@ -75,13 +111,7 @@ public class JWTUtil {
         refreshRepository.save(refreshEntity);
     }
 
-    /**
-     * 주어진 key와 value로 Cookie를 생성하는 메서드
-     * 
-     * @param key   쿠키 이름
-     * @param value 쿠키 값
-     * @return 생성된 Cookie 객체
-     */
+
     public Cookie createCookie(String key, String value, int maxAge) {
         Cookie cookie = new Cookie(key, value);
         cookie.setMaxAge(maxAge); // 초 단위로 설정
@@ -90,4 +120,16 @@ public class JWTUtil {
         // cookie.setPath("/"); // 필요에 따라 경로 설정
         return cookie;
     }
+
+    public String getRefreshTokenFromCookies(HttpServletRequest request, String cookieName) {
+    if (request.getCookies() != null) {
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals(cookieName)) {
+                return cookie.getValue();
+            }
+        }
+    }
+    return null; // 쿠키가 없거나 이름이 일치하지 않으면 null 반환
+    }
+
 }

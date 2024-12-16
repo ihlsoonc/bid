@@ -37,6 +37,16 @@
             <version>3.0.1</version>
         </dependency>
 
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>3.5.13</version> <!-- 최신 버전 사용 -->
+    </dependency>
+
+
+
+
+
         <!-- MariaDB Driver -->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
@@ -99,6 +109,7 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
          </dependency>
+         
         <!-- coolSMS -->
         <dependency>
             <groupId>net.nurigo</groupId>

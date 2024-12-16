@@ -6,7 +6,7 @@
 <mapper namespace="com.bidsystem.bid.mapper.SeatPriceMapper">
 
     <!-- 좌석별 가격 조회 -->
-    <select id="getSeatPrice" parameterType="hashmap" resultType="hashmap">
+    <select id="getSeatPrices" parameterType="hashmap" resultType="hashmap">
         SELECT * FROM seatprice WHERE match_no = #{matchNumber} ORDER BY CAST(seat_no AS UNSIGNED) ASC
     </select>
 

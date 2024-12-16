@@ -28,6 +28,12 @@ public interface MatchMapper {
     // 경기 추가
     int addMatch(Map<String, Object> params);
 
+    // 일괄 입찰 등록
+    int batchBid(Map<String, Object> params);
+
+    // 일괄 입찰 승인
+    int approveBatchBid(Map<String, Object> params);
+
     // 경기 수정
     int updateMatch(Map<String, Object> params);
     

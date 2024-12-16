@@ -9,6 +9,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+/* 주요 메서드 설명 */
+/* 1. verifyPassword(Map<String, Object> request):
+      - 입력된 사용자 ID와 비밀번호를 기반으로 사용자 자격을 확인
+      - 프로세스:
+        1) `UserMapper`를 사용하여 사용자 정보를 DB에서 조회
+        2) 조회된 비밀번호(암호화된 값)와 입력된 비밀번호(평문)를 비교
+        3) 비밀번호가 일치하면 사용자 정보를 반환
+        4) 비밀번호 불일치 시 `PasswordMismatchException` 발생
+        5) 사용자를 찾지 못하면 `NotFoundException` 발생 */
+
 @Service
 public class PaswordVerification {
 

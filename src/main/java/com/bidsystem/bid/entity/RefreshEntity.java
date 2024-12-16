@@ -1,14 +1,14 @@
 package com.bidsystem.bid.entity;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+
+/*
+ * refresh token기록
+ */
 
 @Entity
-@Table(name = "refresh") // 테이블 이름 지정
+@Table(name = "refresh") 
 public class RefreshEntity {
 
     @Id

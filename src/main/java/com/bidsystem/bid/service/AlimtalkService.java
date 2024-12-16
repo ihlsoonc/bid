@@ -1,6 +1,7 @@
 package com.bidsystem.bid.service;
 
 import com.bidsystem.bid.mapper.MatchMapper;
+import com.bidsystem.bid.config.AlimtalkProperties;
 import com.bidsystem.bid.mapper.BidMapper;
 import com.bidsystem.bid.service.ExceptionService.*;
 
@@ -8,7 +9,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,254 +26,211 @@ import java.util.Map;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/* 주요 메서드 설명 */
+/* 1. getAccessToken():
+      - 알림톡 API에서 인증 토큰을 가져오는 메서드
+      - 인증 토큰은 이후 메시지 전송에 필요 */
+
+/* 2. sendAlimtalkByMatch(String matchNumber, String ACCESS_TOKEN):
+      - 특정 경기 번호와 관련된 모든 낙찰자들에게 알림톡 메시지를 전송
+      - 전송 이후 해당 경기의 알림톡 전송 상태 flag를 업데이트 */
+      
+/* 3. sendOneAlimTalk(String alimMessage, String telno, String token):
+      - 단일 사용자에게 알림톡 메시지를 전송
+      - 메시지 내용과 사용자 전화번호, 인증 토큰을 사용 */
+
+
 @Service
 public class AlimtalkService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AlimtalkService.class);
+
     @Autowired
     private MatchMapper matchMapper;
     @Autowired
     private BidMapper bidMapper;
 
-    // RestTemplate 빈을 생성
+    @Autowired
+    private AlimtalkProperties alimtalkProperties;
+
     private RestTemplate restTemplate = new RestTemplate();
-
-    // appl
-    @Value("${alimtalk.token-url}")
-    private String TOKEN_URL;
-
-    @Value("${alimtalk.send-url}")
-    private String SEND_URL;
-
-    @Value("${alimtalk.result-url}")
-    private String RESULT_URL;
-
-    @Value("${alimtalk.bsid}")
-    private String BSID;
-
-    @Value("${alimtalk.passwd}")
-    private String PASSWD;
-
-    @Value("${alimtalk.sender-key}")
-    private String SENDER_KEY;
-
-    @Value("${alimtalk.template-code}")
-    private String TEMPLATE_CODE;
-
-    @Value("${alimtalk.country-code}")
-    private String COUNTRY_CODE;
-
-    // 필요한 경우 메서드 추가
-
-    // // 각 필드를 final로 선언
-    // private final String TOKEN_URL;
-    // private final String SEND_URL;
-    // private final String RESULT_URL;
-    // private final String BSID;
-    // private final String PASSWD;
-    // private final String SENDER_KEY;
-    // private final String TEMPLATE_CODE;
-    // private final String COUNTRY_CODE;
-
-    // // 생성자를 통해 초기화
-    // public AlimtalkService(AlimtalkProperties alimtalkProperties) {
-    //     this.TOKEN_URL = alimtalkProperties.getTokenUrl();
-    //     this.SEND_URL = alimtalkProperties.getSendUrl();
-    //     this.RESULT_URL = alimtalkProperties.getResultUrl();
-    //     this.BSID = alimtalkProperties.getBsid();
-    //     this.PASSWD = alimtalkProperties.getPasswd();
-    //     this.SENDER_KEY = alimtalkProperties.getSenderKey();
-    //     this.TEMPLATE_CODE = alimtalkProperties.getTemplateCode();
-    //     this.COUNTRY_CODE = alimtalkProperties.getCountryCode();
-    // }
 
     @SuppressWarnings("deprecation")
     public String getAccessToken() {
-        System.out.println("getAccessToken 메서드 시작");
-    
+        logger.info("getAccessToken 메서드 시작");
+
         String retToken = "";
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("bsid", BSID);
-        jsonObject.put("passwd", PASSWD);
-    
+        jsonObject.put("bsid", alimtalkProperties.getBsid());
+        jsonObject.put("passwd", alimtalkProperties.getPasswd());
+
         try {
-            // RestTemplate 설정
             RestTemplate restTemplate = new RestTemplate();
-    
-            // HTTP 헤더 설정
+
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-    
-            // 요청 생성
+
             HttpEntity<String> entity = new HttpEntity<>(jsonObject.toString(), headers);
-            System.out.println("HttpEntity 생성 완료: " + entity);
-    
-            // POST 요청 수행
-            ResponseEntity<String> response = restTemplate.exchange(TOKEN_URL, HttpMethod.POST, entity, String.class);
-    
-            // 응답 상태 코드 확인
+            logger.info("HttpEntity 생성 완료: {}", entity);
+
+            ResponseEntity<String> response = restTemplate.exchange(alimtalkProperties.getTokenUrl(), HttpMethod.POST, entity, String.class);
+
             if (response.getStatusCodeValue() != 200) {
-                System.out.println("getToken 응답 오류: HTTP " + response.getStatusCodeValue());
+                logger.info("getToken 응답 오류: HTTP {}", response.getStatusCodeValue());
                 return "";
             } else {
-                System.out.println("응답 상태 코드 확인 완료: 200 OK");
+                logger.info("응답 상태 코드 확인 완료: 200 OK");
             }
-    
-            // JSON 응답 파싱
+
             ObjectMapper objectMapper = new ObjectMapper();
-    
-            // JSON 문자열을 JsonNode로 파싱
+
             JsonNode responseJson = objectMapper.readTree(response.getBody());
-            System.out.println("response 파싱된 JSON 객체: " + responseJson);
-    
-            // 응답 코드 확인
+            logger.info("response 파싱된 JSON 객체: {}", responseJson);
+
             String responseCode = responseJson.get("responseCode").asText();
-            System.out.println("응답 코드(responseCode): " + responseCode);
-    
-            // 응답 코드가 1000인지 확인
+            logger.info("응답 코드(responseCode): {}", responseCode);
+
             if ("1000".equals(responseCode)) {
                 retToken = responseJson.get("token").asText();
-                System.out.println("토큰 발급 성공: " + retToken);
+                logger.info("토큰 발급 성공: {}", retToken);
             } else {
                 String errorMsg = responseJson.get("msg").asText();
-                System.out.println("토큰 발급 실패: " + responseCode + " - " + errorMsg);
+                logger.info("토큰 발급 실패: {} - {}", responseCode, errorMsg);
                 return "";
             }
         } catch (Exception e) {
             throw new ServerException("시스템 오류 : 알림톡 전송 토큰 획득에 실패하였습니다.", e);
         }
-        System.out.println("getAccessToken 메서드 종료, 반환할 토큰: " + retToken);
+        logger.info("getAccessToken 메서드 종료, 반환할 토큰: {}", retToken);
         return retToken;
     }
+    public Map<String, Object> sendAlimtalkByMatch(String matchNumber, String ACCESS_TOKEN) {
 
-    public Map<String, Object> sendAlimtalkByMatch(String matchNumber, String ACCESS_TOKEN) throws IOException {
-
+        // Logger 인스턴스 생성
+        Logger logger = LoggerFactory.getLogger(AlimtalkService.class);
+    
         // 경기 정보 구성
         Map<String, Object> matchParams = new HashMap<>();
         matchParams.put("matchNumber", matchNumber);
-
-        Map<String, Object> matchResults = matchMapper.getMatchById(matchParams);
-        String match_name = (String) matchResults.get("match_name");
-        String round_name = (String) matchResults.get("round");
-        String match_info = match_name + " " + round_name + " (" + matchNumber + ")";
-
-        // 결제시한 정보 구성
-        String pay_due ="";
-        Timestamp paydueTimestamp = (Timestamp) matchResults.get("pay_due_datetime");
-        if (paydueTimestamp != null) {
-            LocalDateTime paydueDatetime = paydueTimestamp.toLocalDateTime();
-            pay_due = paydueDatetime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        }
-
-        // 낙찰 정보 구성 - 경기별 여러 사용자의 정보로 구성됨
-        List<Map<String, Object>> bidResults = bidMapper.getAwardedBidsByMatch(matchParams);
-        System.out.println("현재 경기의 낙찰 정보 데이터 건수: " + bidResults.size());
-
-        // 전화번호별로 정보 저장
-        Map<String, String> telnoUsername = new HashMap<>();
-        Map<String, Integer> telnoBidTotal = new HashMap<>();
-        Map<String, StringBuilder> telnoBidsArray = new HashMap<>();
-
-        for (Map<String, Object> result : bidResults) {
-            // 값 추출
-            String bid_telno = result.get("bid_telno").toString();
-            String seat_no = result.get("seat_no").toString();
-            int bid_amount = Integer.parseInt(result.get("bid_amount").toString());
-            int total_bid_amount = Integer.parseInt(result.get("total_bid_amount").toString());
-            String username = result.get("username").toString();
-
-            // 전화번호별로 사용자 이름 저장
-            telnoUsername.putIfAbsent(bid_telno, username);
-
-            // 전화번호별로 입찰 총액
-            telnoBidTotal.put(bid_telno, total_bid_amount);
-
-            // 낙찰 내역 누적
-            telnoBidsArray.putIfAbsent(bid_telno, new StringBuilder());
-            telnoBidsArray.get(bid_telno).append(seat_no).append("번,  입찰액: ").append(bid_amount).append("원\n");
-        }
-
-        // 각 전화번호별로 메시지 생성 및 전송
-        for (String tel : telnoBidsArray.keySet()) {
-            String userName = telnoUsername.get(tel);
-            String bidsArray = telnoBidsArray.get(tel).toString();
-            int bidTotal = telnoBidTotal.get(tel);
-
-            // 알림톡 템플릿에 맞춘 메시지 문자열 생성
-            String message = userName + "님의 낙찰 내용을 알려드립니다.\n" +
-                            "경기 : " + match_info + "\n" +
-                            "좌석   입찰금액\n" +
-                            "--------------------------------\n" +
-                            bidsArray +
-                            "--------------------------------\n" +
-                            "총 결제 금액은 " + bidTotal + "원입니다.\n" +
-                            "결제시한 : " + pay_due;
-
-            System.out.println("\n알림톡 전송 전화번호: "+ tel+" \n\n"+  message+"\n\n");
-                
-            // 전화번호별로 메시지 전송
-            sendOneAlimTalk(message, tel, ACCESS_TOKEN);
-        }
-
         try {
+            Map<String, Object> matchResults = matchMapper.getMatchById(matchParams);
+            String match_name = (String) matchResults.get("match_name");
+            String round_name = (String) matchResults.get("round");
+            String match_info = match_name + " " + round_name + " (" + matchNumber + ")";
+    
+            // 결제시한 정보 구성
+            String pay_due = "";
+            Timestamp paydueTimestamp = (Timestamp) matchResults.get("pay_due_datetime");
+            if (paydueTimestamp != null) {
+                LocalDateTime paydueDatetime = paydueTimestamp.toLocalDateTime();
+                pay_due = paydueDatetime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            }
+    
+            // 낙찰 정보 구성 - 경기별 여러 사용자의 정보로 구성됨
+            List<Map<String, Object>> bidResults = bidMapper.getAwardedBidsByMatch(matchParams);
+            logger.info("현재 경기의 낙찰 정보 데이터 건수: {}", bidResults.size());
+    
+            // 전화번호별로 정보 저장
+            Map<String, String> telnoUsername = new HashMap<>();
+            Map<String, Integer> telnoBidTotal = new HashMap<>();
+            Map<String, StringBuilder> telnoBidsArray = new HashMap<>();
+    
+            for (Map<String, Object> result : bidResults) {
+                // 값 추출
+                String bid_telno = result.get("bid_telno").toString();
+                String seat_no = result.get("seat_no").toString();
+                int bid_amount = Integer.parseInt(result.get("bid_amount").toString());
+                int total_bid_amount = Integer.parseInt(result.get("total_bid_amount").toString());
+                String username = result.get("username").toString();
+    
+                // 전화번호별로 사용자 이름 저장
+                telnoUsername.putIfAbsent(bid_telno, username);
+    
+                // 전화번호별로 입찰 총액
+                telnoBidTotal.put(bid_telno, total_bid_amount);
+    
+                // 낙찰 내역 누적
+                telnoBidsArray.putIfAbsent(bid_telno, new StringBuilder());
+                telnoBidsArray.get(bid_telno).append(seat_no).append("번,  입찰액: ").append(bid_amount).append("원\n");
+            }
+    
+            // 각 전화번호별로 메시지 생성 및 전송
+            for (String tel : telnoBidsArray.keySet()) {
+                String userName = telnoUsername.get(tel);
+                String bidsArray = telnoBidsArray.get(tel).toString();
+                int bidTotal = telnoBidTotal.get(tel);
+    
+                // 알림톡 템플릿에 맞춘 메시지 문자열 생성
+                String message = userName + "님의 낙찰 내용을 알려드립니다.\n" +
+                                "경기 : " + match_info + "\n" +
+                                "좌석   입찰금액\n" +
+                                "--------------------------------\n" +
+                                bidsArray +
+                                "--------------------------------\n" +
+                                "총 결제 금액은 " + bidTotal + "원입니다.\n" +
+                                "결제시한 : " + pay_due;
+    
+                logger.info("\n알림톡 전송 전화번호: {}\n\n{}\n", tel, message);
+    
+                // 전화번호별로 메시지 전송
+                sendOneAlimTalk(message, tel, ACCESS_TOKEN);
+            }
+    
             int affectedRows = matchMapper.updateMatchAlimtalkStatus(matchParams);
-            if (affectedRows > 0) {
-                Map<String, Object> response = new HashMap<>();
-                response.put("message", "정보가 성공적으로 수정되었습니다.");
-                return response;
-            } else {
+            if (affectedRows == 0) {
                 throw new NotFoundException("시스템 오류 : 알림톡 송신 정보 갱신에 실패하였습니다.");
             }
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "삭제 처리가 성공적으로 수행되었습니다.");
+            return response;
         } catch (NotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new DataAccessException(null,e);
+            throw new DataAccessException(null, e);
         }
-    } 
+    }
+    
+    public void sendOneAlimTalk(String alimMessage, String telno, String token) {
+        logger.info("sendOneAlimTalk 메서드 시작");
 
-public void sendOneAlimTalk(String alimMessage, String telno, String token) {   
-    System.out.println("sendOneAlimTalk 메서드 시작");
+        Map<String, Object> requestBody = new HashMap<>();
+        String msgIdx = String.valueOf(System.currentTimeMillis());
+        logger.info("\n메시지 인덱스(msgIdx) 생성: {}", msgIdx);
 
-    Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("msgIdx", msgIdx);
+        requestBody.put("countryCode",alimtalkProperties.getCountryCode());
+        requestBody.put("recipient", telno);
+        requestBody.put("senderKey", alimtalkProperties.getSenderKey());
+        requestBody.put("message", alimMessage);
+        requestBody.put("tmpltCode", alimtalkProperties.getTemplateCode());
+        requestBody.put("resMethod", "PUSH");
 
-    String msgIdx = String.valueOf(System.currentTimeMillis());
-    System.out.println("\n메시지 인덱스(msgIdx) 생성: " + msgIdx);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("bt-token", token);
 
-    // 요청 본문 구성
-    requestBody.put("msgIdx", msgIdx);
-    requestBody.put("countryCode", COUNTRY_CODE);
-    requestBody.put("recipient", telno);
-    requestBody.put("senderKey", SENDER_KEY);
-    requestBody.put("message", alimMessage);
-    requestBody.put("tmpltCode", TEMPLATE_CODE);
-    requestBody.put("resMethod", "PUSH");
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
 
-    // HTTP 헤더 구성
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.set("bt-token", token);
-
-    // HttpEntity에 요청 본문과 헤더 설정
-    HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
-
-    // 알림톡 전송 요청
-    System.out.println("\n알림톡 전송 요청 시작");
-    try{
-        ResponseEntity<String> response = restTemplate.exchange(SEND_URL, HttpMethod.POST, entity, String.class);
-        // 응답 상태 확인
-        System.out.println("알림톡 전송 결과: " + response.getBody());
-        if (response.getStatusCode() == HttpStatus.OK) {
-            System.out.println("알림톡 전송 성공: " + response.getBody());
-        } else {
-            System.out.println("알림톡 전송 오류: HTTP " + response.getStatusCode());
+        logger.info("\n알림톡 전송 요청 시작");
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(alimtalkProperties.getSendUrl(), HttpMethod.POST, entity, String.class);
+            logger.info("알림톡 전송 결과: {}", response.getBody());
+            if (response.getStatusCode() == HttpStatus.OK) {
+                logger.info("알림톡 전송 성공: {}", response.getBody());
+            } else {
+                logger.info("알림톡 전송 오류: HTTP {}", response.getStatusCode());
+            }
+        } catch (Exception e) {
+            throw new ServerException("시스템 오류 : 알림톡 전송 실패", e);
         }
-    } catch(Exception e) {
-        throw new ServerException("시스템 오류 : 알림톡 전송 실패", e);
-
     }
 }
-}
 
-    // // 3. 알림톡 결과 조회 메서드
+// // 3. 알림톡 결과 조회 메서드
     // public Map<String, Object> getAlimResult(String[] msgIdxArr, String token) throws IOException {
     //     HttpHeaders headers = new HttpHeaders();
     //     headers.setContentType(MediaType.APPLICATION_JSON);

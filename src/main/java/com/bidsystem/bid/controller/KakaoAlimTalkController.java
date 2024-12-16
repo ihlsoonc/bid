@@ -1,6 +1,4 @@
 package com.bidsystem.bid.controller;
-import com.bidsystem.bid.service.ExceptionService.*;
-
 
 import com.bidsystem.bid.service.AlimtalkService;
 
@@ -21,17 +19,12 @@ public class KakaoAlimTalkController {
     private AlimtalkService alimtalkService;
 
     @PostMapping("/send-kakao-message")
-    public ResponseEntity<String> sendKakaoMessage(@RequestBody Map<String, Object> request) {
+    public ResponseEntity<Map<String, Object>> sendKakaoMessage(@RequestBody Map<String, Object> request) {
         String ACCESS_TOKEN = alimtalkService.getAccessToken();
         
         String matchNumber = (String) request.get("matchNumber");
-        try {
-            alimtalkService.sendAlimtalkByMatch(matchNumber, ACCESS_TOKEN);
-            return ResponseEntity.ok("알림톡이 성공적으로 발송되었습니다.");
-        } catch (Exception e) {
-            throw new ServerException( "시스템 오류 : 알림톡 전송에 실패하였습니다.",e);
-        }
-        
+        Map<String, Object> result = alimtalkService.sendAlimtalkByMatch(matchNumber, ACCESS_TOKEN);
+        return ResponseEntity.ok(result);
+    
     }
-
 }

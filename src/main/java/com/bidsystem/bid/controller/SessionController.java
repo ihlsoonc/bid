@@ -1,3 +1,5 @@
+
+//jwt사용으로 이 사용되지 않음
 package com.bidsystem.bid.controller;
 
 import com.bidsystem.bid.service.SessionService;

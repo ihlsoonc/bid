@@ -8,31 +8,32 @@
     <!-- 좌석번호별 입찰자 수와 최고 입찰 금액 조회 -->
 <select id="getBidsBySeatArray" parameterType="hashmap" resultType="hashmap">
     SELECT 
-        b.seat_no,
+        p.seat_no,
+        p.seat_price,
         b.row_no,
         b.col_no,
-        p.seat_price,
         COALESCE(COUNT(DISTINCT b.bid_telno), 0) AS total_bidders,
         COALESCE(MAX(b.bid_amount), 0) AS current_bid_amount
     FROM
-        bids AS b
-    LEFT JOIN 
         seatprice AS p
+    LEFT JOIN 
+        bids AS b
     ON 
         p.seat_no = b.seat_no AND p.match_no = b.match_no
     WHERE
-        b.match_no = #{matchNumber}
+        p.match_no = #{matchNumber}
         <if test="seatNoArray != null and seatNoArray.size() > 0">
-            AND b.seat_no IN 
+            AND p.seat_no IN 
             <foreach item="seatNo" collection="seatNoArray" open="(" separator="," close=")">
                 #{seatNo}
             </foreach>
         </if>
     GROUP BY
-        b.seat_no
+        p.seat_no
     ORDER BY
-        CAST(b.seat_no AS UNSIGNED) ASC;
-    </select>
+        CAST(p.seat_no AS UNSIGNED) ASC;
+</select>
+
 
     <!-- 좌석번호별 입찰자 수와 최고 입찰 금액 조회 -->
     <select id="getBidTallies" parameterType="hashmap" resultType="hashmap">

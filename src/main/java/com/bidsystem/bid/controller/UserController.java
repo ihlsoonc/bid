@@ -43,13 +43,6 @@ public class UserController {
         return ResponseEntity.ok(result); 
     }
 
-//    // 사용자 등록
-//     @PostMapping("/register")
-//     public ResponseEntity<Map<String, Object>> registerUser(@RequestBody Map<String, Object> request) {
-//         Map<String, Object> result = userService.registerUser(request); // 서비스에서 사용자 등록 처리
-//         return ResponseEntity.ok(result); 
-//     }
-
     // 사용자 정보 수정
     @PostMapping("/update")
     public ResponseEntity<Map<String, Object>> updateUser(@RequestBody Map<String, Object> request) {

@@ -12,6 +12,24 @@ import com.bidsystem.bid.dto.UserRegistrationDto;
 import com.bidsystem.bid.repository.UserRepository;
 import com.bidsystem.bid.entity.UserEntity;
 
+/* 주요 메서드 설명 */
+/* 1. RegisterService 생성자:
+      - `UserRepository`와 `BCryptPasswordEncoder`를 초기화
+      - 사용자 데이터 저장 및 비밀번호 암호화를 위한 의존성 주입 */
+      
+/* 2. registerProcess(UserRegistrationDto registerDTO):
+      - 사용자 등록 프로세스를 처리하는 메서드
+      - 주요 기능:
+        1) DTO에서 사용자 입력 데이터(username, password, email, telno, role) 추출
+        2) 전화번호 중복 여부 확인
+            - 중복된 경우 `DuplicateKeyException` 발생
+        3) `UserEntity` 객체를 생성하고 값 설정
+            - 비밀번호는 `BCryptPasswordEncoder`로 암호화하여 저장
+        4) 사용자 데이터를 `UserRepository`를 통해 저장
+        5) 저장 성공 여부를 확인하고 응답 메시지 반환
+        6) 저장 실패 시 `ZeroAffectedRowException` 발생 */
+
+
 @Service
 public class RegisterService {
 
@@ -25,62 +43,46 @@ public class RegisterService {
     public Map<String, Object> registerProcess(UserRegistrationDto registerDTO) {
 
         // DTO에서 값 추출
-        System.out.println("Processing registration for DTO: " + registerDTO);
     
         String username = registerDTO.getUsername();
-        System.out.println("Extracted username: " + username);
     
         String password = registerDTO.getPassword();
-        System.out.println("Extracted password: " + password);
     
         String email = registerDTO.getEmail();
-        System.out.println("Extracted email: " + email);
     
         String telno = registerDTO.getTelno();
-        System.out.println("Extracted telno: " + telno);
     
         String role = registerDTO.getRole();
-        System.out.println("Extracted role: " + role);
     
         // 응답 객체 초기화
         Map<String, Object> response = new HashMap<>();
     
         // 중복 사용자 확인
-        System.out.println("Checking if telno exists: " + telno);
         Boolean isExist = userRepository.existsByTelno(telno);
         if (isExist) {
-            System.out.println("중복된 사용자가 있습니다.");
             throw new DuplicateKeyException("중복된 사용자가 있습니다.");
         }
     
         // UserEntity 객체 생성 및 값 설정
         UserEntity data = new UserEntity();
         data.setUsername(username);
-        System.out.println("Set username in UserEntity: " + username);
     
         data.setPassword(bCryptPasswordEncoder.encode(password));
-        System.out.println("Set encoded password in UserEntity.");
     
         data.setEmail(email);
-        System.out.println("Set email in UserEntity: " + email);
     
         data.setTelno(telno);
-        System.out.println("Set telno in UserEntity: " + telno);
     
         data.setRole(role);
-        System.out.println("Set role in UserEntity: " + role);
     
         // 저장 및 ID 확인
         Long newId = userRepository.save(data).getId();
-        System.out.println("User saved with ID: " + newId);
     
         // 결과 처리
         if (newId > 0) {
             response.put("message", "성공적으로 등록되었습니다.");
-            System.out.println("Registration successful for telno: " + telno);
             return response;
         } else {
-            System.out.println("User save failed, throwing exception.");
             throw new ZeroAffectedRowException(null);
         }
     }

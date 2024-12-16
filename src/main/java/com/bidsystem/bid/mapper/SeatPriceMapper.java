@@ -9,7 +9,7 @@ import java.util.List;
 public interface SeatPriceMapper {
 
     // 좌석별 가격 조회
-    List< Map<String, Object>> getSeatPrice(Map<String, Object> params);
+    List< Map<String, Object>> getSeatPrices(Map<String, Object> params);
 
     // 좌석별 가격 입력 또는 갱신
     int updateSeatPrice(Map<String, Object> params);

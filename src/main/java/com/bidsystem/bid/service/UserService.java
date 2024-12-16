@@ -10,6 +10,36 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+/* 주요 메서드 설명 */
+/* - getUserByQueryAndPassword(Map<String, Object> request):
+       사용자 ID와 비밀번호를 기반으로 사용자 정보를 조회
+       비밀번호를 제외한 사용자 정보를 반환 */
+
+/* - getUserByQuery(Map<String, Object> request):
+       사용자 정보를 특정 조건(query)에 따라 조회
+       비밀번호를 제외한 정보를 반환 */
+
+/* - getEmailCount(Map<String, Object> request):
+       사용자 등록 또는 수정 시 이메일 중복 여부를 확인
+       주요 기능:
+         . DB에서 이메일 개수 확인 */
+
+/* - getTelnoCount(Map<String, Object> request):
+       사용자 등록 또는 수정 시 전화번호 중복 여부를 확인
+       주요 기능:
+         . DB에서 전화번호 개수 확인 */
+
+/* - changePassword(Map<String, Object> request):
+       사용자의 비밀번호를 변경
+       주요 기능:
+         . 입력받은 비밀번호를 암호화 및 저장
+         . 업데이트 실패 시 `ZeroAffectedRowException` 발생 */
+
+/* - updateUser(Map<String, Object> request):
+       사용자 정보를 업데이트
+       주요 기능:
+         . 업데이트 실패 시 `ZeroAffectedRowException` 발생 */
+
 @Service
 public class UserService {
 

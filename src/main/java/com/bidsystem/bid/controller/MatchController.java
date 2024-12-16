@@ -21,13 +21,6 @@ public class MatchController {
         return ResponseEntity.ok(results); 
     }
 
-    // 특정 경기 조회
-    @GetMapping("/getbyid")
-    public ResponseEntity<Map<String, Object>> getMatchById(@RequestParam Map<String, Object> params) {
-        Map<String, Object> results = matchService.getMatchById(params); 
-        return ResponseEntity.ok(results); 
-    }
-
     // 모든 경기 조회
     @GetMapping("/getall")
     public ResponseEntity<List<Map<String, Object>>> getAllMatches(@RequestParam Map<String, Object> params) {
@@ -46,6 +39,19 @@ public class MatchController {
     @GetMapping("/getallapproved")
     public ResponseEntity<List<Map<String, Object>>> getAllApprovedMatches(@RequestParam Map<String, Object> params) {
         List<Map<String, Object>> results = matchService.getAllApprovedMatches(params); 
+        return ResponseEntity.ok(results); 
+    }
+
+    // 경기 일괄 입찰 등록
+    @PostMapping("/batch-bid-submit")
+    public ResponseEntity<Map<String, Object>> batchBid(@RequestBody Map<String, Object> request) {
+        Map<String, Object> results  = matchService.batchBid(request); 
+        return ResponseEntity.ok(results); 
+    }
+    // 경기 일괄 입찰 승인
+    @PostMapping("/batch-bid-approve")
+    public ResponseEntity<Map<String, Object>> approveBatchBid(@RequestBody Map<String, Object> request) {
+        Map<String, Object> results  = matchService.approveBatchBid(request); 
         return ResponseEntity.ok(results); 
     }
 

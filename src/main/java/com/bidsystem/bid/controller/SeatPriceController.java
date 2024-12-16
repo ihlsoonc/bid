@@ -17,7 +17,7 @@ public class SeatPriceController {
     private SeatPriceService seatPriceService;
 
     // 특정 경기의 좌석 가격을 조회
-    @GetMapping("/getbyid")
+    @GetMapping("/getall")
     public ResponseEntity<List<Map<String, Object>>> getSeatPrices(@RequestParam Map<String, Object> params) {
         List<Map<String, Object>> results = seatPriceService.getSeatPrices(params); // 서비스에서 데이터 반환
         return ResponseEntity.ok(results); // 데이터를 ResponseEntity로 감싸서 반환
