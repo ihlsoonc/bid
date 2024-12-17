@@ -4469,3 +4469,2930 @@ Jwt filter is excluded forURL: http://localhost:5000/reissue-access-token
 2024-12-17T14:31:18.939+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
 
 ================ Request ended: 404 /api/match/getall
+2024-12-17T14:31:24.524+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@cd67e4a
+
+2024-12-17T14:31:24.527+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:31:24.527+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:31:24.529+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:31:24.530+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:40:01.709+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4386c0f4
+
+2024-12-17T14:40:01.715+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:40:01.715+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:40:01.718+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T14:40:01.721+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:40:20.082+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/delete Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@3ed0c88a
+
+2024-12-17T14:40:20.090+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.deleteVenue[begin]---------------*/
+2024-12-17T14:40:20.090+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ DELETE FROM venue_code WHERE venue_cd = '005'
+/*com.bidsystem.bid.mapper.VenueMapper.deleteVenue*/
+2024-12-17T14:40:20.094+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 3 ms
+2024-12-17T14:40:20.095+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"005","venueName":"잠실당구장","venuePlaceInfo":"","venueGeneralInfo":"","venueImageFileName":"a2.jpg"}
+2024-12-17T14:40:20.095+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/delete
+2024-12-17T14:40:21.615+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@3844777c
+
+2024-12-17T14:40:21.619+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:40:21.620+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:40:21.621+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:40:21.623+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:01:13.864+09:00  WARN 23452 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h16m39s920ms164µs800ns).
+2024-12-17T19:01:15.569+09:00  INFO 23452 --- [http-nio-5000-exec-9] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/reissue-access-token
+2024-12-17T19:01:15.569+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /reissue-access-token Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@722600ac
+
+2024-12-17T19:01:15.571+09:00  INFO 23452 --- [http-nio-5000-exec-9] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/reissue-access-token
+2024-12-17T19:01:15.689+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"username":"","role":""}
+2024-12-17T19:01:15.690+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /reissue-access-token
+2024-12-17T19:01:15.695+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@21181a0
+
+2024-12-17T19:01:15.697+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:01:15.697+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:01:15.698+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:01:15.700+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:11:51.718+09:00  INFO 23452 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:11:51.720+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/get-telno-count Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@3c7bf4ac
+
+2024-12-17T19:11:51.721+09:00  INFO 23452 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:11:51.726+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getTelnoCount[begin]---------------*/
+2024-12-17T19:11:51.727+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COUNT(*) AS telno_count
+        FROM biduser
+        WHERE telno = '44444444444'
+/*com.bidsystem.bid.mapper.UserMapper.getTelnoCount*/
+2024-12-17T19:11:51.728+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:11:51.731+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"44444444444"}
+2024-12-17T19:11:51.732+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/get-telno-count
+2024-12-17T19:11:51.740+09:00  INFO 23452 --- [http-nio-5000-exec-6] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T19:11:51.740+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/send-auth-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7fa1e586
+
+2024-12-17T19:11:51.741+09:00  INFO 23452 --- [http-nio-5000-exec-6] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T19:11:51.748+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"userid":"","password":"","password2":"","username":"","email":"","telno":"44444444444","postcode":"","addr1":"","addr2":"","role":"","authNumber":""}
+2024-12-17T19:11:51.748+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/send-auth-code
+2024-12-17T19:11:57.429+09:00  INFO 23452 --- [http-nio-5000-exec-8] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T19:11:57.430+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/verify-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@73dc984e
+
+2024-12-17T19:11:57.431+09:00  INFO 23452 --- [http-nio-5000-exec-8] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T19:11:57.434+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"userid":"","password":"","password2":"","username":"","email":"","telno":"44444444444","postcode":"","addr1":"","addr2":"","role":"","authNumber":"769184"}
+2024-12-17T19:11:57.435+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/verify-code
+2024-12-17T19:12:28.494+09:00  INFO 23452 --- [http-nio-5000-exec-9] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:12:28.496+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/get-telno-count Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@478face7
+
+2024-12-17T19:12:28.498+09:00  INFO 23452 --- [http-nio-5000-exec-9] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:12:28.501+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getTelnoCount[begin]---------------*/
+2024-12-17T19:12:28.501+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COUNT(*) AS telno_count
+        FROM biduser
+        WHERE telno = '44444444444'
+/*com.bidsystem.bid.mapper.UserMapper.getTelnoCount*/
+2024-12-17T19:12:28.503+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:12:28.504+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"44444444444"}
+2024-12-17T19:12:28.505+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/get-telno-count
+2024-12-17T19:12:28.508+09:00  INFO 23452 --- [http-nio-5000-exec-10] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T19:12:28.509+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/send-auth-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@432c8b9b
+
+2024-12-17T19:12:28.509+09:00  INFO 23452 --- [http-nio-5000-exec-10] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T19:12:28.513+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"password":"444","password2":"444","username":"조대회","email":"","postcode":"","addr1":"","addr2":"","role":"","telno":"44444444444","authNumber":""}
+2024-12-17T19:12:28.514+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/send-auth-code
+2024-12-17T19:12:33.206+09:00  INFO 23452 --- [http-nio-5000-exec-4] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T19:12:33.207+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/verify-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@514a047c
+
+2024-12-17T19:12:33.208+09:00  INFO 23452 --- [http-nio-5000-exec-4] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T19:12:33.211+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"password":"444","password2":"444","username":"조대회","email":"","postcode":"","addr1":"","addr2":"","role":"","telno":"44444444444","authNumber":"993381"}
+2024-12-17T19:12:33.212+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/verify-code
+2024-12-17T19:14:11.455+09:00  INFO 23452 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:14:11.457+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/get-telno-count Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@5085b50c
+
+2024-12-17T19:14:11.458+09:00  INFO 23452 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:14:11.460+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getTelnoCount[begin]---------------*/
+2024-12-17T19:14:11.461+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COUNT(*) AS telno_count
+        FROM biduser
+        WHERE telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getTelnoCount*/
+2024-12-17T19:14:11.462+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:14:11.463+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111"}
+2024-12-17T19:14:11.464+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/get-telno-count
+2024-12-17T19:14:17.773+09:00  INFO 23452 --- [http-nio-5000-exec-5] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:14:17.774+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/get-telno-count Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1fb1e508
+
+2024-12-17T19:14:17.775+09:00  INFO 23452 --- [http-nio-5000-exec-5] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:14:17.777+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getTelnoCount[begin]---------------*/
+2024-12-17T19:14:17.778+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COUNT(*) AS telno_count
+        FROM biduser
+        WHERE telno = '44444444444'
+/*com.bidsystem.bid.mapper.UserMapper.getTelnoCount*/
+2024-12-17T19:14:17.779+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:14:17.780+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"44444444444"}
+2024-12-17T19:14:17.780+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/get-telno-count
+2024-12-17T19:14:17.784+09:00  INFO 23452 --- [http-nio-5000-exec-6] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T19:14:17.785+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/send-auth-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@44e91511
+
+2024-12-17T19:14:17.785+09:00  INFO 23452 --- [http-nio-5000-exec-6] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T19:14:17.787+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"password":"","password2":"","username":"","email":"","postcode":"","addr1":"","addr2":"","role":"","telno":"44444444444","authNumber":""}
+2024-12-17T19:14:17.787+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/send-auth-code
+2024-12-17T19:15:29.509+09:00  INFO 23452 --- [http-nio-5000-exec-8] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T19:15:29.509+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/verify-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@36de1851
+
+2024-12-17T19:15:29.510+09:00  INFO 23452 --- [http-nio-5000-exec-8] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T19:15:29.513+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"password":"","password2":"","username":"","email":"","postcode":"","addr1":"","addr2":"","role":"","telno":"44444444444","authNumber":"377381"}
+2024-12-17T19:15:29.514+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/verify-code
+2024-12-17T19:16:46.934+09:00  INFO 23452 --- [http-nio-5000-exec-1] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/reissue-access-token
+2024-12-17T19:16:46.935+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /reissue-access-token Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@15ae4b7e
+
+2024-12-17T19:16:46.935+09:00  INFO 23452 --- [http-nio-5000-exec-1] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/reissue-access-token
+2024-12-17T19:16:46.942+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"username":"","role":""}
+2024-12-17T19:16:46.942+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /reissue-access-token
+2024-12-17T19:16:46.948+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/get-email-count Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7fedc2b1
+
+2024-12-17T19:16:46.953+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getEmailCount[begin]---------------*/
+2024-12-17T19:16:46.954+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COUNT(*) AS email_count
+        FROM biduser
+        WHERE telno != 'a4@b.com' AND
+            email = ?
+/*com.bidsystem.bid.mapper.UserMapper.getEmailCount*/
+2024-12-17T19:16:46.955+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:16:46.957+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"email":"a4@b.com"}
+2024-12-17T19:16:46.957+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/get-email-count
+2024-12-17T19:16:50.330+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /register Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1b8e7226
+
+2024-12-17T19:16:50.444+09:00  WARN 23452 --- [http-nio-5000-exec-5] o.m.jdbc.message.server.ErrorPacket      : Error: 1048-23000: Column 'telno' cannot be null
+2024-12-17T19:16:50.445+09:00  WARN 23452 --- [http-nio-5000-exec-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1048, SQLState: 23000
+2024-12-17T19:16:50.445+09:00 ERROR 23452 --- [http-nio-5000-exec-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : (conn=487) Column 'telno' cannot be null
+2024-12-17T19:16:50.454+09:00 ERROR 23452 --- [http-nio-5000-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=487) Column 'telno' cannot be null] [insert into biduser (created_at,email,password,role,telno,username) values (?,?,?,?,?,?)]; SQL [insert into biduser (created_at,email,password,role,telno,username) values (?,?,?,?,?,?)]; constraint [null]] with root cause
+
+java.sql.SQLIntegrityConstraintViolationException: (conn=487) Column 'telno' cannot be null
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:297) ~[mariadb-java-client-3.4.1.jar:na]
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378) ~[mariadb-java-client-3.4.1.jar:na]
+	at org.mariadb.jdbc.message.ClientMessage.readPacket(ClientMessage.java:189) ~[mariadb-java-client-3.4.1.jar:na]
+	at org.mariadb.jdbc.client.impl.StandardClient.readPacket(StandardClient.java:1235) ~[mariadb-java-client-3.4.1.jar:na]
+	at org.mariadb.jdbc.client.impl.StandardClient.readResults(StandardClient.java:1174) ~[mariadb-java-client-3.4.1.jar:na]
+	at org.mariadb.jdbc.client.impl.StandardClient.readResponse(StandardClient.java:1093) ~[mariadb-java-client-3.4.1.jar:na]
+	at org.mariadb.jdbc.client.impl.StandardClient.execute(StandardClient.java:1017) ~[mariadb-java-client-3.4.1.jar:na]
+	at org.mariadb.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:101) ~[mariadb-java-client-3.4.1.jar:na]
+	at org.mariadb.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:313) ~[mariadb-java-client-3.4.1.jar:na]
+	at org.mariadb.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:290) ~[mariadb-java-client-3.4.1.jar:na]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:275) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performInsert(GetGeneratedKeysDelegate.java:107) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorPostInsertSingleTable.execute(MutationExecutorPostInsertSingleTable.java:100) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:171) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:112) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2780) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:676) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:272) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:363) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:277) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:180) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:140) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:755) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:739) ~[hibernate-core-6.2.13.Final.jar:6.2.13.Final]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:360) ~[spring-orm-6.0.13.jar:6.0.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy110.persist(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:311) ~[spring-orm-6.0.13.jar:6.0.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy110.persist(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:618) ~[spring-data-jpa-3.1.5.jar:3.1.5]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:288) ~[spring-data-commons-3.1.5.jar:3.1.5]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:136) ~[spring-data-commons-3.1.5.jar:3.1.5]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:120) ~[spring-data-commons-3.1.5.jar:3.1.5]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516) ~[spring-data-commons-3.1.5.jar:3.1.5]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285) ~[spring-data-commons-3.1.5.jar:3.1.5]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628) ~[spring-data-commons-3.1.5.jar:3.1.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168) ~[spring-data-commons-3.1.5.jar:3.1.5]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143) ~[spring-data-commons-3.1.5.jar:3.1.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:72) ~[spring-data-commons-3.1.5.jar:3.1.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:391) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164) ~[spring-data-jpa-3.1.5.jar:3.1.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:244) ~[spring-aop-6.0.13.jar:6.0.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy128.save(Unknown Source) ~[na:na]
+	at com.bidsystem.bid.service.RegisterService.registerProcess(RegisterService.java:79) ~[classes/:na]
+	at com.bidsystem.bid.controller.RegisterController.registerProcess(RegisterController.java:23) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:547) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:614) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at com.bidsystem.bid.config.JWTFilter.doFilterInternal(JWTFilter.java:162) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at com.bidsystem.bid.config.CorsLoggingFilter.doFilter(CorsLoggingFilter.java:38) ~[classes/:na]
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:72) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.JWTFilter.doFilterInternal(JWTFilter.java:162) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.CustomLogoutFilter.doFilter(CustomLogoutFilter.java:80) ~[classes/:na]
+	at com.bidsystem.bid.config.CustomLogoutFilter.doFilter(CustomLogoutFilter.java:71) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+
+2024-12-17T19:19:55.685+09:00  INFO 23452 --- [http-nio-5000-exec-8] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:19:55.686+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/get-telno-count Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@68bda0b7
+
+2024-12-17T19:19:55.688+09:00  INFO 23452 --- [http-nio-5000-exec-8] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/user/get-telno-count
+2024-12-17T19:19:55.691+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getTelnoCount[begin]---------------*/
+2024-12-17T19:19:55.691+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COUNT(*) AS telno_count
+        FROM biduser
+        WHERE telno = '44444444444'
+/*com.bidsystem.bid.mapper.UserMapper.getTelnoCount*/
+2024-12-17T19:19:55.692+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:19:55.694+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"44444444444"}
+2024-12-17T19:19:55.695+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/get-telno-count
+2024-12-17T19:19:55.699+09:00  INFO 23452 --- [http-nio-5000-exec-9] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T19:19:55.699+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/send-auth-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@22681095
+
+2024-12-17T19:19:55.700+09:00  INFO 23452 --- [http-nio-5000-exec-9] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T19:19:55.703+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"userid":"","password":"","password2":"","username":"","email":"","telno":"44444444444","postcode":"","addr1":"","addr2":"","role":"","authNumber":""}
+2024-12-17T19:19:55.704+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/send-auth-code
+2024-12-17T19:20:00.627+09:00  INFO 23452 --- [http-nio-5000-exec-10] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T19:20:00.627+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/verify-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7cb7999a
+
+2024-12-17T19:20:00.628+09:00  INFO 23452 --- [http-nio-5000-exec-10] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T19:20:00.632+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"userid":"","password":"","password2":"","username":"","email":"","telno":"44444444444","postcode":"","addr1":"","addr2":"","role":"","authNumber":"185221"}
+2024-12-17T19:20:00.632+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/verify-code
+2024-12-17T19:20:21.512+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/get-email-count Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7d86037
+
+2024-12-17T19:20:21.515+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getEmailCount[begin]---------------*/
+2024-12-17T19:20:21.516+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COUNT(*) AS email_count
+        FROM biduser
+        WHERE telno != '44444444444' AND
+            email = 'a4@b.com'
+/*com.bidsystem.bid.mapper.UserMapper.getEmailCount*/
+2024-12-17T19:20:21.517+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:20:21.520+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"44444444444","email":"a4@b.com"}
+2024-12-17T19:20:21.520+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/get-email-count
+2024-12-17T19:20:25.237+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /register Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@240306c5
+
+2024-12-17T19:20:25.332+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: telno=44444444444&password=444&password2=444&username=%EC%82%AC%EB%8C%80%ED%9A%8C&email=a4%40b.com&postcode=&addr1=&addr2=&role=adminm
+2024-12-17T19:20:25.332+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /register
+2024-12-17T19:20:57.813+09:00  WARN 23452 --- [http-nio-5000-exec-2] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T19:20:57.815+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4e58bf88
+
+2024-12-17T19:20:57.816+09:00  INFO 23452 --- [http-nio-5000-exec-2] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T19:20:58.005+09:00  INFO 23452 --- [http-nio-5000-exec-2] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 김대회
+2024-12-17T19:20:58.005+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=33333333333&password=333
+2024-12-17T19:20:58.006+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T19:20:58.373+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2e9dd55
+
+2024-12-17T19:20:58.375+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:20:58.376+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:20:58.378+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:20:58.380+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:21:01.603+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1955bd4d
+
+2024-12-17T19:21:01.606+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:21:01.607+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:21:01.608+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:21:01.609+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:22:17.056+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7a28f88
+
+2024-12-17T19:22:17.062+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo[begin]---------------*/
+2024-12-17T19:22:17.063+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COALESCE(MAX(match_no), 0) FROM matches
+/*com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo*/
+2024-12-17T19:22:17.065+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:22:17.073+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.addMatch[begin]---------------*/
+2024-12-17T19:22:17.074+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO matches (
+            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
+            is_bid_available, filename_attached, pay_due_datetime, created_by
+        )
+        VALUES (
+            1, '001', '탁구', '여자 결승', '2025-01-11', '07:21', '19:21', '2024-12-24 19:21:00', '2024-12-26 19:21:00',
+            'Y', '9756895279_cat1.jpg', '2024-12-27 19:21:00', '33333333333'
+        )
+/*com.bidsystem.bid.mapper.MatchMapper.addMatch*/
+2024-12-17T19:22:17.075+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:22:17.081+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":"","venueCd":"001","venueName":{"label":"아름체육관","value":"001"},"matchName":"탁구","round":"여자 결승","startDate":"2025-01-11","startTime":"07:21","endTime":"19:21","bidOpenTime":"2024-12-24T19:21","bidCloseTime":"2024-12-26T19:21","isBidAvailable":"Y","payDue":"2024-12-27T19:21","fileName":"9756895279_cat1.jpg","fileNameShort":"cat1.jpg","bidLable":{"label":"입찰 가능","value":"Y"},"file":{},"telno":"33333333333"}
+2024-12-17T19:22:17.082+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/add
+2024-12-17T19:22:18.469+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/files/upload Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4d44786
+
+2024-12-17T19:22:18.492+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/files/upload
+2024-12-17T19:22:30.402+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@5beea7f5
+
+2024-12-17T19:22:30.406+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:22:30.407+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:22:30.410+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 3 ms
+2024-12-17T19:22:30.412+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:22:32.785+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7fdac035
+
+2024-12-17T19:22:32.788+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:22:32.788+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:22:32.790+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:22:32.792+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:23:11.319+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@27a3e448
+
+2024-12-17T19:23:11.325+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo[begin]---------------*/
+2024-12-17T19:23:11.325+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COALESCE(MAX(match_no), 0) FROM matches
+/*com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo*/
+2024-12-17T19:23:11.326+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:23:11.326+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.addMatch[begin]---------------*/
+2024-12-17T19:23:11.327+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO matches (
+            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
+            is_bid_available, filename_attached, pay_due_datetime, created_by
+        )
+        VALUES (
+            2, '002', '당구', '남자단식결승', '2025-01-10', '07:22', '07:22', , ,
+            'N', '8924501172_cat2.jpg', , '33333333333'
+        )
+/*com.bidsystem.bid.mapper.MatchMapper.addMatch*/
+2024-12-17T19:23:11.328+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:23:11.338+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":"","venueCd":"002","venueName":{"label":"매송실내체육관","value":"002"},"matchName":"당구","round":"남자단식결승","startDate":"2025-01-10","startTime":"07:22","endTime":"07:22","bidOpenTime":"","bidCloseTime":"","isBidAvailable":"N","payDue":"","fileName":"8924501172_cat2.jpg","fileNameShort":"cat2.jpg","bidLable":{"label":"입찰 불가능","value":"N"},"file":{},"telno":"33333333333"}
+2024-12-17T19:23:11.338+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/add
+2024-12-17T19:23:12.777+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/files/upload Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2ddc325e
+
+2024-12-17T19:23:12.786+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/files/upload
+2024-12-17T19:23:15.381+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@460d4fab
+
+2024-12-17T19:23:15.382+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:23:15.383+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:23:15.383+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:23:15.385+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:23:16.604+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getmy Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@23a4638
+
+2024-12-17T19:23:16.607+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMyMatches[begin]---------------*/
+2024-12-17T19:23:16.607+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.created_by = '33333333333'
+            AND m.venue_cd = '001';
+/*com.bidsystem.bid.mapper.MatchMapper.getMyMatches*/
+2024-12-17T19:23:16.611+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:23:16.625+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getmy
+2024-12-17T19:23:19.529+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@58492c3a
+
+2024-12-17T19:23:19.531+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:23:19.532+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:23:19.533+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:23:19.534+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:23:20.537+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getmy Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1513b4d2
+
+2024-12-17T19:23:20.538+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMyMatches[begin]---------------*/
+2024-12-17T19:23:20.538+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.created_by = '33333333333'
+            AND m.venue_cd = '002';
+/*com.bidsystem.bid.mapper.MatchMapper.getMyMatches*/
+2024-12-17T19:23:20.541+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 3 ms
+2024-12-17T19:23:20.543+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getmy
+2024-12-17T19:23:44.279+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.CustomLogoutFilter        : 
+Logged out successfully.
+2024-12-17T19:23:51.334+09:00  WARN 23452 --- [http-nio-5000-exec-1] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T19:23:51.334+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2515c874
+
+2024-12-17T19:23:51.335+09:00  INFO 23452 --- [http-nio-5000-exec-1] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T19:23:51.415+09:00  WARN 23452 --- [http-nio-5000-exec-1] com.bidsystem.bid.config.LoginFilter     : 
+ LoginFiler No Refresh Token found in cookies.
+2024-12-17T19:23:51.426+09:00  INFO 23452 --- [http-nio-5000-exec-1] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 사대회
+2024-12-17T19:23:51.427+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=44444444444&password=444
+2024-12-17T19:23:51.427+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T19:23:51.442+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7ad78e7d
+
+2024-12-17T19:23:51.446+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:23:51.447+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:23:51.449+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:23:51.450+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:23:54.763+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@73e517d5
+
+2024-12-17T19:23:54.766+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:23:54.767+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:23:54.767+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:23:54.768+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:24:45.281+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1c8f1d0b
+
+2024-12-17T19:24:45.286+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo[begin]---------------*/
+2024-12-17T19:24:45.287+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COALESCE(MAX(match_no), 0) FROM matches
+/*com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo*/
+2024-12-17T19:24:45.288+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:24:45.288+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.addMatch[begin]---------------*/
+2024-12-17T19:24:45.288+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO matches (
+            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
+            is_bid_available, filename_attached, pay_due_datetime, created_by
+        )
+        VALUES (
+            3, '001', '탁구', '혼합복식 결승', '2025-01-09', '07:25', '22:24', , ,
+            'N', '2897854259_cat3.jpg', , '44444444444'
+        )
+/*com.bidsystem.bid.mapper.MatchMapper.addMatch*/
+2024-12-17T19:24:45.289+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:24:45.299+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":"","venueCd":"001","venueName":{"label":"아름체육관","value":"001"},"matchName":"탁구","round":"혼합복식 결승","startDate":"2025-01-09","startTime":"07:25","endTime":"22:24","bidOpenTime":"","bidCloseTime":"","isBidAvailable":"N","payDue":"","fileName":"2897854259_cat3.jpg","fileNameShort":"cat3.jpg","bidLable":{"label":"입찰 불가능","value":"N"},"file":{},"telno":"44444444444"}
+2024-12-17T19:24:45.300+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/add
+2024-12-17T19:24:46.922+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/files/upload Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2c637859
+
+2024-12-17T19:24:46.935+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/files/upload
+2024-12-17T19:25:34.562+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@52410b82
+
+2024-12-17T19:25:34.567+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo[begin]---------------*/
+2024-12-17T19:25:34.567+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COALESCE(MAX(match_no), 0) FROM matches
+/*com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo*/
+2024-12-17T19:25:34.568+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:25:34.569+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.addMatch[begin]---------------*/
+2024-12-17T19:25:34.569+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO matches (
+            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
+            is_bid_available, filename_attached, pay_due_datetime, created_by
+        )
+        VALUES (
+            4, '002', '탁구', '혼합복식 준결승', '2025-01-10', '07:25', '22:24', , ,
+            'Y', '9199223843_cat4.jpg', , '44444444444'
+        )
+/*com.bidsystem.bid.mapper.MatchMapper.addMatch*/
+2024-12-17T19:25:34.570+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:25:34.580+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":"","venueCd":"002","venueName":{"label":"매송실내체육관","value":"002"},"matchName":"탁구","round":"혼합복식 준결승","startDate":"2025-01-10","startTime":"07:25","endTime":"22:24","bidOpenTime":"","bidCloseTime":"","isBidAvailable":"Y","payDue":"","fileName":"9199223843_cat4.jpg","fileNameShort":"cat4.jpg","bidLable":{"label":"입찰 가능","value":"Y"},"file":{},"telno":"44444444444"}
+2024-12-17T19:25:34.581+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/add
+2024-12-17T19:25:36.208+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/files/upload Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@598a65fa
+
+2024-12-17T19:25:36.217+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/files/upload
+2024-12-17T19:28:58.532+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6cbb16
+
+2024-12-17T19:28:58.534+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:28:58.534+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:28:58.535+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:28:58.536+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:29:09.644+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@5985a886
+
+2024-12-17T19:29:09.646+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:29:09.646+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:29:09.647+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:29:09.648+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:29:40.755+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1d913590
+
+2024-12-17T19:29:40.759+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo[begin]---------------*/
+2024-12-17T19:29:40.761+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COALESCE(MAX(match_no), 0) FROM matches
+/*com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo*/
+2024-12-17T19:29:40.762+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:29:40.763+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.addMatch[begin]---------------*/
+2024-12-17T19:29:40.763+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO matches (
+            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
+            is_bid_available, filename_attached, pay_due_datetime, created_by
+        )
+        VALUES (
+            5, '003', 'ㅁㅁ', 'ㅁㅁ', '2025-01-03', '07:29', '19:29', , ,
+            'N', '1378871811_cat8.jpg', , '44444444444'
+        )
+/*com.bidsystem.bid.mapper.MatchMapper.addMatch*/
+2024-12-17T19:29:40.765+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:29:40.769+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":"","venueCd":"003","venueName":{"label":"탄천운동장","value":"003"},"matchName":"ㅁㅁ","round":"ㅁㅁ","startDate":"2025-01-03","startTime":"07:29","endTime":"19:29","bidOpenTime":"","bidCloseTime":"","isBidAvailable":"N","payDue":"","fileName":"1378871811_cat8.jpg","fileNameShort":"cat8.jpg","bidLable":{"label":"입찰 불가능","value":"N"},"file":{},"telno":"44444444444"}
+2024-12-17T19:29:40.771+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/add
+2024-12-17T19:32:31.925+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@273f5155
+
+2024-12-17T19:32:31.929+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo[begin]---------------*/
+2024-12-17T19:32:31.929+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COALESCE(MAX(match_no), 0) FROM matches
+/*com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo*/
+2024-12-17T19:32:31.931+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:32:31.932+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.addMatch[begin]---------------*/
+2024-12-17T19:32:31.932+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO matches (
+            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
+            is_bid_available, filename_attached, pay_due_datetime, created_by
+        )
+        VALUES (
+            6, '003', 'ㅁㅁ', 'ㅁㅁ', '2025-01-03', '07:29', '19:29', , ,
+            'N', '2889040118_1378871811_cat8.jpg', , '44444444444'
+        )
+/*com.bidsystem.bid.mapper.MatchMapper.addMatch*/
+2024-12-17T19:32:31.933+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:32:31.937+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":"","venueCd":"003","venueName":{"label":"탄천운동장","value":"003"},"matchName":"ㅁㅁ","round":"ㅁㅁ","startDate":"2025-01-03","startTime":"07:29","endTime":"19:29","bidOpenTime":"","bidCloseTime":"","isBidAvailable":"N","payDue":"","fileName":"2889040118_1378871811_cat8.jpg","fileNameShort":"cat8.jpg","bidLable":{"label":"입찰 불가능","value":"N"},"file":{},"telno":"44444444444"}
+2024-12-17T19:32:31.937+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/add
+2024-12-17T19:33:20.467+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1ea1b187
+
+2024-12-17T19:33:20.469+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:33:20.469+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:33:20.470+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:33:20.471+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:33:46.974+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@775a7dac
+
+2024-12-17T19:33:46.983+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo[begin]---------------*/
+2024-12-17T19:33:46.983+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COALESCE(MAX(match_no), 0) FROM matches
+/*com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo*/
+2024-12-17T19:33:46.984+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:33:46.985+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.addMatch[begin]---------------*/
+2024-12-17T19:33:46.985+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO matches (
+            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
+            is_bid_available, filename_attached, pay_due_datetime, created_by
+        )
+        VALUES (
+            7, '001', 'ㅁㅁㅁ', 'ㅁㅁㅁ', '2025-01-09', '19:33', '21:33', , ,
+            'Y', '', , '44444444444'
+        )
+/*com.bidsystem.bid.mapper.MatchMapper.addMatch*/
+2024-12-17T19:33:46.986+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:33:46.995+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":"","venueCd":"001","venueName":{"label":"아름체육관","value":"001"},"matchName":"ㅁㅁㅁ","round":"ㅁㅁㅁ","startDate":"2025-01-09","startTime":"19:33","endTime":"21:33","bidOpenTime":"","bidCloseTime":"","isBidAvailable":"Y","payDue":"","fileName":"","fileNameShort":"","bidLable":{"label":"입찰 가능","value":"Y"},"telno":"44444444444"}
+2024-12-17T19:33:46.996+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/add
+2024-12-17T19:34:27.775+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6b9a1733
+
+2024-12-17T19:34:27.782+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo[begin]---------------*/
+2024-12-17T19:34:27.783+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT COALESCE(MAX(match_no), 0) FROM matches
+/*com.bidsystem.bid.mapper.MatchMapper.getMaxMatchNo*/
+2024-12-17T19:34:27.785+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:34:27.786+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.addMatch[begin]---------------*/
+2024-12-17T19:34:27.786+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO matches (
+            match_no, venue_cd, match_name, round, start_date, start_time, end_time, bid_open_datetime, bid_close_datetime,
+            is_bid_available, filename_attached, pay_due_datetime, created_by
+        )
+        VALUES (
+            8, '001', 'ㅁㅁㅁ', 'ㅁㅁㅁ', '2025-01-09', '19:33', '21:33', , ,
+            'Y', '6399166329_cat5.jpg', , '44444444444'
+        )
+/*com.bidsystem.bid.mapper.MatchMapper.addMatch*/
+2024-12-17T19:34:27.787+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:34:27.797+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":"","venueCd":"001","venueName":{"label":"아름체육관","value":"001"},"matchName":"ㅁㅁㅁ","round":"ㅁㅁㅁ","startDate":"2025-01-09","startTime":"19:33","endTime":"21:33","bidOpenTime":"","bidCloseTime":"","isBidAvailable":"Y","payDue":"","fileName":"6399166329_cat5.jpg","fileNameShort":"cat5.jpg","bidLable":{"label":"입찰 가능","value":"Y"},"file":{},"telno":"44444444444"}
+2024-12-17T19:34:27.797+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/add
+2024-12-17T19:34:27.809+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/files/upload Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@384eb8ba
+
+2024-12-17T19:34:27.817+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/files/upload
+2024-12-17T19:36:22.159+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@41882555
+
+2024-12-17T19:36:22.162+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:36:22.162+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:36:22.163+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:36:22.165+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:36:22.951+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@70acb03c
+
+2024-12-17T19:36:22.954+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:36:22.954+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:36:22.957+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:36:22.958+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:36:41.952+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@e35f170
+
+2024-12-17T19:36:41.954+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:36:41.954+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:36:41.957+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:36:41.957+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:36:42.850+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7e1176c8
+
+2024-12-17T19:36:42.852+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:36:42.853+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '002'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:36:42.854+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:36:42.856+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:37:55.885+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@29cd3c0
+
+2024-12-17T19:37:55.886+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:37:55.887+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:37:55.888+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:37:55.889+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:37:56.979+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@39b48298
+
+2024-12-17T19:37:56.981+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:37:56.981+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:37:56.983+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:37:56.985+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:38:56.572+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1d3aad38
+
+2024-12-17T19:38:56.575+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:38:56.576+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:38:56.576+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:38:56.579+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:38:58.187+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@21f6ea5c
+
+2024-12-17T19:38:58.189+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:38:58.189+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:38:58.192+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:38:58.194+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:39:48.870+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@24b7281c
+
+2024-12-17T19:39:48.871+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:39:48.871+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:39:48.873+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:39:48.874+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:39:49.923+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@42fa8696
+
+2024-12-17T19:39:49.925+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:39:49.926+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:39:49.927+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:39:49.929+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:39:53.372+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@c1b05e7
+
+2024-12-17T19:39:53.374+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:39:53.374+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:39:53.376+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:39:53.377+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:39:54.290+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@498be08d
+
+2024-12-17T19:39:54.292+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:39:54.292+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '002'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:39:54.294+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:39:54.296+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:04.872+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/approve Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@20e4d75b
+
+2024-12-17T19:40:04.875+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.approveMatch[begin]---------------*/
+2024-12-17T19:40:04.876+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ UPDATE matches
+        SET 
+            approved = 'Y', 
+            approved_by = '77777777777', 
+            updated_at = CURRENT_TIMESTAMP
+        WHERE match_no = 2
+/*com.bidsystem.bid.mapper.MatchMapper.approveMatch*/
+2024-12-17T19:40:04.880+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 3 ms
+2024-12-17T19:40:04.882+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":2,"telno":"77777777777","role":"admin","actionType":"Y"}
+2024-12-17T19:40:04.883+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/approve
+2024-12-17T19:40:04.892+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6a3d8be3
+
+2024-12-17T19:40:04.894+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:40:04.894+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '002'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:40:04.896+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:40:04.898+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:08.118+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/approve Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1af96ca0
+
+2024-12-17T19:40:08.123+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.approveMatch[begin]---------------*/
+2024-12-17T19:40:08.124+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ UPDATE matches
+        SET 
+            approved = 'Y', 
+            approved_by = '77777777777', 
+            updated_at = CURRENT_TIMESTAMP
+        WHERE match_no = 4
+/*com.bidsystem.bid.mapper.MatchMapper.approveMatch*/
+2024-12-17T19:40:08.132+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 8 ms
+2024-12-17T19:40:08.134+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":4,"telno":"77777777777","role":"admin","actionType":"Y"}
+2024-12-17T19:40:08.134+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/approve
+2024-12-17T19:40:08.140+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@b038845
+
+2024-12-17T19:40:08.142+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:40:08.142+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '002'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:40:08.144+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:40:08.146+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:11.299+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@316d25f7
+
+2024-12-17T19:40:11.301+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:40:11.302+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:40:11.304+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:40:11.305+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:40:12.372+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@636fd3a
+
+2024-12-17T19:40:12.374+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:40:12.374+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:40:12.376+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:40:12.377+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:13.811+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/approve Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@e781255
+
+2024-12-17T19:40:13.813+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.approveMatch[begin]---------------*/
+2024-12-17T19:40:13.813+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ UPDATE matches
+        SET 
+            approved = 'Y', 
+            approved_by = '77777777777', 
+            updated_at = CURRENT_TIMESTAMP
+        WHERE match_no = 1
+/*com.bidsystem.bid.mapper.MatchMapper.approveMatch*/
+2024-12-17T19:40:13.815+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:40:13.816+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":1,"telno":"77777777777","role":"admin","actionType":"Y"}
+2024-12-17T19:40:13.816+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/approve
+2024-12-17T19:40:13.823+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@20c773d8
+
+2024-12-17T19:40:13.824+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:40:13.825+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:40:13.827+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:40:13.828+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:19.546+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@5763adbd
+
+2024-12-17T19:40:19.550+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:40:19.550+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:40:19.552+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:40:19.554+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:40:20.513+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@14c170c0
+
+2024-12-17T19:40:20.516+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:40:20.516+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '002'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:40:20.518+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:40:20.519+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:22.852+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7bd64c38
+
+2024-12-17T19:40:22.853+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:40:22.854+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:40:22.854+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:40:22.855+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:40:23.891+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@277b6576
+
+2024-12-17T19:40:23.893+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:40:23.893+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:40:23.894+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:40:23.895+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:31.906+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@648ba2e7
+
+2024-12-17T19:40:31.907+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:40:31.908+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:40:31.909+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:40:31.912+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:40:33.084+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6e523638
+
+2024-12-17T19:40:33.085+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:40:33.086+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '002'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:40:33.088+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:40:33.089+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:42.901+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/match/approve Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@61f97f0d
+
+2024-12-17T19:40:42.904+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.approveMatch[begin]---------------*/
+2024-12-17T19:40:42.905+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ UPDATE matches
+        SET 
+            approved = 'N', 
+            approved_by = '77777777777', 
+            updated_at = CURRENT_TIMESTAMP
+        WHERE match_no = 4
+/*com.bidsystem.bid.mapper.MatchMapper.approveMatch*/
+2024-12-17T19:40:42.909+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 4 ms
+2024-12-17T19:40:42.911+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"matchNumber":4,"telno":"77777777777","role":"admin","actionType":"N"}
+2024-12-17T19:40:42.911+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/approve
+2024-12-17T19:40:42.919+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@36fa0bb3
+
+2024-12-17T19:40:42.921+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:40:42.922+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '002'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:40:42.924+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:40:42.925+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:47.070+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@55f8f7f0
+
+2024-12-17T19:40:47.071+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:40:47.071+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:40:47.072+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:40:47.073+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:40:48.211+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7daf3b6c
+
+2024-12-17T19:40:48.213+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:40:48.214+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:40:48.215+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:40:48.216+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:40:49.582+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/status Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@23f79880
+
+2024-12-17T19:40:49.583+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus[begin]---------------*/
+2024-12-17T19:40:49.583+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT
+            m.*,
+            v.venue_name
+        FROM
+            matches AS m
+        JOIN venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.match_no = '1'
+/*com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus*/
+2024-12-17T19:40:49.586+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:40:49.587+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/status
+2024-12-17T19:40:49.598+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/seatprice/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@431da08a
+
+2024-12-17T19:40:49.601+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices[begin]---------------*/
+2024-12-17T19:40:49.601+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM seatprice WHERE match_no = '1' ORDER BY CAST(seat_no AS UNSIGNED) ASC
+/*com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices*/
+2024-12-17T19:40:49.603+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:40:49.603+09:00  INFO 23452 --- [http-nio-5000-exec-9] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T19:40:49.605+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/seatprice/getall
+2024-12-17T19:41:06.390+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/seatprice/updatearray Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6ef0042a
+
+2024-12-17T19:41:06.415+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.SeatPriceMapper.updateSeatPriceArray[begin]---------------*/
+2024-12-17T19:41:06.416+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO seatprice (seat_no, match_no, seat_price, row_no, col_no) VALUES
+          
+            ('1', '1', 15000, '', '')
+         , 
+            ('2', '1', 15000, '', '')
+         , 
+            ('3', '1', 15000, '', '')
+         , 
+            ('4', '1', 15000, '', '')
+         , 
+            ('5', '1', 15000, '', '')
+         , 
+            ('6', '1', 15000, '', '')
+         , 
+            ('7', '1', 15000, '', '')
+         , 
+            ('8', '1', 15000, '', '')
+         , 
+            ('9', '1', 15000, '', '')
+         , 
+            ('10', '1', 15000, '', '')
+         
+        ON DUPLICATE KEY UPDATE
+            seat_price = VALUES(seat_price),
+            row_no = VALUES(row_no),
+            col_no = VALUES(col_no);
+/*com.bidsystem.bid.mapper.SeatPriceMapper.updateSeatPriceArray*/
+2024-12-17T19:41:06.419+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:41:06.422+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"seatPriceArray":[{"row_no":"","col_no":"","seat_no":"1","seat_price":15000,"matchNumber":"1"},{"row_no":"","col_no":"","seat_no":"2","seat_price":15000,"matchNumber":"1"},{"row_no":"","col_no":"","seat_no":"3","seat_price":15000,"matchNumber":"1"},{"row_no":"","col_no":"","seat_no":"4","seat_price":15000,"matchNumber":"1"},{"row_no":"","col_no":"","seat_no":"5","seat_price":15000,"matchNumber":"1"},{"row_no":"","col_no":"","seat_no":"6","seat_price":15000,"matchNumber":"1"},{"row_no":"","col_no":"","seat_no":"7","seat_price":15000,"matchNumber":"1"},{"row_no":"","col_no":"","seat_no":"8","seat_price":15000,"matchNumber":"1"},{"row_no":"","col_no":"","seat_no":"9","seat_price":15000,"matchNumber":"1"},{"row_no":"","col_no":"","seat_no":"10","seat_price":15000,"matchNumber":"1"}]}
+2024-12-17T19:41:06.424+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/seatprice/updatearray
+2024-12-17T19:41:06.437+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/seatprice/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@154c3a2c
+
+2024-12-17T19:41:06.440+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices[begin]---------------*/
+2024-12-17T19:41:06.440+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM seatprice WHERE match_no = '1' ORDER BY CAST(seat_no AS UNSIGNED) ASC
+/*com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices*/
+2024-12-17T19:41:06.441+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:41:06.444+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/seatprice/getall
+2024-12-17T19:41:51.526+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/seatprice/updatearray Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2b1022b8
+
+2024-12-17T19:41:51.530+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.SeatPriceMapper.updateSeatPriceArray[begin]---------------*/
+2024-12-17T19:41:51.531+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO seatprice (seat_no, match_no, seat_price, row_no, col_no) VALUES
+          
+            ('11', '1', 5000, '', '')
+         
+        ON DUPLICATE KEY UPDATE
+            seat_price = VALUES(seat_price),
+            row_no = VALUES(row_no),
+            col_no = VALUES(col_no);
+/*com.bidsystem.bid.mapper.SeatPriceMapper.updateSeatPriceArray*/
+2024-12-17T19:41:51.532+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:41:51.550+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"seatPriceArray":[{"row_no":"","col_no":"","seat_no":"11","seat_price":5000,"matchNumber":"1"}],"matchNumber":"1"}
+2024-12-17T19:41:51.551+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/seatprice/updatearray
+2024-12-17T19:41:51.557+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/seatprice/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@74e7224e
+
+2024-12-17T19:41:51.558+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices[begin]---------------*/
+2024-12-17T19:41:51.559+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM seatprice WHERE match_no = '1' ORDER BY CAST(seat_no AS UNSIGNED) ASC
+/*com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices*/
+2024-12-17T19:41:51.560+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:41:51.562+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/seatprice/getall
+2024-12-17T19:41:55.141+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@46c767a4
+
+2024-12-17T19:41:55.144+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:41:55.144+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:41:55.145+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:41:55.147+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:41:56.284+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@68a3e945
+
+2024-12-17T19:41:56.286+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:41:56.287+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:41:56.288+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:41:56.290+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:41:57.628+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/status Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2cf5fb64
+
+2024-12-17T19:41:57.629+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus[begin]---------------*/
+2024-12-17T19:41:57.630+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT
+            m.*,
+            v.venue_name
+        FROM
+            matches AS m
+        JOIN venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.match_no = '1'
+/*com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus*/
+2024-12-17T19:41:57.632+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:41:57.634+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/status
+2024-12-17T19:41:57.639+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/seatprice/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@78971319
+
+2024-12-17T19:41:57.642+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices[begin]---------------*/
+2024-12-17T19:41:57.642+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM seatprice WHERE match_no = '1' ORDER BY CAST(seat_no AS UNSIGNED) ASC
+/*com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices*/
+2024-12-17T19:41:57.643+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:41:57.643+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/seatprice/getall
+2024-12-17T19:42:09.844+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6c363f80
+
+2024-12-17T19:42:09.849+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:42:09.849+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:42:09.852+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:42:09.853+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:42:16.568+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@430c7fac
+
+2024-12-17T19:42:16.570+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:42:16.570+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:42:16.571+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:42:16.572+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:42:17.852+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@37e86d3
+
+2024-12-17T19:42:17.853+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:42:17.854+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '002'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:42:17.857+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 3 ms
+2024-12-17T19:42:17.858+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:42:23.627+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@68188326
+
+2024-12-17T19:42:23.632+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:42:23.632+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:42:23.634+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:42:23.636+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:42:27.212+09:00  WARN 23452 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T19:42:27.212+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@623fd472
+
+2024-12-17T19:42:27.213+09:00  INFO 23452 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T19:42:27.295+09:00  INFO 23452 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 일철수
+2024-12-17T19:42:27.296+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=11111111111&password=111
+2024-12-17T19:42:27.296+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T19:42:27.311+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@12a776a6
+
+2024-12-17T19:42:27.314+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:42:27.316+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:42:27.316+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:42:27.317+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:42:28.402+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getallapproved Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@a05f6fb
+
+2024-12-17T19:42:28.404+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches[begin]---------------*/
+2024-12-17T19:42:28.405+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE 
+            m.approved = 'Y' 
+            AND m.venue_cd = '001'
+            AND m.is_bid_available = 'Y';
+/*com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches*/
+2024-12-17T19:42:28.406+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:42:28.408+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getallapproved
+2024-12-17T19:42:32.555+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@61c92f84
+
+2024-12-17T19:42:32.557+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:42:32.557+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:42:32.557+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:42:32.559+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:42:33.590+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getallapproved Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@718bd0dc
+
+2024-12-17T19:42:33.594+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches[begin]---------------*/
+2024-12-17T19:42:33.594+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE 
+            m.approved = 'Y' 
+            AND m.venue_cd = '002'
+            AND m.is_bid_available = 'Y';
+/*com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches*/
+2024-12-17T19:42:33.596+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:42:33.596+09:00  INFO 23452 --- [http-nio-5000-exec-10] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T19:42:33.597+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/match/getallapproved
+2024-12-17T19:42:35.836+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@440da4ee
+
+2024-12-17T19:42:35.837+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:42:35.837+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:42:35.839+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:42:35.840+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:42:57.213+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getallapproved Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@5b6459d6
+
+2024-12-17T19:42:57.215+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches[begin]---------------*/
+2024-12-17T19:42:57.215+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE 
+            m.approved = 'Y' 
+            AND m.venue_cd = '001'
+            AND m.is_bid_available = 'Y';
+/*com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches*/
+2024-12-17T19:42:57.217+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:42:57.218+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getallapproved
+2024-12-17T19:42:59.442+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@ed9aa05
+
+2024-12-17T19:42:59.444+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:42:59.445+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:42:59.446+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:42:59.448+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:43:00.866+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getallapproved Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6a5a197c
+
+2024-12-17T19:43:00.869+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches[begin]---------------*/
+2024-12-17T19:43:00.869+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE 
+            m.approved = 'Y' 
+            AND m.venue_cd = '002'
+            AND m.is_bid_available = 'Y';
+/*com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches*/
+2024-12-17T19:43:00.870+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:43:00.871+09:00  INFO 23452 --- [http-nio-5000-exec-3] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T19:43:00.872+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/match/getallapproved
+2024-12-17T19:47:21.937+09:00  WARN 23452 --- [http-nio-5000-exec-7] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T19:47:21.938+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@573f66a4
+
+2024-12-17T19:47:21.938+09:00  INFO 23452 --- [http-nio-5000-exec-7] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T19:47:22.033+09:00  INFO 23452 --- [http-nio-5000-exec-7] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 일철수
+2024-12-17T19:47:22.034+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=11111111111&password=111
+2024-12-17T19:47:22.034+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T19:47:22.056+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@22926590
+
+2024-12-17T19:47:22.058+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:47:22.059+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:47:22.060+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:47:22.062+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:47:23.011+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getallapproved Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@43b8c30e
+
+2024-12-17T19:47:23.013+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches[begin]---------------*/
+2024-12-17T19:47:23.013+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE 
+            m.approved = 'Y' 
+            AND m.venue_cd = '001'
+            AND m.is_bid_available = 'Y';
+/*com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches*/
+2024-12-17T19:47:23.016+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T19:47:23.017+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getallapproved
+2024-12-17T19:47:26.191+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/status Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@19e32c54
+
+2024-12-17T19:47:26.192+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus[begin]---------------*/
+2024-12-17T19:47:26.192+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT
+            m.*,
+            v.venue_name
+        FROM
+            matches AS m
+        JOIN venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.match_no = '1'
+/*com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus*/
+2024-12-17T19:47:26.194+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:47:26.197+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/status
+2024-12-17T19:47:26.208+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/bid/get-mylastbids Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@714f44a0
+
+2024-12-17T19:47:26.211+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.BidMapper.getMyLastBids[begin]---------------*/
+2024-12-17T19:47:26.212+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            b.row_no,
+            b.col_no,
+            b.seat_no,
+            b.bid_amount,
+            b.bid_at,
+            b.bid_won,
+            b.bid_paid,
+            (SELECT MAX(bid_amount)
+            FROM bids
+            WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
+        FROM 
+            bids AS b
+        WHERE
+            b.bid_telno = '11111111111' AND
+            b.match_no = '1'
+            AND b.bid_at = (
+                SELECT MAX(bid_at)
+                FROM bids
+                WHERE bid_telno = '11111111111'
+                AND seat_no = b.seat_no
+                AND match_no = b.match_no
+            )
+        ORDER BY
+            b.seat_no,
+            b.row_no,
+            b.col_no
+/*com.bidsystem.bid.mapper.BidMapper.getMyLastBids*/
+2024-12-17T19:47:26.213+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:47:26.214+09:00  INFO 23452 --- [http-nio-5000-exec-1] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T19:47:26.215+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/bid/get-mylastbids
+2024-12-17T19:47:26.220+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/bid/get-mybids Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@21f494cf
+
+2024-12-17T19:47:26.223+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.BidMapper.getMyBids[begin]---------------*/
+2024-12-17T19:47:26.223+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            b.seat_no,
+            b.bid_amount,
+            b.bid_at,
+            b.bid_won,
+            b.bid_paid,
+            (SELECT MAX(bid_amount)
+             FROM bids
+             WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
+        FROM 
+            bids AS b
+        WHERE
+            b.bid_telno = '11111111111' AND
+            b.match_no = '1'
+        ORDER BY
+            b.bid_at
+/*com.bidsystem.bid.mapper.BidMapper.getMyBids*/
+2024-12-17T19:47:26.224+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:47:26.225+09:00  INFO 23452 --- [http-nio-5000-exec-3] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T19:47:26.225+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/bid/get-mybids
+2024-12-17T19:47:26.231+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/bid/get-bid-tallies Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1d7165af
+
+2024-12-17T19:47:26.234+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.BidMapper.getBidTallies[begin]---------------*/
+2024-12-17T19:47:26.234+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            b.seat_no, 
+            b.row_no,
+            b.col_no,
+            p.seat_price,
+            COALESCE(COUNT(DISTINCT b.bid_telno), 0) AS total_bidders,
+            COALESCE(MAX(b.bid_amount), 0) AS current_bid_amount
+        FROM 
+            bids AS b
+        LEFT JOIN 
+            seatprice AS p
+        ON 
+            p.seat_no = b.seat_no AND p.match_no = b.match_no
+        WHERE
+            b.match_no = '1'
+        GROUP BY
+            b.seat_no
+        ORDER BY
+            CAST(b.seat_no AS UNSIGNED) ASC;
+/*com.bidsystem.bid.mapper.BidMapper.getBidTallies*/
+2024-12-17T19:47:26.235+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:47:26.235+09:00  INFO 23452 --- [http-nio-5000-exec-6] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 입찰 내역이 없습니다.
+2024-12-17T19:47:26.236+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/bid/get-bid-tallies
+2024-12-17T19:47:30.973+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getallapproved Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@c914e7e
+
+2024-12-17T19:47:30.974+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches[begin]---------------*/
+2024-12-17T19:47:30.975+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE 
+            m.approved = 'Y' 
+            AND m.venue_cd = '001'
+            AND m.is_bid_available = 'Y';
+/*com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches*/
+2024-12-17T19:47:30.976+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:47:30.978+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getallapproved
+2024-12-17T19:47:31.882+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6b6c5a76
+
+2024-12-17T19:47:31.884+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:47:31.884+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:47:31.886+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:47:31.887+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:52:05.233+09:00  WARN 23452 --- [http-nio-5000-exec-4] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T19:52:05.234+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@13cbae7e
+
+2024-12-17T19:52:05.234+09:00  INFO 23452 --- [http-nio-5000-exec-4] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T19:52:05.317+09:00  INFO 23452 --- [http-nio-5000-exec-4] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 오총괄
+2024-12-17T19:52:05.317+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=77777777777&password=777
+2024-12-17T19:52:05.317+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T19:52:05.656+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@41243290
+
+2024-12-17T19:52:05.658+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:52:05.658+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:52:05.659+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:52:05.660+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:52:06.606+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@24f65c84
+
+2024-12-17T19:52:06.608+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:52:06.608+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:52:06.610+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:52:06.612+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:52:14.235+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@42214166
+
+2024-12-17T19:52:14.236+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:52:14.237+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:52:14.238+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:52:14.239+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:52:35.603+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@d15b092
+
+2024-12-17T19:52:35.605+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:52:35.606+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:52:35.606+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:52:35.607+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:52:37.298+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@be87104
+
+2024-12-17T19:52:37.300+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:52:37.301+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:52:37.303+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:52:37.306+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:52:41.248+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@683f7d61
+
+2024-12-17T19:52:41.249+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:52:41.249+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:52:41.250+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:52:41.252+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:52:42.617+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2ba383d9
+
+2024-12-17T19:52:42.618+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T19:52:42.618+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T19:52:42.620+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:52:42.621+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getall
+2024-12-17T19:52:53.850+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/status Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7e68e65d
+
+2024-12-17T19:52:53.852+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus[begin]---------------*/
+2024-12-17T19:52:53.853+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT
+            m.*,
+            v.venue_name
+        FROM
+            matches AS m
+        JOIN venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.match_no = '1'
+/*com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus*/
+2024-12-17T19:52:53.854+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:52:53.855+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/status
+2024-12-17T19:52:53.860+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/seatprice/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@44f4dad7
+
+2024-12-17T19:52:53.862+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices[begin]---------------*/
+2024-12-17T19:52:53.863+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM seatprice WHERE match_no = '1' ORDER BY CAST(seat_no AS UNSIGNED) ASC
+/*com.bidsystem.bid.mapper.SeatPriceMapper.getSeatPrices*/
+2024-12-17T19:52:53.864+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:52:53.866+09:00  INFO 23452 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/seatprice/getall
+2024-12-17T19:53:03.814+09:00  WARN 23452 --- [http-nio-5000-exec-4] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T19:53:03.814+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@169865fa
+
+2024-12-17T19:53:03.815+09:00  INFO 23452 --- [http-nio-5000-exec-4] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T19:53:03.890+09:00  INFO 23452 --- [http-nio-5000-exec-4] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 일철수
+2024-12-17T19:53:03.891+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=11111111111&password=111
+2024-12-17T19:53:03.891+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T19:53:03.908+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@fbbb473
+
+2024-12-17T19:53:03.911+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:53:03.911+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:53:03.912+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T19:53:03.913+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T19:53:04.586+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getallapproved Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4e3afc07
+
+2024-12-17T19:53:04.588+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches[begin]---------------*/
+2024-12-17T19:53:04.588+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE 
+            m.approved = 'Y' 
+            AND m.venue_cd = '001'
+            AND m.is_bid_available = 'Y';
+/*com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches*/
+2024-12-17T19:53:04.590+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:53:04.591+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/getallapproved
+2024-12-17T19:53:05.377+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/status Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@38c97130
+
+2024-12-17T19:53:05.379+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus[begin]---------------*/
+2024-12-17T19:53:05.379+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT
+            m.*,
+            v.venue_name
+        FROM
+            matches AS m
+        JOIN venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.match_no = '1'
+/*com.bidsystem.bid.mapper.MatchMapper.getMatchBidStatus*/
+2024-12-17T19:53:05.381+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:53:05.382+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/match/status
+2024-12-17T19:53:05.389+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/bid/get-mylastbids Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@70120cd3
+
+2024-12-17T19:53:05.390+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.BidMapper.getMyLastBids[begin]---------------*/
+2024-12-17T19:53:05.391+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            b.row_no,
+            b.col_no,
+            b.seat_no,
+            b.bid_amount,
+            b.bid_at,
+            b.bid_won,
+            b.bid_paid,
+            (SELECT MAX(bid_amount)
+            FROM bids
+            WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
+        FROM 
+            bids AS b
+        WHERE
+            b.bid_telno = '11111111111' AND
+            b.match_no = '1'
+            AND b.bid_at = (
+                SELECT MAX(bid_at)
+                FROM bids
+                WHERE bid_telno = '11111111111'
+                AND seat_no = b.seat_no
+                AND match_no = b.match_no
+            )
+        ORDER BY
+            b.seat_no,
+            b.row_no,
+            b.col_no
+/*com.bidsystem.bid.mapper.BidMapper.getMyLastBids*/
+2024-12-17T19:53:05.393+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:53:05.393+09:00  INFO 23452 --- [http-nio-5000-exec-5] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T19:53:05.394+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/bid/get-mylastbids
+2024-12-17T19:53:05.398+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/bid/get-mybids Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@327a5eed
+
+2024-12-17T19:53:05.400+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.BidMapper.getMyBids[begin]---------------*/
+2024-12-17T19:53:05.400+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            b.seat_no,
+            b.bid_amount,
+            b.bid_at,
+            b.bid_won,
+            b.bid_paid,
+            (SELECT MAX(bid_amount)
+             FROM bids
+             WHERE seat_no = b.seat_no AND match_no = b.match_no) AS highest_bid_amount
+        FROM 
+            bids AS b
+        WHERE
+            b.bid_telno = '11111111111' AND
+            b.match_no = '1'
+        ORDER BY
+            b.bid_at
+/*com.bidsystem.bid.mapper.BidMapper.getMyBids*/
+2024-12-17T19:53:05.402+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:53:05.402+09:00  INFO 23452 --- [http-nio-5000-exec-6] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T19:53:05.403+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/bid/get-mybids
+2024-12-17T19:53:05.405+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/bid/get-bid-tallies Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@61d8528
+
+2024-12-17T19:53:05.406+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.BidMapper.getBidTallies[begin]---------------*/
+2024-12-17T19:53:05.406+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            b.seat_no, 
+            b.row_no,
+            b.col_no,
+            p.seat_price,
+            COALESCE(COUNT(DISTINCT b.bid_telno), 0) AS total_bidders,
+            COALESCE(MAX(b.bid_amount), 0) AS current_bid_amount
+        FROM 
+            bids AS b
+        LEFT JOIN 
+            seatprice AS p
+        ON 
+            p.seat_no = b.seat_no AND p.match_no = b.match_no
+        WHERE
+            b.match_no = '1'
+        GROUP BY
+            b.seat_no
+        ORDER BY
+            CAST(b.seat_no AS UNSIGNED) ASC;
+/*com.bidsystem.bid.mapper.BidMapper.getBidTallies*/
+2024-12-17T19:53:05.408+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:53:05.408+09:00  INFO 23452 --- [http-nio-5000-exec-7] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 입찰 내역이 없습니다.
+2024-12-17T19:53:05.409+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/bid/get-bid-tallies
+2024-12-17T19:53:17.323+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@3be2c26
+
+2024-12-17T19:53:17.324+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T19:53:17.325+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T19:53:17.326+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T19:53:17.327+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
