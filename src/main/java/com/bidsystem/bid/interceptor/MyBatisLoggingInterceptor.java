@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.regex.Matcher;
 
 /**
  * Mybatis SQL Log 남기기용 Interceptor
@@ -82,28 +83,36 @@ public class MyBatisLoggingInterceptor implements Interceptor {
         }
     }
 
-    public static String genSql(Configuration configuration, BoundSql boundSql) {
-        Object parameterObject = boundSql.getParameterObject();
-        List<?> parameterMappings = boundSql.getParameterMappings();
-        String sql = boundSql.getSql();
+public static String genSql(Configuration configuration, BoundSql boundSql) {
+    Object parameterObject = boundSql.getParameterObject();
+    List<?> parameterMappings = boundSql.getParameterMappings();
+    String sql = boundSql.getSql();
 
-        if (parameterMappings.size() > 0 && parameterObject != null) {
-            if (configuration.getTypeHandlerRegistry().hasTypeHandler(parameterObject.getClass())) {
-                sql = sql.replaceFirst("\\?", getParameterValue(parameterObject));
-            } else {
-                org.apache.ibatis.reflection.MetaObject metaObject = configuration.newMetaObject(parameterObject);
-                for (Object parameterMapping : parameterMappings) {
-                    String propertyName = ((org.apache.ibatis.mapping.ParameterMapping) parameterMapping).getProperty();
-                    if (metaObject.hasGetter(propertyName)) {
-                        Object obj = metaObject.getValue(propertyName);
-                        sql = sql.replaceFirst("\\?", getParameterValue(obj));
-                    } else if (boundSql.hasAdditionalParameter(propertyName)) {
-                        Object obj = boundSql.getAdditionalParameter(propertyName);
-                        sql = sql.replaceFirst("\\?", getParameterValue(obj));
-                    }
+    if (parameterMappings.size() > 0 && parameterObject != null) {
+        if (configuration.getTypeHandlerRegistry().hasTypeHandler(parameterObject.getClass())) {
+            // 단일 파라미터 객체에 대한 치환
+            sql = sql.replaceFirst("\\?", Matcher.quoteReplacement(getParameterValue(parameterObject)));
+        } else {
+            // 다중 파라미터 객체에 대한 치환
+            org.apache.ibatis.reflection.MetaObject metaObject = configuration.newMetaObject(parameterObject);
+            for (Object parameterMapping : parameterMappings) {
+                String propertyName = ((org.apache.ibatis.mapping.ParameterMapping) parameterMapping).getProperty();
+                Object value;
+
+                if (metaObject.hasGetter(propertyName)) {
+                    value = metaObject.getValue(propertyName);
+                } else if (boundSql.hasAdditionalParameter(propertyName)) {
+                    value = boundSql.getAdditionalParameter(propertyName);
+                } else {
+                    continue; // 값이 없으면 다음으로 넘어감
                 }
+
+                // 안전하게 치환
+                sql = sql.replaceFirst("\\?", Matcher.quoteReplacement(getParameterValue(value)));
             }
         }
-        return sql;
     }
+    return sql;
+}
+
 }

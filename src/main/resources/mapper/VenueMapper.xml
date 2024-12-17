@@ -16,8 +16,8 @@
 
     <!-- 경기장 추가 -->
     <insert id="addVenue" parameterType="hashmap">
-        INSERT INTO venue_code (venue_cd, venue_name, venue_place_info, venue_general_info)
-        VALUES (#{venueCd}, #{venueName}, #{venuePlaceInfo}, #{venueGeneralInfo})
+        INSERT INTO venue_code (venue_cd, venue_name, venue_place_info, venue_general_info,venue.venue_img_file)
+        VALUES (#{venueCd}, #{venueName}, #{venuePlaceInfo}, #{venueGeneralInfo},#{venueImageFileName})
     </insert>
 
     <!-- 경기장 수정 -->
@@ -26,7 +26,8 @@
         SET 
             venue_name = #{venueName}, 
             venue_place_info = #{venuePlaceInfo}, 
-            venue_general_info = #{venueGeneralInfo}
+            venue_general_info = #{venueGeneralInfo},
+            venue_img_file = #{venueImageFileName}
         WHERE venue_cd = #{venueCd}
     </update>
 

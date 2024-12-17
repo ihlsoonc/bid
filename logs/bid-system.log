@@ -2522,3 +2522,1950 @@ Caused by: java.lang.IndexOutOfBoundsException: No group 2
 2024-12-17T13:24:23.645+09:00  INFO 22980 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
 
 ================ Request ended: 500 /api/user/change-password
+2024-12-17T13:29:35.976+09:00  WARN 21984 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/gram/.m2/repository/org/json/json/20210307/json-20210307.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/gram/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2024-12-17T13:29:35.989+09:00  INFO 21984 --- [main] com.BidApplicationTests                  : Starting BidApplicationTests using Java 23 with PID 21984 (started by gram in C:\Users\gram\Desktop\bidserver)
+2024-12-17T13:29:35.990+09:00  INFO 21984 --- [main] com.BidApplicationTests                  : No active profile set, falling back to 1 default profile: "default"
+2024-12-17T13:29:36.699+09:00  INFO 21984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:29:36.701+09:00  INFO 21984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-17T13:29:36.818+09:00  INFO 21984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 111 ms. Found 2 JPA repository interfaces.
+2024-12-17T13:29:36.832+09:00  INFO 21984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:29:36.833+09:00  INFO 21984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-17T13:29:36.847+09:00  INFO 21984 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.RefreshRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:29:36.848+09:00  INFO 21984 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:29:36.848+09:00  INFO 21984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2024-12-17T13:29:36.951+09:00 DEBUG 21984 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-12-17T13:29:37.285+09:00  INFO 21984 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-17T13:29:37.394+09:00  INFO 21984 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@4b4969ea
+2024-12-17T13:29:37.396+09:00  INFO 21984 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-17T13:29:37.456+09:00  INFO 21984 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-17T13:29:37.520+09:00  INFO 21984 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2024-12-17T13:29:37.524+09:00  INFO 21984 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-12-17T13:29:37.864+09:00  INFO 21984 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-17T13:29:38.477+09:00  INFO 21984 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-17T13:29:38.480+09:00  INFO 21984 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T13:29:39.612+09:00  WARN 21984 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-17T13:29:39.732+09:00  INFO 21984 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-12-17T13:29:39.951+09:00  INFO 21984 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7d5ddfac, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@72ea5674, org.springframework.security.web.context.SecurityContextHolderFilter@403f6c04, org.springframework.security.web.header.HeaderWriterFilter@5b395ee, org.springframework.web.filter.CorsFilter@7ecd6861, com.bidsystem.bid.config.CustomLogoutFilter@6557dcea, org.springframework.security.web.authentication.logout.LogoutFilter@6bab373c, com.bidsystem.bid.config.JWTFilter@76e4df53, com.bidsystem.bid.config.RequestLoggingFilter@569d6e0d, com.bidsystem.bid.config.LoginFilter@43069adf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4bbabec8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@cc3fc5c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@18edbed9, org.springframework.security.web.session.SessionManagementFilter@6020cd42, org.springframework.security.web.access.ExceptionTranslationFilter@157a2c86, org.springframework.security.web.access.intercept.AuthorizationFilter@7d0e46dd]
+2024-12-17T13:29:40.655+09:00  INFO 21984 --- [main] com.BidApplicationTests                  : Started BidApplicationTests in 4.96 seconds (process running for 5.681)
+2024-12-17T13:29:41.064+09:00  INFO 21984 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T13:29:41.065+09:00  INFO 21984 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-17T13:29:41.070+09:00  INFO 21984 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-17T13:29:46.117+09:00  INFO 9336 --- [main] com.bidsystem.bid.BidApplication         : Starting BidApplication using Java 23 with PID 9336 (C:\Users\gram\Desktop\bidserver\target\classes started by gram in C:\Users\gram\Desktop\bidserver)
+2024-12-17T13:29:46.121+09:00  INFO 9336 --- [main] com.bidsystem.bid.BidApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-12-17T13:29:46.649+09:00  INFO 9336 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:29:46.651+09:00  INFO 9336 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-17T13:29:46.753+09:00  INFO 9336 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 97 ms. Found 2 JPA repository interfaces.
+2024-12-17T13:29:46.771+09:00  INFO 9336 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:29:46.773+09:00  INFO 9336 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-17T13:29:46.784+09:00  INFO 9336 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.RefreshRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:29:46.785+09:00  INFO 9336 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:29:46.786+09:00  INFO 9336 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2024-12-17T13:29:46.863+09:00 DEBUG 9336 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-12-17T13:29:47.194+09:00  INFO 9336 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 5000 (http)
+2024-12-17T13:29:47.200+09:00  INFO 9336 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-17T13:29:47.201+09:00  INFO 9336 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2024-12-17T13:29:47.350+09:00  INFO 9336 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2024-12-17T13:29:47.354+09:00  INFO 9336 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-17T13:29:47.354+09:00  INFO 9336 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1180 ms
+2024-12-17T13:29:47.418+09:00  INFO 9336 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-17T13:29:47.483+09:00  INFO 9336 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@7cfb8e98
+2024-12-17T13:29:47.485+09:00  INFO 9336 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-17T13:29:47.513+09:00  INFO 9336 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-17T13:29:47.546+09:00  INFO 9336 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2024-12-17T13:29:47.548+09:00  INFO 9336 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-12-17T13:29:47.728+09:00  INFO 9336 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-17T13:29:48.279+09:00  INFO 9336 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-17T13:29:48.282+09:00  INFO 9336 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T13:29:48.903+09:00  WARN 9336 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-17T13:29:48.964+09:00  INFO 9336 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-12-17T13:29:49.072+09:00  INFO 9336 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@14ecd835, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19c578bf, org.springframework.security.web.context.SecurityContextHolderFilter@16a7af5d, org.springframework.security.web.header.HeaderWriterFilter@433d5536, org.springframework.web.filter.CorsFilter@1eeb9e5c, com.bidsystem.bid.config.CustomLogoutFilter@2cca7d3c, org.springframework.security.web.authentication.logout.LogoutFilter@6bc1c8d0, com.bidsystem.bid.config.JWTFilter@5e1535e0, com.bidsystem.bid.config.RequestLoggingFilter@6c27be1d, com.bidsystem.bid.config.LoginFilter@2e7cd4bb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3e2ee637, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3a744e32, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51a06fd5, org.springframework.security.web.session.SessionManagementFilter@6a9b8f33, org.springframework.security.web.access.ExceptionTranslationFilter@77c1a7ce, org.springframework.security.web.access.intercept.AuthorizationFilter@2d541e01]
+2024-12-17T13:29:49.391+09:00  INFO 9336 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5000 (http) with context path ''
+2024-12-17T13:29:49.395+09:00  INFO 9336 --- [main] com.bidsystem.bid.BidApplication         : Started BidApplication in 3.603 seconds (process running for 3.873)
+2024-12-17T13:29:49.397+09:00  INFO 9336 --- [main] com.bidsystem.bid.BidApplication         : 
+
+---------------------------- BidApplication started -------------
+
+2024-12-17T13:30:42.537+09:00  INFO 9336 --- [http-nio-5000-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-17T13:30:42.538+09:00  INFO 9336 --- [http-nio-5000-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-17T13:30:42.540+09:00  INFO 9336 --- [http-nio-5000-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-12-17T13:30:42.671+09:00  INFO 9336 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/change-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4baa2053
+
+2024-12-17T13:30:42.837+09:00  INFO 9336 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.changePassword[begin]---------------*/
+2024-12-17T13:30:42.839+09:00 ERROR 9336 --- [http-nio-5000-exec-2] com.bidsystem.bid.service.BidService     : 
+
++++++++ DataAccessException: An error occurred while accessing the database. null --- Cause : null
+
+org.mybatis.spring.MyBatisSystemException: null
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:97) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy122.update(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.update(SqlSessionTemplate.java:288) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:142) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86) ~[mybatis-3.5.13.jar:3.5.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy126.changePassword(Unknown Source) ~[na:na]
+	at com.bidsystem.bid.service.UserService.changePassword(UserService.java:134) ~[classes/:na]
+	at com.bidsystem.bid.controller.UserController.changePassword(UserController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:547) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:614) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at com.bidsystem.bid.config.JWTFilter.doFilterInternal(JWTFilter.java:162) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at com.bidsystem.bid.config.CorsLoggingFilter.doFilter(CorsLoggingFilter.java:38) ~[classes/:na]
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:72) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.JWTFilter.doFilterInternal(JWTFilter.java:162) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.CustomLogoutFilter.doFilter(CustomLogoutFilter.java:80) ~[classes/:na]
+	at com.bidsystem.bid.config.CustomLogoutFilter.doFilter(CustomLogoutFilter.java:71) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: java.lang.IndexOutOfBoundsException: No group 2
+### Cause: java.lang.IndexOutOfBoundsException: No group 2
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:199) ~[mybatis-3.5.13.jar:3.5.13]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	... 117 common frames omitted
+Caused by: java.lang.IndexOutOfBoundsException: No group 2
+	at java.base/java.util.regex.Matcher.checkGroup(Matcher.java:1845) ~[na:na]
+	at java.base/java.util.regex.Matcher.start(Matcher.java:523) ~[na:na]
+	at java.base/java.util.regex.Matcher.appendExpandedReplacement(Matcher.java:1134) ~[na:na]
+	at java.base/java.util.regex.Matcher.appendReplacement(Matcher.java:1041) ~[na:na]
+	at java.base/java.util.regex.Matcher.replaceFirst(Matcher.java:1444) ~[na:na]
+	at java.base/java.lang.String.replaceFirst(String.java:3116) ~[na:na]
+	at com.bidsystem.bid.interceptor.MyBatisLoggingInterceptor.genSql(MyBatisLoggingInterceptor.java:99) ~[classes/:na]
+	at com.bidsystem.bid.interceptor.MyBatisLoggingInterceptor.intercept(MyBatisLoggingInterceptor.java:47) ~[classes/:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59) ~[mybatis-3.5.13.jar:3.5.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy140.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197) ~[mybatis-3.5.13.jar:3.5.13]
+	... 120 common frames omitted
+
+2024-12-17T13:30:42.863+09:00  INFO 9336 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111","password":"111"}
+2024-12-17T13:30:42.866+09:00  INFO 9336 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 500 /api/user/change-password
+2024-12-17T13:31:00.790+09:00  INFO 9336 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7583a84f
+
+2024-12-17T13:31:00.810+09:00  INFO 9336 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:31:00.811+09:00  INFO 9336 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:31:00.832+09:00  INFO 9336 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 21 ms
+2024-12-17T13:31:00.905+09:00  INFO 9336 --- [http-nio-5000-exec-1] com.bidsystem.bid.service.BidService     : 
+
++++++++ PasswordMismatchException: Password does not match. Message: 
+2024-12-17T13:31:00.907+09:00  INFO 9336 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"..."}
+2024-12-17T13:31:00.908+09:00  INFO 9336 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 400 /api/user/getinfo-byquery-and-password
+2024-12-17T13:31:05.406+09:00  INFO 9336 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@301730f8
+
+2024-12-17T13:31:05.416+09:00  INFO 9336 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:31:05.418+09:00  INFO 9336 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:31:05.422+09:00  INFO 9336 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T13:31:05.601+09:00  INFO 9336 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"111"}
+2024-12-17T13:31:05.603+09:00  INFO 9336 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/getinfo-byquery-and-password
+2024-12-17T13:31:09.631+09:00  INFO 9336 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/change-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@36839fdc
+
+2024-12-17T13:31:09.763+09:00  INFO 9336 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.changePassword[begin]---------------*/
+2024-12-17T13:31:09.765+09:00 ERROR 9336 --- [http-nio-5000-exec-5] com.bidsystem.bid.service.BidService     : 
+
++++++++ DataAccessException: An error occurred while accessing the database. null --- Cause : null
+
+org.mybatis.spring.MyBatisSystemException: null
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:97) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy122.update(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.update(SqlSessionTemplate.java:288) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:142) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86) ~[mybatis-3.5.13.jar:3.5.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy126.changePassword(Unknown Source) ~[na:na]
+	at com.bidsystem.bid.service.UserService.changePassword(UserService.java:134) ~[classes/:na]
+	at com.bidsystem.bid.controller.UserController.changePassword(UserController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:547) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:614) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at com.bidsystem.bid.config.JWTFilter.doFilterInternal(JWTFilter.java:162) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at com.bidsystem.bid.config.CorsLoggingFilter.doFilter(CorsLoggingFilter.java:38) ~[classes/:na]
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:72) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.JWTFilter.doFilterInternal(JWTFilter.java:162) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.CustomLogoutFilter.doFilter(CustomLogoutFilter.java:80) ~[classes/:na]
+	at com.bidsystem.bid.config.CustomLogoutFilter.doFilter(CustomLogoutFilter.java:71) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: java.lang.IndexOutOfBoundsException: No group 2
+### Cause: java.lang.IndexOutOfBoundsException: No group 2
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:199) ~[mybatis-3.5.13.jar:3.5.13]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	... 117 common frames omitted
+Caused by: java.lang.IndexOutOfBoundsException: No group 2
+	at java.base/java.util.regex.Matcher.checkGroup(Matcher.java:1845) ~[na:na]
+	at java.base/java.util.regex.Matcher.start(Matcher.java:523) ~[na:na]
+	at java.base/java.util.regex.Matcher.appendExpandedReplacement(Matcher.java:1134) ~[na:na]
+	at java.base/java.util.regex.Matcher.appendReplacement(Matcher.java:1041) ~[na:na]
+	at java.base/java.util.regex.Matcher.replaceFirst(Matcher.java:1444) ~[na:na]
+	at java.base/java.lang.String.replaceFirst(String.java:3116) ~[na:na]
+	at com.bidsystem.bid.interceptor.MyBatisLoggingInterceptor.genSql(MyBatisLoggingInterceptor.java:99) ~[classes/:na]
+	at com.bidsystem.bid.interceptor.MyBatisLoggingInterceptor.intercept(MyBatisLoggingInterceptor.java:47) ~[classes/:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59) ~[mybatis-3.5.13.jar:3.5.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy140.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197) ~[mybatis-3.5.13.jar:3.5.13]
+	... 120 common frames omitted
+
+2024-12-17T13:31:09.794+09:00  INFO 9336 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111","password":"111"}
+2024-12-17T13:31:09.795+09:00  INFO 9336 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 500 /api/user/change-password
+2024-12-17T13:32:18.290+09:00  WARN 17776 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/gram/.m2/repository/org/json/json/20210307/json-20210307.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/gram/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2024-12-17T13:32:18.307+09:00  INFO 17776 --- [main] com.BidApplicationTests                  : Starting BidApplicationTests using Java 23 with PID 17776 (started by gram in C:\Users\gram\Desktop\bidserver)
+2024-12-17T13:32:18.308+09:00  INFO 17776 --- [main] com.BidApplicationTests                  : No active profile set, falling back to 1 default profile: "default"
+2024-12-17T13:32:19.111+09:00  INFO 17776 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:32:19.113+09:00  INFO 17776 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-17T13:32:19.233+09:00  INFO 17776 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 114 ms. Found 2 JPA repository interfaces.
+2024-12-17T13:32:19.258+09:00  INFO 17776 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:32:19.259+09:00  INFO 17776 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-17T13:32:19.273+09:00  INFO 17776 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.RefreshRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:32:19.273+09:00  INFO 17776 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:32:19.273+09:00  INFO 17776 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2024-12-17T13:32:19.398+09:00 DEBUG 17776 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-12-17T13:32:19.780+09:00  INFO 17776 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-17T13:32:19.944+09:00  INFO 17776 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@4863c8ac
+2024-12-17T13:32:19.956+09:00  INFO 17776 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-17T13:32:20.038+09:00  INFO 17776 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-17T13:32:20.123+09:00  INFO 17776 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2024-12-17T13:32:20.127+09:00  INFO 17776 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-12-17T13:32:20.490+09:00  INFO 17776 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-17T13:32:21.132+09:00  INFO 17776 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-17T13:32:21.135+09:00  INFO 17776 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T13:32:22.462+09:00  WARN 17776 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-17T13:32:22.574+09:00  INFO 17776 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-12-17T13:32:22.835+09:00  INFO 17776 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@522221e1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@14060410, org.springframework.security.web.context.SecurityContextHolderFilter@29becf8b, org.springframework.security.web.header.HeaderWriterFilter@6df0d030, org.springframework.web.filter.CorsFilter@58397dd, com.bidsystem.bid.config.CustomLogoutFilter@620260ad, org.springframework.security.web.authentication.logout.LogoutFilter@569d6e0d, com.bidsystem.bid.config.JWTFilter@216c6825, com.bidsystem.bid.config.RequestLoggingFilter@56ece9c, com.bidsystem.bid.config.LoginFilter@1c4a8c93, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@36995784, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4101e146, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6d3c80bf, org.springframework.security.web.session.SessionManagementFilter@73b71935, org.springframework.security.web.access.ExceptionTranslationFilter@6fa5fc67, org.springframework.security.web.access.intercept.AuthorizationFilter@2a0d8df8]
+2024-12-17T13:32:23.583+09:00  INFO 17776 --- [main] com.BidApplicationTests                  : Started BidApplicationTests in 5.621 seconds (process running for 6.42)
+2024-12-17T13:32:24.091+09:00  INFO 17776 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T13:32:24.096+09:00  INFO 17776 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-17T13:32:24.102+09:00  INFO 17776 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-17T13:32:29.892+09:00  INFO 4624 --- [main] com.bidsystem.bid.BidApplication         : Starting BidApplication using Java 23 with PID 4624 (C:\Users\gram\Desktop\bidserver\target\classes started by gram in C:\Users\gram\Desktop\bidserver)
+2024-12-17T13:32:29.894+09:00  INFO 4624 --- [main] com.bidsystem.bid.BidApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-12-17T13:32:30.512+09:00  INFO 4624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:32:30.514+09:00  INFO 4624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-17T13:32:30.657+09:00  INFO 4624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 137 ms. Found 2 JPA repository interfaces.
+2024-12-17T13:32:30.682+09:00  INFO 4624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:32:30.684+09:00  INFO 4624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-17T13:32:30.705+09:00  INFO 4624 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.RefreshRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:32:30.706+09:00  INFO 4624 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:32:30.707+09:00  INFO 4624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2024-12-17T13:32:30.798+09:00 DEBUG 4624 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-12-17T13:32:31.252+09:00  INFO 4624 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 5000 (http)
+2024-12-17T13:32:31.264+09:00  INFO 4624 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-17T13:32:31.264+09:00  INFO 4624 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2024-12-17T13:32:31.466+09:00  INFO 4624 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2024-12-17T13:32:31.471+09:00  INFO 4624 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-17T13:32:31.472+09:00  INFO 4624 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1535 ms
+2024-12-17T13:32:31.574+09:00  INFO 4624 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-17T13:32:31.652+09:00  INFO 4624 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@19002b34
+2024-12-17T13:32:31.654+09:00  INFO 4624 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-17T13:32:31.690+09:00  INFO 4624 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-17T13:32:31.728+09:00  INFO 4624 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2024-12-17T13:32:31.730+09:00  INFO 4624 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-12-17T13:32:31.942+09:00  INFO 4624 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-17T13:32:32.677+09:00  INFO 4624 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-17T13:32:32.680+09:00  INFO 4624 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T13:32:33.485+09:00  WARN 4624 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-17T13:32:33.566+09:00  INFO 4624 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-12-17T13:32:33.698+09:00  INFO 4624 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@51a06fd5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@26edfa34, org.springframework.security.web.context.SecurityContextHolderFilter@18487f92, org.springframework.security.web.header.HeaderWriterFilter@3e2ee637, org.springframework.web.filter.CorsFilter@776b7fa2, com.bidsystem.bid.config.CustomLogoutFilter@3f7aa4f8, org.springframework.security.web.authentication.logout.LogoutFilter@6c04310f, com.bidsystem.bid.config.JWTFilter@6d76aa05, com.bidsystem.bid.config.RequestLoggingFilter@2403c1c5, com.bidsystem.bid.config.LoginFilter@8b93c88, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4667c6d9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@204beb58, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@628e0403, org.springframework.security.web.session.SessionManagementFilter@492e9e87, org.springframework.security.web.access.ExceptionTranslationFilter@16a7af5d, org.springframework.security.web.access.intercept.AuthorizationFilter@5e1535e0]
+2024-12-17T13:32:34.093+09:00  INFO 4624 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5000 (http) with context path ''
+2024-12-17T13:32:34.099+09:00  INFO 4624 --- [main] com.bidsystem.bid.BidApplication         : Started BidApplication in 4.543 seconds (process running for 4.907)
+2024-12-17T13:32:34.101+09:00  INFO 4624 --- [main] com.bidsystem.bid.BidApplication         : 
+
+---------------------------- BidApplication started -------------
+
+2024-12-17T13:33:00.431+09:00  INFO 4624 --- [http-nio-5000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-17T13:33:00.432+09:00  INFO 4624 --- [http-nio-5000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-17T13:33:00.434+09:00  INFO 4624 --- [http-nio-5000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-12-17T13:33:00.550+09:00  INFO 4624 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6946873d
+
+2024-12-17T13:33:00.666+09:00  INFO 4624 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:33:00.666+09:00  INFO 4624 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:33:00.685+09:00  INFO 4624 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 18 ms
+2024-12-17T13:33:00.798+09:00  INFO 4624 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"111"}
+2024-12-17T13:33:00.804+09:00  INFO 4624 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/getinfo-byquery-and-password
+2024-12-17T13:33:03.924+09:00  INFO 4624 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@301730f8
+
+2024-12-17T13:33:03.933+09:00  INFO 4624 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:33:03.934+09:00  INFO 4624 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:33:03.935+09:00  INFO 4624 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:33:04.011+09:00  INFO 4624 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"111"}
+2024-12-17T13:33:04.013+09:00  INFO 4624 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/getinfo-byquery-and-password
+2024-12-17T13:33:19.564+09:00  INFO 4624 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1f29f862
+
+2024-12-17T13:33:19.568+09:00  INFO 4624 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:33:19.570+09:00  INFO 4624 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:33:19.574+09:00  INFO 4624 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T13:33:19.652+09:00  INFO 4624 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"111"}
+2024-12-17T13:33:19.654+09:00  INFO 4624 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/getinfo-byquery-and-password
+2024-12-17T13:33:21.394+09:00  INFO 4624 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/change-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@11761956
+
+2024-12-17T13:33:21.488+09:00  INFO 4624 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.changePassword[begin]---------------*/
+2024-12-17T13:33:21.490+09:00 ERROR 4624 --- [http-nio-5000-exec-5] com.bidsystem.bid.service.BidService     : 
+
++++++++ DataAccessException: An error occurred while accessing the database. null --- Cause : null
+
+org.mybatis.spring.MyBatisSystemException: null
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:97) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy122.update(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.update(SqlSessionTemplate.java:288) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:142) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86) ~[mybatis-3.5.13.jar:3.5.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy126.changePassword(Unknown Source) ~[na:na]
+	at com.bidsystem.bid.service.UserService.changePassword(UserService.java:134) ~[classes/:na]
+	at com.bidsystem.bid.controller.UserController.changePassword(UserController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:547) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:614) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at com.bidsystem.bid.config.JWTFilter.doFilterInternal(JWTFilter.java:162) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at com.bidsystem.bid.config.CorsLoggingFilter.doFilter(CorsLoggingFilter.java:38) ~[classes/:na]
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97) ~[jakarta.servlet-api-6.0.0.jar:6.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:72) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.JWTFilter.doFilterInternal(JWTFilter.java:162) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at com.bidsystem.bid.config.CustomLogoutFilter.doFilter(CustomLogoutFilter.java:80) ~[classes/:na]
+	at com.bidsystem.bid.config.CustomLogoutFilter.doFilter(CustomLogoutFilter.java:71) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: java.lang.IndexOutOfBoundsException: No group 2
+### Cause: java.lang.IndexOutOfBoundsException: No group 2
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:199) ~[mybatis-3.5.13.jar:3.5.13]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425) ~[mybatis-spring-3.0.1.jar:3.0.1]
+	... 117 common frames omitted
+Caused by: java.lang.IndexOutOfBoundsException: No group 2
+	at java.base/java.util.regex.Matcher.checkGroup(Matcher.java:1845) ~[na:na]
+	at java.base/java.util.regex.Matcher.start(Matcher.java:523) ~[na:na]
+	at java.base/java.util.regex.Matcher.appendExpandedReplacement(Matcher.java:1134) ~[na:na]
+	at java.base/java.util.regex.Matcher.appendReplacement(Matcher.java:1041) ~[na:na]
+	at java.base/java.util.regex.Matcher.replaceFirst(Matcher.java:1444) ~[na:na]
+	at java.base/java.lang.String.replaceFirst(String.java:3116) ~[na:na]
+	at com.bidsystem.bid.interceptor.MyBatisLoggingInterceptor.genSql(MyBatisLoggingInterceptor.java:99) ~[classes/:na]
+	at com.bidsystem.bid.interceptor.MyBatisLoggingInterceptor.intercept(MyBatisLoggingInterceptor.java:47) ~[classes/:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59) ~[mybatis-3.5.13.jar:3.5.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy140.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197) ~[mybatis-3.5.13.jar:3.5.13]
+	... 120 common frames omitted
+
+2024-12-17T13:33:21.513+09:00  INFO 4624 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111","password":"111"}
+2024-12-17T13:33:21.514+09:00  INFO 4624 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 500 /api/user/change-password
+2024-12-17T13:36:29.683+09:00  WARN 4424 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/gram/.m2/repository/org/json/json/20210307/json-20210307.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/gram/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2024-12-17T13:36:29.699+09:00  INFO 4424 --- [main] com.BidApplicationTests                  : Starting BidApplicationTests using Java 23 with PID 4424 (started by gram in C:\Users\gram\Desktop\bidserver)
+2024-12-17T13:36:29.700+09:00  INFO 4424 --- [main] com.BidApplicationTests                  : No active profile set, falling back to 1 default profile: "default"
+2024-12-17T13:36:30.476+09:00  INFO 4424 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:36:30.477+09:00  INFO 4424 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-17T13:36:30.610+09:00  INFO 4424 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 126 ms. Found 2 JPA repository interfaces.
+2024-12-17T13:36:30.626+09:00  INFO 4424 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:36:30.628+09:00  INFO 4424 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-17T13:36:30.641+09:00  INFO 4424 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.RefreshRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:36:30.641+09:00  INFO 4424 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:36:30.641+09:00  INFO 4424 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2024-12-17T13:36:30.780+09:00 DEBUG 4424 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-12-17T13:36:31.161+09:00  INFO 4424 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-17T13:36:31.295+09:00  INFO 4424 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@935493d
+2024-12-17T13:36:31.302+09:00  INFO 4424 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-17T13:36:31.379+09:00  INFO 4424 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-17T13:36:31.472+09:00  INFO 4424 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2024-12-17T13:36:31.476+09:00  INFO 4424 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-12-17T13:36:31.828+09:00  INFO 4424 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-17T13:36:32.528+09:00  INFO 4424 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-17T13:36:32.530+09:00  INFO 4424 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T13:36:33.650+09:00  WARN 4424 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-17T13:36:33.766+09:00  INFO 4424 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-12-17T13:36:33.951+09:00  INFO 4424 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6557dcea, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@76e4df53, org.springframework.security.web.context.SecurityContextHolderFilter@1043c493, org.springframework.security.web.header.HeaderWriterFilter@2b68c59b, org.springframework.web.filter.CorsFilter@569d6e0d, com.bidsystem.bid.config.CustomLogoutFilter@43069adf, org.springframework.security.web.authentication.logout.LogoutFilter@4dcc0e3d, com.bidsystem.bid.config.JWTFilter@18edbed9, com.bidsystem.bid.config.RequestLoggingFilter@4823f4d0, com.bidsystem.bid.config.LoginFilter@75f316df, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@12115c28, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@fdeec12, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2d4aadc, org.springframework.security.web.session.SessionManagementFilter@403f6c04, org.springframework.security.web.access.ExceptionTranslationFilter@24facb47, org.springframework.security.web.access.intercept.AuthorizationFilter@7d5ddfac]
+2024-12-17T13:36:34.749+09:00  INFO 4424 --- [main] com.BidApplicationTests                  : Started BidApplicationTests in 5.383 seconds (process running for 6.211)
+2024-12-17T13:36:35.229+09:00  INFO 4424 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T13:36:35.232+09:00  INFO 4424 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-17T13:36:35.236+09:00  INFO 4424 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-17T13:36:40.663+09:00  INFO 19176 --- [main] com.bidsystem.bid.BidApplication         : Starting BidApplication using Java 23 with PID 19176 (C:\Users\gram\Desktop\bidserver\target\classes started by gram in C:\Users\gram\Desktop\bidserver)
+2024-12-17T13:36:40.665+09:00  INFO 19176 --- [main] com.bidsystem.bid.BidApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-12-17T13:36:41.242+09:00  INFO 19176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:36:41.243+09:00  INFO 19176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-17T13:36:41.365+09:00  INFO 19176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 116 ms. Found 2 JPA repository interfaces.
+2024-12-17T13:36:41.387+09:00  INFO 19176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T13:36:41.389+09:00  INFO 19176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-17T13:36:41.403+09:00  INFO 19176 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.RefreshRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:36:41.404+09:00  INFO 19176 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T13:36:41.405+09:00  INFO 19176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2024-12-17T13:36:41.496+09:00 DEBUG 19176 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-12-17T13:36:41.901+09:00  INFO 19176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 5000 (http)
+2024-12-17T13:36:41.912+09:00  INFO 19176 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-17T13:36:41.913+09:00  INFO 19176 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2024-12-17T13:36:42.082+09:00  INFO 19176 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2024-12-17T13:36:42.087+09:00  INFO 19176 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-17T13:36:42.087+09:00  INFO 19176 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1380 ms
+2024-12-17T13:36:42.153+09:00  INFO 19176 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-17T13:36:42.242+09:00  INFO 19176 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@5ed0b4e3
+2024-12-17T13:36:42.245+09:00  INFO 19176 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-17T13:36:42.286+09:00  INFO 19176 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-17T13:36:42.333+09:00  INFO 19176 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2024-12-17T13:36:42.336+09:00  INFO 19176 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-12-17T13:36:42.534+09:00  INFO 19176 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-17T13:36:43.190+09:00  INFO 19176 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-17T13:36:43.193+09:00  INFO 19176 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T13:36:43.944+09:00  WARN 19176 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-17T13:36:44.022+09:00  INFO 19176 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-12-17T13:36:44.151+09:00  INFO 19176 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6015c745, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2d541e01, org.springframework.security.web.context.SecurityContextHolderFilter@101eb529, org.springframework.security.web.header.HeaderWriterFilter@7444714e, org.springframework.web.filter.CorsFilter@4c897417, com.bidsystem.bid.config.CustomLogoutFilter@5a8d03ce, org.springframework.security.web.authentication.logout.LogoutFilter@752573df, com.bidsystem.bid.config.JWTFilter@14ecd835, com.bidsystem.bid.config.RequestLoggingFilter@19c578bf, com.bidsystem.bid.config.LoginFilter@1eeb9e5c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5ac8916d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e2ee637, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2cca7d3c, org.springframework.security.web.session.SessionManagementFilter@77c1a7ce, org.springframework.security.web.access.ExceptionTranslationFilter@6aaed880, org.springframework.security.web.access.intercept.AuthorizationFilter@6c04310f]
+2024-12-17T13:36:44.537+09:00  INFO 19176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5000 (http) with context path ''
+2024-12-17T13:36:44.543+09:00  INFO 19176 --- [main] com.bidsystem.bid.BidApplication         : Started BidApplication in 4.217 seconds (process running for 4.514)
+2024-12-17T13:36:44.545+09:00  INFO 19176 --- [main] com.bidsystem.bid.BidApplication         : 
+
+---------------------------- BidApplication started -------------
+
+2024-12-17T13:37:01.001+09:00  INFO 19176 --- [http-nio-5000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-17T13:37:01.002+09:00  INFO 19176 --- [http-nio-5000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-17T13:37:01.004+09:00  INFO 19176 --- [http-nio-5000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-12-17T13:37:01.099+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@b0cfc83
+
+2024-12-17T13:37:01.205+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:37:01.207+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:37:01.226+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 19 ms
+2024-12-17T13:37:01.311+09:00  INFO 19176 --- [http-nio-5000-exec-1] com.bidsystem.bid.service.BidService     : 
+
++++++++ PasswordMismatchException: Password does not match. Message: 
+2024-12-17T13:37:01.325+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"..."}
+2024-12-17T13:37:01.339+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 400 /api/user/getinfo-byquery-and-password
+2024-12-17T13:37:04.820+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@36839fdc
+
+2024-12-17T13:37:04.826+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:37:04.827+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:37:04.829+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:37:04.926+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"111"}
+2024-12-17T13:37:04.927+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/getinfo-byquery-and-password
+2024-12-17T13:37:09.318+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/change-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1f29f862
+
+2024-12-17T13:37:09.401+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.changePassword[begin]---------------*/
+2024-12-17T13:37:09.402+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ UPDATE biduser
+        SET password = '$2a$10$sr6fyB.EY6bvwDAC/vRuwOEUiFhyAVdN1wSDIg8avg0QUkDnxD7oy'
+        WHERE telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.changePassword*/
+2024-12-17T13:37:09.408+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 4 ms
+2024-12-17T13:37:09.410+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111","password":"111"}
+2024-12-17T13:37:09.410+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/change-password
+2024-12-17T13:37:28.810+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@11761956
+
+2024-12-17T13:37:28.815+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:37:28.816+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:37:28.819+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 3 ms
+2024-12-17T13:37:28.889+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"111"}
+2024-12-17T13:37:28.890+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/getinfo-byquery-and-password
+2024-12-17T13:37:44.874+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@716605da
+
+2024-12-17T13:37:44.880+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:37:44.880+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:37:44.882+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:37:44.964+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"111"}
+2024-12-17T13:37:44.965+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/getinfo-byquery-and-password
+2024-12-17T13:37:50.965+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/change-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@bf31427
+
+2024-12-17T13:37:51.044+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.changePassword[begin]---------------*/
+2024-12-17T13:37:51.045+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ UPDATE biduser
+        SET password = '$2a$10$gr/gUGvtDWgy/qsw217bZ.DSmxV/BFoCiguGBWYGCc6Fj7rKy363u'
+        WHERE telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.changePassword*/
+2024-12-17T13:37:51.053+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 8 ms
+2024-12-17T13:37:51.056+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111","password":"111"}
+2024-12-17T13:37:51.057+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/change-password
+2024-12-17T13:37:58.916+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7924f33e
+
+2024-12-17T13:37:58.923+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:37:58.923+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:37:58.924+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T13:37:59.004+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"111"}
+2024-12-17T13:37:59.006+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/user/getinfo-byquery-and-password
+2024-12-17T13:41:43.157+09:00  WARN 19176 --- [http-nio-5000-exec-8] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T13:41:43.158+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@5677104c
+
+2024-12-17T13:41:43.158+09:00  INFO 19176 --- [http-nio-5000-exec-8] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T13:41:43.463+09:00  INFO 19176 --- [http-nio-5000-exec-8] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 일철수
+2024-12-17T13:41:43.464+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=11111111111&password=111
+2024-12-17T13:41:43.464+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T13:44:33.098+09:00  INFO 19176 --- [http-nio-5000-exec-2] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T13:44:33.099+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/send-auth-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4c724973
+
+2024-12-17T13:44:33.100+09:00  INFO 19176 --- [http-nio-5000-exec-2] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T13:44:33.105+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111","authNumber":""}
+2024-12-17T13:44:33.106+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/send-auth-code
+2024-12-17T13:52:32.250+09:00  INFO 19176 --- [http-nio-5000-exec-5] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T13:52:32.251+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/send-auth-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7fa1e586
+
+2024-12-17T13:52:32.252+09:00  INFO 19176 --- [http-nio-5000-exec-5] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T13:52:32.255+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111","authNumber":""}
+2024-12-17T13:52:32.256+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/send-auth-code
+2024-12-17T13:52:43.862+09:00  INFO 19176 --- [http-nio-5000-exec-10] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T13:52:43.863+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/send-auth-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@534eb29
+
+2024-12-17T13:52:43.864+09:00  INFO 19176 --- [http-nio-5000-exec-10] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/send-auth-code
+2024-12-17T13:52:43.865+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111","authNumber":""}
+2024-12-17T13:52:43.866+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/send-auth-code
+2024-12-17T13:52:48.903+09:00  INFO 19176 --- [http-nio-5000-exec-6] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T13:52:48.903+09:00  INFO 19176 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/sendsms/verify-code Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1c39b4e9
+
+2024-12-17T13:52:48.904+09:00  INFO 19176 --- [http-nio-5000-exec-6] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/api/sendsms/verify-code
+2024-12-17T13:52:48.906+09:00  INFO 19176 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"telno":"11111111111","authNumber":"419205"}
+2024-12-17T13:52:48.907+09:00  INFO 19176 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/sendsms/verify-code
+2024-12-17T13:53:14.401+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/user/getinfo-byquery-and-password Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@aa79d75
+
+2024-12-17T13:53:14.410+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.UserMapper.getUserByQuery[begin]---------------*/
+2024-12-17T13:53:14.411+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * 
+        FROM biduser 
+        WHERE
+         
+                telno = '11111111111'
+/*com.bidsystem.bid.mapper.UserMapper.getUserByQuery*/
+2024-12-17T13:53:14.413+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T13:53:14.485+09:00  INFO 19176 --- [http-nio-5000-exec-8] com.bidsystem.bid.service.BidService     : 
+
++++++++ PasswordMismatchException: Password does not match. Message: 
+2024-12-17T13:53:14.487+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"query":"11111111111","queryType":"telno","password":"..."}
+2024-12-17T13:53:14.488+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 400 /api/user/getinfo-byquery-and-password
+2024-12-17T13:53:53.162+09:00  WARN 19176 --- [http-nio-5000-exec-1] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T13:53:53.163+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1edd699b
+
+2024-12-17T13:53:53.164+09:00  INFO 19176 --- [http-nio-5000-exec-1] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T13:53:53.261+09:00  INFO 19176 --- [http-nio-5000-exec-1] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 일철수
+2024-12-17T13:53:53.262+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=11111111111&password=111
+2024-12-17T13:53:53.262+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T13:54:44.267+09:00  WARN 19176 --- [http-nio-5000-exec-2] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T13:54:44.267+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@ccef3a4
+
+2024-12-17T13:54:44.268+09:00  INFO 19176 --- [http-nio-5000-exec-2] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T13:54:44.348+09:00  INFO 19176 --- [http-nio-5000-exec-2] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 일철수
+2024-12-17T13:54:44.349+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=11111111111&password=111
+2024-12-17T13:54:44.349+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T13:55:14.402+09:00  WARN 19176 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.JWTFilter       : Access Token null - Request URL: http://localhost:5000/login
+2024-12-17T13:55:14.404+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /login Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@30fce083
+
+2024-12-17T13:55:14.404+09:00  INFO 19176 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.LoginFilter     : Authentication for request URI: /login, Method: POST
+2024-12-17T13:55:14.490+09:00  INFO 19176 --- [http-nio-5000-exec-3] com.bidsystem.bid.config.LoginFilter     : 
+LoginFilter success: new acces and refresh areissued for username: 김대회
+2024-12-17T13:55:14.491+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: username=33333333333&password=333
+2024-12-17T13:55:14.491+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /login
+2024-12-17T13:55:14.555+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1fb1e508
+
+2024-12-17T13:55:14.562+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T13:55:14.563+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T13:55:14.563+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T13:55:14.564+09:00  INFO 19176 --- [http-nio-5000-exec-4] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T13:55:14.566+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/venue/getall
+2024-12-17T13:55:45.676+09:00  INFO 19176 --- [http-nio-5000-exec-7] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/reissue-access-token
+2024-12-17T13:55:45.677+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /reissue-access-token Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@77e3126a
+
+2024-12-17T13:55:45.678+09:00  INFO 19176 --- [http-nio-5000-exec-7] com.bidsystem.bid.config.JWTFilter       : 
+Jwt filter is excluded forURL: http://localhost:5000/reissue-access-token
+2024-12-17T13:55:45.699+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"username":"","role":""}
+2024-12-17T13:55:45.699+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /reissue-access-token
+2024-12-17T13:55:45.706+09:00  INFO 19176 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@12fe591e
+
+2024-12-17T13:55:45.710+09:00  INFO 19176 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T13:55:45.711+09:00  INFO 19176 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T13:55:45.712+09:00  INFO 19176 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:55:45.712+09:00  INFO 19176 --- [http-nio-5000-exec-6] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T13:55:45.715+09:00  INFO 19176 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/venue/getall
+2024-12-17T13:56:32.009+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@cd67e4a
+
+2024-12-17T13:56:32.014+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.addVenue[begin]---------------*/
+2024-12-17T13:56:32.014+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO venue_code (venue_cd, venue_name, venue_place_info, venue_general_info)
+        VALUES ('001', '아름체육관', '', '')
+/*com.bidsystem.bid.mapper.VenueMapper.addVenue*/
+2024-12-17T13:56:32.021+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 6 ms
+2024-12-17T13:56:32.024+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"001","venueName":"아름체육관","venuePlaceInfo":"","venueGeneralInfo":""}
+2024-12-17T13:56:32.025+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/add
+2024-12-17T13:56:33.571+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4cb79b44
+
+2024-12-17T13:56:33.574+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T13:56:33.575+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T13:56:33.576+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:56:33.579+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T13:56:48.841+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6222ffa1
+
+2024-12-17T13:56:48.846+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.addVenue[begin]---------------*/
+2024-12-17T13:56:48.847+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO venue_code (venue_cd, venue_name, venue_place_info, venue_general_info)
+        VALUES ('002', '매송실내체육관', '', '')
+/*com.bidsystem.bid.mapper.VenueMapper.addVenue*/
+2024-12-17T13:56:48.855+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 7 ms
+2024-12-17T13:56:48.858+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"002","venueName":"매송실내체육관","venuePlaceInfo":"","venueGeneralInfo":""}
+2024-12-17T13:56:48.858+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/add
+2024-12-17T13:56:50.408+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@34cc66dd
+
+2024-12-17T13:56:50.411+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T13:56:50.411+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T13:56:50.414+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:56:50.415+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T13:57:07.489+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@19f924bd
+
+2024-12-17T13:57:07.495+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.addVenue[begin]---------------*/
+2024-12-17T13:57:07.496+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO venue_code (venue_cd, venue_name, venue_place_info, venue_general_info)
+        VALUES ('003', '탄천운동장', '', '')
+/*com.bidsystem.bid.mapper.VenueMapper.addVenue*/
+2024-12-17T13:57:07.498+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:57:07.501+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"003","venueName":"탄천운동장","venuePlaceInfo":"","venueGeneralInfo":""}
+2024-12-17T13:57:07.502+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/add
+2024-12-17T13:57:09.006+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@52ccbc23
+
+2024-12-17T13:57:09.008+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T13:57:09.009+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T13:57:09.010+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:57:09.012+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T13:57:40.450+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2ef1e58c
+
+2024-12-17T13:57:40.453+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T13:57:40.454+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T13:57:40.455+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:57:40.457+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T13:58:57.895+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@21181a0
+
+2024-12-17T13:58:57.897+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T13:58:57.898+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T13:58:57.899+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:58:57.899+09:00  INFO 19176 --- [http-nio-5000-exec-9] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T13:58:57.900+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/match/getall
+2024-12-17T13:59:11.392+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7b8435dd
+
+2024-12-17T13:59:11.394+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T13:59:11.395+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T13:59:11.396+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:59:11.397+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T13:59:14.632+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getallapproved Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@58a8fe2f
+
+2024-12-17T13:59:14.634+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches[begin]---------------*/
+2024-12-17T13:59:14.635+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE 
+            m.approved = 'Y' 
+            AND m.venue_cd = '001'
+            AND m.is_bid_available = 'Y';
+/*com.bidsystem.bid.mapper.MatchMapper.getAllApprovedMatches*/
+2024-12-17T13:59:14.637+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T13:59:14.637+09:00  INFO 19176 --- [http-nio-5000-exec-3] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T13:59:14.638+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/match/getallapproved
+2024-12-17T14:04:51.866+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@46b961b9
+
+2024-12-17T14:04:51.869+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:04:51.870+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:04:51.871+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:04:51.873+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:09:54.596+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@62e153a
+
+2024-12-17T14:09:54.598+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:09:54.599+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:09:54.600+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:09:54.601+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:15:38.834+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2596dcac
+
+2024-12-17T14:15:38.836+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:15:38.838+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:15:38.839+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:15:38.840+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:15:55.305+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@6a6015df
+
+2024-12-17T14:15:55.309+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:15:55.309+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:15:55.310+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T14:15:55.311+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:15:56.555+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2327aa33
+
+2024-12-17T14:15:56.557+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T14:15:56.558+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T14:15:56.559+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:15:56.560+09:00  INFO 19176 --- [http-nio-5000-exec-5] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T14:15:56.561+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/match/getall
+2024-12-17T14:15:57.655+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@3f3005af
+
+2024-12-17T14:15:57.658+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:15:57.659+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:15:57.660+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:15:57.662+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:16:49.772+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@10b7f57
+
+2024-12-17T14:16:49.776+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.addVenue[begin]---------------*/
+2024-12-17T14:16:49.777+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO venue_code (venue_cd, venue_name, venue_place_info, venue_general_info)
+        VALUES ('004', '탄천실내탁구잗', '', '')
+/*com.bidsystem.bid.mapper.VenueMapper.addVenue*/
+2024-12-17T14:16:49.785+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 8 ms
+2024-12-17T14:16:49.787+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"004","venueName":"탄천실내탁구잗","venuePlaceInfo":"","venueGeneralInfo":"","venueImage":{"__key":"1731641538326cat3.jpg41304"}}
+2024-12-17T14:16:49.788+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/add
+2024-12-17T14:16:51.485+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@133135b
+
+2024-12-17T14:16:51.490+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:16:51.491+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:16:51.493+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T14:16:51.496+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:18:28.723+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@58168e26
+
+2024-12-17T14:18:28.724+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:18:28.725+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:18:28.726+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:18:28.727+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:18:52.628+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@432c8b9b
+
+2024-12-17T14:18:52.631+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:18:52.631+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:18:52.632+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:18:52.633+09:00  INFO 19176 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:19:01.947+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/delete Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@31ef84e5
+
+2024-12-17T14:19:01.949+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.deleteVenue[begin]---------------*/
+2024-12-17T14:19:01.949+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ DELETE FROM venue_code WHERE venue_cd = '004'
+/*com.bidsystem.bid.mapper.VenueMapper.deleteVenue*/
+2024-12-17T14:19:01.960+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 10 ms
+2024-12-17T14:19:01.961+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"004","venueName":"탄천실내탁구잗","venuePlaceInfo":"","venueGeneralInfo":""}
+2024-12-17T14:19:01.962+09:00  INFO 19176 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/delete
+2024-12-17T14:19:03.576+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@163298af
+
+2024-12-17T14:19:03.578+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:19:03.579+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:19:03.580+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:19:03.582+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:19:25.428+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2fb209b5
+
+2024-12-17T14:19:25.432+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.addVenue[begin]---------------*/
+2024-12-17T14:19:25.433+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO venue_code (venue_cd, venue_name, venue_place_info, venue_general_info)
+        VALUES ('004', '탄천실내탁구장', '', '')
+/*com.bidsystem.bid.mapper.VenueMapper.addVenue*/
+2024-12-17T14:19:25.442+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 8 ms
+2024-12-17T14:19:25.445+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"004","venueName":"탄천실내탁구장","venuePlaceInfo":"","venueGeneralInfo":"","venueImage":{"__key":"1731641552210cat4.jpg6583"}}
+2024-12-17T14:19:25.445+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/add
+2024-12-17T14:19:27.181+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@d3a8b93
+
+2024-12-17T14:19:27.183+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:19:27.184+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:19:27.185+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:19:27.187+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:20:21.387+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@d511bef
+
+2024-12-17T14:20:21.389+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:20:21.389+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:20:21.391+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:20:21.392+09:00  INFO 19176 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:23:37.208+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4b9bdb98
+
+2024-12-17T14:23:37.210+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:23:37.210+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:23:37.212+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T14:23:37.214+09:00  INFO 19176 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:24:57.249+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@2f4183f1
+
+2024-12-17T14:24:57.250+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:24:57.251+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:24:57.252+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:24:57.253+09:00  INFO 19176 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:25:14.082+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/update Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@419fee3a
+
+2024-12-17T14:25:14.084+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.updateVenue[begin]---------------*/
+2024-12-17T14:25:14.085+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ UPDATE venue_code
+        SET 
+            venue_name = '아름체육관', 
+            venue_place_info = '', 
+            venue_general_info = ''
+        WHERE venue_cd = '001'
+/*com.bidsystem.bid.mapper.VenueMapper.updateVenue*/
+2024-12-17T14:25:14.087+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:25:14.089+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"001","venueName":"아름체육관","venuePlaceInfo":"","venueGeneralInfo":"","venueImageFileName":"a5.jpg"}
+2024-12-17T14:25:14.089+09:00  INFO 19176 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/update
+2024-12-17T14:25:15.847+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7e1176c8
+
+2024-12-17T14:25:15.849+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:25:15.850+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:25:15.851+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:25:15.853+09:00  INFO 19176 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:25:51.239+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/add Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7b17a0c6
+
+2024-12-17T14:25:51.242+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.addVenue[begin]---------------*/
+2024-12-17T14:25:51.243+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ INSERT INTO venue_code (venue_cd, venue_name, venue_place_info, venue_general_info)
+        VALUES ('005', '잠실당구장', '', '')
+/*com.bidsystem.bid.mapper.VenueMapper.addVenue*/
+2024-12-17T14:25:51.251+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 8 ms
+2024-12-17T14:25:51.253+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"005","venueName":"잠실당구장","venuePlaceInfo":"","venueGeneralInfo":"","venueImageFileName":"a3.jpg"}
+2024-12-17T14:25:51.254+09:00  INFO 19176 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/add
+2024-12-17T14:25:53.165+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4409e112
+
+2024-12-17T14:25:53.169+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:25:53.170+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:25:53.172+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 2 ms
+2024-12-17T14:25:53.173+09:00  INFO 19176 --- [http-nio-5000-exec-10] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:29:31.416+09:00  INFO 23452 --- [main] com.bidsystem.bid.BidApplication         : Starting BidApplication using Java 23 with PID 23452 (C:\Users\gram\Desktop\bidserver\target\classes started by gram in C:\Users\gram\Desktop\bidserver)
+2024-12-17T14:29:31.418+09:00  INFO 23452 --- [main] com.bidsystem.bid.BidApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-12-17T14:29:31.909+09:00  INFO 23452 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T14:29:31.911+09:00  INFO 23452 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-17T14:29:32.007+09:00  INFO 23452 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 92 ms. Found 2 JPA repository interfaces.
+2024-12-17T14:29:32.020+09:00  INFO 23452 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-17T14:29:32.021+09:00  INFO 23452 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-17T14:29:32.031+09:00  INFO 23452 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.RefreshRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T14:29:32.032+09:00  INFO 23452 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bidsystem.bid.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-12-17T14:29:32.032+09:00  INFO 23452 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2024-12-17T14:29:32.102+09:00 DEBUG 23452 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-12-17T14:29:32.398+09:00  INFO 23452 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 5000 (http)
+2024-12-17T14:29:32.404+09:00  INFO 23452 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-17T14:29:32.404+09:00  INFO 23452 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2024-12-17T14:29:32.549+09:00  INFO 23452 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2024-12-17T14:29:32.552+09:00  INFO 23452 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-17T14:29:32.553+09:00  INFO 23452 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1096 ms
+2024-12-17T14:29:32.615+09:00  INFO 23452 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-17T14:29:32.676+09:00  INFO 23452 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@418f0534
+2024-12-17T14:29:32.678+09:00  INFO 23452 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-17T14:29:32.707+09:00  INFO 23452 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-17T14:29:32.743+09:00  INFO 23452 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2024-12-17T14:29:32.745+09:00  INFO 23452 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-12-17T14:29:32.916+09:00  INFO 23452 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-17T14:29:33.444+09:00  INFO 23452 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-17T14:29:33.446+09:00  INFO 23452 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-17T14:29:34.046+09:00  WARN 23452 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-17T14:29:34.106+09:00  INFO 23452 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-12-17T14:29:34.215+09:00  INFO 23452 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@19c578bf, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1eeb9e5c, org.springframework.security.web.context.SecurityContextHolderFilter@207358ad, org.springframework.security.web.header.HeaderWriterFilter@101eb529, org.springframework.web.filter.CorsFilter@2cca7d3c, com.bidsystem.bid.config.CustomLogoutFilter@5e1535e0, org.springframework.security.web.authentication.logout.LogoutFilter@7f93fce1, com.bidsystem.bid.config.JWTFilter@6c27be1d, com.bidsystem.bid.config.RequestLoggingFilter@2e7cd4bb, com.bidsystem.bid.config.LoginFilter@51a06fd5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@62d818c6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@18487f92, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@26edfa34, org.springframework.security.web.session.SessionManagementFilter@5ac8916d, org.springframework.security.web.access.ExceptionTranslationFilter@14a488ed, org.springframework.security.web.access.intercept.AuthorizationFilter@4c897417]
+2024-12-17T14:29:34.546+09:00  INFO 23452 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5000 (http) with context path ''
+2024-12-17T14:29:34.551+09:00  INFO 23452 --- [main] com.bidsystem.bid.BidApplication         : Started BidApplication in 3.413 seconds (process running for 3.668)
+2024-12-17T14:29:34.553+09:00  INFO 23452 --- [main] com.bidsystem.bid.BidApplication         : 
+
+---------------------------- BidApplication started -------------
+
+2024-12-17T14:30:14.070+09:00  INFO 23452 --- [http-nio-5000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-17T14:30:14.070+09:00  INFO 23452 --- [http-nio-5000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-17T14:30:14.071+09:00  INFO 23452 --- [http-nio-5000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-12-17T14:30:14.176+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@71116d41
+
+2024-12-17T14:30:14.204+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:30:14.205+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:30:14.222+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 16 ms
+2024-12-17T14:30:14.275+09:00  INFO 23452 --- [http-nio-5000-exec-1] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:30:24.109+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/update Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1f29f862
+
+2024-12-17T14:30:24.131+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.updateVenue[begin]---------------*/
+2024-12-17T14:30:24.132+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ UPDATE venue_code
+        SET 
+            venue_name = '아름체육관', 
+            venue_place_info = '', 
+            venue_general_info = '',
+            venue_img_file = 'a2.jpg'
+        WHERE venue_cd = '001'
+/*com.bidsystem.bid.mapper.VenueMapper.updateVenue*/
+2024-12-17T14:30:24.143+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 10 ms
+2024-12-17T14:30:24.145+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"001","venueName":"아름체육관","venuePlaceInfo":"","venueGeneralInfo":"","venueImageFileName":"a2.jpg"}
+2024-12-17T14:30:24.145+09:00  INFO 23452 --- [http-nio-5000-exec-4] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/update
+2024-12-17T14:30:25.765+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@301730f8
+
+2024-12-17T14:30:25.770+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:30:25.771+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:30:25.772+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:30:25.774+09:00  INFO 23452 --- [http-nio-5000-exec-2] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:30:52.614+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@36839fdc
+
+2024-12-17T14:30:52.620+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:30:52.621+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:30:52.622+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 0 ms
+2024-12-17T14:30:52.624+09:00  INFO 23452 --- [http-nio-5000-exec-3] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:30:59.866+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@11761956
+
+2024-12-17T14:30:59.871+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:30:59.872+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:30:59.873+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:30:59.875+09:00  INFO 23452 --- [http-nio-5000-exec-5] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:31:08.037+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: POST /api/venue/update Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@716605da
+
+2024-12-17T14:31:08.044+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.updateVenue[begin]---------------*/
+2024-12-17T14:31:08.045+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ UPDATE venue_code
+        SET 
+            venue_name = '아름체육관', 
+            venue_place_info = '', 
+            venue_general_info = '',
+            venue_img_file = 'a1.jpg'
+        WHERE venue_cd = '001'
+/*com.bidsystem.bid.mapper.VenueMapper.updateVenue*/
+2024-12-17T14:31:08.054+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 8 ms
+2024-12-17T14:31:08.056+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Request Body: {"venueCd":"001","venueName":"아름체육관","venuePlaceInfo":"","venueGeneralInfo":"","venueImageFileName":"a1.jpg"}
+2024-12-17T14:31:08.056+09:00  INFO 23452 --- [http-nio-5000-exec-6] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/update
+2024-12-17T14:31:09.995+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@1c39b4e9
+
+2024-12-17T14:31:10.000+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:31:10.000+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:31:10.002+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:31:10.005+09:00  INFO 23452 --- [http-nio-5000-exec-7] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:31:12.722+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/venue/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@7924f33e
+
+2024-12-17T14:31:12.727+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.VenueMapper.getAllVenues[begin]---------------*/
+2024-12-17T14:31:12.728+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT * FROM venue_code WHERE 1=1
+/*com.bidsystem.bid.mapper.VenueMapper.getAllVenues*/
+2024-12-17T14:31:12.730+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:31:12.733+09:00  INFO 23452 --- [http-nio-5000-exec-8] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 200 /api/venue/getall
+2024-12-17T14:31:18.925+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+--------------------- Incoming request: GET /api/match/getall Params: org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@198df736
+
+2024-12-17T14:31:18.931+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+/*---------------Mapper Map ID: com.bidsystem.bid.mapper.MatchMapper.getAllMatches[begin]---------------*/
+2024-12-17T14:31:18.931+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : 
+
+==> sql:
+ SELECT 
+            m.*,
+            v.venue_name
+        FROM 
+            matches m
+        JOIN 
+            venue_code v ON m.venue_cd = v.venue_cd
+        WHERE
+            m.venue_cd = '001'
+/*com.bidsystem.bid.mapper.MatchMapper.getAllMatches*/
+2024-12-17T14:31:18.933+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.b.i.MyBatisLoggingInterceptor        : <== sql END 1 ms
+2024-12-17T14:31:18.934+09:00  INFO 23452 --- [http-nio-5000-exec-9] com.bidsystem.bid.service.BidService     : 
+
++++++++ NoDataException: No information available. Message: 
+2024-12-17T14:31:18.939+09:00  INFO 23452 --- [http-nio-5000-exec-9] c.b.bid.config.RequestLoggingFilter      : 
+
+================ Request ended: 404 /api/match/getall
