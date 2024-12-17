@@ -160,8 +160,8 @@ public Map<String, String> getBidStatus(Map<String, Object> results) {
                         result.put("bid_status_code", bidStatus.get("bidStatusCode"));
                     } catch (Exception e) {
                         // 특정 경기의 입찰 상태 계산 중 오류 발생 시 처리 (필요하면 로그 추가)
-                        result.put("bid_status_name", "오류 발생");
-                        result.put("bid_status_code", "ERROR");
+                        result.put("bid_status_name", "상태 없음");
+                        result.put("bid_status_code", "NULL");
                     }
                 }
                 return results;
@@ -221,8 +221,8 @@ public Map<String, String> getBidStatus(Map<String, Object> results) {
                          result.put("bid_status_code", bidStatus.get("bidStatusCode"));
                      } catch (Exception e) {
                          // 특정 경기의 입찰 상태 계산 중 오류 발생 시 처리 (필요하면 로그 추가)
-                         result.put("bid_status_name", "오류 발생");
-                         result.put("bid_status_code", "ERROR");
+                         result.put("bid_status_name", "상태 없음");
+                         result.put("bid_status_code", "NULL");
                      }
                  }
                  return results;

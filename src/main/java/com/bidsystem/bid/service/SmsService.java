@@ -85,10 +85,10 @@ public class SmsService {
     
         // CoolSMS 메시지 전송
         try {
-            SingleMessageSentResponse smsresponse = messageService.sendOne(new SingleMessageSendingRequest(message));
+            // SingleMessageSentResponse smsresponse = messageService.sendOne(new SingleMessageSendingRequest(message));
     
             Map<String, Object> response = new HashMap<>();
-            response.put("message", "인증 코드가 성공적으로 전송되었습니다.");
+            response.put("message", "인증 코드가 성공적으로 전송되었습니다. "+ code);
             return response;
         } catch (Exception e) {
             throw new ServerException("시스템 오류 : 인증코드 전송 중 오류가 발생하였습니다. " + code, e);

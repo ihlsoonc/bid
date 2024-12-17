@@ -125,9 +125,14 @@ public class SecurityConfig {
                     return configuration;
                 }
             })));
+
+
           http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(mvc.pattern("/login")).permitAll()
                 .requestMatchers(mvc.pattern("/register")).permitAll()
+                .requestMatchers(mvc.pattern("/api/user/get-telno-count")).permitAll()
+                .requestMatchers(mvc.pattern("/api/sendsms/send-auth-code")).permitAll()
+                .requestMatchers(mvc.pattern("/api/sendsms/verify-code")).permitAll()             
                 .requestMatchers(mvc.pattern("/reissue-access-token")).permitAll()
                 .requestMatchers(mvc.pattern("/api/pg**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/WEB-INF/views/**")).permitAll()

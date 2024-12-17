@@ -75,6 +75,7 @@ public class JWTFilter<Authentication> extends OncePerRequestFilter {
         return 
             requestURI.contains("/api/login") ||
             requestURI.contains("/api/register") ||     
+
             requestURI.contains("/api/pgstart") || 
             requestURI.contains("/api/pgreturn") || 
             requestURI.contains("/api/pgstart-mobile") || 
@@ -88,7 +89,11 @@ public class JWTFilter<Authentication> extends OncePerRequestFilter {
             requestURI.contains("/images/") ||
             requestURI.contains("/bidseats") ||
             requestURI.contains("/reissue-access-token") || 
-            requestURI.equals("/");
+            requestURI.equals("/")  ||
+            //사용자 등록시 전화번호 중복과 인증을 위해 아래 세줄은 jwtFiler exclude
+            requestURI.contains("/api/user/get-telno-count") ||                     
+            requestURI.contains("/api/sendsms/send-auth-code") ||
+            requestURI.contains("/api/sendsms/verify-code");
     }
 
     @Override
