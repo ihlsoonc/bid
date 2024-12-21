@@ -46,7 +46,7 @@ public class SeatPriceService {
         try {
             List<Map<String, Object>> results = seatPriceMapper.getSeatPrices(params);
             if (results == null || results.isEmpty()) {
-                throw new NoDataException(null);
+                throw new NoDataException("좌석 정보가 없습니다.");
             } else {
                 return results;
             }

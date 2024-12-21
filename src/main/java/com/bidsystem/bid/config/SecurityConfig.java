@@ -131,6 +131,7 @@ public class SecurityConfig {
                 .requestMatchers(mvc.pattern("/login")).permitAll()
                 .requestMatchers(mvc.pattern("/register")).permitAll()
                 .requestMatchers(mvc.pattern("/api/user/get-telno-count")).permitAll()
+                .requestMatchers(mvc.pattern("/api/user/get-email-count")).permitAll()
                 .requestMatchers(mvc.pattern("/api/sendsms/send-auth-code")).permitAll()
                 .requestMatchers(mvc.pattern("/api/sendsms/verify-code")).permitAll()             
                 .requestMatchers(mvc.pattern("/reissue-access-token")).permitAll()
