@@ -35,13 +35,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserEntity userData = userRepository.findByTelno(username);             //전화번호로 사용자 로그인
         // UserEntity userData = userRepository.findByUsername(username);       //사용자 이름으로 로그인
         // 사용자 데이터 출력
-        if (userData != null) {
-            System.out.println("User found: " + userData);
+        if (userData == null) {
+            throw new UsernameNotFoundException("UserEntity cannot be null");
+        } else {
             return new CustomUserDetails(userData);
         }
-        if (userData != null) {
-            return new CustomUserDetails(userData);
-        }
-        return new CustomUserDetails(userData);
     }
 }

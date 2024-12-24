@@ -52,10 +52,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.bidsystem.bid.dto.CustomUserDetails;
@@ -151,12 +153,34 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         response.getWriter().flush();
     }
 
-    // 인증 실패 시 호출되는 메서드 구현
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
-        logger.error("Authentication failed: {}", failed.getMessage());
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType("application/json");
-        response.getWriter().write("{\"error_code\": \"AUTH_FAILED\", \"message\": \"Invalid credentials.\"}");
+// 인증 실패 시 호출되는 메서드 구현
+protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
+    logger.error("Authentication failed: {}", failed.getMessage());
+    
+    response.setStatus(HttpStatus.UNAUTHORIZED.value());
+    response.setContentType("application/json; charset=UTF-8"); // UTF-8 설정
+    response.setCharacterEncoding("UTF-8"); // 응답 인코딩 설정
+
+    String errorMessage;
+    String errorCode;
+
+    if (failed instanceof UsernameNotFoundException) {
+        // ID가 존재하지 않는 경우
+        errorCode = "USER_NOT_FOUND";
+        errorMessage = "존재하지 않는 사용자입니다. ID를 확인하세요.";
+    } else if (failed instanceof BadCredentialsException) {
+        // 암호가 틀린 경우
+        errorCode = "INVALID_PASSWORD";
+        errorMessage = "암호가 틀렸습니다. 다시 시도하세요.";
+    } else {
+        // 기타 인증 실패
+        errorCode = "AUTH_FAILED";
+        errorMessage = "인증에 실패하였습니다. ID와 암호를 확인하세요.";
     }
+
+    // JSON 응답 작성
+    response.getWriter().write(String.format("{\"error_code\": \"%s\", \"message\": \"%s\"}", errorCode, errorMessage));
+    response.getWriter().flush();
+}
 
 }
